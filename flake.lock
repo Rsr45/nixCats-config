@@ -1,0 +1,77 @@
+{
+  "nodes": {
+    "nixCats": {
+      "locked": {
+        "lastModified": 1751857141,
+        "narHash": "sha256-QvjjPdcP2TSjTg6QFfNzgkfM4asVqzA3ntBDd3ZmlP8=",
+        "owner": "BirdeeHub",
+        "repo": "nixCats-nvim",
+        "rev": "dc1f2ed2d2041c3ae39289751d294ce3dd0b39e3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "BirdeeHub",
+        "repo": "nixCats-nvim",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1751786137,
+        "narHash": "sha256-lIlUKVGCGsh0Q2EA7/6xRtKUZjaQ/ur8uUyY+MynHXQ=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "ceb24d94c6feaa4e8737a8e2bd3cf71c3a7eaaa0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "plugins-breadcrumbs": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1705019976,
+        "narHash": "sha256-DXR5Qvlxh9MiCngH9OlzsUp6LCg8P/RNwurU9vky89w=",
+        "owner": "LunarVim",
+        "repo": "breadcrumbs.nvim",
+        "rev": "9f764278784ce2f10dbe2f555ba14be2451d36a0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "LunarVim",
+        "repo": "breadcrumbs.nvim",
+        "type": "github"
+      }
+    },
+    "plugins-navbuddy": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1746961661,
+        "narHash": "sha256-cabDiT088N8ugpXKSOOjO/5Q2W33ITv39GKA0AM0M48=",
+        "owner": "hasansujon786",
+        "repo": "nvim-navbuddy",
+        "rev": "18802efb91bcfafc54aed513ef97da1dfeae4059",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hasansujon786",
+        "repo": "nvim-navbuddy",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "nixCats": "nixCats",
+        "nixpkgs": "nixpkgs",
+        "plugins-breadcrumbs": "plugins-breadcrumbs",
+        "plugins-navbuddy": "plugins-navbuddy"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
