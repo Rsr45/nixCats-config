@@ -223,6 +223,7 @@
             ];
             markdown = with pkgs.vimPlugins; [
               markdown-preview-nvim
+              render-markdown-nvim
             ];
             neonixdev = with pkgs.vimPlugins; [
               lazydev-nvim
@@ -263,10 +264,8 @@
                 vim-sleuth
                 vim-fugitive
                 vim-rhubarb
-                # nvim-surround
                 mini-surround
                 mini-pairs
-                # pkgs.neovimPlugins.breadcrumbs
               ];
               extra = with pkgs.vimPlugins; [
                 fidget-nvim

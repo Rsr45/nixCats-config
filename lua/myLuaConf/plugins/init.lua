@@ -88,6 +88,15 @@ require('lze').load {
                 end,
         },
         {
+                "render-markdown.nvim",
+                for_cat = "general.markdown",
+                ft = "markdown",
+                cmd = "RenderMarkdown",
+                after = function ()
+                        require("render-markdown").setup {}
+                end,
+        },
+        {
                 "undotree",
                 for_cat = 'general.extra',
                 cmd = { "UndotreeToggle", "UndotreeHide", "UndotreeShow", "UndotreeFocus", "UndotreePersistUndo", },
@@ -113,22 +122,12 @@ require('lze').load {
                         require("ibl").setup()
                 end,
         },
-        -- {
-        --         "nvim-surround",
-        --         for_cat = 'general.always',
-        --         event = "DeferredUIEnter",
-        --         -- keys = "",
-        --         after = function(plugin)
-        --                 require('nvim-surround').setup()
-        --         end,
-        -- },
         {
                 "mini.surround",
-                for_cat = 'general.always',
+                for_cat = "general.always",
                 event = "DeferredUIEnter",
-                -- optional = true,
                 after = function(plugin)
-                        require('mini.surround').setup {
+                        require("mini.surround").setup {
                                 mappings = {
                                         add = "gza",            -- Add surrounding in Normal and Visual modes
                                         delete = "gzd",         -- Delete surrounding
@@ -146,16 +145,16 @@ require('lze').load {
         },
         {
                 "mini.pairs",
-                for_cat = 'general.always',
+                for_cat = "general.always",
                 after = function(plugin)
-                        require('mini.pairs').setup()
+                        require("mini.pairs").setup()
                 end
         },
         {
                 "mini.icons",
-                for_cat = 'general.extra',
+                for_cat = "general.extra",
                 after = function(plugin)
-                        require('mini.icons').setup()
+                        require("mini.icons").setup()
                         MiniIcons.mock_nvim_web_devicons()
                 end,
         },
@@ -243,13 +242,13 @@ require('lze').load {
                 after = function(plugin)
                         require('gitsigns').setup({
                                 -- See `:help gitsigns.txt`
-                                signs = {
-                                        add = { text = '+' },
-                                        change = { text = '~' },
-                                        delete = { text = '_' },
-                                        topdelete = { text = '‾' },
-                                        changedelete = { text = '~' },
-                                },
+                                -- signs = {
+                                --         add = { text = '+' },
+                                --         change = { text = '~' },
+                                --         delete = { text = '_' },
+                                --         topdelete = { text = '‾' },
+                                --         changedelete = { text = '~' },
+                                -- },
                                 on_attach = function(bufnr)
                                         local gs = package.loaded.gitsigns
 
