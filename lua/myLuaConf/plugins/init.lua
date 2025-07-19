@@ -92,9 +92,39 @@ require('lze').load {
                 for_cat = "general.markdown",
                 ft = "markdown",
                 cmd = "RenderMarkdown",
-                after = function ()
+                after = function()
                         require("render-markdown").setup {}
                 end,
+        },
+        {
+                "obsidian.nvim",
+                ft = "markdown",
+                for_cat = "general.notes",
+                -- cmd = { "ObsidianOpen", "ObsidianNew", "Obsidian" },
+                after = function()
+                        require("obsidian").setup({
+                                ui = { enable = false },
+                                workspaces = {
+                                        {
+                                                name = "Personal",
+                                                path = "~/Personal/Vaults/Personal",
+                                                overrides = {
+                                                        notes_subdir = "05-Fleeting",
+                                                        attachments = {
+                                                                img_folder = "99-Meta/01-Assets/imgs",
+                                                        },
+                                                },
+                                        },
+                                        {
+                                                name = "Work",
+                                                path = "~/Personal/Vaults/Dev",
+                                                -- overrides = {
+                                                --         notes_subdir = "",
+                                                -- },
+                                        },
+                                },
+                        })
+                end
         },
         {
                 "undotree",

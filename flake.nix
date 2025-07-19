@@ -228,6 +228,9 @@
             neonixdev = with pkgs.vimPlugins; [
               lazydev-nvim
             ];
+            notes = with pkgs.vimPlugins; [
+              obsidian-nvim
+            ];
             general = {
               blink = with pkgs.vimPlugins; [
                 luasnip
@@ -401,6 +404,7 @@
             # enable the categories you want from categoryDefinitions
             categories = {
               markdown = true;
+              notes = true;
               general = true;
               lint = true;
               format = true;
