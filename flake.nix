@@ -390,7 +390,7 @@
               aliases = [
                 "vi"
                 "vim"
-                "nvim"
+                # "nvim"
               ];
 
               # explained below in the `regularCats` package's definition
