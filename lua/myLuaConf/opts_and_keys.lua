@@ -65,6 +65,8 @@ vim.o.termguicolors = true
 vim.o.cursorline = true
 vim.o.cursorlineopt='both'
 
+vim.o.conceallevel = 1
+
 -- [[ Disable auto comment on enter ]]
 -- See :help formatoptions
 vim.api.nvim_create_autocmd("FileType", {

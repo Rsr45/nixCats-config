@@ -1,6 +1,6 @@
-local colorschemeName = nixCats('colorscheme')
-if not require('nixCatsUtils').isNixCats then
-        colorschemeName = 'onedark'
+local colorschemeName = nixCats("colorscheme")
+if not require("nixCatsUtils").isNixCats then
+        colorschemeName = "onedark"
 end
 -- Could I lazy load on colorscheme with lze?
 -- sure. But I was going to call vim.cmd.colorscheme() during startup anyway
@@ -16,12 +16,12 @@ if ok then
         })
         vim.notify = notify
         vim.keymap.set("n", "<Esc>", function()
-                notify.dismiss({ silent = true, })
+                notify.dismiss({ silent = true })
         end, { desc = "dismiss notify popup and clear hlsearch" })
 end
 
 -- NOTE: you can check if you included the category with the thing wherever you want.
-if nixCats('general.extra') then
+if nixCats("general.extra") then
         -- I didnt want to bother with lazy loading this.
         -- I could put it in opt and put it in a spec anyway
         -- and then not set any handlers and it would load at startup,
@@ -32,7 +32,7 @@ if nixCats('general.extra') then
         require("oil").setup({
                 default_file_explorer = true,
                 view_options = {
-                        show_hidden = true
+                        show_hidden = true,
                 },
                 columns = {
                         "icon",
@@ -59,15 +59,15 @@ if nixCats('general.extra') then
                         ["g\\"] = "actions.toggle_trash",
                 },
         })
-        vim.keymap.set("n", "-", "<cmd>Oil<CR>", { noremap = true, desc = 'Open Parent Directory' })
-        vim.keymap.set("n", "<leader>-", "<cmd>Oil .<CR>", { noremap = true, desc = 'Open nvim root directory' })
+        vim.keymap.set("n", "-", "<cmd>Oil<CR>", { noremap = true, desc = "Open Parent Directory" })
+        vim.keymap.set("n", "<leader>-", "<cmd>Oil .<CR>", { noremap = true, desc = "Open nvim root directory" })
 end
 
-require('lze').load {
-        { import = "myLuaConf.plugins.telescope", },
-        { import = "myLuaConf.plugins.treesitter", },
-        { import = "myLuaConf.plugins.completion", },
-        { import = "myLuaConf.plugins.navigation", },
+require("lze").load({
+        { import = "myLuaConf.plugins.telescope" },
+        { import = "myLuaConf.plugins.treesitter" },
+        { import = "myLuaConf.plugins.completion" },
+        { import = "myLuaConf.plugins.navigation" },
         {
                 "markdown-preview.nvim",
                 -- NOTE: for_cat is a custom handler that just sets enabled value for us,
@@ -75,27 +75,45 @@ require('lze').load {
                 -- it is defined in luaUtils template in lua/nixCatsUtils/lzUtils.lua
                 -- you could replace this with enabled = nixCats('cat.name') == true
                 -- if you didnt care to set a different default for when not using nix than the default you already set
-                for_cat = 'general.markdown',
-                cmd = { "MarkdownPreview", "MarkdownPreviewStop", "MarkdownPreviewToggle", },
+                for_cat = "general.markdown",
+                cmd = { "MarkdownPreview", "MarkdownPreviewStop", "MarkdownPreviewToggle" },
                 ft = "markdown",
                 keys = {
-                        { "<leader>mp", "<cmd>MarkdownPreview <CR>",       mode = { "n" }, noremap = true, desc = "markdown preview" },
-                        { "<leader>ms", "<cmd>MarkdownPreviewStop <CR>",   mode = { "n" }, noremap = true, desc = "markdown preview stop" },
-                        { "<leader>mt", "<cmd>MarkdownPreviewToggle <CR>", mode = { "n" }, noremap = true, desc = "markdown preview toggle" },
+                        {
+                                "<leader>mp",
+                                "<cmd>MarkdownPreview <CR>",
+                                mode = { "n" },
+                                noremap = true,
+                                desc = "markdown preview",
+                        },
+                        {
+                                "<leader>ms",
+                                "<cmd>MarkdownPreviewStop <CR>",
+                                mode = { "n" },
+                                noremap = true,
+                                desc = "markdown preview stop",
+                        },
+                        {
+                                "<leader>mt",
+                                "<cmd>MarkdownPreviewToggle <CR>",
+                                mode = { "n" },
+                                noremap = true,
+                                desc = "markdown preview toggle",
+                        },
                 },
                 before = function(plugin)
                         vim.g.mkdp_auto_close = 0
                 end,
         },
-        {
-                "render-markdown.nvim",
-                for_cat = "general.markdown",
-                ft = "markdown",
-                cmd = "RenderMarkdown",
-                after = function()
-                        require("render-markdown").setup {}
-                end,
-        },
+        -- {
+        --         "render-markdown.nvim",
+        --         for_cat = "general.markdown",
+        --         ft = "markdown",
+        --         cmd = "RenderMarkdown",
+        --         after = function()
+        --                 require("render-markdown").setup {}
+        --         end,
+        -- },
         {
                 "obsidian.nvim",
                 ft = "markdown",
@@ -103,15 +121,15 @@ require('lze').load {
                 -- cmd = { "ObsidianOpen", "ObsidianNew", "Obsidian" },
                 after = function()
                         require("obsidian").setup({
-                                ui = { enable = false },
+                                -- ui = { enable = false },
                                 workspaces = {
                                         {
                                                 name = "Personal",
                                                 path = "~/Personal/Vaults/Personal",
                                                 overrides = {
-                                                        notes_subdir = "05-Fleeting",
+                                                        notes_subdir = "05_Fleeting",
                                                         attachments = {
-                                                                img_folder = "99-Meta/01-Assets/imgs",
+                                                                img_folder = "99_Meta/01_Assets/imgs",
                                                         },
                                                 },
                                         },
@@ -123,14 +141,49 @@ require('lze').load {
                                                 -- },
                                         },
                                 },
+                                templates = {
+                                        folder = "99_Meta/00_Templates",
+                                        date_format = "%Y-%m-%d",
+                                        time_format = "%H:%M",
+                                        -- A map for custom variables, the key should be the variable and the value a function.
+                                        -- Functions are called with obsidian.TemplateContext objects as their sole parameter.
+                                        -- See: https://github.com/obsidian-nvim/obsidian.nvim/wiki/Template#substitutions
+                                        -- substitutions = {},
+
+                                        -- A map for configuring unique directories and paths for specific templates
+                                        --- See: https://github.com/obsidian-nvim/obsidian.nvim/wiki/Template#customizations
+                                        -- customizations = {},
+                                },
+                                daily_notes = {
+                                        -- Optional, if you keep daily notes in a separate directory.
+                                        folder = "06_Daily",
+                                        -- Optional, if you want to change the date format for the ID of daily notes.
+                                        date_format = "%Y-%m-%d",
+                                        -- Optional, if you want to change the date format of the default alias of daily notes.
+                                        alias_format = "%B %-d, %Y",
+                                        -- Optional, default tags to add to each new daily note created.
+                                        default_tags = { "daily-notes" },
+                                        -- Optional, if you want to automatically insert a template from your template directory like 'daily.md'
+                                        -- template = "daily.md",
+                                        -- Optional, if you want `Obsidian yesterday` to return the last work day or `Obsidian tomorrow` to return the next work day.
+                                        workdays_only = true,
+                                },
+                                completion = {
+                                        -- Enables completion using blink.cmp
+                                        blink = true,
+                                        -- Trigger completion at 2 chars.
+                                        min_chars = 2,
+                                        -- Set to false to disable new note creation in the picker
+                                        create_new = true,
+                                },
                         })
-                end
+                end,
         },
         {
                 "undotree",
-                for_cat = 'general.extra',
-                cmd = { "UndotreeToggle", "UndotreeHide", "UndotreeShow", "UndotreeFocus", "UndotreePersistUndo", },
-                keys = { { "<leader>U", "<cmd>UndotreeToggle<CR>", mode = { "n" }, desc = "Undo Tree" }, },
+                for_cat = "general.extra",
+                cmd = { "UndotreeToggle", "UndotreeHide", "UndotreeShow", "UndotreeFocus", "UndotreePersistUndo" },
+                keys = { { "<leader>U", "<cmd>UndotreeToggle<CR>", mode = { "n" }, desc = "Undo Tree" } },
                 before = function(_)
                         vim.g.undotree_WindowLayout = 1
                         vim.g.undotree_SplitWidth = 40
@@ -138,15 +191,15 @@ require('lze').load {
         },
         {
                 "comment.nvim",
-                for_cat = 'general.extra',
+                for_cat = "general.extra",
                 event = "DeferredUIEnter",
                 after = function(plugin)
-                        require('Comment').setup()
+                        require("Comment").setup()
                 end,
         },
         {
                 "indent-blankline.nvim",
-                for_cat = 'general.extra',
+                for_cat = "general.extra",
                 event = "DeferredUIEnter",
                 after = function(plugin)
                         require("ibl").setup()
@@ -157,20 +210,20 @@ require('lze').load {
                 for_cat = "general.always",
                 event = "DeferredUIEnter",
                 after = function(plugin)
-                        require("mini.surround").setup {
+                        require("mini.surround").setup({
                                 mappings = {
-                                        add = "gza",            -- Add surrounding in Normal and Visual modes
-                                        delete = "gzd",         -- Delete surrounding
-                                        find = "gzf",           -- Find surrounding (to the right)
-                                        find_left = "gzF",      -- Find surrounding (to the left)
-                                        highlight = "gzh",      -- Highlight surrounding
-                                        replace = "gzr",        -- Replace surrounding
+                                        add = "gza", -- Add surrounding in Normal and Visual modes
+                                        delete = "gzd", -- Delete surrounding
+                                        find = "gzf", -- Find surrounding (to the right)
+                                        find_left = "gzF", -- Find surrounding (to the left)
+                                        highlight = "gzh", -- Highlight surrounding
+                                        replace = "gzr", -- Replace surrounding
                                         update_n_lines = "gzn", -- Update `n_lines`
                                 },
                                 keys = {
                                         { "gz", "", desc = "+surround" },
                                 },
-                        }
+                        })
                 end,
         },
         {
@@ -178,7 +231,7 @@ require('lze').load {
                 for_cat = "general.always",
                 after = function(plugin)
                         require("mini.pairs").setup()
-                end
+                end,
         },
         {
                 "mini.icons",
@@ -190,7 +243,7 @@ require('lze').load {
         },
         {
                 "vim-startuptime",
-                for_cat = 'general.extra',
+                for_cat = "general.extra",
                 cmd = { "StartupTime" },
                 before = function(_)
                         vim.g.startuptime_event_width = 0
@@ -200,11 +253,11 @@ require('lze').load {
         },
         {
                 "fidget.nvim",
-                for_cat = 'general.extra',
+                for_cat = "general.extra",
                 event = "DeferredUIEnter",
                 -- keys = "",
                 after = function(plugin)
-                        require('fidget').setup({})
+                        require("fidget").setup({})
                 end,
         },
         -- {
@@ -223,34 +276,38 @@ require('lze').load {
         -- },
         {
                 "lualine.nvim",
-                for_cat = 'general.always',
+                for_cat = "general.always",
                 -- cmd = { "" },
                 event = "DeferredUIEnter",
                 -- ft = "",
                 -- keys = "",
                 -- colorscheme = "",
                 after = function(plugin)
-                        require('lualine').setup({
+                        require("lualine").setup({
                                 options = {
                                         icons_enabled = false,
                                         theme = colorschemeName,
-                                        component_separators = '|',
-                                        section_separators = '',
+                                        component_separators = "|",
+                                        section_separators = "",
                                 },
                                 sections = {
                                         lualine_c = {
                                                 {
-                                                        'filename', path = 1, status = true,
+                                                        "filename",
+                                                        path = 1,
+                                                        status = true,
                                                 },
                                         },
                                 },
                                 inactive_sections = {
                                         lualine_b = {
                                                 {
-                                                        'filename', path = 3, status = true,
+                                                        "filename",
+                                                        path = 3,
+                                                        status = true,
                                                 },
                                         },
-                                        lualine_x = { 'filetype' },
+                                        lualine_x = { "filetype" },
                                 },
                                 -- tabline = {
                                 --         lualine_a = { 'buffers' },
@@ -263,14 +320,14 @@ require('lze').load {
         },
         {
                 "gitsigns.nvim",
-                for_cat = 'general.always',
+                for_cat = "general.always",
                 event = "DeferredUIEnter",
                 -- cmd = { "" },
                 -- ft = "",
                 -- keys = "",
                 -- colorscheme = "",
                 after = function(plugin)
-                        require('gitsigns').setup({
+                        require("gitsigns").setup({
                                 -- See `:help gitsigns.txt`
                                 -- signs = {
                                 --         add = { text = '+' },
@@ -289,57 +346,57 @@ require('lze').load {
                                         end
 
                                         -- Navigation
-                                        map({ 'n', 'v' }, ']c', function()
+                                        map({ "n", "v" }, "]c", function()
                                                 if vim.wo.diff then
-                                                        return ']c'
+                                                        return "]c"
                                                 end
                                                 vim.schedule(function()
                                                         gs.next_hunk()
                                                 end)
-                                                return '<Ignore>'
-                                        end, { expr = true, desc = 'Jump to next hunk' })
+                                                return "<Ignore>"
+                                        end, { expr = true, desc = "Jump to next hunk" })
 
-                                        map({ 'n', 'v' }, '[c', function()
+                                        map({ "n", "v" }, "[c", function()
                                                 if vim.wo.diff then
-                                                        return '[c'
+                                                        return "[c"
                                                 end
                                                 vim.schedule(function()
                                                         gs.prev_hunk()
                                                 end)
-                                                return '<Ignore>'
-                                        end, { expr = true, desc = 'Jump to previous hunk' })
+                                                return "<Ignore>"
+                                        end, { expr = true, desc = "Jump to previous hunk" })
 
                                         -- Actions
                                         -- visual mode
-                                        map('v', '<leader>hs', function()
-                                                gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
-                                        end, { desc = 'stage git hunk' })
-                                        map('v', '<leader>hr', function()
-                                                gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
-                                        end, { desc = 'reset git hunk' })
+                                        map("v", "<leader>hs", function()
+                                                gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+                                        end, { desc = "stage git hunk" })
+                                        map("v", "<leader>hr", function()
+                                                gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+                                        end, { desc = "reset git hunk" })
                                         -- normal mode
-                                        map('n', '<leader>gs', gs.stage_hunk, { desc = 'git stage hunk' })
-                                        map('n', '<leader>gr', gs.reset_hunk, { desc = 'git reset hunk' })
-                                        map('n', '<leader>gS', gs.stage_buffer, { desc = 'git Stage buffer' })
-                                        map('n', '<leader>gu', gs.undo_stage_hunk, { desc = 'undo stage hunk' })
-                                        map('n', '<leader>gR', gs.reset_buffer, { desc = 'git Reset buffer' })
-                                        map('n', '<leader>gp', gs.preview_hunk, { desc = 'preview git hunk' })
-                                        map('n', '<leader>gb', function()
-                                                gs.blame_line { full = false }
-                                        end, { desc = 'git blame line' })
-                                        map('n', '<leader>gd', gs.diffthis, { desc = 'git diff against index' })
-                                        map('n', '<leader>gD', function()
-                                                gs.diffthis '~'
-                                        end, { desc = 'git diff against last commit' })
+                                        map("n", "<leader>gs", gs.stage_hunk, { desc = "git stage hunk" })
+                                        map("n", "<leader>gr", gs.reset_hunk, { desc = "git reset hunk" })
+                                        map("n", "<leader>gS", gs.stage_buffer, { desc = "git Stage buffer" })
+                                        map("n", "<leader>gu", gs.undo_stage_hunk, { desc = "undo stage hunk" })
+                                        map("n", "<leader>gR", gs.reset_buffer, { desc = "git Reset buffer" })
+                                        map("n", "<leader>gp", gs.preview_hunk, { desc = "preview git hunk" })
+                                        map("n", "<leader>gb", function()
+                                                gs.blame_line({ full = false })
+                                        end, { desc = "git blame line" })
+                                        map("n", "<leader>gd", gs.diffthis, { desc = "git diff against index" })
+                                        map("n", "<leader>gD", function()
+                                                gs.diffthis("~")
+                                        end, { desc = "git diff against last commit" })
 
                                         -- Toggles
-                                        map('n', '<leader>gtb', gs.toggle_current_line_blame,
-                                                { desc = 'toggle git blame line' })
-                                        map('n', '<leader>gtd', gs.toggle_deleted, { desc = 'toggle git show deleted' })
+                                        map("n", "<leader>gtb", gs.toggle_current_line_blame,
+                                                { desc = "toggle git blame line" })
+                                        map("n", "<leader>gtd", gs.toggle_deleted, { desc = "toggle git show deleted" })
 
                                         -- Text object
-                                        map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>',
-                                                { desc = 'select git hunk' })
+                                        map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>",
+                                                { desc = "select git hunk" })
                                 end,
                         })
                         -- vim.cmd([[hi GitSignsAdd guifg=#04de21]])
@@ -349,17 +406,17 @@ require('lze').load {
         },
         {
                 "which-key.nvim",
-                for_cat = 'general.extra',
+                for_cat = "general.extra",
                 -- cmd = { "" },
                 event = "DeferredUIEnter",
                 -- ft = "",
                 -- keys = "",
                 -- colorscheme = "",
                 after = function(plugin)
-                        require('which-key').setup({
+                        require("which-key").setup({
                                 preset = "helix",
                         })
-                        require('which-key').add {
+                        require("which-key").add({
                                 { "<leader><leader>",  group = "buffer commands" },
                                 { "<leader><leader>_", hidden = true },
                                 { "<leader>l",         group = "Lsp" },
@@ -378,7 +435,7 @@ require('lze').load {
                                 { "<leader>t_",        hidden = true },
                                 { "<leader>w",         group = "[w]orkspace" },
                                 { "<leader>w_",        hidden = true },
-                        }
+                        })
                 end,
         },
-}
+})
