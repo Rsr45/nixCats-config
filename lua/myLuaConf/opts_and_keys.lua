@@ -29,6 +29,7 @@ vim.wo.number = true
 vim.o.mouse = 'a'
 
 vim.o.filetype = "on"
+vim.o.showmode = false
 
 -- Indent
 -- vim.o.smarttab = true

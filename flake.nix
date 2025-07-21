@@ -270,7 +270,7 @@
                 nvim-lspconfig
                 lualine-nvim
                 gitsigns-nvim
-                # vim-sleuth
+                vim-sleuth
                 vim-fugitive
                 vim-rhubarb
                 mini-surround
@@ -278,6 +278,12 @@
                 nvim-navic
                 pkgs.neovimPlugins.navbuddy
                 pkgs.neovimPlugins.breadcrumbs
+                lazygit-nvim
+                nvim-biscuits
+                # mini
+                snacks-nvim
+                nvim-ufo
+                promise-async
               ];
               extra = with pkgs.vimPlugins; [
                 fidget-nvim

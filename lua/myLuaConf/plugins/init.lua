@@ -180,6 +180,34 @@ require("lze").load({
         end,
     },
     {
+        "nvim-ufo",
+        for_cat = "general.always",
+        event = "DeferredUIEnter",
+        after = function()
+            vim.o.foldcolumn = '1' -- '0' is not bad
+            vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
+            vim.o.foldlevelstart = 99
+            vim.o.foldenable = true
+
+            -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
+            vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
+            vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+
+            require("ufo").setup({
+                provide_selector = function(bufnr, filetype, buftype)
+                    return { "lsp", "treesitter", "indent" }
+                end
+            })
+        end
+    },
+    {
+        "promise-async",
+        for_cat = "general.always",
+        dep_of = "nvim-ufo",
+        -- after = function ()
+        -- end
+    },
+    {
         "undotree",
         for_cat = "general.extra",
         cmd = { "UndotreeToggle", "UndotreeHide", "UndotreeShow", "UndotreeFocus", "UndotreePersistUndo" },
@@ -307,16 +335,25 @@ require("lze").load({
             require("lualine").setup({
                 options = {
                     icons_enabled = false,
-                    theme = colorschemeName,
+                    theme = "auto",
+                    -- theme = colorschemeName,
                     component_separators = "",
                     section_separators = "",
+                    color = { fg = '#c1c1c1', bg = '#121212', gui = '' }, -- maybe probably
                 },
                 sections = {
                     lualine_a = {
-                        "mode",
+                        {
+                            'mode',
+                            fmt = function(str) return str:sub(1, 3) end,
+                            color = { fg = '#c1c1c1', bg = '#121212', gui = '' },
+                        }
                     },
                     lualine_b = {
-                        "lsp_status",
+                        {
+                            "lsp_status",
+                            color = { fg = '#c1c1c1', bg = '#121212', gui = '' },
+                        }
                     },
                     lualine_c = {
                         {
@@ -336,13 +373,26 @@ require("lze").load({
                                 readonly = '[-]',      -- Text to show when the file is non-modifiable or readonly.
                                 unnamed = '[No Name]', -- Text to show for unnamed buffers.
                                 newfile = '[New]',     -- Text to show for newly created file before first write
-                            }
+                            },
+                            color = { fg = '#c1c1c1', bg = '#121212', gui = '' },
                         },
                     },
                     lualine_x = {
+                        {
+                            color = { fg = '#c1c1c1', bg = '#121212', gui = '' },
+                        }
                     },
                     lualine_y = {
+                        {
+                            color = { fg = '#c1c1c1', bg = '#121212', gui = '' },
+                        }
                     },
+                    lualine_z = {
+                        {
+                            "location",
+                            color = { fg = '#c1c1c1', bg = '#121212', gui = '' },
+                        }
+                    }
                 },
                 -- tabline = {
                 --         lualine_a = { 'buffers' },
@@ -365,11 +415,11 @@ require("lze").load({
             require("gitsigns").setup({
                 -- See `:help gitsigns.txt`
                 signs = {
-                        add = { text = '+' },
-                        change = { text = '~' },
-                        delete = { text = '_' },
-                        topdelete = { text = '‾' },
-                        changedelete = { text = '~' },
+                    add = { text = '+' },
+                    change = { text = '~' },
+                    delete = { text = '_' },
+                    topdelete = { text = '‾' },
+                    changedelete = { text = '~' },
                 },
                 on_attach = function(bufnr)
                     local gs = package.loaded.gitsigns
