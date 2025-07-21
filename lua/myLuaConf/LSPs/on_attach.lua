@@ -1,9 +1,4 @@
 return function(_, bufnr, client)
-        -- local navic = require('nvim-navic')
-        --
-        -- if client.server_capabilities.documentSymbolProvider then
-        --         navic.attach(client, bufnr)
-        -- end
 
         vim.lsp.inlay_hint.enable(true)
 

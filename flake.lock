@@ -31,6 +31,22 @@
         "type": "github"
       }
     },
+    "plugins-black-metal": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1746375973,
+        "narHash": "sha256-z+qJfvCIV5WEAvKIkttDKpfBDt1xDBkTYLk2EoZbnj8=",
+        "owner": "metalelf0",
+        "repo": "black-metal-theme-neovim",
+        "rev": "1838337ce73a8de38e81bc40abe54f07b2380273",
+        "type": "github"
+      },
+      "original": {
+        "owner": "metalelf0",
+        "repo": "black-metal-theme-neovim",
+        "type": "github"
+      }
+    },
     "plugins-breadcrumbs": {
       "flake": false,
       "locked": {
@@ -67,6 +83,7 @@
       "inputs": {
         "nixCats": "nixCats",
         "nixpkgs": "nixpkgs",
+        "plugins-black-metal": "plugins-black-metal",
         "plugins-breadcrumbs": "plugins-breadcrumbs",
         "plugins-navbuddy": "plugins-navbuddy"
       }

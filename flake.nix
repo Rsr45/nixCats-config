@@ -57,6 +57,11 @@
       url = "github:hasansujon786/nvim-navbuddy";
       flake = false;
     };
+
+    "plugins-black-metal" = {
+      url = "github:metalelf0/black-metal-theme-neovim";
+      flake = false;
+    };
   };
 
   # see :help nixCats.flake.outputs
@@ -187,6 +192,7 @@
               with pkgs.vimPlugins;
               (builtins.getAttr (categories.colorscheme or "onedark") {
                 # Theme switcher without creating a new category
+                "emperor" = pkgs.neovimPlugins.black-metal;
                 "onedark" = onedark-nvim;
                 "catppuccin" = catppuccin-nvim;
                 "catppuccin-mocha" = catppuccin-nvim;
@@ -264,11 +270,14 @@
                 nvim-lspconfig
                 lualine-nvim
                 gitsigns-nvim
-                vim-sleuth
+                # vim-sleuth
                 vim-fugitive
                 vim-rhubarb
                 mini-surround
                 mini-pairs
+                nvim-navic
+                pkgs.neovimPlugins.navbuddy
+                pkgs.neovimPlugins.breadcrumbs
               ];
               extra = with pkgs.vimPlugins; [
                 fidget-nvim
@@ -423,7 +432,7 @@
               # you could also pass something else:
               # see :help nixCats
               themer = true;
-              colorscheme = "miasma";
+              colorscheme = "emperor";
             };
             extra = {
               # to keep the categories table from being filled with non category things that you want to pass
