@@ -273,8 +273,11 @@
                 vim-sleuth
                 vim-fugitive
                 vim-rhubarb
+                mini-ai
                 mini-surround
                 mini-pairs
+                mini-operators
+                mini-bracketed
                 nvim-navic
                 pkgs.neovimPlugins.navbuddy
                 pkgs.neovimPlugins.breadcrumbs
@@ -289,7 +292,8 @@
                 fidget-nvim
                 # lualine-lsp-progress
                 which-key-nvim
-                comment-nvim
+                # comment-nvim
+                mini-comment
                 undotree
                 indent-blankline-nvim
                 vim-startuptime

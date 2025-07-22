@@ -68,6 +68,41 @@ require("lze").load({
     { import = "myLuaConf.plugins.treesitter" },
     { import = "myLuaConf.plugins.completion" },
     { import = "myLuaConf.plugins.navigation" },
+    { import = "myLuaConf.plugins.mini" },
+    {
+        "snacks.nvim",
+        for_cat = "general.always",
+        lazy = false,
+        keys = {
+            { "<leader>u", "<cmd>lua Snacks.picker.undo()<CR>", mode = { "n" }, desc = "Undo" },
+            { "<leader>ff", "<cmd>lua Snacks.picker.files()<CR>", mode = { "n" }, desc = "Files" },
+        },
+        after = function()
+            require("snacks").setup({
+                statuscolumn = {
+                    -- your statuscolumn configuration comes here
+                    -- or leave it empty to use the default settings
+                    -- refer to the configuration section below
+                    left = { "mark", "sign" }, -- priority of signs on the left (high to low)
+                    right = { "fold", "git" }, -- priority of signs on the right (high to low)
+                    folds = {
+                        open = false,          -- show open fold icons
+                        git_hl = false,        -- use Git Signs hl for fold icons
+                    },
+                    git = {
+                        -- patterns to match Git signs
+                        patterns = { "GitSign", "MiniDiffSign" },
+                    },
+                    refresh = 50, -- refresh at most every 50ms
+                },
+                picker = {
+                    -- your picker configuration comes here
+                    -- or leave it empty to use the default settings
+                    -- refer to the configuration section below
+                },
+            })
+        end
+    },
     {
         "markdown-preview.nvim",
         -- NOTE: for_cat is a custom handler that just sets enabled value for us,
@@ -116,9 +151,9 @@ require("lze").load({
     -- },
     {
         "obsidian.nvim",
-        ft = "markdown",
+        -- ft = "markdown",
         for_cat = "general.notes",
-        -- cmd = { "ObsidianOpen", "ObsidianNew", "Obsidian" },
+        cmd = { "ObsidianOpen", "ObsidianNew", "ObsidianSearch" },
         after = function()
             require("obsidian").setup({
                 -- ui = { enable = false },
@@ -180,9 +215,20 @@ require("lze").load({
         end,
     },
     {
+        "vim-sleuth",
+        for_cat = "general.always",
+        lazy = false,
+    },
+    {
+        "vim-fugitive",
+        for_cat = "general.always",
+        cmd = { "G", "Git" },
+    },
+    {
         "nvim-ufo",
         for_cat = "general.always",
-        event = "DeferredUIEnter",
+        lazy = false,
+        -- event = "DeferredUIEnter",
         after = function()
             vim.o.foldcolumn = '1' -- '0' is not bad
             vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
@@ -218,55 +264,11 @@ require("lze").load({
         end,
     },
     {
-        "comment.nvim",
-        for_cat = "general.extra",
-        event = "DeferredUIEnter",
-        after = function(plugin)
-            require("Comment").setup()
-        end,
-    },
-    {
         "indent-blankline.nvim",
         for_cat = "general.extra",
         event = "DeferredUIEnter",
         after = function(plugin)
             require("ibl").setup()
-        end,
-    },
-    {
-        "mini.surround",
-        for_cat = "general.always",
-        event = "DeferredUIEnter",
-        after = function(plugin)
-            require("mini.surround").setup({
-                mappings = {
-                    add = "gza",            -- Add surrounding in Normal and Visual modes
-                    delete = "gzd",         -- Delete surrounding
-                    find = "gzf",           -- Find surrounding (to the right)
-                    find_left = "gzF",      -- Find surrounding (to the left)
-                    highlight = "gzh",      -- Highlight surrounding
-                    replace = "gzr",        -- Replace surrounding
-                    update_n_lines = "gzn", -- Update `n_lines`
-                },
-                keys = {
-                    { "gz", "", desc = "+surround" },
-                },
-            })
-        end,
-    },
-    {
-        "mini.pairs",
-        for_cat = "general.always",
-        after = function(plugin)
-            require("mini.pairs").setup()
-        end,
-    },
-    {
-        "mini.icons",
-        for_cat = "general.extra",
-        after = function(plugin)
-            require("mini.icons").setup()
-            MiniIcons.mock_nvim_web_devicons()
         end,
     },
     {
@@ -414,13 +416,13 @@ require("lze").load({
         after = function(plugin)
             require("gitsigns").setup({
                 -- See `:help gitsigns.txt`
-                signs = {
-                    add = { text = '+' },
-                    change = { text = '~' },
-                    delete = { text = '_' },
-                    topdelete = { text = '‾' },
-                    changedelete = { text = '~' },
-                },
+                -- signs = {
+                --     add = { text = '+' },
+                --     change = { text = '~' },
+                --     delete = { text = '_' },
+                --     topdelete = { text = '‾' },
+                --     changedelete = { text = '~' },
+                -- },
                 on_attach = function(bufnr)
                     local gs = package.loaded.gitsigns
 
@@ -461,7 +463,7 @@ require("lze").load({
                     end, { desc = "reset git hunk" })
                     -- normal mode
                     map("n", "<leader>gs", gs.stage_hunk, { desc = "git stage hunk" })
-                    map("n", "<leader>gr", gs.reset_hunk, { desc = "git reset hunk" })
+                    map("n", "<leader>grr", gs.reset_hunk, { desc = "git reset hunk" })
                     map("n", "<leader>gS", gs.stage_buffer, { desc = "git Stage buffer" })
                     map("n", "<leader>gu", gs.undo_stage_hunk, { desc = "undo stage hunk" })
                     map("n", "<leader>gR", gs.reset_buffer, { desc = "git Reset buffer" })
@@ -497,15 +499,16 @@ require("lze").load({
         -- ft = "",
         -- keys = "",
         -- colorscheme = "",
-        after = function(plugin)
+        after = function()
             require("which-key").setup({
                 preset = "helix",
+                delay = "200",
             })
             require("which-key").add({
-                { "<leader><leader>",  group = "buffer commands" },
-                { "<leader><leader>_", hidden = true },
-                { "<leader>l",         group = "Lsp" },
-                { "<leader>l_",        hidden = true },
+                -- { "<leader><leader>",  group = "buffer commands" },
+                -- { "<leader><leader>_", hidden = true },
+                { "<leader>c",         group = "[c]ode" },
+                { "<leader>c_",        hidden = true },
                 { "<leader>d",         group = "[d]ocument" },
                 { "<leader>d_",        hidden = true },
                 { "<leader>g",         group = "[g]it" },
@@ -514,7 +517,7 @@ require("lze").load({
                 { "<leader>m_",        hidden = true },
                 { "<leader>r",         group = "[r]ename" },
                 { "<leader>r_",        hidden = true },
-                { "<leader>f",         group = "Telescope" },
+                { "<leader>f",         group = "[f]picker" },
                 { "<leader>f_",        hidden = true },
                 { "<leader>t",         group = "[t]oggles" },
                 { "<leader>t_",        hidden = true },

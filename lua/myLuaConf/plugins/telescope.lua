@@ -88,7 +88,7 @@ return {
       { "<leader>fg", function() return require('telescope.builtin').live_grep() end, mode = {"n"}, desc = 'Grep in Files', },
       { "<leader>fw", function() return require('telescope.builtin').grep_string() end, mode = {"n"}, desc = 'Grep Word Under Cursor', },
       { "<leader>fs", function() return require('telescope.builtin').builtin() end, mode = {"n"}, desc = 'List Telescope Actions', },
-      { "<leader>ff", function() return require('telescope.builtin').find_files() end, mode = {"n"}, desc = 'List Files', },
+      -- { "<leader>ff", function() return require('telescope.builtin').find_files() end, mode = {"n"}, desc = 'List Files', },
       { "<leader>fh", function() return require('telescope.builtin').help_tags() end, mode = {"n"}, desc = 'Help', },
     },
     -- colorscheme = "",

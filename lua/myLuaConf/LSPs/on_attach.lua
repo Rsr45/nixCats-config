@@ -1,5 +1,4 @@
 return function(_, bufnr, client)
-
         vim.lsp.inlay_hint.enable(true)
 
         -- we create a function that lets us more easily define mappings specific
@@ -22,7 +21,7 @@ return function(_, bufnr, client)
         -- because otherwise they would load telescope eagerly when this is defined.
         -- due to us using the on_require handler to make sure it is available.
         if nixCats('general.telescope') then
-                nmap('gr', function() require('telescope.builtin').lsp_references() end, '[G]oto [R]eferences')
+                nmap('<leader>gr', function() require('telescope.builtin').lsp_references() end, '[G]oto [R]eferences')
                 nmap('gI', function() require('telescope.builtin').lsp_implementations() end, '[G]oto [I]mplementation')
                 nmap('<leader>ds', function() require('telescope.builtin').lsp_document_symbols() end,
                         '[D]ocument [S]ymbols')
