@@ -64,6 +64,37 @@ if nixCats("general.extra") then
 end
 
 require("lze").load({
+    {
+        "nui.nvim",
+        for_cat = "general.always",
+        lazy = false,
+        dep_of = { "noice.nvim" },
+    },
+    {
+        "noice.nvim",
+        for_cat = "general.always",
+        lazy = false,
+        after = function()
+            require("noice").setup({
+                lsp = {
+                    -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+                    override = {
+                        ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+                        ["vim.lsp.util.stylize_markdown"] = true,
+                        ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+                    },
+                },
+                -- you can enable a preset for easier configuration
+                presets = {
+                    bottom_search = true,         -- use a classic bottom cmdline for search
+                    command_palette = true,       -- position the cmdline and popupmenu together
+                    long_message_to_split = true, -- long messages will be sent to a split
+                    inc_rename = false,           -- enables an input dialog for inc-rename.nvim
+                    lsp_doc_border = false,       -- add a border to hover docs and signature help
+                },
+            })
+        end,
+    },
     { import = "myLuaConf.plugins.telescope" },
     { import = "myLuaConf.plugins.treesitter" },
     { import = "myLuaConf.plugins.completion" },
@@ -74,7 +105,7 @@ require("lze").load({
         for_cat = "general.always",
         lazy = false,
         keys = {
-            { "<leader>u", "<cmd>lua Snacks.picker.undo()<CR>", mode = { "n" }, desc = "Undo" },
+            { "<leader>u",  "<cmd>lua Snacks.picker.undo()<CR>",  mode = { "n" }, desc = "Undo" },
             { "<leader>ff", "<cmd>lua Snacks.picker.files()<CR>", mode = { "n" }, desc = "Files" },
         },
         after = function()
@@ -96,12 +127,16 @@ require("lze").load({
                     refresh = 50, -- refresh at most every 50ms
                 },
                 picker = {
-                    -- your picker configuration comes here
-                    -- or leave it empty to use the default settings
-                    -- refer to the configuration section below
+                    sources = {
+                    },
                 },
             })
         end
+    },
+    {
+        "fzf-lua",
+        for_cat = "general.always",
+        lazy = false,
     },
     {
         "markdown-preview.nvim",
@@ -140,15 +175,15 @@ require("lze").load({
             vim.g.mkdp_auto_close = 0
         end,
     },
-    -- {
-    --         "render-markdown.nvim",
-    --         for_cat = "general.markdown",
-    --         ft = "markdown",
-    --         cmd = "RenderMarkdown",
-    --         after = function()
-    --                 require("render-markdown").setup {}
-    --         end,
-    -- },
+    {
+        "render-markdown.nvim",
+        for_cat = "general.markdown",
+        ft = "markdown",
+        cmd = "RenderMarkdown",
+        after = function()
+            require("render-markdown").setup {}
+        end,
+    },
     {
         "obsidian.nvim",
         -- ft = "markdown",
@@ -156,7 +191,7 @@ require("lze").load({
         cmd = { "ObsidianOpen", "ObsidianNew", "ObsidianSearch" },
         after = function()
             require("obsidian").setup({
-                -- ui = { enable = false },
+                ui = { enable = false },
                 workspaces = {
                     {
                         name = "Personal",
@@ -219,6 +254,11 @@ require("lze").load({
         for_cat = "general.always",
         lazy = false,
     },
+    -- {
+    --     "vim-visual-multi",
+    --     for_cat = "general.always",
+    --     lazy = false,
+    -- },
     {
         "vim-fugitive",
         for_cat = "general.always",
@@ -250,8 +290,6 @@ require("lze").load({
         "promise-async",
         for_cat = "general.always",
         dep_of = "nvim-ufo",
-        -- after = function ()
-        -- end
     },
     {
         "undotree",
@@ -267,8 +305,11 @@ require("lze").load({
         "indent-blankline.nvim",
         for_cat = "general.extra",
         event = "DeferredUIEnter",
-        after = function(plugin)
-            require("ibl").setup()
+        after = function()
+            require("ibl").setup({
+                indent = { char = "▏", },
+                scope = { enabled = true, },
+            })
         end,
     },
     {
@@ -286,43 +327,52 @@ require("lze").load({
         for_cat = "general.extra",
         event = "DeferredUIEnter",
         -- keys = "",
-        after = function(plugin)
-            require("fidget").setup({})
+        after = function()
+            require("fidget").setup({
+                notification = {
+                    window = {
+                        border = "single",
+                        x_padding = 1,
+                        y_padding = 1,
+                    },
+                },
+            })
         end,
     },
-    -- {
-    --   "hlargs",
-    --   for_cat = 'general.extra',
-    --   event = "DeferredUIEnter",
-    --   -- keys = "",
-    --   dep_of = { "nvim-lspconfig" },
-    --   after = function(plugin)
-    --     require('hlargs').setup {
-    --       color = '#32a88f',
-    --     }
-    --     vim.cmd([[hi clear @lsp.type.parameter]])
-    --     vim.cmd([[hi link @lsp.type.parameter Hlargs]])
-    --   end,
-    -- },
     {
         "nvim-navic",
         for_cat = "general.always",
         event = "DeferredUIEnter",
-        dep_of = "breadcrumbs",
+        dep_of = { "breadcrumbs", "nvim-navbuddy" },
         after = function()
             require("nvim-navic").setup({
                 lsp = {
                     auto_attach = true,
                 }
             })
+            -- vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
         end
     },
     {
-        "breadcrumbs",
+        "nvim-navbuddy",
+        for_cat = "general.always",
+        cmd = "Navbuddy",
+        after = function()
+            require("nvim-navbuddy").setup({
+                lsp = {
+                    auto_attach = true,
+                },
+            })
+        end
+    },
+    {
+        "bufferline.nvim",
         for_cat = "general.always",
         event = "DeferredUIEnter",
         after = function()
-            require("breadcrumbs").setup()
+            require("bufferline").setup({
+
+            })
         end
     },
     {
@@ -333,7 +383,7 @@ require("lze").load({
         -- ft = "",
         -- keys = "",
         -- colorscheme = "",
-        after = function(plugin)
+        after = function()
             require("lualine").setup({
                 options = {
                     icons_enabled = false,
@@ -341,20 +391,19 @@ require("lze").load({
                     -- theme = colorschemeName,
                     component_separators = "",
                     section_separators = "",
-                    color = { fg = '#c1c1c1', bg = '#121212', gui = '' }, -- maybe probably
                 },
                 sections = {
                     lualine_a = {
                         {
                             'mode',
                             fmt = function(str) return str:sub(1, 3) end,
-                            color = { fg = '#c1c1c1', bg = '#121212', gui = '' },
+                            -- color = { fg = '#c1c1c1', bg = '', gui = '' },
                         }
                     },
                     lualine_b = {
                         {
                             "lsp_status",
-                            color = { fg = '#c1c1c1', bg = '#121212', gui = '' },
+                            -- color = { fg = '#c1c1c1', bg = '', gui = '' },
                         }
                     },
                     lualine_c = {
@@ -376,34 +425,52 @@ require("lze").load({
                                 unnamed = '[No Name]', -- Text to show for unnamed buffers.
                                 newfile = '[New]',     -- Text to show for newly created file before first write
                             },
-                            color = { fg = '#c1c1c1', bg = '#121212', gui = '' },
+                            -- color = { fg = '#c1c1c1', bg = '', gui = '' },
                         },
                     },
                     lualine_x = {
                         {
-                            color = { fg = '#c1c1c1', bg = '#121212', gui = '' },
+                            -- color = { fg = '#c1c1c1', bg = '', gui = '' },
                         }
                     },
                     lualine_y = {
                         {
-                            color = { fg = '#c1c1c1', bg = '#121212', gui = '' },
-                        }
+                            -- color = { fg = '#c1c1c1', bg = '', gui = '' },
+                        },
                     },
                     lualine_z = {
                         {
                             "location",
-                            color = { fg = '#c1c1c1', bg = '#121212', gui = '' },
+                            -- color = { fg = '#c1c1c1', bg = '', gui = '' },
                         }
                     }
                 },
-                -- tabline = {
-                --         lualine_a = { 'buffers' },
-                --         -- if you use lualine-lsp-progress, I have mine here instead of fidget
-                --         -- lualine_b = { 'lsp_progress', },
-                --         lualine_z = { 'tabs' }
-                -- },
+                winbar = {
+                    lualine_a = {
+                        {
+                            "filename",
+                            -- color = { fg = '#c1c1c1', bg = '', gui = '' },
+                        },
+                    },
+                    lualine_b = {
+                        {
+                            function()
+                                return require('nvim-navic').get_location()
+                            end,
+                            cond = function()
+                                return require('nvim-navic').is_available()
+                            end,
+
+                            -- color = { fg = '#c1c1c1', bg = '', gui = '' },
+                        },
+                    },
+                    lualine_c = {},
+                    lualine_x = {},
+                    lualine_y = {},
+                    lualine_z = {},
+                },
             })
-        end,
+        end
     },
     {
         "gitsigns.nvim",
@@ -466,7 +533,7 @@ require("lze").load({
                     map("n", "<leader>grr", gs.reset_hunk, { desc = "git reset hunk" })
                     map("n", "<leader>gS", gs.stage_buffer, { desc = "git Stage buffer" })
                     map("n", "<leader>gu", gs.undo_stage_hunk, { desc = "undo stage hunk" })
-                    map("n", "<leader>gR", gs.reset_buffer, { desc = "git Reset buffer" })
+                    map("n", "<leader>grR", gs.reset_buffer, { desc = "git Reset buffer" })
                     map("n", "<leader>gp", gs.preview_hunk, { desc = "preview git hunk" })
                     map("n", "<leader>gb", function()
                         gs.blame_line({ full = false })
@@ -502,27 +569,26 @@ require("lze").load({
         after = function()
             require("which-key").setup({
                 preset = "helix",
-                delay = "200",
             })
             require("which-key").add({
                 -- { "<leader><leader>",  group = "buffer commands" },
                 -- { "<leader><leader>_", hidden = true },
-                { "<leader>c",         group = "[c]ode" },
-                { "<leader>c_",        hidden = true },
-                { "<leader>d",         group = "[d]ocument" },
-                { "<leader>d_",        hidden = true },
-                { "<leader>g",         group = "[g]it" },
-                { "<leader>g_",        hidden = true },
-                { "<leader>m",         group = "[m]arkdown" },
-                { "<leader>m_",        hidden = true },
-                { "<leader>r",         group = "[r]ename" },
-                { "<leader>r_",        hidden = true },
-                { "<leader>f",         group = "[f]picker" },
-                { "<leader>f_",        hidden = true },
-                { "<leader>t",         group = "[t]oggles" },
-                { "<leader>t_",        hidden = true },
-                { "<leader>w",         group = "[w]orkspace" },
-                { "<leader>w_",        hidden = true },
+                { "<leader>c",  group = "[c]ode" },
+                { "<leader>c_", hidden = true },
+                { "<leader>d",  group = "[d]ocument" },
+                { "<leader>d_", hidden = true },
+                { "<leader>g",  group = "[g]it" },
+                { "<leader>g_", hidden = true },
+                { "<leader>m",  group = "[m]arkdown" },
+                { "<leader>m_", hidden = true },
+                { "<leader>r",  group = "[r]ename" },
+                { "<leader>r_", hidden = true },
+                { "<leader>f",  group = "[f]picker" },
+                { "<leader>f_", hidden = true },
+                { "<leader>t",  group = "[t]oggles" },
+                { "<leader>t_", hidden = true },
+                { "<leader>w",  group = "[w]orkspace" },
+                { "<leader>w_", hidden = true },
             })
         end,
     },

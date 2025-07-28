@@ -53,7 +53,7 @@
       flake = false;
     };
 
-    "plugins-navbuddy" = {
+    "plugins-nvim-navbuddy" = {
       url = "github:hasansujon786/nvim-navbuddy";
       flake = false;
     };
@@ -192,6 +192,7 @@
               with pkgs.vimPlugins;
               (builtins.getAttr (categories.colorscheme or "onedark") {
                 # Theme switcher without creating a new category
+                "gruvbox-material" = gruvbox-material;
                 "emperor" = pkgs.neovimPlugins.black-metal;
                 "onedark" = onedark-nvim;
                 "catppuccin" = catppuccin-nvim;
@@ -269,17 +270,20 @@
               always = with pkgs.vimPlugins; [
                 nvim-lspconfig
                 lualine-nvim
+                bufferline-nvim
                 gitsigns-nvim
                 vim-sleuth
                 vim-fugitive
                 vim-rhubarb
+                vim-visual-multi
                 mini-ai
                 mini-surround
                 mini-pairs
                 mini-operators
                 mini-bracketed
                 nvim-navic
-                pkgs.neovimPlugins.navbuddy
+                pkgs.neovimPlugins.nvim-navbuddy
+                # nvim-navbuddy
                 pkgs.neovimPlugins.breadcrumbs
                 lazygit-nvim
                 nvim-biscuits
@@ -287,6 +291,9 @@
                 snacks-nvim
                 nvim-ufo
                 promise-async
+                nui-nvim
+                noice-nvim
+                fzf-lua
               ];
               extra = with pkgs.vimPlugins; [
                 fidget-nvim
@@ -442,7 +449,7 @@
               # you could also pass something else:
               # see :help nixCats
               themer = true;
-              colorscheme = "emperor";
+              colorscheme = "gruvbox-material";
             };
             extra = {
               # to keep the categories table from being filled with non category things that you want to pass

@@ -19,7 +19,7 @@ return {
     "luasnip",
     for_cat = "general.blink",
     dep_of = { "blink.cmp" },
-    after = function (_)
+    after = function(_)
       local luasnip = require 'luasnip'
       require('luasnip.loaders.from_vscode').lazy_load()
       luasnip.config.setup {}
@@ -27,9 +27,9 @@ return {
       local ls = require('luasnip')
 
       vim.keymap.set({ "i", "s" }, "<M-n>", function()
-          if ls.choice_active() then
-              ls.change_choice(1)
-          end
+        if ls.choice_active() then
+          ls.change_choice(1)
+        end
       end)
     end,
   },
@@ -42,15 +42,21 @@ return {
     "blink.cmp",
     for_cat = "general.blink",
     event = "DeferredUIEnter",
-    after = function (_)
+    after = function(_)
       require("blink.cmp").setup({
         -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
         -- See :h blink-cmp-config-keymap for configuring keymaps
-        keymap =  {
+        keymap = {
           preset = 'default',
+
+          ['<Up>'] = {},
+          ['<Down>'] = {},
+          ['<Left>'] = {},
+          ['<Right>'] = {},
         },
         cmdline = {
           enabled = true,
+          keymap = { preset = 'inherit' },
           completion = {
             menu = {
               auto_show = true,
@@ -82,6 +88,7 @@ return {
         completion = {
           menu = {
             draw = {
+              columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind", gap = 1 } },
               treesitter = { 'lsp' },
               components = {
                 label = {
@@ -97,6 +104,7 @@ return {
           },
           documentation = {
             auto_show = true,
+            auto_show_delay_ms = 500,
           },
         },
         snippets = {

@@ -63,7 +63,7 @@
         "type": "github"
       }
     },
-    "plugins-navbuddy": {
+    "plugins-nvim-navbuddy": {
       "flake": false,
       "locked": {
         "lastModified": 1746961661,
@@ -85,7 +85,7 @@
         "nixpkgs": "nixpkgs",
         "plugins-black-metal": "plugins-black-metal",
         "plugins-breadcrumbs": "plugins-breadcrumbs",
-        "plugins-navbuddy": "plugins-navbuddy"
+        "plugins-nvim-navbuddy": "plugins-nvim-navbuddy"
       }
     }
   },
