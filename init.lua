@@ -19,7 +19,7 @@ Of course, if you only ever download nvim with nix, this isnt needed.]]
 --[[ an error if not loaded via nixCats  ]]
 --[[ ----------------------------------- ]]
 require('nixCatsUtils').setup {
-        non_nix_value = true,
+    non_nix_value = true,
 }
 --[[
 Nix puts the plugins

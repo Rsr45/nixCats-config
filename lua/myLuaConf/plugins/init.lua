@@ -95,7 +95,7 @@ require("lze").load({
             })
         end,
     },
-    { import = "myLuaConf.plugins.telescope" },
+    -- { import = "myLuaConf.plugins.telescope" },
     { import = "myLuaConf.plugins.treesitter" },
     { import = "myLuaConf.plugins.completion" },
     { import = "myLuaConf.plugins.navigation" },
@@ -105,8 +105,21 @@ require("lze").load({
         for_cat = "general.always",
         lazy = false,
         keys = {
-            { "<leader>u",  "<cmd>lua Snacks.picker.undo()<CR>",  mode = { "n" }, desc = "Undo" },
-            { "<leader>ff", "<cmd>lua Snacks.picker.files()<CR>", mode = { "n" }, desc = "Files" },
+            { "<leader>u",  "<cmd>lua Snacks.picker.undo()<CR>",                                 mode = { "n" }, desc = "Undo" },
+            { "<leader>f",  "<cmd>lua Snacks.picker.files()<CR>",                                mode = { "n" }, desc = "Files" },
+            { "<leader>F",  "<cmd>lua Snacks.picker.grep({ cwd = vim.fn.expand('%:p:h') })<CR>", mode = { "n" }, desc = "Files in cwd" },
+            { "<leader>b",  "<cmd>lua Snacks.picker.buffers()<CR>",                              mode = { "n" }, desc = "Buffer" },
+            { "<leader>g",  "<cmd>lua Snacks.picker.grep()<CR>",                                 mode = { "n" }, desc = "Grep" },
+            { "<leader>G",  "<cmd>lua Snacks.picker.grep_word()<CR>",                            mode = { "n" }, desc = "Grep Word Under Cursor" },
+            { "<leader>s",  "<cmd>lua Snacks.picker.lsp_symbols()<CR>",                          mode = { "n" }, desc = "symbol" },
+            { "<leader>ws", "<cmd>lua Snacks.picker.lsp_symbols()<CR>",                          mode = { "n" }, desc = "symbol" },
+            { "<leader>S",  "<cmd>lua Snacks.picker.lsp_workspace_symbols()<CR>",                mode = { "n" }, desc = "workspace symbol" },
+            { "<leader>wS", "<cmd>lua Snacks.picker.lsp_workspace_symbols()<CR>",                mode = { "n" }, desc = "workspace symbol" },
+            { "<leader>d",  "<cmd>lua Snacks.picker.diagnostics()<CR>",                          mode = { "n" }, desc = "diagnostics" },
+            { "<leader>D",  "<cmd>lua Snacks.picker.diagnostics_buffers()<CR>",                  mode = { "n" }, desc = "diagnostics buffers" },
+            -- { "<leader>gr", "<cmd>lua Snacks.picker.lsp_references()<CR>",                       mode = { "n" }, desc = "[G]oto [R]eferences" },
+            -- { "<leader>gI", "<cmd>lua Snacks.picker.lsp_implementations()<CR>",                  mode = { "n" }, desc = "[G]oto [I]mplementation" },
+            { "<leader>t",  "<cmd>lua Snacks.explorer()<CR>",                                    mode = { "n" }, desc = "explorer" },
         },
         after = function()
             require("snacks").setup({
@@ -131,13 +144,14 @@ require("lze").load({
                     },
                 },
             })
-        end
+        end,
     },
-    {
-        "fzf-lua",
-        for_cat = "general.always",
-        lazy = false,
-    },
+    -- {
+    -- try to replicate its ui in snacks.picker if possible if not its no big deal
+    --     "fzf-lua",
+    --     for_cat = "general.always",
+    --     lazy = false,
+    -- },
     {
         "markdown-preview.nvim",
         -- NOTE: for_cat is a custom handler that just sets enabled value for us,
@@ -171,7 +185,7 @@ require("lze").load({
                 desc = "markdown preview toggle",
             },
         },
-        before = function(plugin)
+        before = function()
             vim.g.mkdp_auto_close = 0
         end,
     },
@@ -250,10 +264,23 @@ require("lze").load({
         end,
     },
     {
-        "vim-sleuth",
+        "nvim-highlight-colors",
         for_cat = "general.always",
         lazy = false,
+        -- ft = { "" },
+        after = function()
+            require('nvim-highlight-colors').setup({
+                render = 'virtual',
+                virtual_symbol = '■',
+                virtual_symbol_position = 'inline',
+            })
+        end,
     },
+    -- {
+    --     "vim-sleuth",
+    --     for_cat = "general.always",
+    --     lazy = false,
+    -- },
     -- {
     --     "vim-visual-multi",
     --     for_cat = "general.always",
@@ -357,6 +384,9 @@ require("lze").load({
         "nvim-navbuddy",
         for_cat = "general.always",
         cmd = "Navbuddy",
+        -- keys = {
+        --     {},
+        -- },
         after = function()
             require("nvim-navbuddy").setup({
                 lsp = {
@@ -365,16 +395,16 @@ require("lze").load({
             })
         end
     },
-    {
-        "bufferline.nvim",
-        for_cat = "general.always",
-        event = "DeferredUIEnter",
-        after = function()
-            require("bufferline").setup({
-
-            })
-        end
-    },
+    -- {
+    --     "bufferline.nvim",
+    --     for_cat = "general.always",
+    --     event = "DeferredUIEnter",
+    --     after = function()
+    --         require("bufferline").setup({
+    --
+    --         })
+    --     end
+    -- },
     {
         "lualine.nvim",
         for_cat = "general.always",
@@ -435,6 +465,7 @@ require("lze").load({
                     },
                     lualine_y = {
                         {
+                            -- "progress",
                             -- color = { fg = '#c1c1c1', bg = '', gui = '' },
                         },
                     },
@@ -480,7 +511,7 @@ require("lze").load({
         -- ft = "",
         -- keys = "",
         -- colorscheme = "",
-        after = function(plugin)
+        after = function()
             require("gitsigns").setup({
                 -- See `:help gitsigns.txt`
                 -- signs = {
@@ -490,68 +521,68 @@ require("lze").load({
                 --     topdelete = { text = '‾' },
                 --     changedelete = { text = '~' },
                 -- },
-                on_attach = function(bufnr)
-                    local gs = package.loaded.gitsigns
-
-                    local function map(mode, l, r, opts)
-                        opts = opts or {}
-                        opts.buffer = bufnr
-                        vim.keymap.set(mode, l, r, opts)
-                    end
-
-                    -- Navigation
-                    map({ "n", "v" }, "]c", function()
-                        if vim.wo.diff then
-                            return "]c"
-                        end
-                        vim.schedule(function()
-                            gs.next_hunk()
-                        end)
-                        return "<Ignore>"
-                    end, { expr = true, desc = "Jump to next hunk" })
-
-                    map({ "n", "v" }, "[c", function()
-                        if vim.wo.diff then
-                            return "[c"
-                        end
-                        vim.schedule(function()
-                            gs.prev_hunk()
-                        end)
-                        return "<Ignore>"
-                    end, { expr = true, desc = "Jump to previous hunk" })
-
-                    -- Actions
-                    -- visual mode
-                    map("v", "<leader>hs", function()
-                        gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
-                    end, { desc = "stage git hunk" })
-                    map("v", "<leader>hr", function()
-                        gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
-                    end, { desc = "reset git hunk" })
-                    -- normal mode
-                    map("n", "<leader>gs", gs.stage_hunk, { desc = "git stage hunk" })
-                    map("n", "<leader>grr", gs.reset_hunk, { desc = "git reset hunk" })
-                    map("n", "<leader>gS", gs.stage_buffer, { desc = "git Stage buffer" })
-                    map("n", "<leader>gu", gs.undo_stage_hunk, { desc = "undo stage hunk" })
-                    map("n", "<leader>grR", gs.reset_buffer, { desc = "git Reset buffer" })
-                    map("n", "<leader>gp", gs.preview_hunk, { desc = "preview git hunk" })
-                    map("n", "<leader>gb", function()
-                        gs.blame_line({ full = false })
-                    end, { desc = "git blame line" })
-                    map("n", "<leader>gd", gs.diffthis, { desc = "git diff against index" })
-                    map("n", "<leader>gD", function()
-                        gs.diffthis("~")
-                    end, { desc = "git diff against last commit" })
-
-                    -- Toggles
-                    map("n", "<leader>gtb", gs.toggle_current_line_blame,
-                        { desc = "toggle git blame line" })
-                    map("n", "<leader>gtd", gs.toggle_deleted, { desc = "toggle git show deleted" })
-
-                    -- Text object
-                    map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>",
-                        { desc = "select git hunk" })
-                end,
+                -- on_attach = function(bufnr)
+                --     local gs = package.loaded.gitsigns
+                --
+                --     local function map(mode, l, r, opts)
+                --         opts = opts or {}
+                --         opts.buffer = bufnr
+                --         vim.keymap.set(mode, l, r, opts)
+                --     end
+                --
+                --     -- Navigation
+                --     map({ "n", "v" }, "]c", function()
+                --         if vim.wo.diff then
+                --             return "]c"
+                --         end
+                --         vim.schedule(function()
+                --             gs.next_hunk()
+                --         end)
+                --         return "<Ignore>"
+                --     end, { expr = true, desc = "Jump to next hunk" })
+                --
+                --     map({ "n", "v" }, "[c", function()
+                --         if vim.wo.diff then
+                --             return "[c"
+                --         end
+                --         vim.schedule(function()
+                --             gs.prev_hunk()
+                --         end)
+                --         return "<Ignore>"
+                --     end, { expr = true, desc = "Jump to previous hunk" })
+                --
+                --     -- Actions
+                --     -- visual mode
+                --     map("v", "<leader>hs", function()
+                --         gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+                --     end, { desc = "stage git hunk" })
+                --     map("v", "<leader>hr", function()
+                --         gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+                --     end, { desc = "reset git hunk" })
+                --     -- normal mode
+                --     map("n", "<leader>gs", gs.stage_hunk, { desc = "git stage hunk" })
+                --     map("n", "<leader>grr", gs.reset_hunk, { desc = "git reset hunk" })
+                --     map("n", "<leader>gS", gs.stage_buffer, { desc = "git Stage buffer" })
+                --     map("n", "<leader>gu", gs.undo_stage_hunk, { desc = "undo stage hunk" })
+                --     map("n", "<leader>grR", gs.reset_buffer, { desc = "git Reset buffer" })
+                --     map("n", "<leader>gp", gs.preview_hunk, { desc = "preview git hunk" })
+                --     map("n", "<leader>gb", function()
+                --         gs.blame_line({ full = false })
+                --     end, { desc = "git blame line" })
+                --     map("n", "<leader>gd", gs.diffthis, { desc = "git diff against index" })
+                --     map("n", "<leader>gD", function()
+                --         gs.diffthis("~")
+                --     end, { desc = "git diff against last commit" })
+                --
+                --     -- Toggles
+                --     map("n", "<leader>gtb", gs.toggle_current_line_blame,
+                --         { desc = "toggle git blame line" })
+                --     map("n", "<leader>gtd", gs.toggle_deleted, { desc = "toggle git show deleted" })
+                --
+                --     -- Text object
+                --     map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>",
+                --         { desc = "select git hunk" })
+                -- end,
             })
             -- vim.cmd([[hi GitSignsAdd guifg=#04de21]])
             -- vim.cmd([[hi GitSignsChange guifg=#83fce6]])
@@ -577,18 +608,16 @@ require("lze").load({
                 { "<leader>c_", hidden = true },
                 { "<leader>d",  group = "[d]ocument" },
                 { "<leader>d_", hidden = true },
-                { "<leader>g",  group = "[g]it" },
-                { "<leader>g_", hidden = true },
                 { "<leader>m",  group = "[m]arkdown" },
                 { "<leader>m_", hidden = true },
                 { "<leader>r",  group = "[r]ename" },
                 { "<leader>r_", hidden = true },
-                { "<leader>f",  group = "[f]picker" },
-                { "<leader>f_", hidden = true },
                 { "<leader>t",  group = "[t]oggles" },
                 { "<leader>t_", hidden = true },
                 { "<leader>w",  group = "[w]orkspace" },
                 { "<leader>w_", hidden = true },
+                { "<leader>l",  group = "[l]sp" },
+                { "<leader>l_", hidden = true },
             })
         end,
     },

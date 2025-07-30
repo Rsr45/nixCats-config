@@ -266,6 +266,7 @@
                 harpoon2
                 leap-nvim
                 flit-nvim
+                flash-nvim
               ];
               always = with pkgs.vimPlugins; [
                 nvim-lspconfig
@@ -294,6 +295,7 @@
                 nui-nvim
                 noice-nvim
                 fzf-lua
+                nvim-highlight-colors
               ];
               extra = with pkgs.vimPlugins; [
                 fidget-nvim
