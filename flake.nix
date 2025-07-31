@@ -282,6 +282,7 @@
                 mini-pairs
                 mini-operators
                 mini-bracketed
+                mini-statusline
                 nvim-navic
                 pkgs.neovimPlugins.nvim-navbuddy
                 # nvim-navbuddy

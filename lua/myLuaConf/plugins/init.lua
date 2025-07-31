@@ -100,6 +100,7 @@ require("lze").load({
     { import = "myLuaConf.plugins.completion" },
     { import = "myLuaConf.plugins.navigation" },
     { import = "myLuaConf.plugins.mini" },
+    { import = "myLuaConf.plugins.lualine" },
     {
         "snacks.nvim",
         for_cat = "general.always",
@@ -111,15 +112,15 @@ require("lze").load({
             { "<leader>b",  "<cmd>lua Snacks.picker.buffers()<CR>",                              mode = { "n" }, desc = "Buffer" },
             { "<leader>g",  "<cmd>lua Snacks.picker.grep()<CR>",                                 mode = { "n" }, desc = "Grep" },
             { "<leader>G",  "<cmd>lua Snacks.picker.grep_word()<CR>",                            mode = { "n" }, desc = "Grep Word Under Cursor" },
-            { "<leader>s",  "<cmd>lua Snacks.picker.lsp_symbols()<CR>",                          mode = { "n" }, desc = "symbol" },
-            { "<leader>ws", "<cmd>lua Snacks.picker.lsp_symbols()<CR>",                          mode = { "n" }, desc = "symbol" },
-            { "<leader>S",  "<cmd>lua Snacks.picker.lsp_workspace_symbols()<CR>",                mode = { "n" }, desc = "workspace symbol" },
-            { "<leader>wS", "<cmd>lua Snacks.picker.lsp_workspace_symbols()<CR>",                mode = { "n" }, desc = "workspace symbol" },
-            { "<leader>d",  "<cmd>lua Snacks.picker.diagnostics()<CR>",                          mode = { "n" }, desc = "diagnostics" },
-            { "<leader>D",  "<cmd>lua Snacks.picker.diagnostics_buffers()<CR>",                  mode = { "n" }, desc = "diagnostics buffers" },
+            { "<leader>s",  "<cmd>lua Snacks.picker.lsp_symbols()<CR>",                          mode = { "n" }, desc = "Document Symbols" },
+            { "<leader>ws", "<cmd>lua Snacks.picker.lsp_symbols()<CR>",                          mode = { "n" }, desc = "[D]ocument [S]ymbols" },
+            { "<leader>S",  "<cmd>lua Snacks.picker.lsp_workspace_symbols()<CR>",                mode = { "n" }, desc = "Workspace Symbols" },
+            { "<leader>wS", "<cmd>lua Snacks.picker.lsp_workspace_symbols()<CR>",                mode = { "n" }, desc = "[W]orkspace [S]ymbols" },
+            { "<leader>d",  "<cmd>lua Snacks.picker.diagnostics()<CR>",                          mode = { "n" }, desc = "Diagnostics" },
+            { "<leader>D",  "<cmd>lua Snacks.picker.diagnostics_buffers()<CR>",                  mode = { "n" }, desc = "Diagnostics Buffers" },
             -- { "<leader>gr", "<cmd>lua Snacks.picker.lsp_references()<CR>",                       mode = { "n" }, desc = "[G]oto [R]eferences" },
             -- { "<leader>gI", "<cmd>lua Snacks.picker.lsp_implementations()<CR>",                  mode = { "n" }, desc = "[G]oto [I]mplementation" },
-            { "<leader>t",  "<cmd>lua Snacks.explorer()<CR>",                                    mode = { "n" }, desc = "explorer" },
+            { "<leader>t",  "<cmd>lua Snacks.explorer()<CR>",                                    mode = { "n" }, desc = "Explorer" },
         },
         after = function()
             require("snacks").setup({
@@ -406,104 +407,6 @@ require("lze").load({
     --     end
     -- },
     {
-        "lualine.nvim",
-        for_cat = "general.always",
-        -- cmd = { "" },
-        event = "DeferredUIEnter",
-        -- ft = "",
-        -- keys = "",
-        -- colorscheme = "",
-        after = function()
-            require("lualine").setup({
-                options = {
-                    icons_enabled = false,
-                    theme = "auto",
-                    -- theme = colorschemeName,
-                    component_separators = "",
-                    section_separators = "",
-                },
-                sections = {
-                    lualine_a = {
-                        {
-                            'mode',
-                            fmt = function(str) return str:sub(1, 3) end,
-                            -- color = { fg = '#c1c1c1', bg = '', gui = '' },
-                        }
-                    },
-                    lualine_b = {
-                        {
-                            "lsp_status",
-                            -- color = { fg = '#c1c1c1', bg = '', gui = '' },
-                        }
-                    },
-                    lualine_c = {
-                        {
-                            'filename',
-                            file_status = true,     -- Displays file status (readonly status, modified status)
-                            newfile_status = false, -- Display new file status (new file means no write after created)
-                            path = 1,               -- 0: Just the filename
-                            -- 1: Relative path
-                            -- 2: Absolute path
-                            -- 3: Absolute path, with tilde as the home directory
-                            -- 4: Filename and parent dir, with tilde as the home directory
-
-                            shorting_target = 40, -- Shortens path to leave 40 spaces in the window
-                            -- for other components. (terrible name, any suggestions?)
-                            symbols = {
-                                modified = '[+]',      -- Text to show when the file is modified.
-                                readonly = '[-]',      -- Text to show when the file is non-modifiable or readonly.
-                                unnamed = '[No Name]', -- Text to show for unnamed buffers.
-                                newfile = '[New]',     -- Text to show for newly created file before first write
-                            },
-                            -- color = { fg = '#c1c1c1', bg = '', gui = '' },
-                        },
-                    },
-                    lualine_x = {
-                        {
-                            -- color = { fg = '#c1c1c1', bg = '', gui = '' },
-                        }
-                    },
-                    lualine_y = {
-                        {
-                            -- "progress",
-                            -- color = { fg = '#c1c1c1', bg = '', gui = '' },
-                        },
-                    },
-                    lualine_z = {
-                        {
-                            "location",
-                            -- color = { fg = '#c1c1c1', bg = '', gui = '' },
-                        }
-                    }
-                },
-                winbar = {
-                    lualine_a = {
-                        {
-                            "filename",
-                            -- color = { fg = '#c1c1c1', bg = '', gui = '' },
-                        },
-                    },
-                    lualine_b = {
-                        {
-                            function()
-                                return require('nvim-navic').get_location()
-                            end,
-                            cond = function()
-                                return require('nvim-navic').is_available()
-                            end,
-
-                            -- color = { fg = '#c1c1c1', bg = '', gui = '' },
-                        },
-                    },
-                    lualine_c = {},
-                    lualine_x = {},
-                    lualine_y = {},
-                    lualine_z = {},
-                },
-            })
-        end
-    },
-    {
         "gitsigns.nvim",
         for_cat = "general.always",
         event = "DeferredUIEnter",
@@ -612,8 +515,6 @@ require("lze").load({
                 { "<leader>m_", hidden = true },
                 { "<leader>r",  group = "[r]ename" },
                 { "<leader>r_", hidden = true },
-                { "<leader>t",  group = "[t]oggles" },
-                { "<leader>t_", hidden = true },
                 { "<leader>w",  group = "[w]orkspace" },
                 { "<leader>w_", hidden = true },
                 { "<leader>l",  group = "[l]sp" },
