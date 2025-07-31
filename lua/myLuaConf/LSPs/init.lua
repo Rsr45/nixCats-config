@@ -149,8 +149,8 @@ require('lze').load {
                     nixpkgs = {
                         -- in the extras set of your package definition:
                         -- nixdExtras.nixpkgs = ''import ${pkgs.path} {}''
-                        -- expr = nixCats.extra("nixdExtras.nixpkgs") or [[import <nixpkgs> {}]],
-                        expr = nixCats.extra("import (builtins.getFlake \"github:Rsr45/nixos-config\").inputs.nixpkgs { }")
+                        expr = nixCats.extra("nixdExtras.nixpkgs") or [[import <nixpkgs> {}]],
+                        -- expr = nixCats.extra("import (builtins.getFlake \"github:Rsr45/nixos-config\").inputs.nixpkgs { }")
                     },
                     options = {
                         -- If you integrated with your system flake,
@@ -159,8 +159,8 @@ require('lze').load {
                         -- of where your config actually was.
                         nixos = {
                             -- nixdExtras.nixos_options = ''(builtins.getFlake "path:${builtins.toString inputs.self.outPath}").nixosConfigurations.configname.options''
-                            -- expr = nixCats.extra("nixdExtras.nixos_options")
-                            expr = nixCats.extra("(builtins.getFlake \"github:Rsr45/nixos-config\").nixosConfigurations.apocrypha.options")
+                            expr = nixCats.extra("nixdExtras.nixos_options")
+                            -- expr = nixCats.extra("(builtins.getFlake \"github:Rsr45/nixos-config\").nixosConfigurations.apocrypha.options")
 
                         },
                         -- If you have your config as a separate flake, inputs.self would be referring to the wrong flake.
@@ -168,8 +168,8 @@ require('lze').load {
                         -- or just put an absolute path to where it usually is and accept the impurity.
                         ["home-manager"] = {
                             -- nixdExtras.home_manager_options = ''(builtins.getFlake "path:${builtins.toString inputs.self.outPath}").homeConfigurations.configname.options''
-                            -- expr = nixCats.extra("nixdExtras.home_manager_options")
-                            expr = nixCats.extra("(builtins.getFlake \"github:Rsr45/nixos-config\").nixosConfigurations.apocrypha.options.home-manager.users.type.getSubOptions []")
+                            expr = nixCats.extra("nixdExtras.home_manager_options")
+                            -- expr = nixCats.extra("(builtins.getFlake \"github:Rsr45/nixos-config\").nixosConfigurations.apocrypha.options.home-manager.users.type.getSubOptions []")
                         }
                     },
                     formatting = {
