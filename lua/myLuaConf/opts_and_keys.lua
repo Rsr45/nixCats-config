@@ -31,6 +31,8 @@ vim.o.mouse = 'a'
 vim.o.filetype = "on"
 vim.o.showmode = false
 
+vim.o.swapfile = false
+
 -- Indent
 -- vim.o.smarttab = true
 vim.opt.cpoptions:append('I')
