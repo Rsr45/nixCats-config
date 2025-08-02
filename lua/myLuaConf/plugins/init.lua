@@ -108,7 +108,7 @@ require("lze").load({
         keys = {
             { "<leader>u",  "<cmd>lua Snacks.picker.undo()<CR>",                                 mode = { "n" }, desc = "Undo" },
             { "<leader>f",  "<cmd>lua Snacks.picker.files()<CR>",                                mode = { "n" }, desc = "Files" },
-            { "<leader>F",  "<cmd>lua Snacks.picker.grep({ cwd = vim.fn.expand('%:p:h') })<CR>", mode = { "n" }, desc = "Files in cwd" },
+            { "<leader>F",  "<cmd>lua Snacks.picker.files({ cwd = vim.fn.expand('%:p:h') })<CR>", mode = { "n" }, desc = "Files in cwd" },
             { "<leader>b",  "<cmd>lua Snacks.picker.buffers()<CR>",                              mode = { "n" }, desc = "Buffer" },
             { "<leader>g",  "<cmd>lua Snacks.picker.grep()<CR>",                                 mode = { "n" }, desc = "Grep" },
             { "<leader>G",  "<cmd>lua Snacks.picker.grep_word()<CR>",                            mode = { "n" }, desc = "Grep Word Under Cursor" },
