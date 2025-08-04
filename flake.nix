@@ -192,7 +192,9 @@
               with pkgs.vimPlugins;
               (builtins.getAttr (categories.colorscheme or "onedark") {
                 # Theme switcher without creating a new category
-                "dracula" = dracula-vim;
+                "moonfly" = vim-moonfly-colors;
+                "dracula-vim" = dracula-vim;
+                "dracula-nvim" = dracula-nvim;
                 "gruvbox-material" = gruvbox-material;
                 "emperor" = pkgs.neovimPlugins.black-metal;
                 "onedark" = onedark-nvim;
@@ -453,7 +455,7 @@
               # you could also pass something else:
               # see :help nixCats
               themer = true;
-              colorscheme = "dracula";
+              colorscheme = "moonfly";
             };
             extra = {
               # to keep the categories table from being filled with non category things that you want to pass
