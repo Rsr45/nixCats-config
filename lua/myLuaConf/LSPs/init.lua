@@ -191,4 +191,11 @@ require('lze').load {
             },
         },
     },
+    {
+        "markdown_oxide",
+        for_cat = "markdown",
+        lsp = {
+            filetypes = { "markdown" },
+        },
+    },
 }

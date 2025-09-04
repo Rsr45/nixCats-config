@@ -65,31 +65,42 @@ return {
         -- event = "",
         -- ft = "",
         keys = {
-            -- { "<leader>fM", '<cmd>Telescope notify<CR>', mode = {"n"}, desc = 'List Notifications', },
-            -- { "<leader>fp",live_grep_git_root, mode = {"n"}, desc = 'Grep Git Root', },
-            -- { "<leader>/", function()
-            --   -- Slightly advanced example of overriding default behavior and theme
-            --   -- You can pass additional configuration to telescope to change theme, layout, etc.
-            --   require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-            --     winblend = 10,
-            --     previewer = false,
-            --   })
-            -- end, mode = {"n"}, desc = 'Search in Current Buffer', },
-            -- { "<leader>f/", function()
-            --   require('telescope.builtin').live_grep {
-            --     grep_open_files = true,
-            --     prompt_title = 'Grep Buffers',
-            --   }
-            -- end, mode = {"n"}, desc = 'Grep in Open Files' },
-            -- { "<leader>fb", function() return require('telescope.builtin').buffers() end, mode = {"n"}, desc = 'List Buffers', },
-            -- { "<leader>f.", function() return require('telescope.builtin').oldfiles() end, mode = {"n"}, desc = 'List Recent Files', },
-            -- { "<leader>fr", function() return require('telescope.builtin').resume() end, mode = {"n"}, desc = 'Resume Last Action', },
-            -- { "<leader>fd", function() return require('telescope.builtin').diagnostics() end, mode = {"n"}, desc = 'Diagnostics', },
-            -- { "<leader>fg", function() return require('telescope.builtin').live_grep() end, mode = {"n"}, desc = 'Grep in Files', },
-            -- { "<leader>fw", function() return require('telescope.builtin').grep_string() end, mode = {"n"}, desc = 'Grep Word Under Cursor', },
-            -- { "<leader>fs", function() return require('telescope.builtin').builtin() end, mode = {"n"}, desc = 'List Telescope Actions', },
-            -- { "<leader>ff", function() return require('telescope.builtin').find_files() end, mode = {"n"}, desc = 'List Files', },
-            -- { "<leader>fh", function() return require('telescope.builtin').help_tags() end, mode = {"n"}, desc = 'Help', },
+            { "<leader>fM", '<cmd>Telescope notify<CR>', mode = { "n" }, desc = '[S]earch [M]essage', },
+            { "<leader>sp", live_grep_git_root,          mode = { "n" }, desc = '[S]earch git [P]roject root', },
+            {
+                "<leader>/",
+                function()
+                    -- Slightly advanced example of overriding default behavior and theme
+                    -- You can pass additional configuration to telescope to change theme, layout, etc.
+                    require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+                        winblend = 10,
+                        previewer = false,
+                    })
+                end,
+                mode = { "n" },
+                desc = '[/] Fuzzily search in current buffer',
+            },
+            {
+                "<leader>s/",
+                function()
+                    require('telescope.builtin').live_grep {
+                        grep_open_files = true,
+                        prompt_title = 'Live Grep in Open Files',
+                    }
+                end,
+                mode = { "n" },
+                desc = '[S]earch [/] in Open Files'
+            },
+            { "<leader><leader>s", function() return require('telescope.builtin').buffers() end,     mode = { "n" }, desc = '[ ] Find existing buffers', },
+            { "<leader>s.",        function() return require('telescope.builtin').oldfiles() end,    mode = { "n" }, desc = '[S]earch Recent Files ("." for repeat)', },
+            { "<leader>sr",        function() return require('telescope.builtin').resume() end,      mode = { "n" }, desc = '[S]earch [R]esume', },
+            { "<leader>sd",        function() return require('telescope.builtin').diagnostics() end, mode = { "n" }, desc = '[S]earch [D]iagnostics', },
+            { "<leader>sg",        function() return require('telescope.builtin').live_grep() end,   mode = { "n" }, desc = '[S]earch by [G]rep', },
+            { "<leader>sw",        function() return require('telescope.builtin').grep_string() end, mode = { "n" }, desc = '[S]earch current [W]ord', },
+            { "<leader>ss",        function() return require('telescope.builtin').builtin() end,     mode = { "n" }, desc = '[S]earch [S]elect Telescope', },
+            { "<leader>sf",        function() return require('telescope.builtin').find_files() end,  mode = { "n" }, desc = '[S]earch [F]iles', },
+            { "<leader>sk",        function() return require('telescope.builtin').keymaps() end,     mode = { "n" }, desc = '[S]earch [K]eymaps', },
+            { "<leader>sh",        function() return require('telescope.builtin').help_tags() end,   mode = { "n" }, desc = '[S]earch [H]elp', },
         },
         -- colorscheme = "",
         load = function(name)

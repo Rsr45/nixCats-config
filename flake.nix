@@ -151,6 +151,13 @@
               go-tools
               gccgo
             ];
+            typst = with pkgs; [
+              tinymist
+              typstyle
+            ];
+            markdown = with pkgs; [
+              markdown-oxide
+            ];
             # and easily check if they are included in lua
             format = with pkgs; [
             ];
@@ -159,10 +166,6 @@
               inherit (pkgs) nix-doc lua-language-server nixd;
               # and each will be its own sub category
             };
-            typst = with pkgs; [
-              tinymist
-              typstyle
-            ];
           };
 
           # This is for plugins that will load at startup without using packadd:
