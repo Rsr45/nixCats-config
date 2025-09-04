@@ -1,4 +1,4 @@
-vim.cmd([[hi LineNr guifg=NONE]])
+vim.cmd([[hi LineNr guibg=NONE]])
 -- vim.cmd([[hi WinBar guibg=#000000]])
 -- vim.cmd([[hi CursorLine guibg=#121212]])
 -- vim.cmd([[hi CursorLineNr guibg=#121212]])

@@ -159,6 +159,10 @@
               inherit (pkgs) nix-doc lua-language-server nixd;
               # and each will be its own sub category
             };
+            typst = with pkgs; [
+              tinymist
+              typstyle
+            ];
           };
 
           # This is for plugins that will load at startup without using packadd:
@@ -442,13 +446,14 @@
               lint = true;
               format = true;
               neonixdev = true;
+              typst = true;
               test = {
                 subtest1 = true;
               };
 
               # enabling this category will enable the go category,
               # and ALSO debug.go and debug.default due to our extraCats in categoryDefinitions.
-              # go = true; # <- disabled but you could enable it with override or module on install
+              go = true; # <- disabled but you could enable it with override or module on install
 
               # this does not have an associated category of plugins,
               # but lua can still check for it

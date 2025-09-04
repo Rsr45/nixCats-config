@@ -150,7 +150,6 @@ require('lze').load {
                         -- in the extras set of your package definition:
                         -- nixdExtras.nixpkgs = ''import ${pkgs.path} {}''
                         expr = nixCats.extra("nixdExtras.nixpkgs") or [[import <nixpkgs> {}]],
-                        -- expr = nixCats.extra("import (builtins.getFlake \"github:Rsr45/nixos-config\").inputs.nixpkgs { }")
                     },
                     options = {
                         -- If you integrated with your system flake,
@@ -160,7 +159,6 @@ require('lze').load {
                         nixos = {
                             -- nixdExtras.nixos_options = ''(builtins.getFlake "path:${builtins.toString inputs.self.outPath}").nixosConfigurations.configname.options''
                             expr = nixCats.extra("nixdExtras.nixos_options")
-                            -- expr = nixCats.extra("(builtins.getFlake \"github:Rsr45/nixos-config\").nixosConfigurations.apocrypha.options")
 
                         },
                         -- If you have your config as a separate flake, inputs.self would be referring to the wrong flake.
@@ -169,7 +167,6 @@ require('lze').load {
                         ["home-manager"] = {
                             -- nixdExtras.home_manager_options = ''(builtins.getFlake "path:${builtins.toString inputs.self.outPath}").homeConfigurations.configname.options''
                             expr = nixCats.extra("nixdExtras.home_manager_options")
-                            -- expr = nixCats.extra("(builtins.getFlake \"github:Rsr45/nixos-config\").nixosConfigurations.apocrypha.options.home-manager.users.type.getSubOptions []")
                         }
                     },
                     formatting = {
@@ -181,6 +178,16 @@ require('lze').load {
                         }
                     }
                 }
+            },
+        },
+    },
+    {
+        "tinymist",
+        for_cat = "typst",
+        lsp = {
+            filetypes = { "typst" },
+            settings = {
+                formatterMode = "typstyle"
             },
         },
     },
