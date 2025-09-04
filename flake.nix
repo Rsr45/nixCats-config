@@ -280,6 +280,7 @@
                 vim-fugitive
                 vim-rhubarb
                 vim-visual-multi
+                mini-base16
                 mini-ai
                 mini-surround
                 mini-pairs

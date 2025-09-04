@@ -1,4 +1,9 @@
 return {
+    -- {
+    --     "mini.base16",
+    --     for_cat = "general.always",
+    --     event = "DeferredUIEnter",
+    -- },
     {
         "mini.comment",
         for_cat = "general.extra",

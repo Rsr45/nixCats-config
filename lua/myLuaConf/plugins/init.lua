@@ -106,21 +106,96 @@ require("lze").load({
         for_cat = "general.always",
         lazy = false,
         keys = {
-            { "<leader>u",  "<cmd>lua Snacks.picker.undo()<CR>",                                  mode = { "n" }, desc = "Undo" },
-            { "<leader>f",  "<cmd>lua Snacks.picker.files()<CR>",                                 mode = { "n" }, desc = "Files" },
-            { "<leader>F",  "<cmd>lua Snacks.picker.files({ cwd = vim.fn.expand('%:p:h') })<CR>", mode = { "n" }, desc = "Files in cwd" },
-            { "<leader>b",  "<cmd>lua Snacks.picker.buffers()<CR>",                               mode = { "n" }, desc = "Buffer" },
-            { "<leader>g",  "<cmd>lua Snacks.picker.grep()<CR>",                                  mode = { "n" }, desc = "Grep" },
-            { "<leader>G",  "<cmd>lua Snacks.picker.grep_word()<CR>",                             mode = { "n" }, desc = "Grep Word Under Cursor" },
-            { "<leader>s",  "<cmd>lua Snacks.picker.lsp_symbols()<CR>",                           mode = { "n" }, desc = "Document Symbols" },
-            { "<leader>ws", "<cmd>lua Snacks.picker.lsp_symbols()<CR>",                           mode = { "n" }, desc = "[D]ocument [S]ymbols" },
-            { "<leader>S",  "<cmd>lua Snacks.picker.lsp_workspace_symbols()<CR>",                 mode = { "n" }, desc = "Workspace Symbols" },
-            { "<leader>wS", "<cmd>lua Snacks.picker.lsp_workspace_symbols()<CR>",                 mode = { "n" }, desc = "[W]orkspace [S]ymbols" },
-            { "<leader>d",  "<cmd>lua Snacks.picker.diagnostics()<CR>",                           mode = { "n" }, desc = "Diagnostics" },
-            { "<leader>D",  "<cmd>lua Snacks.picker.diagnostics_buffers()<CR>",                   mode = { "n" }, desc = "Diagnostics Buffers" },
-            -- { "<leader>gr", "<cmd>lua Snacks.picker.lsp_references()<CR>",                        mode = { "n" }, desc = "[G]oto [R]eferences" },
-            -- { "<leader>gI", "<cmd>lua Snacks.picker.lsp_implementations()<CR>",                   mode = { "n" }, desc = "[G]oto [I]mplementation" },
-            { "<leader>t",  "<cmd>lua Snacks.explorer()<CR>",                                     mode = { "n" }, desc = "Explorer" },
+            {
+                "<leader>u",
+                "<cmd>lua Snacks.picker.undo()<CR>",
+                mode = { "n" },
+                desc = "Undo"
+            },
+            {
+                "<leader>f",
+                "<cmd>lua Snacks.picker.files()<CR>",
+                mode = { "n" },
+                desc = "Files"
+            },
+            {
+                "<leader>F",
+                "<cmd>lua Snacks.picker.files({ cwd = vim.fn.expand('%:p:h') })<CR>",
+                mode = { "n" },
+                desc = "Files in cwd"
+            },
+            {
+                "<leader>b",
+                "<cmd>lua Snacks.picker.buffers()<CR>",
+                mode = { "n" },
+                desc = "Buffer"
+            },
+            {
+                "<leader>g",
+                "<cmd>lua Snacks.picker.grep()<CR>",
+                mode = { "n" },
+                desc = "Grep"
+            },
+            {
+                "<leader>G",
+                "<cmd>lua Snacks.picker.grep_word()<CR>",
+                mode = { "n" },
+                desc = "Grep Word Under Cursor"
+            },
+            {
+                "<leader>s",
+                "<cmd>lua Snacks.picker.lsp_symbols()<CR>",
+                mode = { "n" },
+                desc = "Document Symbols"
+            },
+            {
+                "<leader>ws",
+                "<cmd>lua Snacks.picker.lsp_symbols()<CR>",
+                mode = { "n" },
+                desc = "[D]ocument [S]ymbols"
+            },
+            {
+                "<leader>S",
+                "<cmd>lua Snacks.picker.lsp_workspace_symbols()<CR>",
+                mode = { "n" },
+                desc = "Workspace Symbols"
+            },
+            {
+                "<leader>wS",
+                "<cmd>lua Snacks.picker.lsp_workspace_symbols()<CR>",
+                mode = { "n" },
+                desc = "[W]orkspace [S]ymbols"
+            },
+            {
+                "<leader>d",
+                "<cmd>lua Snacks.picker.diagnostics()<CR>",
+                mode = { "n" },
+                desc = "Diagnostics"
+            },
+            {
+                "<leader>D",
+                "<cmd>lua Snacks.picker.diagnostics_buffers()<CR>",
+                mode = { "n" },
+                desc = "Diagnostics Buffers"
+            },
+            -- {
+            --     "<leader>gr",
+            --     "<cmd>lua Snacks.picker.lsp_references()<CR>",
+            --     mode = { "n" },
+            --     desc = "[G]oto [R]eferences"
+            -- },
+            -- {
+            --     "<leader>gI",
+            --     "<cmd>lua Snacks.picker.lsp_implementations()<CR>",
+            --     mode = { "n" },
+            --     desc = "[G]oto [I]mplementation"
+            -- },
+            {
+                "<leader>t",
+                "<cmd>lua Snacks.explorer()<CR>",
+                mode = { "n" },
+                desc = "Explorer"
+            },
         },
         after = function()
             require("snacks").setup({
@@ -203,7 +278,51 @@ require("lze").load({
         "obsidian.nvim",
         -- ft = "markdown",
         for_cat = "general.notes",
-        cmd = { "ObsidianOpen", "ObsidianNew", "ObsidianSearch" },
+        cmd = { "ObsidianOpen", "ObsidianNew", "ObsidianSearch", "Obsidian" },
+        keys = {
+            {
+                "<leader>off",
+                "<cmd>Obsidian search<CR>",
+                mode = { "n" },
+                desc = "Search Notes"
+            },
+            {
+                "<leaderoft>",
+                "<cmd>Obsidian tags",
+                mode = { "n" },
+                desc = "Search Tags",
+            },
+            {
+                "<leader>ofl",
+                "<cmd>Obsidian links<CR>",
+                mode = { "n" },
+                desc = "Search Links"
+            },
+            {
+                "<leader>ofl",
+                "<cmd>Obsidian follow_link<CR>",
+                mode = { "n" },
+                desc = "Follow Link"
+            },
+            {
+                "<leader>onl",
+                "<cmd>Obsidian link_new<CR>",
+                mode = { "n", "v" },
+                desc = "New Link"
+            },
+            {
+                "<leader>ol",
+                "<cmd>Obsidian link<CR>",
+                mode = { "n", "v" },
+                desc = "Link"
+            },
+            {
+                "<leader>onn",
+                "<cmd>Obsidian new<CR>",
+                mode = { "n" },
+                desc = "New Note"
+            },
+        },
         after = function()
             require("obsidian").setup({
                 ui = { enable = false },
@@ -225,6 +344,16 @@ require("lze").load({
                         --         notes_subdir = "",
                         -- },
                     },
+                    -- {
+                    --     name = "Vault",
+                    --     path = "~/Documents/Vault",
+                    --     overrides = {
+                    --         notes_subdir = "05_Fleeting",
+                    --         attachments = {
+                    --             img_folder = "99_Meta/01_Assets/imgs",
+                    --         },
+                    --     },
+                    -- },
                 },
                 templates = {
                     folder = "99_Meta/00_Templates",
