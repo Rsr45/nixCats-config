@@ -247,6 +247,7 @@
             ];
             notes = with pkgs.vimPlugins; [
               obsidian-nvim
+              neorg
             ];
             general = {
               blink = with pkgs.vimPlugins; [

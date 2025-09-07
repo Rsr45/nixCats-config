@@ -39,22 +39,6 @@ require('lze').load {
             })
         end,
     },
-    -- {
-    --         "nvim-navic",
-    --         for_cat = "general.extra",
-    --         dep_of = "nvim-navbuddy",
-    -- },
-    -- {
-    --         "navbuddy",
-    --         for_cat = "general.extra",
-    --         require('navbuddy').setup {
-    --                 lsp = {
-    --                         auto_attach = true,         -- If set to true, you don't need to manually use attach function
-    --                         -- preference = nil, -- list of lsp server names in order of preference
-    --                 },
-    --                 use_default_mappings = true,
-    --         },
-    -- },
     {
         "mason.nvim",
         -- only run it when not on nix

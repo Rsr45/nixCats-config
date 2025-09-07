@@ -70,12 +70,12 @@ return {
             MiniIcons.mock_nvim_web_devicons()
         end,
     },
-    -- {
-    --     "mini.statusline",
-    --     for_cat = "general.always",
-    --     event = "DeferredUIEnter",
-    --     after = function()
-    --         require("mini.statusline").setup()
-    --     end,
-    -- },
+    {
+        "mini.statusline",
+        for_cat = "general.always",
+        event = "DeferredUIEnter",
+        after = function()
+            require("mini.statusline").setup()
+        end,
+    },
 }
