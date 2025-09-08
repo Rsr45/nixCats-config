@@ -21,12 +21,12 @@ return function(_, bufnr, client)
     -- because otherwise they would load telescope eagerly when this is defined.
     -- due to us using the on_require handler to make sure it is available.
     -- if nixCats('general.telescope') then
-    --         nmap('<leader>gr', function() require('telescope.builtin').lsp_references() end, '[G]oto [R]eferences')
-    --         nmap('gI', function() require('telescope.builtin').lsp_implementations() end, '[G]oto [I]mplementation')
-    --         nmap('<leader>ds', function() require('telescope.builtin').lsp_document_symbols() end,
-    --                 '[D]ocument [S]ymbols')
-    --         nmap('<leader>ws', function() require('telescope.builtin').lsp_dynamic_workspace_symbols() end,
-    --                 '[W]orkspace [S]ymbols')
+    nmap('<leader>gr', function() require('telescope.builtin').lsp_references() end, '[G]oto [R]eferences')
+    nmap('gI', function() require('telescope.builtin').lsp_implementations() end, '[G]oto [I]mplementation')
+    nmap('<leader>ds', function() require('telescope.builtin').lsp_document_symbols() end,
+        '[D]ocument [S]ymbols')
+    nmap('<leader>ws', function() require('telescope.builtin').lsp_dynamic_workspace_symbols() end,
+        '[W]orkspace [S]ymbols')
     -- end -- TODO: someone who knows the builtin versions of these to do instead help me out please.
 
     nmap('<leader>lD', vim.lsp.buf.type_definition, 'Type [D]efinition')
