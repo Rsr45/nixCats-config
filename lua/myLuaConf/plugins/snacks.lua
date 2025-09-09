@@ -4,12 +4,12 @@ return {
         for_cat = "general.always",
         lazy = false,
         keys = {
-            -- {
-            --     "<leader>u",
-            --     "<cmd>lua Snacks.picker.undo()<CR>",
-            --     mode = { "n" },
-            --     desc = "Undo"
-            -- },
+            {
+                "<leader>u",
+                "<cmd>lua Snacks.picker.undo()<CR>",
+                mode = { "n" },
+                desc = "Undo"
+            },
             -- {
             --     "<leader>ff",
             --     "<cmd>lua Snacks.picker.files()<CR>",

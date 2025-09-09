@@ -136,6 +136,7 @@
               universal-ctags
               ripgrep
               fd
+              skim
             ];
             # these names are arbitrary.
             lint = with pkgs; [
@@ -210,6 +211,7 @@
                 "tokyonight" = tokyonight-nvim;
                 "tokyonight-day" = tokyonight-nvim;
                 "miasma" = miasma-nvim;
+                "kanagawa" = kanagawa-nvim;
               });
             # This is obviously a fairly basic usecase for this, but still nice.
           };
@@ -465,7 +467,7 @@
               # you could also pass something else:
               # see :help nixCats
               themer = true;
-              colorscheme = "moonfly";
+              colorscheme = "kanagawa";
             };
             extra = {
               # to keep the categories table from being filled with non category things that you want to pass
