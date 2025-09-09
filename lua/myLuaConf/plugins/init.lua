@@ -13,6 +13,7 @@ if ok then
         on_open = function(win)
             vim.api.nvim_win_set_config(win, { focusable = false })
         end,
+        background_colour = "#000000",
     })
     vim.notify = notify
     vim.keymap.set("n", "<Esc>", function()
