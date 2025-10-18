@@ -82,7 +82,6 @@ require('nixCatsUtils.catPacker').setup({
         build = ":call mkdp#util#install()",
         opt = true,
     },
-    { 'LunarVim/breadcrumbs.nvim', opt = true, },
 
     -- all the rest of the setup will be done using the normal setup functions later,
     -- thus working regardless of what method loads the plugins.

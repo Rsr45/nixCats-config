@@ -4,36 +4,55 @@ return {
         for_cat = "general.always",
         lazy = false,
         keys = {
+            { "<leader>ot", mode = { "n" }, "<cmd>lua Snacks.terminal.toggle()<CR>" },
             {
                 "<leader>u",
                 "<cmd>lua Snacks.picker.undo()<CR>",
                 mode = { "n" },
                 desc = "Undo"
             },
-            -- {
-            --     "<leader>ff",
-            --     "<cmd>lua Snacks.picker.files()<CR>",
-            --     mode = { "n" },
-            --     desc = "Files"
-            -- },
-            -- {
-            --     "<leader>fF",
-            --     "<cmd>lua Snacks.picker.files({ cwd = vim.fn.expand('%:p:h') })<CR>",
-            --     mode = { "n" },
-            --     desc = "Files in cwd"
-            -- },
-            -- {
-            --     "<leader>fb",
-            --     "<cmd>lua Snacks.picker.buffers()<CR>",
-            --     mode = { "n" },
-            --     desc = "Buffer"
-            -- },
-            -- {
-            --     "<leader>fg",
-            --     "<cmd>lua Snacks.picker.grep()<CR>",
-            --     mode = { "n" },
-            --     desc = "Grep"
-            -- },
+            {
+                "<leader>,",
+                "<cmd>lua Snacks.picker.buffers()<CR>",
+                mode = { "n" },
+                desc = "Buffer"
+            },
+            {
+                "<leader>.",
+                "<cmd>lua Snacks.picker.files({ cwd = vim.fn.expand('%:p:h')})<CR>",
+                mode = { "n" },
+                desc = "Find file"
+            },
+            {
+                "<leader>/",
+                "<cmd>lua Snacks.picker.grep()<CR>",
+                mode = { "n" },
+                desc = "Grep"
+            },
+            {
+                "<leader>ff",
+                "<cmd>lua Snacks.picker.files({ cwd = vim.fn.expand('%:p:h') })<CR>",
+                mode = { "n" },
+                desc = "Files in cwd"
+            },
+            {
+                "<leader><leader>",
+                "<cmd>lua Snacks.picker.files()<CR>",
+                mode = { "n" },
+                desc = "Find file",
+            },
+            {
+                "<leader>bb",
+                "<cmd>lua Snacks.picker.buffers()<CR>",
+                mode = { "n" },
+                desc = "Buffer"
+            },
+            {
+                "<leader>sp",
+                "<cmd>lua Snacks.picker.grep()<CR>",
+                mode = { "n" },
+                desc = "Grep"
+            },
             -- {
             --     "<leader>fG",
             --     "<cmd>lua Snacks.picker.grep_word()<CR>",
@@ -97,21 +116,89 @@ return {
         },
         after = function()
             require("snacks").setup({
-                statuscolumn = {
-                    -- your statuscolumn configuration comes here
-                    -- or leave it empty to use the default settings
-                    -- refer to the configuration section below
-                    left = { "mark", "sign" }, -- priority of signs on the left (high to low)
-                    right = { "fold", "git" }, -- priority of signs on the right (high to low)
-                    folds = {
-                        open = false,      -- show open fold icons
-                        git_hl = false,    -- use Git Signs hl for fold icons
+                -- statuscolumn = {
+                --     -- your statuscolumn configuration comes here
+                --     -- or leave it empty to use the default settings
+                --     -- refer to the configuration section below
+                --     left = { "mark", "sign" }, -- priority of signs on the left (high to low)
+                --     right = { "fold", "git" }, -- priority of signs on the right (high to low)
+                --     folds = {
+                --         open = false,          -- show open fold icons
+                --         git_hl = false,        -- use Git Signs hl for fold icons
+                --     },
+                --     git = {
+                --         -- patterns to match Git signs
+                --         patterns = { "GitSign", "MiniDiffSign" },
+                --     },
+                --     refresh = 50, -- refresh at most every 50ms
+                -- },
+                -- dashboard = {
+                --     preset = {
+                --         -- Used by the `keys` section to show keymaps.
+                --         -- Set your custom keymaps here.
+                --         -- When using a function, the `items` argument are the default keymaps.
+                --         ---@type snacks.dashboard.Item[]
+                --         keys = {
+                --             { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
+                --             { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+                --             { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
+                --             { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
+                --             { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})" },
+                --             { icon = " ", key = "q", desc = "Quit", action = ":qa" },
+                --         },
+                --     },
+                --     sections = {
+                --         { section = "header" },
+                --         { section = "keys",   gap = 1, padding = 1 },
+                --         { section = "startup" },
+                --     },
+                -- },
+                image = {},
+                terminal = {},
+                notify = {},
+                notifier = {},
+                words = {},
+                -- input = {
+                --     win = { border = "single", },
+                -- },
+                bigfile = {},
+                quickfile = {},
+                explorer = {},
+                picker = {
+                    layout = { preset = "ivy", },
+                },
+                styles = {
+                    default = {
+                        border = "single",
                     },
-                    git = {
-                        -- patterns to match Git signs
-                        patterns = { "GitSign", "MiniDiffSign" },
+                    -- input = {
+                    --     borde = "single",
+                    -- },
+                    notification = {
+                        border = "single",
+                        zindex = 100,
+                        ft = "markdown",
+                        wo = {
+                            winblend = 5,
+                            wrap = false,
+                            conceallevel = 2,
+                            colorcolumn = "",
+                        },
+                        bo = { filetype = "snacks_notif" },
                     },
-                    refresh = 50, -- refresh at most every 50ms
+                    notification_history = {
+                        border = "single",
+                        zindex = 100,
+                        width = 0.6,
+                        height = 0.6,
+                        minimal = false,
+                        title = " Notification History ",
+                        title_pos = "center",
+                        ft = "markdown",
+                        bo = { filetype = "snacks_notif_history", modifiable = false },
+                        wo = { winhighlight = "Normal:SnacksNotifierHistory" },
+                        keys = { q = "close" },
+                    },
                 },
             })
         end,

@@ -3,47 +3,6 @@ if not require("nixCatsUtils").isNixCats then
     colorschemeName = "onedark"
 end
 
-require('kanagawa').setup({
-    compile = false,             -- enable compiling the colorscheme
-    undercurl = true,            -- enable undercurls
-    commentStyle = { italic = true },
-    functionStyle = {},
-    keywordStyle = { italic = true},
-    statementStyle = { bold = true },
-    typeStyle = {},
-    transparent = false,         -- do not set background color
-    dimInactive = false,         -- dim inactive window `:h hl-NormalNC`
-    terminalColors = true,       -- define vim.g.terminal_color_{0,17}
-    colors = {                   -- add/modify theme and palette colors
-        palette = {},
-        theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
-    },
-    overrides = function(colors) -- add/modify highlights
-        return {}
-    end,
-    theme = "dragon",              -- Load "wave" theme
-    background = {               -- map the value of 'background' option to a theme
-        dark = "dragon",           -- try "dragon" !
-        light = "lotus"
-    },
-})
-
-vim.cmd.colorscheme(colorschemeName)
-
-local ok, notify = pcall(require, "notify")
-if ok then
-    notify.setup({
-        on_open = function(win)
-            vim.api.nvim_win_set_config(win, { focusable = false })
-        end,
-        background_colour = "#000000",
-    })
-    vim.notify = notify
-    vim.keymap.set("n", "<Esc>", function()
-        notify.dismiss({ silent = true })
-    end, { desc = "dismiss notify popup and clear hlsearch" })
-end
-
 -- NOTE: you can check if you included the category with the thing wherever you want.
 if nixCats("general.extra") then
     -- I didnt want to bother with lazy loading this.
@@ -94,40 +53,17 @@ require("lze").load({
         lazy = false,
         dep_of = { "noice.nvim" },
     },
-    {
-        "noice.nvim",
-        for_cat = "general.always",
-        lazy = false,
-        after = function()
-            require("noice").setup({
-                lsp = {
-                    -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-                    override = {
-                        ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-                        ["vim.lsp.util.stylize_markdown"] = true,
-                        ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
-                    },
-                },
-                -- you can enable a preset for easier configuration
-                presets = {
-                    bottom_search = true,         -- use a classic bottom cmdline for search
-                    command_palette = true,       -- position the cmdline and popupmenu together
-                    long_message_to_split = true, -- long messages will be sent to a split
-                    inc_rename = false,           -- enables an input dialog for inc-rename.nvim
-                    lsp_doc_border = false,       -- add a border to hover docs and signature help
-                },
-            })
-        end,
-    },
+    { import = "myLuaConf.plugins.noice" },
     { import = "myLuaConf.plugins.telescope" },
     { import = "myLuaConf.plugins.treesitter" },
     { import = "myLuaConf.plugins.completion" },
     { import = "myLuaConf.plugins.navigation" },
     { import = "myLuaConf.plugins.mini" },
-    -- { import = "myLuaConf.plugins.lualine" },
+    { import = "myLuaConf.plugins.lualine" },
     { import = "myLuaConf.plugins.snacks" },
     -- { import = "myLuaConf.plugins.neorg" },
     { import = "myLuaConf.plugins.obsidian" },
+    { import = "myLuaConf.plugins.org" },
     { import = "myLuaConf.plugins.fzf" },
     {
         "markdown-preview.nvim",
@@ -261,52 +197,52 @@ require("lze").load({
             vim.g.startuptime_exe_path = nixCats.packageBinPath
         end,
     },
-    {
-        "fidget.nvim",
-        for_cat = "general.extra",
-        event = "DeferredUIEnter",
-        -- keys = "",
-        after = function()
-            require("fidget").setup({
-                notification = {
-                    window = {
-                        border = "single",
-                        x_padding = 1,
-                        y_padding = 1,
-                    },
-                },
-            })
-        end,
-    },
-    {
-        "nvim-navic",
-        for_cat = "general.always",
-        event = "DeferredUIEnter",
-        dep_of = { "breadcrumbs", "nvim-navbuddy" },
-        after = function()
-            require("nvim-navic").setup({
-                lsp = {
-                    auto_attach = true,
-                }
-            })
-            vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
-        end
-    },
-    {
-        "nvim-navbuddy",
-        for_cat = "general.always",
-        cmd = "Navbuddy",
-        -- keys = {
-        --     {},
-        -- },
-        after = function()
-            require("nvim-navbuddy").setup({
-                lsp = {
-                    auto_attach = true,
-                },
-            })
-        end
-    },
+    -- {
+    --     "fidget.nvim",
+    --     for_cat = "general.extra",
+    --     event = "DeferredUIEnter",
+    --     -- keys = "",
+    --     after = function()
+    --         require("fidget").setup({
+    --             notification = {
+    --                 window = {
+    --                     border = "single",
+    --                     x_padding = 1,
+    --                     y_padding = 1,
+    --                 },
+    --             },
+    --         })
+    --     end,
+    -- },
+    -- {
+    --     "nvim-navic",
+    --     for_cat = "general.always",
+    --     event = "DeferredUIEnter",
+    --     dep_of = { "breadcrumbs", "nvim-navbuddy" },
+    --     after = function()
+    --         require("nvim-navic").setup({
+    --             lsp = {
+    --                 auto_attach = true,
+    --             }
+    --         })
+    --         vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
+    --     end
+    -- },
+    -- {
+    --     "nvim-navbuddy",
+    --     for_cat = "general.always",
+    --     cmd = "Navbuddy",
+    --     -- keys = {
+    --     --     {},
+    --     -- },
+    --     after = function()
+    --         require("nvim-navbuddy").setup({
+    --             lsp = {
+    --                 auto_attach = true,
+    --             },
+    --         })
+    --     end
+    -- },
     -- {
     --     "bufferline.nvim",
     --     for_cat = "general.always",

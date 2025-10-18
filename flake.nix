@@ -62,6 +62,14 @@
       url = "github:metalelf0/black-metal-theme-neovim";
       flake = false;
     };
+    # "plugins-neopywal" = {
+    #   url = "https://github.com/RedsXDD/neopywal.nvim";
+    #   flake = false;
+    # };
+    "plugins-org-bullets" = {
+      url = "github:nvim-orgmode/org-bullets.nvim";
+      flake = false;
+    };
   };
 
   # see :help nixCats.flake.outputs
@@ -212,6 +220,8 @@
                 "tokyonight-day" = tokyonight-nvim;
                 "miasma" = miasma-nvim;
                 "kanagawa" = kanagawa-nvim;
+                # "neopywal" = pkgs.neovimPlugins.neopywal;
+                "pywal" = pywal-nvim;
               });
             # This is obviously a fairly basic usecase for this, but still nice.
           };
@@ -250,6 +260,11 @@
             notes = with pkgs.vimPlugins; [
               obsidian-nvim
               neorg
+            ];
+            org = with pkgs.vimPlugins; [
+              orgmode
+              org-roam-nvim
+              pkgs.neovimPlugins.org-bullets
             ];
             general = {
               blink = with pkgs.vimPlugins; [
@@ -448,6 +463,7 @@
             categories = {
               markdown = true;
               notes = true;
+              org = true;
               general = true;
               lint = true;
               format = true;
@@ -467,7 +483,7 @@
               # you could also pass something else:
               # see :help nixCats
               themer = true;
-              colorscheme = "kanagawa";
+              colorscheme = "pywal";
             };
             extra = {
               # to keep the categories table from being filled with non category things that you want to pass
@@ -475,7 +491,6 @@
               # but you can pass all the same stuff in any of these sets and access it in lua
               nixdExtras = {
                 nixpkgs = ''import ${pkgs.path} {}'';
-                # or inherit nixpkgs;
               };
             };
           };

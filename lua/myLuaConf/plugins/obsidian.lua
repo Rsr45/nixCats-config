@@ -4,50 +4,50 @@ return {
         -- ft = "markdown",
         for_cat = "notes",
         cmd = { "ObsidianOpen", "ObsidianNew", "ObsidianSearch", "Obsidian" },
-        keys = {
-            {
-                "<leader>off",
-                "<cmd>Obsidian search<CR>",
-                mode = { "n" },
-                desc = "Search Notes"
-            },
-            {
-                "<leaderoft>",
-                "<cmd>Obsidian tags",
-                mode = { "n" },
-                desc = "Search Tags",
-            },
-            {
-                "<leader>ofl",
-                "<cmd>Obsidian links<CR>",
-                mode = { "n" },
-                desc = "Search Links"
-            },
-            {
-                "<leader>ofl",
-                "<cmd>Obsidian follow_link<CR>",
-                mode = { "n" },
-                desc = "Follow Link"
-            },
-            {
-                "<leader>onl",
-                "<cmd>Obsidian link_new<CR>",
-                mode = { "n", "v" },
-                desc = "New Link"
-            },
-            {
-                "<leader>ol",
-                "<cmd>Obsidian link<CR>",
-                mode = { "n", "v" },
-                desc = "Link"
-            },
-            {
-                "<leader>onn",
-                "<cmd>Obsidian new<CR>",
-                mode = { "n" },
-                desc = "New Note"
-            },
-        },
+        -- keys = {
+        --     {
+        --         "<leader>off",
+        --         "<cmd>Obsidian search<CR>",
+        --         mode = { "n" },
+        --         desc = "Search Notes"
+        --     },
+        --     {
+        --         "<leaderoft>",
+        --         "<cmd>Obsidian tags",
+        --         mode = { "n" },
+        --         desc = "Search Tags",
+        --     },
+        --     {
+        --         "<leader>ofl",
+        --         "<cmd>Obsidian links<CR>",
+        --         mode = { "n" },
+        --         desc = "Search Links"
+        --     },
+        --     {
+        --         "<leader>ofl",
+        --         "<cmd>Obsidian follow_link<CR>",
+        --         mode = { "n" },
+        --         desc = "Follow Link"
+        --     },
+        --     {
+        --         "<leader>onl",
+        --         "<cmd>Obsidian link_new<CR>",
+        --         mode = { "n", "v" },
+        --         desc = "New Link"
+        --     },
+        --     {
+        --         "<leader>ol",
+        --         "<cmd>Obsidian link<CR>",
+        --         mode = { "n", "v" },
+        --         desc = "Link"
+        --     },
+        --     {
+        --         "<leader>onn",
+        --         "<cmd>Obsidian new<CR>",
+        --         mode = { "n" },
+        --         desc = "New Note"
+        --     },
+        -- },
         after = function()
             require("obsidian").setup({
                 ui = { enable = false },
