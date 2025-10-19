@@ -3,6 +3,8 @@ if not require("nixCatsUtils").isNixCats then
     colorschemeName = "onedark"
 end
 
+vim.cmd.colorscheme(colorschemeName)
+
 -- NOTE: you can check if you included the category with the thing wherever you want.
 if nixCats("general.extra") then
     -- I didnt want to bother with lazy loading this.
@@ -11,19 +13,48 @@ if nixCats("general.extra") then
     -- but why... I guess I could make it load
     -- after the other lze definitions in the next call using priority value?
     -- didnt seem necessary.
+    -- Declare a global function to retrieve the current directory
+    function _G.get_oil_winbar()
+        local bufnr = vim.api.nvim_win_get_buf(vim.g.statusline_winid)
+        local dir = require("oil").get_current_dir(bufnr)
+        if dir then
+            return vim.fn.fnamemodify(dir, ":~")
+        else
+            -- If there is no current directory (e.g. over ssh), just show the buffer name
+            return vim.api.nvim_buf_get_name(0)
+        end
+    end
+
+    local detail = false
+
     vim.g.loaded_netrwPlugin = 1
+    vim.opt.splitright = true
     require("oil").setup({
         default_file_explorer = true,
         view_options = {
             show_hidden = true,
         },
+        win_options = {
+            winbar = "%!v:lua.get_oil_winbar()",
+        },
         columns = {
-            "icon",
-            "permissions",
-            "size",
+            -- "permissions",
+            -- "size",
             -- "mtime",
+            "icon",
         },
         keymaps = {
+            ["gd"] = {
+                desc = "Toggle file detail view",
+                callback = function()
+                    detail = not detail
+                    if detail then
+                        require("oil").set_columns({ "permissions", "size", "mtime" })
+                    else
+                        require("oil").set_columns({ "icon" })
+                    end
+                end,
+            },
             ["g?"] = "actions.show_help",
             ["<CR>"] = "actions.select",
             ["<C-s>"] = "actions.select_vsplit",
@@ -43,6 +74,7 @@ if nixCats("general.extra") then
         },
     })
     vim.keymap.set("n", "-", "<cmd>Oil<CR>", { noremap = true, desc = "Open Parent Directory" })
+    vim.keymap.set("n", "<leader>o/", "<cmd>Oil<CR>", { noremap = true, desc = "Open Directory in oil" })
     vim.keymap.set("n", "<leader>-", "<cmd>Oil .<CR>", { noremap = true, desc = "Open nvim root directory" })
 end
 
