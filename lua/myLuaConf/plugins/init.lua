@@ -382,6 +382,9 @@ require("lze").load({
         after = function()
             require("which-key").setup({
                 preset = "helix",
+                win = {
+                    border = "single",
+                },
             })
             require("which-key").add({
                 -- { "<leader><leader>",  group = "buffer commands" },
