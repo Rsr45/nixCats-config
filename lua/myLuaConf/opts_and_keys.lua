@@ -72,6 +72,8 @@ vim.o.cursorlineopt = 'both'
 
 vim.o.conceallevel = 1
 
+vim.o.winborder = 'single'
+
 -- [[ Disable auto comment on enter ]]
 -- See :help formatoptions
 vim.api.nvim_create_autocmd("FileType", {
@@ -138,3 +140,5 @@ vim.keymap.set("x", "<leader>P", '"_dP',
 
 -- File manipulation
 vim.keymap.set({ "n" }, '<leader>fs', '<cmd>update<CR>', { desc = 'File save' })
+-- spellcheck toggle
+vim.keymap.set({ "n"}, '<leader>ts', '<cmd>set spell!<Cr>', { desc = 'Toggle Spellcheck'})

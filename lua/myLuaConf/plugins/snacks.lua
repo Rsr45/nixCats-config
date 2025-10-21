@@ -157,7 +157,7 @@ return {
                 terminal = {},
                 notify = {},
                 notifier = {},
-                words = {},
+                -- words = {},
                 -- input = {
                 --     win = { border = "single", },
                 -- },
