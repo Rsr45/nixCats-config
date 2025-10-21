@@ -23,8 +23,8 @@ return function(_, bufnr, client)
     -- if nixCats('general.telescope') then
     nmap('<leader>gr', function() require('telescope.builtin').lsp_references() end, '[G]oto [R]eferences')
     nmap('gI', function() require('telescope.builtin').lsp_implementations() end, '[G]oto [I]mplementation')
-    nmap('<leader>ds', function() require('telescope.builtin').lsp_document_symbols() end,
-        '[D]ocument [S]ymbols')
+    -- nmap('<leader>ds', function() require('telescope.builtin').lsp_document_symbols() end,
+    --     '[D]ocument [S]ymbols')
     nmap('<leader>ws', function() require('telescope.builtin').lsp_dynamic_workspace_symbols() end,
         '[W]orkspace [S]ymbols')
     -- end -- TODO: someone who knows the builtin versions of these to do instead help me out please.

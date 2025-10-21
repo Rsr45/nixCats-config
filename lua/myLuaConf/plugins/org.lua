@@ -2,6 +2,8 @@ return {
     {
         "orgmode",
         for_cat = "org",
+        ft = "org",
+        dep_of = { "org-roam.nvim", "org-bullets" },
         lazy = false,
         after = function()
             require("orgmode").setup({
@@ -15,6 +17,7 @@ return {
     {
         "org-roam.nvim",
         for_cat = "org",
+        ft = "org",
         lazy = false,
         after = function()
             require("org-roam").setup({
@@ -31,6 +34,7 @@ return {
     {
         "org-bullets",
         for_cat = "org",
+        ft = "org",
         lazy = false,
         after = function()
             require("org-bullets").setup()

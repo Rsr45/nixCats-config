@@ -79,6 +79,7 @@ if nixCats("general.extra") then
 end
 
 require("lze").load({
+    { import = "myLuaConf.plugins.mini" },
     {
         "nui.nvim",
         for_cat = "general.always",
@@ -90,13 +91,23 @@ require("lze").load({
     { import = "myLuaConf.plugins.treesitter" },
     { import = "myLuaConf.plugins.completion" },
     { import = "myLuaConf.plugins.navigation" },
-    { import = "myLuaConf.plugins.mini" },
     { import = "myLuaConf.plugins.lualine" },
+    -- { import = "myLuaConf.plugins.mini-statusline" },
     { import = "myLuaConf.plugins.snacks" },
     -- { import = "myLuaConf.plugins.neorg" },
     { import = "myLuaConf.plugins.obsidian" },
     { import = "myLuaConf.plugins.org" },
     { import = "myLuaConf.plugins.fzf" },
+    { import = "myLuaConf.plugins.gitsigns" },
+    { import = "myLuaConf.plugins.neogit" },
+    {
+        "mini.icons",
+        for_cat = "general.extra",
+        after = function()
+            require("mini.icons").setup()
+            MiniIcons.mock_nvim_web_devicons()
+        end,
+    },
     {
         "markdown-preview.nvim",
         -- NOTE: for_cat is a custom handler that just sets enabled value for us,
@@ -108,27 +119,9 @@ require("lze").load({
         cmd = { "MarkdownPreview", "MarkdownPreviewStop", "MarkdownPreviewToggle" },
         ft = "markdown",
         keys = {
-            {
-                "<leader>mp",
-                "<cmd>MarkdownPreview <CR>",
-                mode = { "n" },
-                noremap = true,
-                desc = "markdown preview",
-            },
-            {
-                "<leader>ms",
-                "<cmd>MarkdownPreviewStop <CR>",
-                mode = { "n" },
-                noremap = true,
-                desc = "markdown preview stop",
-            },
-            {
-                "<leader>mt",
-                "<cmd>MarkdownPreviewToggle <CR>",
-                mode = { "n" },
-                noremap = true,
-                desc = "markdown preview toggle",
-            },
+            { "<leader>mp", "<cmd>MarkdownPreview <CR>",       mode = { "n" }, noremap = true, desc = "markdown preview", },
+            { "<leader>ms", "<cmd>MarkdownPreviewStop <CR>",   mode = { "n" }, noremap = true, desc = "markdown preview stop", },
+            { "<leader>mt", "<cmd>MarkdownPreviewToggle <CR>", mode = { "n" }, noremap = true, desc = "markdown preview toggle", },
         },
         before = function()
             vim.g.mkdp_auto_close = 0
@@ -140,7 +133,7 @@ require("lze").load({
         ft = "markdown",
         cmd = "RenderMarkdown",
         after = function()
-            require("render-markdown").setup {}
+            require("render-markdown").setup({})
         end,
     },
     {
@@ -149,10 +142,10 @@ require("lze").load({
         lazy = false,
         -- ft = { "" },
         after = function()
-            require('nvim-highlight-colors').setup({
-                render = 'virtual',
-                virtual_symbol = '■',
-                virtual_symbol_position = 'inline',
+            require("nvim-highlight-colors").setup({
+                render = "virtual",
+                virtual_symbol = "■",
+                virtual_symbol_position = "inline",
             })
         end,
     },
@@ -177,21 +170,21 @@ require("lze").load({
         lazy = false,
         -- event = "DeferredUIEnter",
         after = function()
-            vim.o.foldcolumn = '1' -- '0' is not bad
+            vim.o.foldcolumn = "1" -- '0' is not bad
             vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
             vim.o.foldlevelstart = 99
             vim.o.foldenable = true
 
             -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
-            vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
-            vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+            vim.keymap.set("n", "zR", require("ufo").openAllFolds)
+            vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
 
             require("ufo").setup({
                 provide_selector = function(bufnr, filetype, buftype)
                     return { "lsp", "treesitter", "indent" }
-                end
+                end,
             })
-        end
+        end,
     },
     {
         "promise-async",
@@ -214,8 +207,8 @@ require("lze").load({
         event = "DeferredUIEnter",
         after = function()
             require("ibl").setup({
-                indent = { char = "▏", },
-                scope = { enabled = true, },
+                indent = { char = "▏" },
+                scope = { enabled = true },
             })
         end,
     },
@@ -246,11 +239,24 @@ require("lze").load({
     --         })
     --     end,
     -- },
+    {
+        "hlargs",
+        for_cat = 'general.extra',
+        event = "DeferredUIEnter",
+        -- keys = "",
+        dep_of = { "nvim-lspconfig" },
+        after = function()
+            require('hlargs').setup {
+                -- color = '#32a88f',
+            }
+            vim.cmd([[hi clear @lsp.type.parameter]])
+            vim.cmd([[hi link @lsp.type.parameter Hlargs]])
+        end,
+    },
     -- {
     --     "nvim-navic",
     --     for_cat = "general.always",
     --     event = "DeferredUIEnter",
-    --     dep_of = { "breadcrumbs", "nvim-navbuddy" },
     --     after = function()
     --         require("nvim-navic").setup({
     --             lsp = {
@@ -260,117 +266,6 @@ require("lze").load({
     --         vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
     --     end
     -- },
-    -- {
-    --     "nvim-navbuddy",
-    --     for_cat = "general.always",
-    --     cmd = "Navbuddy",
-    --     -- keys = {
-    --     --     {},
-    --     -- },
-    --     after = function()
-    --         require("nvim-navbuddy").setup({
-    --             lsp = {
-    --                 auto_attach = true,
-    --             },
-    --         })
-    --     end
-    -- },
-    -- {
-    --     "bufferline.nvim",
-    --     for_cat = "general.always",
-    --     event = "DeferredUIEnter",
-    --     after = function()
-    --         require("bufferline").setup({
-    --
-    --         })
-    --     end
-    -- },
-    {
-        "gitsigns.nvim",
-        for_cat = "general.always",
-        event = "DeferredUIEnter",
-        -- cmd = { "" },
-        -- ft = "",
-        -- keys = "",
-        -- colorscheme = "",
-        after = function()
-            require("gitsigns").setup({
-                -- See `:help gitsigns.txt`
-                -- signs = {
-                --     add = { text = '+' },
-                --     change = { text = '~' },
-                --     delete = { text = '_' },
-                --     topdelete = { text = '‾' },
-                --     changedelete = { text = '~' },
-                -- },
-                -- on_attach = function(bufnr)
-                --     local gs = package.loaded.gitsigns
-                --
-                --     local function map(mode, l, r, opts)
-                --         opts = opts or {}
-                --         opts.buffer = bufnr
-                --         vim.keymap.set(mode, l, r, opts)
-                --     end
-                --
-                --     -- Navigation
-                --     map({ "n", "v" }, "]c", function()
-                --         if vim.wo.diff then
-                --             return "]c"
-                --         end
-                --         vim.schedule(function()
-                --             gs.next_hunk()
-                --         end)
-                --         return "<Ignore>"
-                --     end, { expr = true, desc = "Jump to next hunk" })
-                --
-                --     map({ "n", "v" }, "[c", function()
-                --         if vim.wo.diff then
-                --             return "[c"
-                --         end
-                --         vim.schedule(function()
-                --             gs.prev_hunk()
-                --         end)
-                --         return "<Ignore>"
-                --     end, { expr = true, desc = "Jump to previous hunk" })
-                --
-                --     -- Actions
-                --     -- visual mode
-                --     map("v", "<leader>hs", function()
-                --         gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
-                --     end, { desc = "stage git hunk" })
-                --     map("v", "<leader>hr", function()
-                --         gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
-                --     end, { desc = "reset git hunk" })
-                --     -- normal mode
-                --     map("n", "<leader>gs", gs.stage_hunk, { desc = "git stage hunk" })
-                --     map("n", "<leader>grr", gs.reset_hunk, { desc = "git reset hunk" })
-                --     map("n", "<leader>gS", gs.stage_buffer, { desc = "git Stage buffer" })
-                --     map("n", "<leader>gu", gs.undo_stage_hunk, { desc = "undo stage hunk" })
-                --     map("n", "<leader>grR", gs.reset_buffer, { desc = "git Reset buffer" })
-                --     map("n", "<leader>gp", gs.preview_hunk, { desc = "preview git hunk" })
-                --     map("n", "<leader>gb", function()
-                --         gs.blame_line({ full = false })
-                --     end, { desc = "git blame line" })
-                --     map("n", "<leader>gd", gs.diffthis, { desc = "git diff against index" })
-                --     map("n", "<leader>gD", function()
-                --         gs.diffthis("~")
-                --     end, { desc = "git diff against last commit" })
-                --
-                --     -- Toggles
-                --     map("n", "<leader>gtb", gs.toggle_current_line_blame,
-                --         { desc = "toggle git blame line" })
-                --     map("n", "<leader>gtd", gs.toggle_deleted, { desc = "toggle git show deleted" })
-                --
-                --     -- Text object
-                --     map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>",
-                --         { desc = "select git hunk" })
-                -- end,
-            })
-            -- vim.cmd([[hi GitSignsAdd guifg=#04de21]])
-            -- vim.cmd([[hi GitSignsChange guifg=#83fce6]])
-            -- vim.cmd([[hi GitSignsDelete guifg=#fa2525]])
-        end,
-    },
     {
         "which-key.nvim",
         for_cat = "general.extra",
@@ -387,19 +282,29 @@ require("lze").load({
                 },
             })
             require("which-key").add({
-                -- { "<leader><leader>",  group = "buffer commands" },
-                -- { "<leader><leader>_", hidden = true },
-                { "<leader>c",  group = "[c]ode" },
+                { "<leader>t",  group = "toggle" },
+                { "<leader>t_", hidden = true },
+                { "<leader>s",  group = "search" },
+                { "<leader>s_", hidden = true },
+                -- { "<leader>o",  group = "open" },
+                -- { "<leader>o_", hidden = true },
+                -- { "<leader>n",  group = "notes" },
+                -- { "<leader>n_", hidden = true },
+                { "<leader>f",  group = "file" },
+                { "<leader>f_", hidden = true },
+                { "<leader>g",  group = "git" },
+                { "<leader>g_", hidden = true },
+                { "<leader>c",  group = "code" },
                 { "<leader>c_", hidden = true },
-                { "<leader>d",  group = "[d]ocument" },
+                { "<leader>d",  group = "debug" },
                 { "<leader>d_", hidden = true },
-                { "<leader>m",  group = "[m]arkdown" },
+                { "<leader>m",  group = "markdown" },
                 { "<leader>m_", hidden = true },
-                { "<leader>r",  group = "[r]ename" },
+                { "<leader>r",  group = "rename" },
                 { "<leader>r_", hidden = true },
-                { "<leader>w",  group = "[w]orkspace" },
+                { "<leader>w",  group = "workspace" },
                 { "<leader>w_", hidden = true },
-                { "<leader>l",  group = "[l]sp" },
+                { "<leader>l",  group = "lsp" },
                 { "<leader>l_", hidden = true },
             })
         end,

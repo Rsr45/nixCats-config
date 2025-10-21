@@ -126,7 +126,7 @@ vim.keymap.set('n', 'down', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent =
 -- vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 -- vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+vim.keymap.set('n', '<leader>cx', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- You should instead use these keybindings so that they are still easy to use, but dont conflict
 vim.keymap.set({ "v", "x", "n" }, '<leader>y', '"+y', { noremap = true, silent = true, desc = 'Yank to clipboard' })

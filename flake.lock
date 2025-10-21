@@ -47,35 +47,19 @@
         "type": "github"
       }
     },
-    "plugins-breadcrumbs": {
+    "plugins-hlargs": {
       "flake": false,
       "locked": {
-        "lastModified": 1759388030,
-        "narHash": "sha256-E/EjzeKyPmssDVF0QtbTmLU805F9b+MNl23pIE2ko0o=",
-        "owner": "LunarVim",
-        "repo": "breadcrumbs.nvim",
-        "rev": "a59e3ee12818135098e5ce8efeb7b58b675b09ec",
+        "lastModified": 1758619418,
+        "narHash": "sha256-WjmVefR0qk2ANWgyHSuYMTuCfzlVTF7tqzAL+uatKkc=",
+        "owner": "m-demare",
+        "repo": "hlargs.nvim",
+        "rev": "0b29317c944fb1f76503ce4540d6dceffbb5ccd2",
         "type": "github"
       },
       "original": {
-        "owner": "LunarVim",
-        "repo": "breadcrumbs.nvim",
-        "type": "github"
-      }
-    },
-    "plugins-nvim-navbuddy": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1746961661,
-        "narHash": "sha256-cabDiT088N8ugpXKSOOjO/5Q2W33ITv39GKA0AM0M48=",
-        "owner": "hasansujon786",
-        "repo": "nvim-navbuddy",
-        "rev": "18802efb91bcfafc54aed513ef97da1dfeae4059",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hasansujon786",
-        "repo": "nvim-navbuddy",
+        "owner": "m-demare",
+        "repo": "hlargs.nvim",
         "type": "github"
       }
     },
@@ -100,8 +84,7 @@
         "nixCats": "nixCats",
         "nixpkgs": "nixpkgs",
         "plugins-black-metal": "plugins-black-metal",
-        "plugins-breadcrumbs": "plugins-breadcrumbs",
-        "plugins-nvim-navbuddy": "plugins-nvim-navbuddy",
+        "plugins-hlargs": "plugins-hlargs",
         "plugins-org-bullets": "plugins-org-bullets"
       }
     }

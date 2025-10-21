@@ -39,24 +39,14 @@
     # How to import it into your config is shown farther down in the startupPlugins set.
     # You put it here like this, and then below you would use it with `pkgs.neovimPlugins.hlargs`
 
-    # "plugins-hlargs" = {
-    #   url = "github:m-demare/hlargs.nvim";
-    #   flake = false;
-    # };
+    "plugins-hlargs" = {
+      url = "github:m-demare/hlargs.nvim";
+      flake = false;
+    };
 
     # neovim-nightly-overlay = {
     #   url = "github:nix-community/neovim-nightly-overlay";
     # };
-
-    "plugins-breadcrumbs" = {
-      url = "github:LunarVim/breadcrumbs.nvim";
-      flake = false;
-    };
-
-    "plugins-nvim-navbuddy" = {
-      url = "github:hasansujon786/nvim-navbuddy";
-      flake = false;
-    };
 
     "plugins-black-metal" = {
       url = "github:metalelf0/black-metal-theme-neovim";
@@ -272,7 +262,6 @@
                 cmp-cmdline
                 blink-cmp
                 blink-compat
-                colorful-menu-nvim
               ];
               treesitter = with pkgs.vimPlugins; [
                 nvim-treesitter-textobjects
@@ -296,13 +285,17 @@
                 flit-nvim
                 flash-nvim
               ];
+              git = with pkgs.vimPlugins; [
+                diffview-nvim
+                gitsigns-nvim
+                vim-fugitive
+                neogit
+              ];
               always = with pkgs.vimPlugins; [
                 nvim-lspconfig
                 lualine-nvim
                 bufferline-nvim
-                gitsigns-nvim
                 vim-sleuth
-                vim-fugitive
                 vim-rhubarb
                 vim-visual-multi
                 mini-base16
@@ -313,12 +306,7 @@
                 mini-bracketed
                 mini-statusline
                 nvim-navic
-                pkgs.neovimPlugins.nvim-navbuddy
-                # nvim-navbuddy
-                pkgs.neovimPlugins.breadcrumbs
-                lazygit-nvim
                 nvim-biscuits
-                # mini
                 snacks-nvim
                 nvim-ufo
                 promise-async
@@ -336,6 +324,7 @@
                 undotree
                 indent-blankline-nvim
                 vim-startuptime
+                pkgs.neovimPlugins.hlargs
               ];
             };
           };

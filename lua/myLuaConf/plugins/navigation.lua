@@ -38,6 +38,14 @@ return {
                     },
                 },
             })
+            vim.keymap.set({ "n", "x", "o" }, "<c-space>", function()
+                require("flash").treesitter({
+                    actions = {
+                        ["<c-space>"] = "next",
+                        ["<BS>"] = "prev"
+                    }
+                })
+            end, { desc = "Treesitter incremental selection" })
         end,
     },
     -- {

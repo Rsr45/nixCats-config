@@ -13,21 +13,21 @@ return {
             vim.cmd.packadd(name)
             vim.cmd.packadd("nvim-treesitter-textobjects")
         end,
-        after = function(plugin)
+        after = function()
             -- [[ Configure Treesitter ]]
             -- See `:help nvim-treesitter`
             require('nvim-treesitter.configs').setup {
                 highlight = { enable = true, },
                 indent = { enable = false, },
-                incremental_selection = {
-                    enable = true,
-                    keymaps = {
-                        init_selection = '<c-space>',
-                        node_incremental = '<c-space>',
-                        scope_incremental = '<c-s>',
-                        node_decremental = '<M-space>',
-                    },
-                },
+                -- incremental_selection = {
+                --     enable = true,
+                --     keymaps = {
+                --         init_selection = '<c-space>',
+                --         node_incremental = '<c-space>',
+                --         scope_incremental = '<c-s>',
+                --         node_decremental = '<M-space>',
+                --     },
+                -- },
                 textobjects = {
                     select = {
                         enable = false,
@@ -65,10 +65,10 @@ return {
                     swap = {
                         enable = true,
                         swap_next = {
-                            ['<leader>la'] = '@parameter.inner',
+                            ['<leader>csn'] = '@parameter.inner',
                         },
                         swap_previous = {
-                            ['<leader>lA'] = '@parameter.inner',
+                            ['<leader>csl'] = '@parameter.inner',
                         },
                     },
                 },

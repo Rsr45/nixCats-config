@@ -4,54 +4,58 @@ return {
         for_cat = "general.always",
         lazy = false,
         keys = {
-            { "<leader>ot", mode = { "n" }, "<cmd>lua Snacks.terminal.toggle()<CR>" },
+            { "<leader>ot",       mode = { "n" }, "<cmd>lua Snacks.terminal.toggle()<CR>",                             desc = "Toggle terminal popup" },
+            { "<leader>sn",       mode = { "n" }, "<cmd>lua Snacks.picker.notifications()<CR>",                        desc = "Search notifications" },
+            { "<leader>u",        mode = { "n" }, "<cmd>lua Snacks.picker.undo()<CR>",                                 desc = "Undo" },
+            { "<leader>,",        mode = { "n" }, "<cmd>lua Snacks.picker.buffers()<CR>",                              desc = "Switch buffer" },
+            { "<leader>.",        mode = { "n" }, "<cmd>lua Snacks.picker.files({ cwd = vim.fn.expand('%:p:h')})<CR>", desc = "Find file" },
+            { "<leader>/",        mode = { "n" }, "<cmd>lua Snacks.picker.grep()<CR>",                                 desc = "Grep" },
+            { "<leader><leader>", mode = { "n" }, "<cmd>lua Snacks.picker.files()<CR>",                                desc = "Find file in project", },
+            -- File
+            -- {
+            --     "<leader>ff",
+            --     "<cmd>lua Snacks.picker.files({ cwd = vim.fn.expand('%:p:h') })<CR>",
+            --     mode = { "n" },
+            --     desc = "Files in cwd"
+            -- },
             {
-                "<leader>u",
-                "<cmd>lua Snacks.picker.undo()<CR>",
-                mode = { "n" },
-                desc = "Undo"
-            },
-            {
-                "<leader>,",
-                "<cmd>lua Snacks.picker.buffers()<CR>",
-                mode = { "n" },
-                desc = "Buffer"
-            },
-            {
-                "<leader>.",
-                "<cmd>lua Snacks.picker.files({ cwd = vim.fn.expand('%:p:h')})<CR>",
-                mode = { "n" },
-                desc = "Find file"
-            },
-            {
-                "<leader>/",
-                "<cmd>lua Snacks.picker.grep()<CR>",
-                mode = { "n" },
-                desc = "Grep"
-            },
-            {
-                "<leader>ff",
+                "<leader>fF",
                 "<cmd>lua Snacks.picker.files({ cwd = vim.fn.expand('%:p:h') })<CR>",
                 mode = { "n" },
-                desc = "Files in cwd"
+                desc = "Find file from here"
             },
-            {
-                "<leader><leader>",
-                "<cmd>lua Snacks.picker.files()<CR>",
-                mode = { "n" },
-                desc = "Find file",
-            },
+            -- Buffer
             {
                 "<leader>bb",
                 "<cmd>lua Snacks.picker.buffers()<CR>",
                 mode = { "n" },
-                desc = "Buffer"
+                desc = "Switch buffer"
             },
+            -- Search
             {
                 "<leader>sp",
                 "<cmd>lua Snacks.picker.grep()<CR>",
                 mode = { "n" },
-                desc = "Grep"
+                desc = "Search project"
+            },
+            {
+                "<leader>sB",
+                "<cmd>lua Snacks.picker.grep_buffers()<CR>",
+                mode = { "n" },
+                desc = "Search all open buffers"
+            },
+            {
+                "<leader>sd",
+                "<cmd>lua Snacks.picker.grep_buffers({ cwd = vim.fn.expand('%:p:h') })<CR>",
+                mode = { "n" },
+                desc = "Search current directory"
+            },
+            -- Project
+            {
+                "<leader>pp",
+                "<cmd>lua Snacks.picker.projects()<CR>",
+                mode = { "n" },
+                desc = "Switch project"
             },
             -- {
             --     "<leader>fG",
@@ -132,27 +136,26 @@ return {
                 --     },
                 --     refresh = 50, -- refresh at most every 50ms
                 -- },
-                -- dashboard = {
-                --     preset = {
-                --         -- Used by the `keys` section to show keymaps.
-                --         -- Set your custom keymaps here.
-                --         -- When using a function, the `items` argument are the default keymaps.
-                --         ---@type snacks.dashboard.Item[]
-                --         keys = {
-                --             { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
-                --             { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
-                --             { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
-                --             { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
-                --             { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})" },
-                --             { icon = " ", key = "q", desc = "Quit", action = ":qa" },
-                --         },
-                --     },
-                --     sections = {
-                --         { section = "header" },
-                --         { section = "keys",   gap = 1, padding = 1 },
-                --         { section = "startup" },
-                --     },
-                -- },
+                dashboard = {
+                    preset = {
+                        -- Used by the `keys` section to show keymaps.
+                        -- Set your custom keymaps here.
+                        -- When using a function, the `items` argument are the default keymaps.
+                        ---@type snacks.dashboard.Item[]
+                        keys = {
+                            { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
+                            { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+                            { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
+                            { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
+                            { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})" },
+                            { icon = " ", key = "q", desc = "Quit", action = ":qa" },
+                        },
+                    },
+                    sections = {
+                        { section = "header" },
+                        { section = "keys",  gap = 1, padding = 1 },
+                    },
+                },
                 image = {},
                 terminal = {},
                 notify = {},
@@ -166,6 +169,34 @@ return {
                 explorer = {},
                 picker = {
                     layout = { preset = "ivy", },
+                    win = {
+                        input = {
+                            keys = {
+                                ["<a-s>"] = { "flash", mode = { "n", "i" } },
+                                ["s"] = { "flash" },
+                            },
+                        },
+                    },
+                    actions = {
+                        flash = function(picker)
+                            require("flash").jump({
+                                pattern = "^",
+                                label = { after = { 0, 0 } },
+                                search = {
+                                    mode = "search",
+                                    exclude = {
+                                        function(win)
+                                            return vim.bo[vim.api.nvim_win_get_buf(win)].filetype ~= "snacks_picker_list"
+                                        end,
+                                    },
+                                },
+                                action = function(match)
+                                    local idx = picker.list:row2idx(match.pos[1])
+                                    picker.list:_move(idx, true, true)
+                                end,
+                            })
+                        end,
+                    },
                 },
                 styles = {
                     default = {

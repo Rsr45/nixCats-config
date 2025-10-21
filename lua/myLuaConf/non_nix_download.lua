@@ -25,7 +25,6 @@ require('nixCatsUtils.catPacker').setup({
     { "BirdeeHub/lzextras", },
     { "stevearc/oil.nvim", },
     { 'joshdick/onedark.vim', },
-    { 'nvim-tree/nvim-web-devicons', },
     { 'nvim-lua/plenary.nvim', },
     { 'tpope/vim-repeat', },
     { 'rcarriga/nvim-notify', },
@@ -53,7 +52,6 @@ require('nixCatsUtils.catPacker').setup({
     { 'hrsh7th/cmp-cmdline',                         opt = true, },
     { 'Saghen/blink.cmp',                            opt = true, },
     { 'Saghen/blink.compat',                         opt = true, },
-    { 'xzbdmw/colorful-menu.nvim',                   opt = true, },
 
     -- lint and format
     { 'mfussenegger/nvim-lint',                      opt = true, },
@@ -66,7 +64,7 @@ require('nixCatsUtils.catPacker').setup({
     { 'jay-babu/mason-nvim-dap.nvim',                opt = true, },
     { 'mfussenegger/nvim-dap',                       opt = true, },
 
-    -- { 'm-demare/hlargs.nvim', },
+    { 'm-demare/hlargs.nvim', },
     { 'mbbill/undotree',                             opt = true, },
     { 'tpope/vim-fugitive',                          opt = true, },
     { 'tpope/vim-rhubarb',                           opt = true, },
@@ -75,8 +73,8 @@ require('nixCatsUtils.catPacker').setup({
     { 'lewis6991/gitsigns.nvim',                     opt = true, },
     { 'nvim-lualine/lualine.nvim',                   opt = true, },
     { 'lukas-reineke/indent-blankline.nvim',         opt = true, },
-    { 'numToStr/Comment.nvim',                       opt = true,                     as = "comment.nvim", },
-    { 'kylechui/nvim-surround',                      opt = true, },
+    { 'nvim-mini/mini.comment',                      opt = true, },
+    { 'nvim-mini/mini.surround',                     opt = true, },
     {
         "iamcco/markdown-preview.nvim",
         build = ":call mkdp#util#install()",
