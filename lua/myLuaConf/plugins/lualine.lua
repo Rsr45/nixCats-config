@@ -25,10 +25,7 @@ return {
                         }
                     },
                     lualine_b = {
-                        {
-                            "lsp_status",
-                            -- color = { fg = '#c1c1c1', bg = '', gui = '' },
-                        }
+                        { "branch", },
                     },
                     lualine_c = {
                         {
@@ -51,23 +48,21 @@ return {
                             },
                             -- color = { fg = '#c1c1c1', bg = '', gui = '' },
                         },
-                    },
-                    lualine_x = {
+                        { 'diff' },
                         {
-                            -- color = { fg = '#c1c1c1', bg = '', gui = '' },
-                        }
-                    },
-                    lualine_y = {
-                        {
-                            -- "progress",
-                            -- color = { fg = '#c1c1c1', bg = '', gui = '' },
+                            require("noice").api.status.mode.get,
+                            cond = require("noice").api.status.mode.has,
+                            color = { fg = "#ff9e64" },
                         },
                     },
+                    lualine_x = {
+                        { 'diagnostics' },
+                    },
+                    lualine_y = {
+                        { 'filetype', },
+                    },
                     lualine_z = {
-                        {
-                            "location",
-                            -- color = { fg = '#c1c1c1', bg = '', gui = '' },
-                        }
+                        { 'location', },
                     }
                 },
                 inactive_sections = {
@@ -79,10 +74,7 @@ return {
                         }
                     },
                     lualine_b = {
-                        {
-                            "lsp_status",
-                            -- color = { fg = '#c1c1c1', bg = '', gui = '' },
-                        }
+                        { "branch", },
                     },
                     lualine_c = {
                         {
@@ -105,23 +97,21 @@ return {
                             },
                             -- color = { fg = '#c1c1c1', bg = '', gui = '' },
                         },
-                    },
-                    lualine_x = {
+                        { 'diff' },
                         {
-                            -- color = { fg = '#c1c1c1', bg = '', gui = '' },
-                        }
-                    },
-                    lualine_y = {
-                        {
-                            -- "progress",
-                            -- color = { fg = '#c1c1c1', bg = '', gui = '' },
+                            require("noice").api.status.mode.get,
+                            cond = require("noice").api.status.mode.has,
+                            color = { fg = "#ff9e64" },
                         },
                     },
+                    lualine_x = {
+                        { 'diagnostics' },
+                    },
+                    lualine_y = {
+                        { 'filetype', },
+                    },
                     lualine_z = {
-                        {
-                            "location",
-                            -- color = { fg = '#c1c1c1', bg = '', gui = '' },
-                        }
+                        { 'location', },
                     }
                 },
                 -- winbar = {

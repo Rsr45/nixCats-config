@@ -3,7 +3,12 @@ return {
         "obsidian.nvim",
         -- ft = "markdown",
         for_cat = "notes",
-        cmd = { "ObsidianOpen", "ObsidianNew", "ObsidianSearch", "Obsidian" },
+        cmd = { "Obsidian open", "Obsidian new", "Obsidian search", "Obsidian" },
+        keys = {
+            { "<leader>nos", mode = { "n" }, "<cmd>Obsidian search<CR>", desc = "" },
+            { "<leader>nolf", mode = { "n" }, "<cmd>Obsidian follow_link<CR>", desc = "" },
+            { "<leader>nolc", mode = { "n" }, "<cmd>Obsidian link<CR>", desc = "" },
+        },
         -- keys = {
         --     {
         --         "<leader>off",
@@ -51,6 +56,7 @@ return {
         after = function()
             require("obsidian").setup({
                 ui = { enable = false },
+                legacy_commands = false,
                 workspaces = {
                     {
                         name = "Personal",
