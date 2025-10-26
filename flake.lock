@@ -79,13 +79,30 @@
         "type": "github"
       }
     },
+    "plugins-org-modern": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1683841146,
+        "narHash": "sha256-TYs3g5CZDVXCFXuYaj3IriJ4qlIOxQgArVOzT7pqkqs=",
+        "owner": "danilshvalov",
+        "repo": "org-modern.nvim",
+        "rev": "c024900b7ee78a0274036025569b47001ef3e6aa",
+        "type": "github"
+      },
+      "original": {
+        "owner": "danilshvalov",
+        "repo": "org-modern.nvim",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "nixCats": "nixCats",
         "nixpkgs": "nixpkgs",
         "plugins-black-metal": "plugins-black-metal",
         "plugins-hlargs": "plugins-hlargs",
-        "plugins-org-bullets": "plugins-org-bullets"
+        "plugins-org-bullets": "plugins-org-bullets",
+        "plugins-org-modern": "plugins-org-modern"
       }
     }
   },

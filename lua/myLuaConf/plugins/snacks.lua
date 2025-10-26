@@ -32,18 +32,9 @@ return {
                 desc = "Switch buffer"
             },
             -- Search
-            {
-                "<leader>sp",
-                "<cmd>lua Snacks.picker.grep()<CR>",
-                mode = { "n" },
-                desc = "Search project"
-            },
-            {
-                "<leader>sB",
-                "<cmd>lua Snacks.picker.grep_buffers()<CR>",
-                mode = { "n" },
-                desc = "Search all open buffers"
-            },
+            { "<leader>sp", mode = { "n" }, "<cmd>lua Snacks.picker.grep()<CR>",         desc = "Search on everything" },
+            { "<leader>sb", mode = { "n" }, "<cmd>lua Snacks.picker.lines()<CR>",        desc = "Search buffer" },
+            { "<leader>sB", mode = { "n" }, "<cmd>lua Snacks.picker.grep_buffers()<CR>", desc = "Search all open buffers" },
             {
                 "<leader>sd",
                 "<cmd>lua Snacks.picker.grep_buffers({ cwd = vim.fn.expand('%:p:h') })<CR>",
@@ -160,14 +151,56 @@ return {
                 notify = {},
                 notifier = {},
                 -- words = {},
-                -- input = {
-                --     win = { border = "single", },
-                -- },
+                input = {
+                    win = { border = "single", },
+                },
                 bigfile = {},
                 quickfile = {},
                 explorer = {},
                 picker = {
-                    layout = { preset = "ivy", },
+
+                    layouts = {
+                        telescope = {
+                            reverse = true,
+                            layout = {
+                                box = "horizontal",
+                                backdrop = false,
+                                width = 0.8,
+                                height = 0.9,
+                                border = "none",
+                                {
+                                    box = "vertical",
+                                    { win = "list",  title = " Results ", title_pos = "center", border = "single" },
+                                    { win = "input", height = 1,          border = "single",    title = "{title} {live} {flags}", title_pos = "center" },
+                                },
+                                {
+                                    win = "preview",
+                                    title = "{preview:Preview}",
+                                    width = 0.45,
+                                    border = "single",
+                                    title_pos = "center",
+                                },
+                            },
+                        },
+                        vertical = {
+                            layout = {
+                                backdrop = false,
+                                width = 0.5,
+                                min_width = 80,
+                                height = 0.8,
+                                min_height = 30,
+                                box = "vertical",
+                                border = "single",
+                                title = "{title} {live} {flags}",
+                                title_pos = "center",
+                                { win = "input",   height = 1,          border = "bottom" },
+                                { win = "list",    border = "none" },
+                                { win = "preview", title = "{preview}", height = 0.4,     border = "top" },
+                            },
+                        },
+                    },
+                    layout = "vertical",
+
                     win = {
                         input = {
                             keys = {

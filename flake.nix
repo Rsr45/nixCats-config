@@ -60,6 +60,10 @@
       url = "github:nvim-orgmode/org-bullets.nvim";
       flake = false;
     };
+    "plugins-org-modern" = {
+      url = "github:danilshvalov/org-modern.nvim";
+      flake = false;
+    };
   };
 
   # see :help nixCats.flake.outputs
@@ -255,6 +259,7 @@
               orgmode
               org-roam-nvim
               pkgs.neovimPlugins.org-bullets
+              pkgs.neovimPlugins.org-modern
             ];
             general = {
               blink = with pkgs.vimPlugins; [
@@ -472,7 +477,7 @@
               # you could also pass something else:
               # see :help nixCats
               themer = true;
-              colorscheme = "pywal";
+              colorscheme = "tokyonight";
             };
             extra = {
               # to keep the categories table from being filled with non category things that you want to pass

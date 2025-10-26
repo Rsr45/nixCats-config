@@ -26,6 +26,9 @@ return {
                     },
                     documentation = {},
                     hover = {},
+                    progress = {
+                        enabled = false,
+                    },
                 },
 
                 cmdline = {
