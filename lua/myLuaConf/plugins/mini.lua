@@ -57,4 +57,15 @@ return {
             require("mini.bracketed").setup()
         end,
     },
+    {
+        "mini.bufremove",
+        for_cat = "general.always",
+        keys = {
+            { "<leader>bd", mode = { "n" }, "<cmd>lua MiniBufremove.delete()<CR>", desc = "Kill buffer" },
+            { "<leader>bk", mode = { "n" }, "<cmd>lua MiniBufremove.delete()<CR>", desc = "Kill buffer" },
+        },
+        after = function()
+            require("mini.bufremove").setup()
+        end,
+    },
 }

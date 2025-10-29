@@ -142,3 +142,5 @@ vim.keymap.set("x", "<leader>P", '"_dP',
 vim.keymap.set({ "n" }, '<leader>fs', '<cmd>update<CR>', { desc = 'File save' })
 -- spellcheck toggle
 vim.keymap.set({ "n"}, '<leader>ts', '<cmd>set spell!<Cr>', { desc = 'Toggle Spellcheck'})
+-- relativenumber toggle
+vim.keymap.set({"n"}, '<leader>tl', '<cmd>set rnu!<CR>')

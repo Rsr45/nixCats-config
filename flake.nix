@@ -158,6 +158,9 @@
               tinymist
               typstyle
             ];
+            tex = with pkgs; [
+              texlab
+            ];
             markdown = with pkgs; [
               markdown-oxide
             ];
@@ -207,6 +210,7 @@
                 "dracula-nvim" = dracula-nvim;
                 "gruvbox-material" = gruvbox-material;
                 "emperor" = pkgs.neovimPlugins.black-metal;
+                "immortal" = pkgs.neovimPlugins.black-metal;
                 "onedark" = onedark-nvim;
                 "catppuccin" = catppuccin-nvim;
                 "catppuccin-mocha" = catppuccin-nvim;
@@ -310,6 +314,7 @@
                 mini-operators
                 mini-bracketed
                 mini-statusline
+                mini-bufremove
                 nvim-navic
                 nvim-biscuits
                 snacks-nvim
@@ -319,6 +324,8 @@
                 noice-nvim
                 fzf-lua
                 nvim-highlight-colors
+                smartcolumn-nvim
+                vimtex
               ];
               extra = with pkgs.vimPlugins; [
                 fidget-nvim

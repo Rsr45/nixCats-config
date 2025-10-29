@@ -76,6 +76,9 @@ if nixCats("general.extra") then
     vim.keymap.set("n", "-", "<cmd>Oil<CR>", { noremap = true, desc = "Open Parent Directory" })
     vim.keymap.set("n", "<leader>o/", "<cmd>Oil<CR>", { noremap = true, desc = "Open Directory in oil" })
     vim.keymap.set("n", "<leader>-", "<cmd>Oil .<CR>", { noremap = true, desc = "Open nvim root directory" })
+
+    vim.cmd([[hi! link WinBar StatusLine]])
+    vim.cmd([[hi! link WinBarNC StatusLineNC]])
 end
 
 require("lze").load({
@@ -100,12 +103,23 @@ require("lze").load({
     { import = "myLuaConf.plugins.fzf" },
     { import = "myLuaConf.plugins.gitsigns" },
     { import = "myLuaConf.plugins.neogit" },
+    { import = "myLuaConf.plugins.whichkey" },
+    { import = "myLuaConf.plugins.smartcolumn" },
     {
         "mini.icons",
         for_cat = "general.extra",
         after = function()
             require("mini.icons").setup()
             MiniIcons.mock_nvim_web_devicons()
+        end,
+    },
+    {
+        "vimtex",
+        lazy = false,
+        for_cat = "general.always",
+        init = function()
+            vim.g.vimtex_view_method = "zathura"
+            vim.g.vimtex_syntax_enabled = 0
         end,
     },
     {
@@ -266,47 +280,4 @@ require("lze").load({
     --         vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
     --     end
     -- },
-    {
-        "which-key.nvim",
-        for_cat = "general.extra",
-        -- cmd = { "" },
-        event = "DeferredUIEnter",
-        -- ft = "",
-        -- keys = "",
-        -- colorscheme = "",
-        after = function()
-            require("which-key").setup({
-                preset = "helix",
-                win = {
-                    border = "single",
-                },
-            })
-            require("which-key").add({
-                { "<leader>t",  group = "toggle" },
-                { "<leader>t_", hidden = true },
-                { "<leader>s",  group = "search" },
-                { "<leader>s_", hidden = true },
-                -- { "<leader>o",  group = "open" },
-                -- { "<leader>o_", hidden = true },
-                -- { "<leader>n",  group = "notes" },
-                -- { "<leader>n_", hidden = true },
-                { "<leader>f",  group = "file" },
-                { "<leader>f_", hidden = true },
-                { "<leader>g",  group = "git" },
-                { "<leader>g_", hidden = true },
-                { "<leader>c",  group = "code" },
-                { "<leader>c_", hidden = true },
-                { "<leader>d",  group = "debug" },
-                { "<leader>d_", hidden = true },
-                { "<leader>m",  group = "markdown" },
-                { "<leader>m_", hidden = true },
-                { "<leader>r",  group = "rename" },
-                { "<leader>r_", hidden = true },
-                { "<leader>w",  group = "workspace" },
-                { "<leader>w_", hidden = true },
-                { "<leader>l",  group = "lsp" },
-                { "<leader>l_", hidden = true },
-            })
-        end,
-    },
 })

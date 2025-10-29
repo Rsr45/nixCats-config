@@ -182,4 +182,11 @@ require('lze').load {
             filetypes = { "markdown" },
         },
     },
+    {
+        "texlab",
+        for_cat = "tex",
+        lsp = {
+            filetypes = { "tex", "latex", "bib" },
+        },
+    },
 }

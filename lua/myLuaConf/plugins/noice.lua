@@ -16,10 +16,10 @@ return {
                     },
 
                     signature = {
-                        enabled = false,
+                        enabled = true,
                         auto_open = {
                             enabled = false,
-                            trigger = true, -- Automatically show signature help when typing a trigger character from the LSP
+                            trigger = false, -- Automatically show signature help when typing a trigger character from the LSP
                             luasnip = true, -- Will open signature help when jumping to Luasnip insert nodes
                             throttle = 50,  -- Debounce lsp signature help request by 50ms
                         },
@@ -83,39 +83,46 @@ return {
                             style = "single",
                             -- padding = { 0, 1 },
                         },
+                        scrollbar = false,
                     },
                     popupmenu = {
                         border = {
                             style = "single",
                             -- padding = { 0, 1 },
                         },
+                        scrollbar = false,
                     },
                     mini = {
                         border = {
                             style = "single",
                             -- padding = { 0, 1 },
                         },
+                        scrollbar = false,
                     },
                     hover = {
                         border = {
                             style = "single",
                             -- padding = { 0, 1 },
                         },
+                        scrollbar = false,
                     },
                     popup = {
                         border = {
                             style = "single",
                             -- padding = { 0, 1 },
                         },
+                        scrollbar = false,
                     },
                     split = {
                         scrollbarSet = false,
+                        scrollbar = false,
                     },
                     notify = {
                         border = {
                             style = "single",
                             -- padding = { 0, 1 },
                         },
+                        scrollbar = false,
                     },
                     -- messages = {
                     --     border = {

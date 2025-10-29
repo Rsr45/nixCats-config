@@ -75,6 +75,7 @@ require('nixCatsUtils.catPacker').setup({
     { 'lukas-reineke/indent-blankline.nvim',         opt = true, },
     { 'nvim-mini/mini.comment',                      opt = true, },
     { 'nvim-mini/mini.surround',                     opt = true, },
+    { 'nvim-mini/mini.bufremove',                    opt = true, },
     {
         "iamcco/markdown-preview.nvim",
         build = ":call mkdp#util#install()",
