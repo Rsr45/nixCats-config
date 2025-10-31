@@ -33,7 +33,7 @@ return {
         for_cat = "general.always",
         event = "DeferredUIEnter",
         after = function()
-            require("mini.ai").setup({})
+            require("mini.ai").setup()
         end
     },
     {
@@ -66,6 +66,25 @@ return {
         },
         after = function()
             require("mini.bufremove").setup()
+        end,
+    },
+    {
+        "mini.align",
+        for_cat = "general.always",
+        after = function()
+            require("mini.align").setup({
+                mappings = {
+                    left = '<M-left>',
+                    right = '<M-right>',
+                    down = '<M-down>',
+                    up = '<M-up>',
+
+                    line_left = '<M-left>',
+                    line_right = '<M-right>',
+                    line_down = '<M-down>',
+                    line_up = '<M-up>',
+                },
+            })
         end,
     },
 }

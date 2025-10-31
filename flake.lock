@@ -47,6 +47,22 @@
         "type": "github"
       }
     },
+    "plugins-feed": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1760486171,
+        "narHash": "sha256-BUnsvN/gxCtNk15T9VCaAVwPEFx2YwyUtastOX1bnlg=",
+        "owner": "neo451",
+        "repo": "feed.nvim",
+        "rev": "249fe744f26d4c822a56f467a2a3c02fb8c45d11",
+        "type": "github"
+      },
+      "original": {
+        "owner": "neo451",
+        "repo": "feed.nvim",
+        "type": "github"
+      }
+    },
     "plugins-hlargs": {
       "flake": false,
       "locked": {
@@ -61,6 +77,19 @@
         "owner": "m-demare",
         "repo": "hlargs.nvim",
         "type": "github"
+      }
+    },
+    "plugins-neopywal": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1723226430,
+        "narHash": "sha256-P28gg5fPPPyhepPHOZFgMnGTToCXK+v4ev6oTRSZXtg=",
+        "type": "tarball",
+        "url": "https://github.com/RedsXDD/neopywal.nvim/archive/refs/tags/v2.6.0.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://github.com/RedsXDD/neopywal.nvim/archive/refs/tags/v2.6.0.tar.gz"
       }
     },
     "plugins-org-bullets": {
@@ -100,7 +129,9 @@
         "nixCats": "nixCats",
         "nixpkgs": "nixpkgs",
         "plugins-black-metal": "plugins-black-metal",
+        "plugins-feed": "plugins-feed",
         "plugins-hlargs": "plugins-hlargs",
+        "plugins-neopywal": "plugins-neopywal",
         "plugins-org-bullets": "plugins-org-bullets",
         "plugins-org-modern": "plugins-org-modern"
       }

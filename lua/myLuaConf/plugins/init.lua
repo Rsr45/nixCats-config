@@ -117,7 +117,7 @@ require("lze").load({
         "vimtex",
         lazy = false,
         for_cat = "general.always",
-        init = function()
+        after = function()
             vim.g.vimtex_view_method = "zathura"
             vim.g.vimtex_syntax_enabled = 0
         end,

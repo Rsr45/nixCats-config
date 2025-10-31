@@ -94,6 +94,7 @@ return {
                 quickfile = {},
                 explorer = {},
                 picker = {
+                    prompt = "[] :";
                     layouts = {
                         telescope = {
                             reverse = true,
@@ -147,7 +148,7 @@ return {
                                 width = 0,
                                 height = 0.4,
                                 position = "bottom",
-                                { win = "input", height = 1, },
+                                { win = "input", height = 1,},
                                 {
                                     box = "horizontal",
                                     { win = "list", border = "none" },

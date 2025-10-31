@@ -52,16 +52,20 @@
       url = "github:metalelf0/black-metal-theme-neovim";
       flake = false;
     };
-    # "plugins-neopywal" = {
-    #   url = "https://github.com/RedsXDD/neopywal.nvim";
-    #   flake = false;
-    # };
+    "plugins-neopywal" = {
+      url = "https://github.com/RedsXDD/neopywal.nvim/archive/refs/tags/v2.6.0.tar.gz";
+      flake = false;
+    };
     "plugins-org-bullets" = {
       url = "github:nvim-orgmode/org-bullets.nvim";
       flake = false;
     };
     "plugins-org-modern" = {
       url = "github:danilshvalov/org-modern.nvim";
+      flake = false;
+    };
+    "plugins-feed" = {
+      url = "github:neo451/feed.nvim";
       flake = false;
     };
   };
@@ -206,6 +210,7 @@
               (builtins.getAttr (categories.colorscheme or "onedark") {
                 # Theme switcher without creating a new category
                 "moonfly" = vim-moonfly-colors;
+                "everforest" = everforest;
                 "dracula-vim" = dracula-vim;
                 "dracula-nvim" = dracula-nvim;
                 "gruvbox-material" = gruvbox-material;
@@ -218,7 +223,7 @@
                 "tokyonight-day" = tokyonight-nvim;
                 "miasma" = miasma-nvim;
                 "kanagawa" = kanagawa-nvim;
-                # "neopywal" = pkgs.neovimPlugins.neopywal;
+                "neopywal" = pkgs.neovimPlugins.neopywal;
                 "pywal" = pywal-nvim;
               });
             # This is obviously a fairly basic usecase for this, but still nice.
@@ -315,6 +320,8 @@
                 mini-bracketed
                 mini-statusline
                 mini-bufremove
+                mini-align
+                mini-move
                 nvim-navic
                 nvim-biscuits
                 snacks-nvim
@@ -326,6 +333,7 @@
                 nvim-highlight-colors
                 smartcolumn-nvim
                 vimtex
+                pkgs.neovimPlugins.feed
               ];
               extra = with pkgs.vimPlugins; [
                 fidget-nvim
@@ -484,7 +492,7 @@
               # you could also pass something else:
               # see :help nixCats
               themer = true;
-              colorscheme = "tokyonight";
+              colorscheme = "neopywal";
             };
             extra = {
               # to keep the categories table from being filled with non category things that you want to pass

@@ -25,6 +25,7 @@ require('nixCatsUtils.catPacker').setup({
     { "BirdeeHub/lzextras", },
     { "stevearc/oil.nvim", },
     { 'joshdick/onedark.vim', },
+    { "RedsXDD/neopywal.nvim", as = "neopywal" },
     { 'nvim-lua/plenary.nvim', },
     { 'tpope/vim-repeat', },
     { 'rcarriga/nvim-notify', },
