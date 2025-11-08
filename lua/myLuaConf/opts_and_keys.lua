@@ -141,6 +141,19 @@ vim.keymap.set("x", "<leader>P", '"_dP',
 -- File manipulation
 vim.keymap.set({ "n" }, '<leader>fs', '<cmd>update<CR>', { desc = 'File save' })
 -- spellcheck toggle
-vim.keymap.set({ "n"}, '<leader>ts', '<cmd>set spell!<Cr>', { desc = 'Toggle Spellcheck'})
+vim.keymap.set({ "n" }, '<leader>ts', '<cmd>set spell!<Cr>', { desc = 'Toggle Spellcheck' })
 -- relativenumber toggle
-vim.keymap.set({"n"}, '<leader>tl', '<cmd>set rnu!<CR>')
+vim.keymap.set({ "n" }, '<leader>tl', '<cmd>set rnu!<CR>')
+--
+vim.keymap.set({ "n" }, '<leader>bN', '<cmd>ene | startinsert<CR>', { desc = 'New Empty Buffer' })
+
+-- harpoon but builtin
+vim.keymap.set('n', "<leader><cr>", ":argu<cr>:args<cr>", { desc = "go to last used arglist file" })
+vim.keymap.set('n', "<leader>1", ":rew<CR>:args<CR>", { desc = "first arg buffer" })
+vim.keymap.set('n', "<leader>2", ":argu 2<CR>:args<CR>", { desc = "second arg buffer" })
+vim.keymap.set('n', "<leader>3", ":argu 3<CR>:args<CR>", { desc = "third arg buffer" })
+vim.keymap.set('n', "<leader>4", ":argu 4<CR>:args<CR>", { desc = "fourth arg buffer" })
+vim.keymap.set('n', "<leader>l", ":args<CR>", { desc = "list arglist" })
+vim.keymap.set('n', "<leader>aa", "<cmd>$argadd %<bar>argded<bar>args<cr>", { desc = "add to arglist" })
+vim.keymap.set('n', "<leader>ad", "<cmd>argdelete %<bar>args<cr>", { desc = "delete from arglist" })
+vim.keymap.set('n', "<leader>ac", "<cmd>argdelete *<CR><C-L>", { desc = "clear arglist" })

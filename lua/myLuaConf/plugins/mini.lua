@@ -87,4 +87,28 @@ return {
             })
         end,
     },
+    {
+        "mini.indentscope",
+        for_cat = "general.always",
+        after = function()
+            require("mini.indentscope").setup({
+                draw = {
+                    animation = require('mini.indentscope').gen_animation.none(),
+                },
+                symbol = "┆",
+                options = {
+                    try_as_border = true,
+                },
+            })
+            -- neopywal fix
+            vim.cmd([[hi! link MiniIndentscopeSymbol ModeMsg]])
+        end
+    },
+    {
+        "mini.cursorword",
+        for_cat = "general.always",
+        after = function()
+            require("mini.cursorword").setup()
+        end
+    }
 }

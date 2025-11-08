@@ -2,23 +2,25 @@ return {
     {
         "snacks.nvim",
         for_cat = "general.always",
-        lazy = false,
+        -- lazy = false,
+        event = "VimEnter",
         keys = {
             { "<leader>ot",       mode = { "n" }, "<cmd>lua Snacks.terminal.toggle()<CR>",                                     desc = "Toggle terminal popup", },
             { "<leader>sn",       mode = { "n" }, "<cmd>lua Snacks.picker.notifications()<CR>",                                desc = "Search notifications", },
             { "<leader>u",        mode = { "n" }, "<cmd>lua Snacks.picker.undo()<CR>",                                         desc = "Undo", },
             { "<leader>,",        mode = { "n" }, "<cmd>lua Snacks.picker.buffers()<CR>",                                      desc = "Switch buffer", },
-            { "<leader>.",        mode = { "n" }, "<cmd>lua Snacks.picker.files({ cwd = vim.fn.expand('%:p:h')})<CR>",         desc = "Find file", },
+            { "<leader>.",        mode = { "n" }, "<cmd>lua Snacks.explorer.open({ cwd = vim.fn.expand('%:p:h') })<CR>",       desc = "Find file", },
             { "<leader>/",        mode = { "n" }, "<cmd>lua Snacks.picker.grep()<CR>",                                         desc = "Grep", },
             { "<leader><leader>", mode = { "n" }, "<cmd>lua Snacks.picker.files()<CR>",                                        desc = "Find file in project", },
             -- File
-            { "<leader>ff",       mode = { "n" }, "<cmd>lua Snacks.picker.files({ cwd = vim.fn.expand('%:p:h') })<CR>",        desc = "Files in cwd" },
+            { "<leader>ff",       mode = { "n" }, "<cmd>lua Snacks.explorer.open({ cwd = vim.fn.expand('%:p:h') })<CR>",       desc = "Find file" },
             { "<leader>fF",       mode = { "n" }, "<cmd>lua Snacks.picker.files({ cwd = vim.fn.expand('%:p:h') })<CR>",        desc = "Find file from here", },
+            { "<leader>fr",       mode = { "n" }, "<cmd>lua Snacks.picker.recent()<CR>",                                       desc = "Recent files", },
             -- Buffer
             { "<leader>bb",       mode = { "n" }, "<cmd>lua Snacks.picker.buffers()<CR>",                                      desc = "Switch buffer", },
             -- Search
             { "<leader>sp",       mode = { "n" }, "<cmd>lua Snacks.picker.grep()<CR>",                                         desc = "Search on everything", },
-            { "<leader>sb",       mode = { "n" }, "<cmd>lua Snacks.picker.lines()<CR>",                                        desc = "Search buffer" },
+            { "<leader>sb",       mode = { "n" }, "<cmd>lua Snacks.picker.lines({ layout = { preset = 'vertico' } })<CR>",     desc = "Search buffer" },
             { "<leader>sB",       mode = { "n" }, "<cmd>lua Snacks.picker.grep_buffers()<CR>",                                 desc = "Search all open buffers", },
             { "<leader>sd",       mode = { "n" }, "<cmd>lua Snacks.picker.grep_buffers({ cwd = vim.fn.expand('%:p:h') })<CR>", desc = "Search current directory", },
             -- Project
@@ -57,32 +59,49 @@ return {
                         keys = {
                             {
                                 icon = " ",
-                                key = "f",
-                                desc = "Find File",
+                                key = "SPC SPC",
+                                desc = "Find file in project",
                                 action = ":lua Snacks.dashboard.pick('files')",
                             },
                             {
-                                icon = " ",
-                                key = "r",
+                                icon = "󱔗 ",
+                                key = "SPC f r",
                                 desc = "Recently opened files",
                                 action = ":lua Snacks.dashboard.pick('oldfiles')",
                             },
-                            { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
-                            {
-                                icon = " ",
-                                key = "g",
-                                desc = "Find Text",
-                                action = ":lua Snacks.dashboard.pick('live_grep')",
-                            },
-                            { icon = " ", key = "q", desc = "Quit", action = ":qa" },
+                            { icon = "󱪝 ", key = "SPC b N", desc = "New File", action = ":ene | startinsert" },
                         },
+                        header = [[
+███╗   ██╗███████╗ ██████╗ ███╗   ██╗██╗██╗  ██╗
+████╗  ██║██╔════╝██╔═══██╗████╗  ██║██║╚██╗██╔╝
+██╔██╗ ██║█████╗  ██║   ██║██╔██╗ ██║██║ ╚███╔╝
+██║╚██╗██║██╔══╝  ██║   ██║██║╚██╗██║██║ ██╔██╗
+██║ ╚████║███████╗╚██████╔╝██║ ╚████║██║██╔╝ ██╗
+╚═╝  ╚═══╝╚══════╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝╚═╝  ╚═╝
+                        ]]
                     },
                     sections = {
                         { section = "header" },
                         { section = "keys",  gap = 1, padding = 1 },
                     },
                 },
-                image = {},
+                -- indent = {
+                --     animate = {
+                --         enabled = false,
+                --     },
+                --     -- scope = {
+                --     --     char = "┆",
+                --     --     -- underline = true,
+                --     -- },
+                --     char = "┆", # fuck it does not change
+                -- },
+                image = {
+                    doc = {
+                        inline = false,
+                        max_width = 45,
+                        max_height = 20,
+                    },
+                },
                 terminal = {},
                 notify = {},
                 notifier = {},
@@ -94,7 +113,7 @@ return {
                 quickfile = {},
                 explorer = {},
                 picker = {
-                    prompt = "[] :";
+                    prompt = " [] :",
                     layouts = {
                         telescope = {
                             reverse = true,
@@ -143,12 +162,12 @@ return {
                         vertico = {
                             layout = {
                                 box = "vertical",
-                                -- backdrop = false,
+                                backdrop = false,
                                 row = -1,
                                 width = 0,
-                                height = 0.4,
+                                height = 0.3,
                                 position = "bottom",
-                                { win = "input", height = 1,},
+                                { win = "input", height = 1, },
                                 {
                                     box = "horizontal",
                                     { win = "list", border = "none" },
@@ -157,6 +176,13 @@ return {
                         },
                     },
                     layout = "vertico",
+
+                    sources = {
+                        explorer = {
+                            tree = false,
+                            layout = { preset = "vertico" }
+                        },
+                    },
 
                     win = {
                         input = {
@@ -219,6 +245,10 @@ return {
                         bo = { filetype = "snacks_notif_history", modifiable = false },
                         wo = { winhighlight = "Normal:SnacksNotifierHistory" },
                         keys = { q = "close" },
+                    },
+                    snacks_image = {
+                        relative = "editor",
+                        col = -1,
                     },
                 },
             })

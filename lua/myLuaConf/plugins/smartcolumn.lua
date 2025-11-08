@@ -5,7 +5,7 @@ return {
         after = function()
             require("smartcolumn").setup({
                 colorcolumn = "100",
-                disabled_filetypes = { "NvimTree", "lazy", "mason", "help", "checkhealth", "lspinfo", "noice", "Trouble", "fish", "zsh", "snacks_dashboard" },
+                disabled_filetypes = { "NvimTree", "lazy", "mason", "help", "checkhealth", "lspinfo", "noice", "Trouble", "fish", "zsh", "snacks_dashboard", "ministarter" },
             })
         end
     },

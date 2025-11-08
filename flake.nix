@@ -312,6 +312,7 @@
                 vim-sleuth
                 vim-rhubarb
                 vim-visual-multi
+                vim-eunuch
                 mini-base16
                 mini-ai
                 mini-surround
@@ -322,6 +323,9 @@
                 mini-bufremove
                 mini-align
                 mini-move
+                mini-indentscope
+                mini-starter
+                mini-cursorword
                 nvim-navic
                 nvim-biscuits
                 snacks-nvim

@@ -27,18 +27,18 @@ return {
                     documentation = {},
                     hover = {},
                     progress = {
-                        enabled = false,
+                        enabled = true,
                     },
                 },
 
                 cmdline = {
                     format = {
-                        cmdline = { icon = ">" },
-                        search_down = { icon = "🔍⌄" },
-                        search_up = { icon = "🔍⌃" },
+                        cmdline = { icon = ":" },
+                        search_down = { icon = "/" },
+                        search_up = { icon = "?" },
                         filter = { icon = "$" },
-                        lua = { icon = "☾" },
-                        help = { icon = "?" },
+                        lua = { icon = "lua" },
+                        help = { icon = "help" },
                     },
                 },
                 format = {

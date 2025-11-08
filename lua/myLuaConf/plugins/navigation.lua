@@ -25,7 +25,18 @@ return {
         event = "DeferredUIEnter",
         keys = {
             { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
-            { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
+            {
+                "S",
+                mode = { "n", "x", "o" },
+                function()
+                    require("flash").treesitter({
+                        actions = {
+                            ["S"] = "next", ["s"] = "prev", ["<RETURN>"] = "next", ["<BS>"] = "prev",
+                        }
+                    })
+                end,
+                desc = "Flash Treesitter"
+            },
             { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
             { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
             { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
@@ -34,15 +45,21 @@ return {
             require("flash").setup({
                 modes = {
                     char = {
-                        jump_labels = true
+                        jump_labels = true,
+                        multi_line = false,
                     },
                 },
+                prompt = {
+                    enabled = false,
+                },
+                highlight = { matches = false, },
             })
             vim.keymap.set({ "n", "x", "o" }, "<c-space>", function()
                 require("flash").treesitter({
                     actions = {
                         ["<c-space>"] = "next",
-                        ["<BS>"] = "prev"
+                        ["<BS>"] = "prev",
+                        ["<RETURN>"] = "next",
                     }
                 })
             end, { desc = "Treesitter incremental selection" })
@@ -67,6 +84,18 @@ return {
     --             end
     --         require('leap').opts.equivalence_classes = { ' \t\r\n', '([{', ')]}', '\'"`' }
     --         require('leap.user').set_repeat_keys('<enter>', '<backspace>')
+    --         vim.keymap.set({ 'x', 'o' }, 'R', function()
+    --             require('leap.treesitter').select {
+    --                 -- To increase/decrease the selection in a clever-f-like manner,
+    --                 -- with the trigger key itself (vRRRRrr...). The default keys
+    --                 -- (<enter>/<backspace>) also work, so feel free to skip this.
+    --                 opts = require('leap.user').with_traversal_keys('R', 'r')
+    --             }
+    --         end)
+    --         -- vim.keymap.set({ 'n', 'x', 'o' }, 'gs', function()
+    --         -- vim.keymap.set({ 'o' }, 'r', function()
+    --         --     require('leap.remote').action()
+    --         -- end)
     --     end,
     -- },
     -- {

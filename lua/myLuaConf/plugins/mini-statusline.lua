@@ -5,10 +5,10 @@ return {
         event = "DeferredUIEnter",
         after = function()
             require("mini.statusline").setup({
-                content = {
-                    active = {},
-                    inactive = {},
-                },
+                -- content = {
+                --     active = {},
+                --     inactive = {},
+                -- },
             })
         end,
     },

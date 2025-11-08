@@ -86,7 +86,7 @@ require("lze").load({
     {
         "nui.nvim",
         for_cat = "general.always",
-        lazy = false,
+        lazy = true,
         dep_of = { "noice.nvim" },
     },
     { import = "myLuaConf.plugins.noice" },
@@ -94,8 +94,7 @@ require("lze").load({
     { import = "myLuaConf.plugins.treesitter" },
     { import = "myLuaConf.plugins.completion" },
     { import = "myLuaConf.plugins.navigation" },
-    { import = "myLuaConf.plugins.lualine" },
-    -- { import = "myLuaConf.plugins.mini-statusline" },
+    { import = "myLuaConf.plugins.mini-statusline" },
     { import = "myLuaConf.plugins.snacks" },
     -- { import = "myLuaConf.plugins.neorg" },
     { import = "myLuaConf.plugins.obsidian" },
@@ -118,7 +117,7 @@ require("lze").load({
         lazy = false,
         for_cat = "general.always",
         after = function()
-            vim.g.vimtex_view_method = "zathura"
+            vim.g.vimtex_view_method = "sioyek"
             vim.g.vimtex_syntax_enabled = 0
         end,
     },
@@ -163,20 +162,29 @@ require("lze").load({
             })
         end,
     },
-    -- {
-    --     "vim-sleuth",
-    --     for_cat = "general.always",
-    --     lazy = false,
-    -- },
-    -- {
-    --     "vim-visual-multi",
-    --     for_cat = "general.always",
-    --     lazy = false,
-    -- },
+    {
+        "vim-sleuth",
+        for_cat = "general.always",
+        lazy = false,
+    },
+    {
+        "vim-visual-multi",
+        for_cat = "general.always",
+        lazy = false,
+    },
     {
         "vim-fugitive",
         for_cat = "general.always",
         cmd = { "G", "Git" },
+    },
+    {
+        "vim-eunuch",
+        for_cat = "general.always",
+        cmd = { "Rename", "Copy", "Duplicate", "Remove", "Move", "Delete", "Chmod", "Mkdir", "Cfind", "Clocate", "Wall" },
+        keys = {
+            { "<leader>fR", mode = { "n" }, "<cmd>Rename" },
+            { "<leader>bR", mode = { "n" }, "<cmd>Rename" },
+        },
     },
     {
         "nvim-ufo",
@@ -221,8 +229,8 @@ require("lze").load({
         event = "DeferredUIEnter",
         after = function()
             require("ibl").setup({
-                indent = { char = "▏" },
-                scope = { enabled = true },
+                indent = { char = "┆" },
+                scope = { enabled = false },
             })
         end,
     },
@@ -236,23 +244,23 @@ require("lze").load({
             vim.g.startuptime_exe_path = nixCats.packageBinPath
         end,
     },
-    {
-        "fidget.nvim",
-        for_cat = "general.extra",
-        event = "DeferredUIEnter",
-        -- keys = "",
-        after = function()
-            require("fidget").setup({
-                notification = {
-                    window = {
-                        border = "single",
-                        x_padding = 1,
-                        y_padding = 1,
-                    },
-                },
-            })
-        end,
-    },
+    -- {
+    --     "fidget.nvim",
+    --     for_cat = "general.extra",
+    --     event = "DeferredUIEnter",
+    --     -- keys = "",
+    --     after = function()
+    --         require("fidget").setup({
+    --             notification = {
+    --                 window = {
+    --                     border = "single",
+    --                     x_padding = 1,
+    --                     y_padding = 1,
+    --                 },
+    --             },
+    --         })
+    --     end,
+    -- },
     {
         "hlargs",
         for_cat = 'general.extra',
