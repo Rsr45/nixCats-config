@@ -72,8 +72,7 @@ vim.o.cursorlineopt = 'both'
 
 vim.o.conceallevel = 1
 
-vim.o.winborder = 'single'
-
+-- vim.o.winborder = 'single'
 -- [[ Disable auto comment on enter ]]
 -- See :help formatoptions
 vim.api.nvim_create_autocmd("FileType", {
@@ -126,7 +125,14 @@ vim.keymap.set('n', 'down', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent =
 -- vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 -- vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-vim.keymap.set('n', '<leader>cx', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+-- vim.keymap.set('n', '<leader>cx', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+vim.keymap.set('n', '<leader>cx', function()
+  if vim.fn.getloclist(0, {winid=1}).winid ~= 0 then
+    vim.cmd('lclose')
+  else
+    vim.diagnostic.setloclist()
+  end
+end, { desc = 'Open diagnostics list' })
 
 -- You should instead use these keybindings so that they are still easy to use, but dont conflict
 vim.keymap.set({ "v", "x", "n" }, '<leader>y', '"+y', { noremap = true, silent = true, desc = 'Yank to clipboard' })
@@ -148,12 +154,12 @@ vim.keymap.set({ "n" }, '<leader>tl', '<cmd>set rnu!<CR>')
 vim.keymap.set({ "n" }, '<leader>bN', '<cmd>ene | startinsert<CR>', { desc = 'New Empty Buffer' })
 
 -- harpoon but builtin
-vim.keymap.set('n', "<leader><cr>", ":argu<cr>:args<cr>", { desc = "go to last used arglist file" })
-vim.keymap.set('n', "<leader>1", ":rew<CR>:args<CR>", { desc = "first arg buffer" })
-vim.keymap.set('n', "<leader>2", ":argu 2<CR>:args<CR>", { desc = "second arg buffer" })
-vim.keymap.set('n', "<leader>3", ":argu 3<CR>:args<CR>", { desc = "third arg buffer" })
-vim.keymap.set('n', "<leader>4", ":argu 4<CR>:args<CR>", { desc = "fourth arg buffer" })
-vim.keymap.set('n', "<leader>l", ":args<CR>", { desc = "list arglist" })
-vim.keymap.set('n', "<leader>aa", "<cmd>$argadd %<bar>argded<bar>args<cr>", { desc = "add to arglist" })
-vim.keymap.set('n', "<leader>ad", "<cmd>argdelete %<bar>args<cr>", { desc = "delete from arglist" })
-vim.keymap.set('n', "<leader>ac", "<cmd>argdelete *<CR><C-L>", { desc = "clear arglist" })
+-- vim.keymap.set('n', "<leader><cr>", ":argu<cr>:args<cr>", { desc = "go to last used arglist file" })
+-- vim.keymap.set('n', "<leader>1", ":rew<CR>:args<CR>", { desc = "first arg buffer" })
+-- vim.keymap.set('n', "<leader>2", ":argu 2<CR>:args<CR>", { desc = "second arg buffer" })
+-- vim.keymap.set('n', "<leader>3", ":argu 3<CR>:args<CR>", { desc = "third arg buffer" })
+-- vim.keymap.set('n', "<leader>4", ":argu 4<CR>:args<CR>", { desc = "fourth arg buffer" })
+-- vim.keymap.set('n', "<leader>l", ":args<CR>", { desc = "list arglist" })
+-- vim.keymap.set('n', "<leader>aa", "<cmd>$argadd %<bar>argded<bar>args<cr>", { desc = "add to arglist" })
+-- vim.keymap.set('n', "<leader>ad", "<cmd>argdelete %<bar>args<cr>", { desc = "delete from arglist" })
+-- vim.keymap.set('n', "<leader>ac", "<cmd>argdelete *<CR><C-L>", { desc = "clear arglist" })

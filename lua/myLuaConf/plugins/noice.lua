@@ -16,7 +16,7 @@ return {
                     },
 
                     signature = {
-                        enabled = true,
+                        enabled = false,
                         auto_open = {
                             enabled = false,
                             trigger = false, -- Automatically show signature help when typing a trigger character from the LSP
@@ -25,7 +25,7 @@ return {
                         },
                     },
                     documentation = {},
-                    hover = {},
+                    hover = { enabled = true },
                     progress = {
                         enabled = true,
                     },
@@ -33,12 +33,12 @@ return {
 
                 cmdline = {
                     format = {
-                        cmdline = { icon = ":" },
+                        cmdline = { icon = ">" },
                         search_down = { icon = "/" },
                         search_up = { icon = "?" },
                         filter = { icon = "$" },
-                        lua = { icon = "lua" },
-                        help = { icon = "help" },
+                        lua = { icon = "l" },
+                        help = { icon = "h" },
                     },
                 },
                 format = {

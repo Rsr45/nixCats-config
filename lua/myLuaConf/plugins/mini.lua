@@ -1,7 +1,7 @@
 return {
     {
         "mini.comment",
-        for_cat = "general.extra",
+        for_cat = "general.mini",
         event = "DeferredUIEnter",
         after = function()
             require("mini.comment").setup()
@@ -9,7 +9,7 @@ return {
     },
     {
         "mini.surround",
-        for_cat = "general.always",
+        for_cat = "general.mini",
         event = "DeferredUIEnter",
         after = function()
             require("mini.surround").setup({
@@ -22,15 +22,15 @@ return {
                     replace = "gsr",        -- Replace surrounding
                     update_n_lines = "gsn", -- Update `n_lines`
                 },
-                keys = {
-                    { "gs", "", desc = "+surround" },
-                },
+                -- keys = {
+                --     { "gs", "", desc = "+surround" },
+                -- },
             })
         end,
     },
     {
         "mini.ai",
-        for_cat = "general.always",
+        for_cat = "general.mini",
         event = "DeferredUIEnter",
         after = function()
             require("mini.ai").setup()
@@ -38,28 +38,28 @@ return {
     },
     {
         "mini.pairs",
-        for_cat = "general.always",
+        for_cat = "general.mini",
         after = function()
             require("mini.pairs").setup()
         end,
     },
     {
         "mini.operators",
-        for_cat = "general.always",
+        for_cat = "general.mini",
         after = function()
             require("mini.operators").setup()
         end,
     },
     {
         "mini.bracketed",
-        for_cat = "general.always",
+        for_cat = "general.mini",
         after = function()
             require("mini.bracketed").setup()
         end,
     },
     {
         "mini.bufremove",
-        for_cat = "general.always",
+        for_cat = "general.mini",
         keys = {
             { "<leader>bd", mode = { "n" }, "<cmd>lua MiniBufremove.delete()<CR>", desc = "Kill buffer" },
             { "<leader>bk", mode = { "n" }, "<cmd>lua MiniBufremove.delete()<CR>", desc = "Kill buffer" },
@@ -70,7 +70,7 @@ return {
     },
     {
         "mini.align",
-        for_cat = "general.always",
+        for_cat = "general.mini",
         after = function()
             require("mini.align").setup({
                 mappings = {
@@ -87,28 +87,42 @@ return {
             })
         end,
     },
+    -- {
+    --     "mini.indentscope",
+    --     for_cat = "general.mini",
+    --     after = function()
+    --         require("mini.indentscope").setup({
+    --             draw = {
+    --                 animation = require('mini.indentscope').gen_animation.none(),
+    --             },
+    --             symbol = "┆",
+    --             options = {
+    --                 try_as_border = true,
+    --             },
+    --         })
+    --         -- neopywal fix
+    --         vim.cmd([[hi! link MiniIndentscopeSymbol ModeMsg]])
+    --     end
+    -- },
     {
-        "mini.indentscope",
-        for_cat = "general.always",
+        "mini.cursorword",
+        for_cat = "general.mini",
         after = function()
-            require("mini.indentscope").setup({
-                draw = {
-                    animation = require('mini.indentscope').gen_animation.none(),
-                },
-                symbol = "┆",
-                options = {
-                    try_as_border = true,
-                },
-            })
-            -- neopywal fix
-            vim.cmd([[hi! link MiniIndentscopeSymbol ModeMsg]])
+            require("mini.cursorword").setup()
         end
     },
     {
-        "mini.cursorword",
-        for_cat = "general.always",
+        "mini.extra",
+        for_cat = "general.mini",
         after = function()
-            require("mini.cursorword").setup()
+            require("mini.extra").setup()
+        end
+    },
+    {
+        "mini.diff",
+        for_cat = "general.mini",
+        after = function()
+            require("mini.diff").setup()
         end
     }
 }

@@ -9,11 +9,11 @@ return {
             { "<leader>sn",       mode = { "n" }, "<cmd>lua Snacks.picker.notifications()<CR>",                                desc = "Search notifications", },
             { "<leader>u",        mode = { "n" }, "<cmd>lua Snacks.picker.undo()<CR>",                                         desc = "Undo", },
             { "<leader>,",        mode = { "n" }, "<cmd>lua Snacks.picker.buffers()<CR>",                                      desc = "Switch buffer", },
-            { "<leader>.",        mode = { "n" }, "<cmd>lua Snacks.explorer.open({ cwd = vim.fn.expand('%:p:h') })<CR>",       desc = "Find file", },
+            { "<leader>.",        mode = { "n" }, "<cmd>lua Snacks.explorer.open({ cwd = vim.fn.expand('%:p:h') })<CR>",       desc = "Explore in cwd", },
             { "<leader>/",        mode = { "n" }, "<cmd>lua Snacks.picker.grep()<CR>",                                         desc = "Grep", },
-            { "<leader><leader>", mode = { "n" }, "<cmd>lua Snacks.picker.files()<CR>",                                        desc = "Find file in project", },
+            { "<leader><leader>", mode = { "n" }, "<cmd>lua Snacks.picker.files()<CR>",                                        desc = "Find file", },
             -- File
-            { "<leader>ff",       mode = { "n" }, "<cmd>lua Snacks.explorer.open({ cwd = vim.fn.expand('%:p:h') })<CR>",       desc = "Find file" },
+            { "<leader>ff",       mode = { "n" }, "<cmd>lua Snacks.picker.files()<CR>",                                        desc = "Find file in project", },
             { "<leader>fF",       mode = { "n" }, "<cmd>lua Snacks.picker.files({ cwd = vim.fn.expand('%:p:h') })<CR>",        desc = "Find file from here", },
             { "<leader>fr",       mode = { "n" }, "<cmd>lua Snacks.picker.recent()<CR>",                                       desc = "Recent files", },
             -- Buffer
@@ -25,16 +25,16 @@ return {
             { "<leader>sd",       mode = { "n" }, "<cmd>lua Snacks.picker.grep_buffers({ cwd = vim.fn.expand('%:p:h') })<CR>", desc = "Search current directory", },
             -- Project
             { "<leader>pp",       mode = { "n" }, "<cmd>lua Snacks.picker.projects()<CR>",                                     desc = "Switch project", },
-            -- { "<leader>fG",       mode = { "n" }, "<cmd>lua Snacks.picker.grep_word()<CR>",                                    desc = "Grep Word Under Cursor" },
+            { "<leader>fG",       mode = { "n" }, "<cmd>lua Snacks.picker.grep_word()<CR>",                                    desc = "Grep Word Under Cursor" },
             -- { "<leader>fs",       mode = { "n" }, "<cmd>lua Snacks.picker.lsp_symbols()<CR>",                                  desc = "Document Symbols" },
-            -- { "<leader>fws",      mode = { "n" }, "<cmd>lua Snacks.picker.lsp_symbols()<CR>",                                  desc = "[D]ocument [S]ymbols" },
+            { "<leader>fd",       mode = { "n" }, "<cmd>lua Snacks.picker.lsp_symbols()<CR>",                                  desc = "[D]ocument [S]ymbols" },
             -- { "<leader>fS",       mode = { "n" }, "<cmd>lua Snacks.picker.lsp_workspace_symbols()<CR>",                        desc = "Workspace Symbols" },
-            -- { "<leader>fwS",      mode = { "n" }, "<cmd>lua Snacks.picker.lsp_workspace_symbols()<CR>",                        desc = "[W]orkspace [S]ymbols" },
-            -- { "<leader>fd",       mode = { "n" }, "<cmd>lua Snacks.picker.diagnostics()<CR>",                                  desc = "Diagnostics" },
-            -- { "<leader>fD",       mode = { "n" }, "<cmd>lua Snacks.picker.diagnostics_buffers()<CR>",                          desc = "Diagnostics Buffers" },
-            -- { "<leader>gr",       mode = { "n" }, "<cmd>lua Snacks.picker.lsp_references()<CR>",                               desc = "[G]oto [R]eferences" },
-            -- { "<leader>gI",       mode = { "n" }, "<cmd>lua Snacks.picker.lsp_implementations()<CR>",                          desc = "[G]oto [I]mplementation" },
-            -- { "<leader>ft",       mode = { "n" }, "<cmd>lua Snacks.explorer()<CR>",                                            desc = "Explorer" },
+            { "<leader>fw",       mode = { "n" }, "<cmd>lua Snacks.picker.lsp_workspace_symbols()<CR>",                        desc = "[W]orkspace [S]ymbols" },
+            { "<leader>fd",       mode = { "n" }, "<cmd>lua Snacks.picker.diagnostics()<CR>",                                  desc = "Diagnostics" },
+            { "<leader>fD",       mode = { "n" }, "<cmd>lua Snacks.picker.diagnostics_buffers()<CR>",                          desc = "Diagnostics Buffers" },
+            { "<leader>gr",       mode = { "n" }, "<cmd>lua Snacks.picker.lsp_references()<CR>",                               desc = "[G]oto [R]eferences" },
+            { "<leader>gI",       mode = { "n" }, "<cmd>lua Snacks.picker.lsp_implementations()<CR>",                          desc = "[G]oto [I]mplementation" },
+            { "<leader>ft",       mode = { "n" }, "<cmd>lua Snacks.explorer()<CR>",                                            desc = "Explorer" },
         },
         after = function()
             require("snacks").setup({
@@ -54,47 +54,16 @@ return {
                     },
                     refresh = 50, -- refresh at most every 50ms
                 },
-                dashboard = {
-                    preset = {
-                        keys = {
-                            {
-                                icon = " ",
-                                key = "SPC SPC",
-                                desc = "Find file in project",
-                                action = ":lua Snacks.dashboard.pick('files')",
-                            },
-                            {
-                                icon = "󱔗 ",
-                                key = "SPC f r",
-                                desc = "Recently opened files",
-                                action = ":lua Snacks.dashboard.pick('oldfiles')",
-                            },
-                            { icon = "󱪝 ", key = "SPC b N", desc = "New File", action = ":ene | startinsert" },
-                        },
-                        header = [[
-███╗   ██╗███████╗ ██████╗ ███╗   ██╗██╗██╗  ██╗
-████╗  ██║██╔════╝██╔═══██╗████╗  ██║██║╚██╗██╔╝
-██╔██╗ ██║█████╗  ██║   ██║██╔██╗ ██║██║ ╚███╔╝
-██║╚██╗██║██╔══╝  ██║   ██║██║╚██╗██║██║ ██╔██╗
-██║ ╚████║███████╗╚██████╔╝██║ ╚████║██║██╔╝ ██╗
-╚═╝  ╚═══╝╚══════╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝╚═╝  ╚═╝
-                        ]]
+                indent = {
+                    animate = {
+                        enabled = false,
                     },
-                    sections = {
-                        { section = "header" },
-                        { section = "keys",  gap = 1, padding = 1 },
+                    scope = {
+                        -- char = "┆",
+                        underline = true,
                     },
+                    -- char = "┆",
                 },
-                -- indent = {
-                --     animate = {
-                --         enabled = false,
-                --     },
-                --     -- scope = {
-                --     --     char = "┆",
-                --     --     -- underline = true,
-                --     -- },
-                --     char = "┆", # fuck it does not change
-                -- },
                 image = {
                     doc = {
                         inline = false,
@@ -170,7 +139,8 @@ return {
                                 { win = "input", height = 1, },
                                 {
                                     box = "horizontal",
-                                    { win = "list", border = "none" },
+                                    { win = "list",    border = "none" },
+                                    { win = "preview", title = "{preview}", width = 0.6, border = "left" },
                                 },
                             },
                         },
@@ -180,7 +150,11 @@ return {
                     sources = {
                         explorer = {
                             tree = false,
-                            layout = { preset = "vertico" }
+                            layout = { preset = "vertico" },
+                            auto_close = true,
+                        },
+                        buffers = {
+                            current = false,
                         },
                     },
 

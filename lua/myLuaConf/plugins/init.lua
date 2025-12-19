@@ -73,9 +73,18 @@ if nixCats("general.extra") then
             ["g\\"] = "actions.toggle_trash",
         },
     })
-    vim.keymap.set("n", "-", "<cmd>Oil<CR>", { noremap = true, desc = "Open Parent Directory" })
-    vim.keymap.set("n", "<leader>o/", "<cmd>Oil<CR>", { noremap = true, desc = "Open Directory in oil" })
-    vim.keymap.set("n", "<leader>-", "<cmd>Oil .<CR>", { noremap = true, desc = "Open nvim root directory" })
+    vim.keymap.set("n", "-", "<cmd>Oil<CR>", {
+        noremap = true,
+        desc = "Open Directory in Oil"
+    })
+    vim.keymap.set("n", "<leader>o/", "<cmd>Oil<CR>", {
+        noremap = true,
+        desc = "Open Directory in Oil"
+    })
+    vim.keymap.set("n", "<leader>-", "<cmd>Oil .<CR>", {
+        noremap = true,
+        desc = "Open nvim root directory"
+    })
 
     vim.cmd([[hi! link WinBar StatusLine]])
     vim.cmd([[hi! link WinBarNC StatusLineNC]])
@@ -90,23 +99,24 @@ require("lze").load({
         dep_of = { "noice.nvim" },
     },
     { import = "myLuaConf.plugins.noice" },
-    { import = "myLuaConf.plugins.telescope" },
+    -- { import = "myLuaConf.plugins.telescope" },
     { import = "myLuaConf.plugins.treesitter" },
     { import = "myLuaConf.plugins.completion" },
     { import = "myLuaConf.plugins.navigation" },
     { import = "myLuaConf.plugins.mini-statusline" },
     { import = "myLuaConf.plugins.snacks" },
     -- { import = "myLuaConf.plugins.neorg" },
-    { import = "myLuaConf.plugins.obsidian" },
+    -- { import = "myLuaConf.plugins.obsidian" },
     { import = "myLuaConf.plugins.org" },
-    { import = "myLuaConf.plugins.fzf" },
-    { import = "myLuaConf.plugins.gitsigns" },
+    { import = "myLuaConf.plugins.obsidian" },
+    -- { import = "myLuaConf.plugins.fzf" },
     { import = "myLuaConf.plugins.neogit" },
     { import = "myLuaConf.plugins.whichkey" },
     { import = "myLuaConf.plugins.smartcolumn" },
+    { import = "myLuaConf.plugins.trouble" },
     {
         "mini.icons",
-        for_cat = "general.extra",
+        for_cat = "general.mini",
         after = function()
             require("mini.icons").setup()
             MiniIcons.mock_nvim_web_devicons()
@@ -123,18 +133,31 @@ require("lze").load({
     },
     {
         "markdown-preview.nvim",
-        -- NOTE: for_cat is a custom handler that just sets enabled value for us,
-        -- based on result of nixCats('cat.name') and allows us to set a different default if we wish
-        -- it is defined in luaUtils template in lua/nixCatsUtils/lzUtils.lua
-        -- you could replace this with enabled = nixCats('cat.name') == true
-        -- if you didnt care to set a different default for when not using nix than the default you already set
         for_cat = "general.markdown",
         cmd = { "MarkdownPreview", "MarkdownPreviewStop", "MarkdownPreviewToggle" },
         ft = "markdown",
         keys = {
-            { "<leader>mp", "<cmd>MarkdownPreview <CR>",       mode = { "n" }, noremap = true, desc = "markdown preview", },
-            { "<leader>ms", "<cmd>MarkdownPreviewStop <CR>",   mode = { "n" }, noremap = true, desc = "markdown preview stop", },
-            { "<leader>mt", "<cmd>MarkdownPreviewToggle <CR>", mode = { "n" }, noremap = true, desc = "markdown preview toggle", },
+            {
+                "<leader>mp",
+                "<cmd>MarkdownPreview <CR>",
+                mode = { "n" },
+                noremap = true,
+                desc = "markdown preview",
+            },
+            {
+                "<leader>ms",
+                "<cmd>MarkdownPreviewStop <CR>",
+                mode = { "n" },
+                noremap = true,
+                desc = "markdown preview stop",
+            },
+            {
+                "<leader>mt",
+                "<cmd>MarkdownPreviewToggle <CR>",
+                mode = { "n" },
+                noremap = true,
+                desc = "markdown preview toggle",
+            },
         },
         before = function()
             vim.g.mkdp_auto_close = 0
@@ -152,8 +175,7 @@ require("lze").load({
     {
         "nvim-highlight-colors",
         for_cat = "general.always",
-        lazy = false,
-        -- ft = { "" },
+        ft = { "css", "scss" },
         after = function()
             require("nvim-highlight-colors").setup({
                 render = "virtual",
@@ -168,11 +190,6 @@ require("lze").load({
         lazy = false,
     },
     {
-        "vim-visual-multi",
-        for_cat = "general.always",
-        lazy = false,
-    },
-    {
         "vim-fugitive",
         for_cat = "general.always",
         cmd = { "G", "Git" },
@@ -180,10 +197,50 @@ require("lze").load({
     {
         "vim-eunuch",
         for_cat = "general.always",
-        cmd = { "Rename", "Copy", "Duplicate", "Remove", "Move", "Delete", "Chmod", "Mkdir", "Cfind", "Clocate", "Wall" },
+        cmd = { "Rename", "Copy", "Unlink", "Duplicate", "Remove", "Move", "Delete", "Chmod",
+            "Mkdir", "Cfind", "Clocate", "Lfind", "Llocate", "SudoEdit", "SudoWrite", "Wall",
+            "W" },
         keys = {
-            { "<leader>fR", mode = { "n" }, "<cmd>Rename" },
-            { "<leader>bR", mode = { "n" }, "<cmd>Rename" },
+            { "<leader>fD", mode = { "n" }, "<cmd>Delete<Cr>", desc = "[D]elete File" },
+            {
+                "<leader>bR",
+                mode = { "n" },
+                function()
+                    local new_name = vim.fn.input("Enter new filename to save as: ")
+                    if new_name ~= "" then
+                        vim.cmd("Rename " .. new_name)
+                    else
+                        print("Aborted: No filename entered.")
+                    end
+                end,
+                desc = "[R]ename Buffer"
+            },
+            {
+                "<leader>fR",
+                mode = { "n" },
+                function()
+                    local new_name = vim.fn.input("Enter new filename to save as: ")
+                    if new_name ~= "" then
+                        vim.cmd("Rename " .. new_name)
+                    else
+                        print("Aborted: No filename entered.")
+                    end
+                end,
+                desc = "[R]ename File"
+            },
+            {
+                "<leader>fS",
+                mode = { "n" },
+                function()
+                    local new_name = vim.fn.input("Enter new filename to save as: ")
+                    if new_name ~= "" then
+                        vim.cmd("saveas " .. new_name)
+                    else
+                        print("Aborted: No filename entered.")
+                    end
+                end,
+                desc = "[S]ave File As"
+            },
         },
     },
     {
@@ -193,7 +250,7 @@ require("lze").load({
         -- event = "DeferredUIEnter",
         after = function()
             vim.o.foldcolumn = "1" -- '0' is not bad
-            vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
+            vim.o.foldlevel = 99   -- Using ufo provider need a large value
             vim.o.foldlevelstart = 99
             vim.o.foldenable = true
 
@@ -216,22 +273,12 @@ require("lze").load({
     {
         "undotree",
         for_cat = "general.extra",
-        cmd = { "UndotreeToggle", "UndotreeHide", "UndotreeShow", "UndotreeFocus", "UndotreePersistUndo" },
+        cmd = { "UndotreeToggle", "UndotreeHide", "UndotreeShow", "UndotreeFocus",
+            "UndotreePersistUndo" },
         keys = { { "<leader>U", "<cmd>UndotreeToggle<CR>", mode = { "n" }, desc = "Undo Tree" } },
         before = function(_)
             vim.g.undotree_WindowLayout = 1
             vim.g.undotree_SplitWidth = 40
-        end,
-    },
-    {
-        "indent-blankline.nvim",
-        for_cat = "general.extra",
-        event = "DeferredUIEnter",
-        after = function()
-            require("ibl").setup({
-                indent = { char = "┆" },
-                scope = { enabled = false },
-            })
         end,
     },
     {
@@ -261,20 +308,20 @@ require("lze").load({
     --         })
     --     end,
     -- },
-    {
-        "hlargs",
-        for_cat = 'general.extra',
-        event = "DeferredUIEnter",
-        -- keys = "",
-        dep_of = { "nvim-lspconfig" },
-        after = function()
-            require('hlargs').setup {
-                -- color = '#32a88f',
-            }
-            vim.cmd([[hi clear @lsp.type.parameter]])
-            vim.cmd([[hi link @lsp.type.parameter Hlargs]])
-        end,
-    },
+    -- {
+    --     "hlargs",
+    --     for_cat = 'general.extra',
+    --     event = "DeferredUIEnter",
+    --     -- keys = "",
+    --     dep_of = { "nvim-lspconfig" },
+    --     after = function()
+    --         require('hlargs').setup {
+    --             -- color = '#32a88f',
+    --         }
+    --         vim.cmd([[hi clear @lsp.type.parameter]])
+    --         vim.cmd([[hi link @lsp.type.parameter Hlargs]])
+    --     end,
+    -- },
     -- {
     --     "nvim-navic",
     --     for_cat = "general.always",

@@ -78,15 +78,17 @@ return {
                     enabled = true,
                     window = {
                         show_documentation = true,
+                        border = 'single',
                     },
                 },
                 completion = {
                     ghost_text = {
-                        enabled = true,
+                        enabled = false,
                     },
                     menu = {
+                        border = 'single',
                         draw = {
-                            columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind", gap = 1 } },
+                            columns = { { 'item_idx' }, { "label", "label_description", gap = 1 }, { "kind_icon", "kind", gap = 1 } },
                             treesitter = { 'lsp' },
                             components = {
                                 kind_icon = {
@@ -107,12 +109,17 @@ return {
                                         return hl
                                     end,
                                 },
+                                item_idx = {
+                                    text = function(ctx) return tostring(ctx.idx) end,
+                                    highlight = 'BlinkCmpItemIdx' -- optional, only if you want to change its color
+                                }
                             },
                         },
                     },
                     documentation = {
-                        auto_show = false,
-                        auto_show_delay_ms = 500,
+                        auto_show = true,
+                        auto_show_delay_ms = 1000,
+                        window = { border = 'single' },
                     },
                 },
                 snippets = {

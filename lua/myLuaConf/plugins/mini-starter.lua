@@ -1,7 +1,7 @@
 return {
     {
         "mini.starter",
-        for_cat = "general.always",
+        for_cat = "general.mini",
         -- event = "VimEnter",
         -- lazy = false,
         after = function()

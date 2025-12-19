@@ -67,19 +67,19 @@ return {
         keys = {
             { "<leader>fM", '<cmd>Telescope notify<CR>', mode = { "n" }, desc = '[S]earch [M]essage', },
             { "<leader>sp", live_grep_git_root,          mode = { "n" }, desc = '[S]earch git [P]roject root', },
-            {
-                "<leader>/",
-                function()
-                    -- Slightly advanced example of overriding default behavior and theme
-                    -- You can pass additional configuration to telescope to change theme, layout, etc.
-                    require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-                        winblend = 10,
-                        previewer = false,
-                    })
-                end,
-                mode = { "n" },
-                desc = '[/] Fuzzily search in current buffer',
-            },
+            -- {
+            --     "<leader>/",
+            --     function()
+            --         -- Slightly advanced example of overriding default behavior and theme
+            --         -- You can pass additional configuration to telescope to change theme, layout, etc.
+            --         require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+            --             winblend = 10,
+            --             previewer = false,
+            --         })
+            --     end,
+            --     mode = { "n" },
+            --     desc = '[/] Fuzzily search in current buffer',
+            -- },
             {
                 "<leader>s/",
                 function()

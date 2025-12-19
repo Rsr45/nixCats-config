@@ -295,15 +295,58 @@
               ];
               navigation = with pkgs.vimPlugins; [
                 harpoon2
+                grapple-nvim
+                mini-jump
+                mini-jump2d
                 leap-nvim
                 flit-nvim
                 flash-nvim
+              ];
+              filesystem = with pkgs.vimPlugins; [
+                mini-pick
+                mini-files
               ];
               git = with pkgs.vimPlugins; [
                 diffview-nvim
                 gitsigns-nvim
                 vim-fugitive
                 neogit
+              ];
+              mini = with pkgs.vimPlugins; [
+                mini-ai
+                mini-align
+                mini-completion
+                mini-keymap
+                mini-move
+                mini-operators
+                mini-pairs
+                # mini-snippets
+                mini-splitjoin
+                mini-surround
+                mini-basics
+                mini-bracketed
+                mini-bufremove
+                mini-clue
+                mini-deps
+                mini-diff
+                mini-extra
+                mini-files
+                mini-git
+                mini-jump
+                mini-jump2d
+                mini-misc
+                mini-pick
+                mini-sessions
+                mini-visits
+                mini-cursorword
+                mini-hipatterns
+                # mini-icons
+                mini-indentscope
+                mini-notify
+                mini-starter
+                mini-statusline
+                # mini-tabline
+                mini-trailspace
               ];
               always = with pkgs.vimPlugins; [
                 nvim-lspconfig
@@ -313,19 +356,6 @@
                 vim-rhubarb
                 vim-visual-multi
                 vim-eunuch
-                mini-base16
-                mini-ai
-                mini-surround
-                mini-pairs
-                mini-operators
-                mini-bracketed
-                mini-statusline
-                mini-bufremove
-                mini-align
-                mini-move
-                mini-indentscope
-                mini-starter
-                mini-cursorword
                 nvim-navic
                 nvim-biscuits
                 snacks-nvim
@@ -337,6 +367,7 @@
                 nvim-highlight-colors
                 smartcolumn-nvim
                 vimtex
+                trouble-nvim
                 pkgs.neovimPlugins.feed
               ];
               extra = with pkgs.vimPlugins; [
@@ -468,7 +499,7 @@
               # OR see :help nixCats.flake.outputs.settings for all of the settings available
               wrapRc = true;
               configDirName = "nixCats-nvim";
-              # neovim-unwrapped = inputs.neovim-nightly-overlay.packages.${pkgs.system}.neovim;
+              # neovim-unwrapped = inputs.neovim-nightly-overlay.packages.${pkgs.stdenv.hostPlatform.system}.neovim;
               hosts.python3.enable = true;
               hosts.node.enable = true;
             };
@@ -528,7 +559,7 @@
               aliases = [ "testCat" ];
 
               # If you wanted nightly, uncomment this, and the flake input.
-              # neovim-unwrapped = inputs.neovim-nightly-overlay.packages.${pkgs.system}.neovim;
+              # neovim-unwrapped = inputs.neovim-nightly-overlay.packages.${pkgs.stdenv.hostPlatform.system}.neovim;
               # Probably add the cache stuff they recommend too.
             };
             categories = {
