@@ -2,11 +2,7 @@ return {
     {
         "lualine.nvim",
         for_cat = "general.always",
-        -- cmd = { "" },
         event = "DeferredUIEnter",
-        -- ft = "",
-        -- keys = "",
-        -- colorscheme = "",
         after = function()
             require("lualine").setup({
                 options = {
@@ -39,7 +35,6 @@ return {
                                 unnamed = '[No Name]',
                                 newfile = '[New]',
                             },
-                            -- color = { fg = '#c1c1c1', bg = '', gui = '' },
                         },
                         { 'diff' },
                         {
@@ -63,7 +58,6 @@ return {
                         {
                             'mode',
                             fmt = function(str) return str:sub(1, 3) end,
-                            -- color = { fg = '#c1c1c1', bg = '', gui = '' },
                         }
                     },
                     lualine_b = {
@@ -81,14 +75,12 @@ return {
                             -- 4: Filename and parent dir, with tilde as the home directory
 
                             shorting_target = 40, -- Shortens path to leave 40 spaces in the window
-                            -- for other components. (terrible name, any suggestions?)
                             symbols = {
-                                modified = '[+]',      -- Text to show when the file is modified.
-                                readonly = '[-]',      -- Text to show when the file is non-modifiable or readonly.
-                                unnamed = '[No Name]', -- Text to show for unnamed buffers.
-                                newfile = '[New]',     -- Text to show for newly created file before first write
+                                modified = '[+]',
+                                readonly = '[-]',
+                                unnamed = '[No Name]',
+                                newfile = '[New]',
                             },
-                            -- color = { fg = '#c1c1c1', bg = '', gui = '' },
                         },
                         { 'diff' },
                         {

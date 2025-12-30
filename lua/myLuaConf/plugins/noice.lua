@@ -27,7 +27,7 @@ return {
                     documentation = {},
                     hover = { enabled = true },
                     progress = {
-                        enabled = true,
+                        enabled = false,
                     },
                 },
 

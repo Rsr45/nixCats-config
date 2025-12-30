@@ -78,7 +78,7 @@ return {
                     enabled = true,
                     window = {
                         show_documentation = true,
-                        border = 'single',
+                        border = 'none',
                     },
                 },
                 completion = {
@@ -86,7 +86,7 @@ return {
                         enabled = false,
                     },
                     menu = {
-                        border = 'single',
+                        border = 'none',
                         draw = {
                             columns = { { 'item_idx' }, { "label", "label_description", gap = 1 }, { "kind_icon", "kind", gap = 1 } },
                             treesitter = { 'lsp' },
@@ -119,7 +119,7 @@ return {
                     documentation = {
                         auto_show = true,
                         auto_show_delay_ms = 1000,
-                        window = { border = 'single' },
+                        window = { border = 'none' },
                     },
                 },
                 snippets = {

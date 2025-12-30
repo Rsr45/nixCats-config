@@ -2,16 +2,12 @@ return {
     {
         "which-key.nvim",
         for_cat = "general.extra",
-        -- cmd = { "" },
         event = "DeferredUIEnter",
-        -- ft = "",
-        -- keys = "",
-        -- colorscheme = "",
         after = function()
             require("which-key").setup({
                 preset = "helix",
                 win = {
-                    border = "single",
+                    border = "none",
                 },
                 icons = {
                     breadcrumb = " ";
@@ -23,10 +19,10 @@ return {
                 { "<leader>t_", hidden = true },
                 { "<leader>s",  group = "search" },
                 { "<leader>s_", hidden = true },
-                -- { "<leader>o",  group = "open" },
-                -- { "<leader>o_", hidden = true },
-                -- { "<leader>n",  group = "notes" },
-                -- { "<leader>n_", hidden = true },
+                { "<leader>o",  group = "open" },
+                { "<leader>o_", hidden = true },
+                { "<leader>n",  group = "notes" },
+                { "<leader>n_", hidden = true },
                 { "<leader>f",  group = "file" },
                 { "<leader>f_", hidden = true },
                 { "<leader>b",  group = "buffer" },

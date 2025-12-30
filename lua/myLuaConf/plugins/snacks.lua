@@ -5,36 +5,38 @@ return {
         -- lazy = false,
         event = "VimEnter",
         keys = {
-            { "<leader>ot",       mode = { "n" }, "<cmd>lua Snacks.terminal.toggle()<CR>",                                     desc = "Toggle terminal popup", },
-            { "<leader>sn",       mode = { "n" }, "<cmd>lua Snacks.picker.notifications()<CR>",                                desc = "Search notifications", },
-            { "<leader>u",        mode = { "n" }, "<cmd>lua Snacks.picker.undo()<CR>",                                         desc = "Undo", },
-            { "<leader>,",        mode = { "n" }, "<cmd>lua Snacks.picker.buffers()<CR>",                                      desc = "Switch buffer", },
-            { "<leader>.",        mode = { "n" }, "<cmd>lua Snacks.explorer.open({ cwd = vim.fn.expand('%:p:h') })<CR>",       desc = "Explore in cwd", },
-            { "<leader>/",        mode = { "n" }, "<cmd>lua Snacks.picker.grep()<CR>",                                         desc = "Grep", },
-            { "<leader><leader>", mode = { "n" }, "<cmd>lua Snacks.picker.files()<CR>",                                        desc = "Find file", },
-            -- File
-            { "<leader>ff",       mode = { "n" }, "<cmd>lua Snacks.picker.files()<CR>",                                        desc = "Find file in project", },
-            { "<leader>fF",       mode = { "n" }, "<cmd>lua Snacks.picker.files({ cwd = vim.fn.expand('%:p:h') })<CR>",        desc = "Find file from here", },
-            { "<leader>fr",       mode = { "n" }, "<cmd>lua Snacks.picker.recent()<CR>",                                       desc = "Recent files", },
+            { "<leader>ot",       mode = { "n" }, function() Snacks.terminal.toggle() end,                                     desc = "Toggle Terminal", },
+            { "<leader>U",        mode = { "n" }, function() Snacks.picker.undo() end,                                         desc = "Undo", },
+            { "<leader>,",        mode = { "n" }, function() Snacks.picker.buffers() end,                                      desc = "Buffers", },
+            { "<leader>.",        mode = { "n" }, function() Snacks.explorer.open({ cwd = vim.fn.expand('%:p:h') }) end,       desc = "Explorer", },
+            { "<leader>/",        mode = { "n" }, function() Snacks.picker.grep() end,                                         desc = "Grep", },
+            { "<leader>:",        mode = { "n" }, function() Snacks.picker.command_history() end,                              desc = "Command History" },
+            { "<leader><leader>", mode = { "n" }, function() Snacks.picker.files() end,                                        desc = "Files", },
+            -- File + find
+            { "<leader>ff",       mode = { "n" }, function() Snacks.picker.files() end,                                        desc = "Files", },
+            { "<leader>fF",       mode = { "n" }, function() Snacks.picker.files({ cwd = vim.fn.expand('%:p:h') }) end,        desc = "Files cwd", },
+            { "<leader>fr",       mode = { "n" }, function() Snacks.picker.recent() end,                                       desc = "Recent", },
+            { "<leader>fG",       mode = { "n" }, function() Snacks.picker.grep_word() end,                                    desc = "Grep Word" },
+            { "<leader>fd",       mode = { "n" }, function() Snacks.picker.diagnostics() end,                                  desc = "Diagnostics" },
+            { "<leader>fD",       mode = { "n" }, function() Snacks.picker.diagnostics_buffers() end,                          desc = "Diagnostics Buffers" },
+            { "<leader>fe",       mode = { "n" }, function() Snacks.explorer() end,                                            desc = "Explorer" },
             -- Buffer
-            { "<leader>bb",       mode = { "n" }, "<cmd>lua Snacks.picker.buffers()<CR>",                                      desc = "Switch buffer", },
+            { "<leader>bb",       mode = { "n" }, function() Snacks.picker.buffers() end,                                      desc = "Buffers", },
             -- Search
-            { "<leader>sp",       mode = { "n" }, "<cmd>lua Snacks.picker.grep()<CR>",                                         desc = "Search on everything", },
-            { "<leader>sb",       mode = { "n" }, "<cmd>lua Snacks.picker.lines({ layout = { preset = 'vertico' } })<CR>",     desc = "Search buffer" },
-            { "<leader>sB",       mode = { "n" }, "<cmd>lua Snacks.picker.grep_buffers()<CR>",                                 desc = "Search all open buffers", },
-            { "<leader>sd",       mode = { "n" }, "<cmd>lua Snacks.picker.grep_buffers({ cwd = vim.fn.expand('%:p:h') })<CR>", desc = "Search current directory", },
+            { "<leader>sp",       mode = { "n" }, function() Snacks.picker.grep() end,                                         desc = "Grep", },
+            { "<leader>sb",       mode = { "n" }, function() Snacks.picker.lines({ layout = { preset = 'vertico' } }) end,     desc = "Lines" },
+            { "<leader>sB",       mode = { "n" }, function() Snacks.picker.grep_buffers() end,                                 desc = "Grep Buffers", },
+            { "<leader>sd",       mode = { "n" }, function() Snacks.picker.grep_buffers({ cwd = vim.fn.expand('%:p:h') }) end, desc = "Grep Buffers cwd", },
+            { "<leader>sn",       mode = { "n" }, function() Snacks.picker.notifications() end,                                desc = "Notifications", },
             -- Project
-            { "<leader>pp",       mode = { "n" }, "<cmd>lua Snacks.picker.projects()<CR>",                                     desc = "Switch project", },
-            { "<leader>fG",       mode = { "n" }, "<cmd>lua Snacks.picker.grep_word()<CR>",                                    desc = "Grep Word Under Cursor" },
-            -- { "<leader>fs",       mode = { "n" }, "<cmd>lua Snacks.picker.lsp_symbols()<CR>",                                  desc = "Document Symbols" },
-            { "<leader>fd",       mode = { "n" }, "<cmd>lua Snacks.picker.lsp_symbols()<CR>",                                  desc = "[D]ocument [S]ymbols" },
-            -- { "<leader>fS",       mode = { "n" }, "<cmd>lua Snacks.picker.lsp_workspace_symbols()<CR>",                        desc = "Workspace Symbols" },
-            { "<leader>fw",       mode = { "n" }, "<cmd>lua Snacks.picker.lsp_workspace_symbols()<CR>",                        desc = "[W]orkspace [S]ymbols" },
-            { "<leader>fd",       mode = { "n" }, "<cmd>lua Snacks.picker.diagnostics()<CR>",                                  desc = "Diagnostics" },
-            { "<leader>fD",       mode = { "n" }, "<cmd>lua Snacks.picker.diagnostics_buffers()<CR>",                          desc = "Diagnostics Buffers" },
-            { "<leader>gr",       mode = { "n" }, "<cmd>lua Snacks.picker.lsp_references()<CR>",                               desc = "[G]oto [R]eferences" },
-            { "<leader>gI",       mode = { "n" }, "<cmd>lua Snacks.picker.lsp_implementations()<CR>",                          desc = "[G]oto [I]mplementation" },
-            { "<leader>ft",       mode = { "n" }, "<cmd>lua Snacks.explorer()<CR>",                                            desc = "Explorer" },
+            { "<leader>pp",       mode = { "n" }, function() Snacks.picker.projects() end,                                     desc = "Projects", },
+            -- LSP
+            { "<leader>ls",       mode = { "n" }, function() Snacks.picker.lsp_symbols() end,                                  desc = "Document Symbols" },
+            { "<leader>ld",       mode = { "n" }, function() Snacks.picker.lsp_symbols() end,                                  desc = "[D]ocument [S]ymbols" },
+            { "<leader>lS",       mode = { "n" }, function() Snacks.picker.lsp_workspace_symbols() end,                        desc = "Workspace Symbols" },
+            { "<leader>lw",       mode = { "n" }, function() Snacks.picker.lsp_workspace_symbols() end,                        desc = "[W]orkspace [S]ymbols" },
+            { "<leader>gr",       mode = { "n" }, function() Snacks.picker.lsp_references() end,                               desc = "[G]oto [R]eferences" },
+            { "<leader>gI",       mode = { "n" }, function() Snacks.picker.lsp_implementations() end,                          desc = "[G]oto [I]mplementation" },
         },
         after = function()
             require("snacks").setup({
@@ -55,20 +57,101 @@ return {
                     refresh = 50, -- refresh at most every 50ms
                 },
                 indent = {
+                    priority = 1,
                     animate = {
                         enabled = false,
                     },
+                    char = "╎",
                     scope = {
                         -- char = "┆",
-                        underline = true,
+                        char = "╎",
+                        underline = false,
                     },
-                    -- char = "┆",
                 },
                 image = {
                     doc = {
                         inline = false,
                         max_width = 45,
                         max_height = 20,
+                    },
+                },
+                dashboard = {
+                    enabled = true,
+                    width = 5,
+                    preset = {
+                        header = [[
+
+   ⣴⣶⣤⡤⠦⣤⣀⣤⠆     ⣈⣭⣿⣶⣿⣦⣼⣆
+    ⠉⠻⢿⣿⠿⣿⣿⣶⣦⠤⠄⡠⢾⣿⣿⡿⠋⠉⠉⠻⣿⣿⡛⣦
+          ⠈⢿⣿⣟⠦ ⣾⣿⣿⣷    ⠻⠿⢿⣿⣧⣄
+           ⣸⣿⣿⢧ ⢻⠻⣿⣿⣷⣄⣀⠄⠢⣀⡀⠈⠙⠿⠄
+          ⢠⣿⣿⣿⠈    ⣻⣿⣿⣿⣿⣿⣿⣿⣛⣳⣤⣀⣀
+   ⢠⣧⣶⣥⡤⢄ ⣸⣿⣿⠘  ⢀⣴⣿⣿⡿⠛⣿⣿⣧⠈⢿⠿⠟⠛⠻⠿⠄
+  ⣰⣿⣿⠛⠻⣿⣿⡦⢹⣿⣷   ⢊⣿⣿⡏  ⢸⣿⣿⡇ ⢀⣠⣄⣾⠄
+ ⣠⣿⠿⠛ ⢀⣿⣿⣷⠘⢿⣿⣦⡀ ⢸⢿⣿⣿⣄ ⣸⣿⣿⡇⣪⣿⡿⠿⣿⣷⡄
+ ⠙⠃   ⣼⣿⡟  ⠈⠻⣿⣿⣦⣌⡇⠻⣿⣿⣷⣿⣿⣿ ⣿⣿⡇ ⠛⠻⢷⣄
+   ⢻⣿⣿⣄   ⠈⠻⣿⣿⣿⣷⣿⣿⣿⣿⣿⡟ ⠫⢿⣿⡆
+    ⠻⣿⣿⣿⣿⣶⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⡟⢀⣀⣤⣾⡿⠃]],
+                    },
+                    sections = {
+                        -- header
+                        { section = "header" },
+                        {
+                            padding = 1,
+                            text = {
+                                { "Neovim :: λ Mesa", hl = "function" },
+                            },
+                            align = "center",
+                        },
+                        -- keys
+                        {
+                            text = {
+                                { "   ", hl = "WarningMsg" },
+                                { "Find file", hl = "function", width = 40 },
+                                { "[f]", hl = "QuickFixLine" },
+
+                            },
+                            action = ":lua Snacks.dashboard.pick('files')",
+                            key = "f",
+                            align = "center",
+                        },
+                        {
+                            text = {
+                                { "   ", hl = "WarningMsg" },
+                                { "New file", hl = "function", width = 40 },
+                                { "[n]", hl = "QuickFixLine" },
+                            },
+                            action = ":ene | startinsert",
+                            key = "n",
+                            align = "center",
+                        },
+                        {
+                            -- padding = 0.7,
+                            text = {
+                                { "󰐮   ", hl = "WarningMsg" },
+                                { "Open project", hl = "function", width = 40 },
+                                { "[p]", hl = "QuickFixLine" },
+                            },
+                            action = function() Snacks.picker.projects() end,
+                            key = "p",
+                            align = "center",
+                        },
+                        {
+                            text = {
+                                { "   ", hl = "WarningMsg" },
+                                { "Quit", hl = "function", width = 40 },
+                                { "[q]", hl = "QuickFixLine" },
+                            },
+
+                            action = ":quitall",
+                            key = "q",
+                            align = "center",
+                        },
+                    },
+                    formats = {
+                        key = function(item)
+                            return { { "[", hl = "Keyword" }, { item.key, hl = "Function" }, { "]", hl = "Keyword" } }
+                        end,
                     },
                 },
                 terminal = {},

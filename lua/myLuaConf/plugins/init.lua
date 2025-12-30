@@ -64,6 +64,7 @@ if nixCats("general.extra") then
             ["<C-c>"] = "actions.close",
             ["<C-l>"] = "actions.refresh",
             ["-"] = "actions.parent",
+            ["<BS>"] = "actions.parent",
             ["_"] = "actions.open_cwd",
             ["`"] = "actions.cd",
             ["~"] = "actions.tcd",
@@ -75,15 +76,15 @@ if nixCats("general.extra") then
     })
     vim.keymap.set("n", "-", "<cmd>Oil<CR>", {
         noremap = true,
-        desc = "Open Directory in Oil"
+        desc = "Open Directory in Oil",
     })
     vim.keymap.set("n", "<leader>o/", "<cmd>Oil<CR>", {
         noremap = true,
-        desc = "Open Directory in Oil"
+        desc = "Open Directory in Oil",
     })
     vim.keymap.set("n", "<leader>-", "<cmd>Oil .<CR>", {
         noremap = true,
-        desc = "Open nvim root directory"
+        desc = "Open nvim root directory",
     })
 
     vim.cmd([[hi! link WinBar StatusLine]])
@@ -103,17 +104,17 @@ require("lze").load({
     { import = "myLuaConf.plugins.treesitter" },
     { import = "myLuaConf.plugins.completion" },
     { import = "myLuaConf.plugins.navigation" },
-    { import = "myLuaConf.plugins.mini-statusline" },
+    -- { import = "myLuaConf.plugins.mini-statusline" },
+    { import = "myLuaConf.plugins.lualine" },
     { import = "myLuaConf.plugins.snacks" },
     -- { import = "myLuaConf.plugins.neorg" },
-    -- { import = "myLuaConf.plugins.obsidian" },
     { import = "myLuaConf.plugins.org" },
     { import = "myLuaConf.plugins.obsidian" },
-    -- { import = "myLuaConf.plugins.fzf" },
     { import = "myLuaConf.plugins.neogit" },
     { import = "myLuaConf.plugins.whichkey" },
     { import = "myLuaConf.plugins.smartcolumn" },
     { import = "myLuaConf.plugins.trouble" },
+    { import = "myLuaConf.plugins.edgy" },
     {
         "mini.icons",
         for_cat = "general.mini",
@@ -197,11 +198,27 @@ require("lze").load({
     {
         "vim-eunuch",
         for_cat = "general.always",
-        cmd = { "Rename", "Copy", "Unlink", "Duplicate", "Remove", "Move", "Delete", "Chmod",
-            "Mkdir", "Cfind", "Clocate", "Lfind", "Llocate", "SudoEdit", "SudoWrite", "Wall",
-            "W" },
+        cmd = {
+            "Rename",
+            "Copy",
+            "Unlink",
+            "Duplicate",
+            "Remove",
+            "Move",
+            "Delete",
+            "Chmod",
+            "Mkdir",
+            "Cfind",
+            "Clocate",
+            "Lfind",
+            "Llocate",
+            "SudoEdit",
+            "SudoWrite",
+            "Wall",
+            "W",
+        },
         keys = {
-            { "<leader>fD", mode = { "n" }, "<cmd>Delete<Cr>", desc = "[D]elete File" },
+            -- { "<leader>fD", mode = { "n" }, "<cmd>Delete<Cr>", desc = "[D]elete File" },
             {
                 "<leader>bR",
                 mode = { "n" },
@@ -213,7 +230,7 @@ require("lze").load({
                         print("Aborted: No filename entered.")
                     end
                 end,
-                desc = "[R]ename Buffer"
+                desc = "[R]ename Buffer",
             },
             {
                 "<leader>fR",
@@ -226,7 +243,7 @@ require("lze").load({
                         print("Aborted: No filename entered.")
                     end
                 end,
-                desc = "[R]ename File"
+                desc = "[R]ename File",
             },
             {
                 "<leader>fS",
@@ -239,7 +256,7 @@ require("lze").load({
                         print("Aborted: No filename entered.")
                     end
                 end,
-                desc = "[S]ave File As"
+                desc = "[S]ave File As",
             },
         },
     },
@@ -273,9 +290,8 @@ require("lze").load({
     {
         "undotree",
         for_cat = "general.extra",
-        cmd = { "UndotreeToggle", "UndotreeHide", "UndotreeShow", "UndotreeFocus",
-            "UndotreePersistUndo" },
-        keys = { { "<leader>U", "<cmd>UndotreeToggle<CR>", mode = { "n" }, desc = "Undo Tree" } },
+        cmd = { "UndotreeToggle", "UndotreeHide", "UndotreeShow", "UndotreeFocus", "UndotreePersistUndo" },
+        keys = { { "<leader>u", "<cmd>UndotreeToggle<CR>", mode = { "n" }, desc = "Undo Tree" } },
         before = function(_)
             vim.g.undotree_WindowLayout = 1
             vim.g.undotree_SplitWidth = 40
@@ -291,23 +307,22 @@ require("lze").load({
             vim.g.startuptime_exe_path = nixCats.packageBinPath
         end,
     },
-    -- {
-    --     "fidget.nvim",
-    --     for_cat = "general.extra",
-    --     event = "DeferredUIEnter",
-    --     -- keys = "",
-    --     after = function()
-    --         require("fidget").setup({
-    --             notification = {
-    --                 window = {
-    --                     border = "single",
-    --                     x_padding = 1,
-    --                     y_padding = 1,
-    --                 },
-    --             },
-    --         })
-    --     end,
-    -- },
+    {
+        "fidget.nvim",
+        for_cat = "general.extra",
+        event = "DeferredUIEnter",
+        after = function()
+            require("fidget").setup({
+                notification = {
+                    window = {
+                        border = "none",
+                        x_padding = 1,
+                        y_padding = 1,
+                    },
+                },
+            })
+        end,
+    },
     -- {
     --     "hlargs",
     --     for_cat = 'general.extra',

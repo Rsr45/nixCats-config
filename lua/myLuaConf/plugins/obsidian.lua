@@ -6,6 +6,7 @@ return {
         cmd = { "Obsidian", "Obsidian open", "Obsidian new", "Obsidian search", "Obsidian tags", "Obsidian follow_link", "Obsidian link_new" },
         keys = {
             { "<leader>fn", mode = { "n" }, "<cmd>Obsidian quick_switch<CR>", desc = "[F]ind [N]ote" },
+            { "<leader>nn", mode = { "n" }, "<cmd>Obsidian new<CR>",          desc = "[N]ote [N]ode" },
             { "<leader>sv", mode = { "n" }, "<cmd>Obsidian search<CR>",       desc = "[S]earch [V]ault" },
             { "<leader>st", mode = { "n" }, "<cmd>Obsidian tags<CR>",         desc = "[S]earch [T]ags" },
             { "<leader>fl", mode = { "n" }, "<cmd>Obsidian follow_link<CR>",  desc = "[F]ollow [L]ink" },
@@ -15,8 +16,6 @@ return {
             require("obsidian").setup({
                 ui = { enable = false },
                 legacy_commands = false,
-                -- note_id_func = require("obsidian.builtin").zettel_id,
-
                 -- Optional, customize how note IDs are generated given an optional title.
                 ---@param title string|?
                 ---@return string
@@ -45,6 +44,19 @@ return {
                     -- return tostring(os.time()) .. "-" .. suffix
                     return tostring(os.date("%Y%m%d%H%M")) .. "-" .. suffix
                 end,
+                frontmatter = {
+                    func = function(note)
+                        local out = { id = note.id, aliases = note.aliases, tags = note.tags, title = note.aliases }
+                        if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
+                            for k, v in pairs(note.metadata) do
+                                out[k] = v
+                            end
+                        end
+
+                        return out
+                    end,
+                    sort = { "id", "aliases", "tags", "title" },
+                },
                 workspaces = {
                     {
                         name = "Personal",
@@ -101,14 +113,6 @@ return {
                     -- Optional, if you want `Obsidian yesterday` to return the last work day or `Obsidian tomorrow` to return the next work day.
                     -- workdays_only = true,
                 },
-                -- completion = {
-                --     -- Enables completion using blink.cmp
-                --     blink = true,
-                --     -- Trigger completion at 2 chars.
-                --     min_chars = 2,
-                --     -- Set to false to disable new note creation in the picker
-                --     create_new = true,
-                -- },
             })
         end,
     },

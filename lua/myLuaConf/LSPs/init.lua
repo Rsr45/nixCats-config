@@ -183,6 +183,20 @@ require('lze').load {
         },
     },
     {
+        "ruff",
+        for_cat = "python",
+        lsp = {
+            filetypes = { "python" },
+        },
+    },
+    -- {
+    --     "pyright",
+    --     for_cat = "python",
+    --     lsp = {
+    --         filetypes = { "python" },
+    --     },
+    -- },
+    {
         "texlab",
         for_cat = "tex",
         lsp = {

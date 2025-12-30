@@ -162,6 +162,10 @@
               tinymist
               typstyle
             ];
+            python = with pkgs; [
+              pyright
+              ruff
+            ];
             tex = with pkgs; [
               texlab
             ];
@@ -369,6 +373,7 @@
                 vimtex
                 trouble-nvim
                 pkgs.neovimPlugins.feed
+                edgy-nvim
               ];
               extra = with pkgs.vimPlugins; [
                 fidget-nvim
@@ -513,6 +518,7 @@
               format = true;
               neonixdev = true;
               typst = true;
+              python = true;
               test = {
                 subtest1 = true;
               };
