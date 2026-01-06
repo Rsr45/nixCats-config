@@ -93,6 +93,7 @@ end
 
 require("lze").load({
     { import = "myLuaConf.plugins.mini" },
+    -- { import = "myLuaConf.plugins.mini-clue" },
     {
         "nui.nvim",
         for_cat = "general.always",
@@ -100,19 +101,17 @@ require("lze").load({
         dep_of = { "noice.nvim" },
     },
     { import = "myLuaConf.plugins.noice" },
-    -- { import = "myLuaConf.plugins.telescope" },
     { import = "myLuaConf.plugins.treesitter" },
     { import = "myLuaConf.plugins.completion" },
     { import = "myLuaConf.plugins.navigation" },
-    -- { import = "myLuaConf.plugins.mini-statusline" },
-    { import = "myLuaConf.plugins.lualine" },
+    { import = "myLuaConf.plugins.mini-statusline" },
     { import = "myLuaConf.plugins.snacks" },
     -- { import = "myLuaConf.plugins.neorg" },
     { import = "myLuaConf.plugins.org" },
     { import = "myLuaConf.plugins.obsidian" },
     { import = "myLuaConf.plugins.neogit" },
-    { import = "myLuaConf.plugins.whichkey" },
-    { import = "myLuaConf.plugins.smartcolumn" },
+    { import = "myLuaConf.plugins.whichkey" }, -- try mini clue
+    -- { import = "myLuaConf.plugins.smartcolumn" }, -- no need for now
     { import = "myLuaConf.plugins.trouble" },
     { import = "myLuaConf.plugins.edgy" },
     {

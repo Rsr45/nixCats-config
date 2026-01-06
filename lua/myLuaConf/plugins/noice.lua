@@ -101,7 +101,7 @@ return {
                     },
                     hover = {
                         border = {
-                            style = "single",
+                            style = "shadow",
                             -- padding = { 0, 1 },
                         },
                         scrollbar = false,
@@ -124,18 +124,18 @@ return {
                         },
                         scrollbar = false,
                     },
-                    -- messages = {
-                    --     border = {
-                    --         style = "single",
-                    --         -- padding = { 0, 1 },
-                    --     },
-                    -- },
-                    -- virtualtext = {
-                    --     border = {
-                    --         style = "single",
-                    --         -- padding = { 0, 1 },
-                    --     },
-                    -- },
+                    messages = {
+                        border = {
+                            style = "single",
+                            -- padding = { 0, 1 },
+                        },
+                    },
+                    virtualtext = {
+                        border = {
+                            style = "single",
+                            -- padding = { 0, 1 },
+                        },
+                    },
                 },
             })
         end,
