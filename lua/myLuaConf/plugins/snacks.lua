@@ -5,58 +5,82 @@ return {
         -- lazy = false,
         event = "VimEnter",
         keys = {
-            { "<leader>ot",       mode = { "n" }, function() Snacks.terminal.toggle() end,                                       desc = "Toggle Terminal", },
-            { "<leader>U",        mode = { "n" }, function() Snacks.picker.undo() end,                                           desc = "Undo", },
-            { "<leader>,",        mode = { "n" }, function() Snacks.picker.buffers() end,                                        desc = "Buffers", },
-            { "<leader>.",        mode = { "n" }, function() Snacks.explorer.open({ cwd = vim.fn.expand('%:p:h') }) end,         desc = "Explorer", },
-            { "<leader>/",        mode = { "n" }, function() Snacks.picker.grep() end,                                           desc = "Grep", },
-            { "<leader>:",        mode = { "n" }, function() Snacks.picker.command_history() end,                                desc = "Command History" },
-            { "<leader><leader>", mode = { "n" }, function() Snacks.picker.files() end,                                          desc = "Files", },
+            { "<leader>tt", mode = { "n" }, function() Snacks.terminal.toggle() end, desc = "Toggle Terminal", },
+            { "<leader>U",  mode = { "n" }, function() Snacks.picker.undo() end,     desc = "Undo", },
+            { "<leader>,",  mode = { "n" }, function() Snacks.picker.buffers() end,  desc = "Buffers", },
+            {
+                "<leader>.",
+                function()
+                    require("telescope.builtin").find_files({
+                        cwd = require("oil").get_current_dir()
+                    })
+                end,
+                mode = "n",
+                nowait = true,
+                desc = "Find files in the current directory"
+            },
+            -- { "<leader>.",        mode = { "n" }, function() Snacks.explorer.open({ cwd = vim.fn.expand('%:p:h') }) end,         desc = "Explorer", },
+            { "<leader>/",        mode = { "n" }, function() Snacks.picker.grep() end,                                  desc = "Grep", },
+            { "<leader>:",        mode = { "n" }, function() Snacks.picker.command_history() end,                       desc = "Command History" },
+            { "<leader><leader>", mode = { "n" }, function() Snacks.picker.files() end,                                 desc = "Files", },
             -- File + find
-            { "<leader>ff",       mode = { "n" }, function() Snacks.picker.files() end,                                          desc = "Files", },
-            { "<leader>fF",       mode = { "n" }, function() Snacks.picker.files({ cwd = vim.fn.expand('%:p:h') }) end,          desc = "Files cwd", },
-            { "<leader>fr",       mode = { "n" }, function() Snacks.picker.recent() end,                                         desc = "Recent", },
-            { "<leader>fG",       mode = { "n" }, function() Snacks.picker.grep_word() end,                                      desc = "Grep Word" },
-            { "<leader>fd",       mode = { "n" }, function() Snacks.picker.diagnostics() end,                                    desc = "Diagnostics" },
-            { "<leader>fD",       mode = { "n" }, function() Snacks.picker.diagnostics_buffers() end,                            desc = "Diagnostics Buffers" },
-            { "<leader>fe",       mode = { "n" }, function() Snacks.explorer() end,                                              desc = "Explorer" },
+            { "<leader>ff",       mode = { "n" }, function() Snacks.picker.files() end,                                 desc = "Files", },
+            -- { "<leader>fF",       mode = { "n" }, function() Snacks.picker.files({ cwd = vim.fn.expand('%:p:h') }) end, desc = "Files cwd", },
+            {
+                "<leader>fF",
+                function()
+                    require("telescope.builtin").find_files({
+                        cwd = require("oil").get_current_dir()
+                    })
+                end,
+                mode = "n",
+                nowait = true,
+                desc = "Find files in the current directory"
+            },
+            { "<leader>fr", mode = { "n" }, function() Snacks.picker.recent() end,                                         desc = "Recent", },
+            { "<leader>fG", mode = { "n" }, function() Snacks.picker.grep_word() end,                                      desc = "Grep Word" },
+            { "<leader>fd", mode = { "n" }, function() Snacks.picker.diagnostics() end,                                    desc = "Diagnostics" },
+            { "<leader>fD", mode = { "n" }, function() Snacks.picker.diagnostics_buffer() end,                             desc = "Diagnostics Buffers" },
+            { "<leader>fe", mode = { "n" }, function() Snacks.explorer() end,                                              desc = "Explorer" },
             -- Buffer
-            { "<leader>bb",       mode = { "n" }, function() Snacks.picker.buffers() end,                                        desc = "Buffers", },
+            { "<leader>bb", mode = { "n" }, function() Snacks.picker.buffers() end,                                        desc = "Buffers", },
             -- Search
-            { "<leader>sp",       mode = { "n" }, function() Snacks.picker.grep() end,                                           desc = "Grep", },
-            { "<leader>sb",       mode = { "n" }, function() Snacks.picker.lines({ layout = { preset = 'vertico_split' } }) end, desc = "Lines" },
-            { "<leader>sB",       mode = { "n" }, function() Snacks.picker.grep_buffers() end,                                   desc = "Grep Buffers", },
-            { "<leader>sd",       mode = { "n" }, function() Snacks.picker.grep_buffers({ cwd = vim.fn.expand('%:p:h') }) end,   desc = "Grep Buffers cwd", },
-            { "<leader>sn",       mode = { "n" }, function() Snacks.picker.notifications() end,                                  desc = "Notifications", },
+            { "<leader>sp", mode = { "n" }, function() Snacks.picker.grep() end,                                           desc = "Grep", },
+            { "<leader>sb", mode = { "n" }, function() Snacks.picker.lines({ layout = { preset = 'vertico_split' } }) end, desc = "Lines" },
+            { "<leader>sB", mode = { "n" }, function() Snacks.picker.grep_buffers() end,                                   desc = "Grep Buffers", },
+            { "<leader>sd", mode = { "n" }, function() Snacks.picker.grep_buffers({ cwd = vim.fn.expand('%:p:h') }) end,   desc = "Grep Buffers cwd", },
+            { "<leader>sn", mode = { "n" }, function() Snacks.picker.notifications() end,                                  desc = "Notifications", },
             -- Project
-            { "<leader>pp",       mode = { "n" }, function() Snacks.picker.projects() end,                                       desc = "Projects", },
+            { "<leader>pp", mode = { "n" }, function() Snacks.picker.projects() end,                                       desc = "Projects", },
             -- LSP
-            { "<leader>ls",       mode = { "n" }, function() Snacks.picker.lsp_symbols() end,                                    desc = "Document Symbols" },
-            { "<leader>ld",       mode = { "n" }, function() Snacks.picker.lsp_symbols() end,                                    desc = "[D]ocument [S]ymbols" },
-            { "<leader>lS",       mode = { "n" }, function() Snacks.picker.lsp_workspace_symbols() end,                          desc = "Workspace Symbols" },
-            { "<leader>lw",       mode = { "n" }, function() Snacks.picker.lsp_workspace_symbols() end,                          desc = "[W]orkspace [S]ymbols" },
-            { "<leader>gr",       mode = { "n" }, function() Snacks.picker.lsp_references() end,                                 desc = "[G]oto [R]eferences" },
-            { "<leader>gI",       mode = { "n" }, function() Snacks.picker.lsp_implementations() end,                            desc = "[G]oto [I]mplementation" },
+            { "<leader>ls", mode = { "n" }, function() Snacks.picker.lsp_symbols() end,                                    desc = "Document Symbols" },
+            { "<leader>ld", mode = { "n" }, function() Snacks.picker.lsp_symbols() end,                                    desc = "[D]ocument [S]ymbols" },
+            { "<leader>lS", mode = { "n" }, function() Snacks.picker.lsp_workspace_symbols() end,                          desc = "Workspace Symbols" },
+            { "<leader>lw", mode = { "n" }, function() Snacks.picker.lsp_workspace_symbols() end,                          desc = "[W]orkspace [S]ymbols" },
+            { "<leader>gr", mode = { "n" }, function() Snacks.picker.lsp_references() end,                                 desc = "[G]oto [R]eferences" },
+            { "<leader>gI", mode = { "n" }, function() Snacks.picker.lsp_implementations() end,                            desc = "[G]oto [I]mplementation" },
+            -- Words
+            { "gslw",       mode = { "n" }, function() Snacks.words.jump(-vim.v.count1) end,                               desc = "Last word" },
+            { "gsnw",       mode = { "n" }, function() Snacks.words.jump(vim.v.count1) end,                                desc = "Next word" },
         },
         after = function()
             require("snacks").setup({
+                animate = {},
                 statuscolumn = {
-                    -- your statuscolumn configuration comes here
-                    -- or leave it empty to use the default settings
-                    -- refer to the configuration section below
-                    right = { "mark", "sign" }, -- priority of signs on the left (high to low)
-                    left = { "fold", "git" },   -- priority of signs on the right (high to low)
+                    enabled = false,
+                    right = { "mark", "sign" },
+                    left = { "fold", "git" },
                     folds = {
-                        open = false,           -- show open fold icons
-                        git_hl = true,          -- use Git Signs hl for fold icons
+                        open = false,  -- show open fold icons
+                        git_hl = true, -- use Git Signs hl for fold icons
                     },
                     git = {
-                        -- patterns to match Git signs
                         patterns = { "GitSign", "MiniDiffSign" },
                     },
-                    refresh = 50, -- refresh at most every 50ms
+                    refresh = 50,
                 },
                 indent = {
+                    enabled = false,
                     priority = 1,
                     animate = {
                         enabled = false,
@@ -157,7 +181,7 @@ return {
                 terminal = {},
                 notify = {},
                 notifier = {},
-                -- words = {},
+                words = {},
                 input = {
                     -- win = { border = "none" },
                 },

@@ -127,11 +127,11 @@ vim.keymap.set('n', 'down', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent =
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 -- vim.keymap.set('n', '<leader>cx', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 vim.keymap.set('n', '<leader>cx', function()
-  if vim.fn.getloclist(0, {winid=1}).winid ~= 0 then
-    vim.cmd('lclose')
-  else
-    vim.diagnostic.setloclist()
-  end
+    if vim.fn.getloclist(0, { winid = 1 }).winid ~= 0 then
+        vim.cmd('lclose')
+    else
+        vim.diagnostic.setloclist()
+    end
 end, { desc = 'Open diagnostics list' })
 
 -- You should instead use these keybindings so that they are still easy to use, but dont conflict
@@ -145,13 +145,13 @@ vim.keymap.set("x", "<leader>P", '"_dP',
     { noremap = true, silent = true, desc = 'Paste over selection without erasing unnamed register' })
 
 -- File manipulation
-vim.keymap.set({ "n" }, '<leader>fs', '<cmd>update<CR>', { desc = 'File save' })
+vim.keymap.set("n", '<leader>fs', '<cmd>update<CR>', { desc = 'File save' })
 -- spellcheck toggle
-vim.keymap.set({ "n" }, '<leader>ts', '<cmd>set spell!<Cr>', { desc = 'Toggle Spellcheck' })
+vim.keymap.set("n", '<leader>ts', '<cmd>set spell!<Cr>', { desc = 'Toggle Spellcheck' })
 -- relativenumber toggle
-vim.keymap.set({ "n" }, '<leader>tl', '<cmd>set rnu!<CR>')
+vim.keymap.set("n", '<leader>tl', '<cmd>set rnu!<CR>')
 --
-vim.keymap.set({ "n" }, '<leader>bN', '<cmd>ene | startinsert<CR>', { desc = 'New Empty Buffer' })
+vim.keymap.set("n", '<leader>bN', '<cmd>ene | startinsert<CR>', { desc = 'New Empty Buffer' })
 
 -- harpoon but builtin
 -- vim.keymap.set('n', "<leader><cr>", ":argu<cr>:args<cr>", { desc = "go to last used arglist file" })

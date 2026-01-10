@@ -38,23 +38,23 @@ if nixCats("general.extra") then
             winbar = "%!v:lua.get_oil_winbar()",
         },
         columns = {
-            -- "permissions",
-            -- "size",
-            -- "mtime",
+            "permissions",
+            "size",
+            "mtime",
             "icon",
         },
         keymaps = {
-            ["gd"] = {
-                desc = "Toggle file detail view",
-                callback = function()
-                    detail = not detail
-                    if detail then
-                        require("oil").set_columns({ "permissions", "size", "mtime" })
-                    else
-                        require("oil").set_columns({ "icon" })
-                    end
-                end,
-            },
+            -- ["gd"] = {
+            --     desc = "Toggle file detail view",
+            --     callback = function()
+            --         detail = not detail
+            --         if detail then
+            --             require("oil").set_columns({ "permissions", "size", "mtime" })
+            --         else
+            --             require("oil").set_columns({ "icon" })
+            --         end
+            --     end,
+            -- },
             ["g?"] = "actions.show_help",
             ["<CR>"] = "actions.select",
             ["<C-s>"] = "actions.select_vsplit",
@@ -78,13 +78,17 @@ if nixCats("general.extra") then
         noremap = true,
         desc = "Open Directory in Oil",
     })
-    vim.keymap.set("n", "<leader>o/", "<cmd>Oil<CR>", {
-        noremap = true,
-        desc = "Open Directory in Oil",
-    })
     vim.keymap.set("n", "<leader>-", "<cmd>Oil .<CR>", {
         noremap = true,
         desc = "Open nvim root directory",
+    })
+    vim.keymap.set("n", "<leader>to", "<cmd>Oil<CR>", {
+        noremap = true,
+        desc = "Open Directory in Oil",
+    })
+    vim.keymap.set("n", "<leader>tO", "<cmd>Oil .<CR>", {
+        noremap = true,
+        desc = "Open Directory in Oil",
     })
 
     vim.cmd([[hi! link WinBar StatusLine]])
@@ -116,7 +120,7 @@ require("lze").load({
     { import = "myLuaConf.plugins.edgy" },
     {
         "mini.icons",
-        for_cat = "general.mini",
+        for_cat = "general.extra",
         after = function()
             require("mini.icons").setup()
             MiniIcons.mock_nvim_web_devicons()

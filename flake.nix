@@ -344,7 +344,7 @@
                 mini-visits
                 mini-cursorword
                 mini-hipatterns
-                # mini-icons
+                mini-icons
                 mini-indentscope
                 mini-notify
                 mini-starter

@@ -19,15 +19,15 @@ return {
             require('nvim-treesitter.configs').setup {
                 highlight = { enable = true, },
                 indent = { enable = false, },
-                -- incremental_selection = {
-                --     enable = true,
-                --     keymaps = {
-                --         init_selection = '<c-space>',
-                --         node_incremental = '<c-space>',
-                --         scope_incremental = '<c-s>',
-                --         node_decremental = '<M-space>',
-                --     },
-                -- },
+                incremental_selection = {
+                    enable = true,
+                    keymaps = {
+                        init_selection = '<c-space>',
+                        node_incremental = '<c-space>',
+                        scope_incremental = '<c-s>',
+                        node_decremental = '<M-space>',
+                    },
+                },
                 textobjects = {
                     select = {
                         enable = false,

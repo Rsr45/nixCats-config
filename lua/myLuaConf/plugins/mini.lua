@@ -124,5 +124,37 @@ return {
         after = function()
             require("mini.diff").setup()
         end
+    },
+    {
+        "mini.trailspace",
+        for_cat = "general.mini",
+        keys = {
+            { "<leader>bt", function() MiniTrailspace.trim() end,            desc = "Trim" },
+            { "<leader>bT", function() MiniTrailspace.trim_last_lines() end, desc = "Trim last lines" },
+            { "<leader>ct", function() MiniTrailspace.trim() end,            desc = "Trim" },
+            { "<leader>cT", function() MiniTrailspace.trim_last_lines() end, desc = "Trim last lines" },
+        },
+        after = function()
+            require("mini.trailspace").setup()
+        end
+    },
+    {
+        "mini.hipatterns",
+        for_cat = "general.mini",
+        after = function()
+            local hipatterns = require("mini.hipatterns")
+            require("mini.hipatterns").setup({
+                highlighters = {
+                    -- Highlight standalone 'FIXME', 'HACK', 'TODO', 'NOTE'
+                    fixme     = { pattern = '%f[%w]()FIXME()%f[%W]', group = 'MiniHipatternsFixme' },
+                    hack      = { pattern = '%f[%w]()HACK()%f[%W]', group = 'MiniHipatternsHack' },
+                    todo      = { pattern = '%f[%w]()TODO()%f[%W]', group = 'MiniHipatternsTodo' },
+                    note      = { pattern = '%f[%w]()NOTE()%f[%W]', group = 'MiniHipatternsNote' },
+
+                    -- Highlight hex color strings (`#rrggbb`) using that color
+                    hex_color = hipatterns.gen_highlighter.hex_color(),
+                },
+            })
+        end
     }
 }

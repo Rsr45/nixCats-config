@@ -165,7 +165,7 @@ return {
                 -- labels = "asdfghjklqwertyuiopzxcvbnm",
                 labels = 'arstgmneio',
                 label = {
-                    uppercase = true,
+                    uppercase = false,
                     distance = false,
                     -- after = false,
                     -- before = { 0, 0 },
@@ -181,15 +181,6 @@ return {
                 },
                 highlight = { matches = false, },
             })
-            vim.keymap.set({ "n", "x", "o" }, "<c-space>", function()
-                require("flash").treesitter({
-                    actions = {
-                        ["<c-space>"] = "next",
-                        ["<BS>"] = "prev",
-                        ["<RETURN>"] = "next",
-                    }
-                })
-            end, { desc = "Treesitter incremental selection" })
         end,
     },
     -- {

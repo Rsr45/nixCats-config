@@ -6,7 +6,8 @@ require('lze').load {
         -- event = "",
         -- ft = "",
         keys = {
-            { "<leader>cf", desc = "Format File" },
+            { "<leader>cf", desc = "Format" },
+            { "<leader>lf", desc = "LSP: Format" },
         },
         -- colorscheme = "",
         after = function(plugin)
@@ -16,13 +17,14 @@ require('lze').load {
                 formatters_by_ft = {
                     -- NOTE: download some formatters in lspsAndRuntimeDeps
                     -- and configure them here
-                    -- lua = { "stylua" },
-                    -- go = { "gofmt", "golint" },
-                    -- templ = { "templ" },
+                    lua = { "stylua" },
+                    go = { "gofmt", "golint" },
+                    templ = { "templ" },
+                    nix = { "nixfmt", "alejandra" },
                     -- Conform will run multiple formatters sequentially
-                    -- python = { "isort", "black" },
+                    python = { "ruff", "isort", "black" },
                     -- Use a sub-list to run only the first available formatter
-                    -- javascript = { { "prettierd", "prettier" } },
+                    javascript = { { "prettierd", "prettier" } },
                 },
             })
 
@@ -32,7 +34,14 @@ require('lze').load {
                     async = false,
                     timeout_ms = 1000,
                 })
-            end, { desc = "Format File" })
+            end, { desc = "Format" })
+            vim.keymap.set({ "n", "v" }, "<leader>lf", function()
+                conform.format({
+                    lsp_fallback = true,
+                    async = false,
+                    timeout_ms = 1000,
+                })
+            end, { desc = "LSP: Format" })
         end,
     },
 }
