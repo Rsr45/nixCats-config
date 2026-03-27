@@ -196,11 +196,11 @@ require('lze').load {
     --         filetypes = { "python" },
     --     },
     -- },
-    {
-        "texlab",
-        for_cat = "tex",
-        lsp = {
-            filetypes = { "tex", "latex", "bib" },
-        },
-    },
+    -- {
+    --     "texlab",
+    --     for_cat = "tex",
+    --     lsp = {
+    --         filetypes = { "tex", "latex", "bib" },
+    --     },
+    -- },
 }

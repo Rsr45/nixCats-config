@@ -2,34 +2,41 @@ return {
     {
         "snacks.nvim",
         for_cat = "general.always",
-        -- lazy = false,
         event = "VimEnter",
         keys = {
-            { "<leader>tt", mode = { "n" }, function() Snacks.terminal.toggle() end, desc = "Toggle Terminal", },
-            { "<leader>U",  mode = { "n" }, function() Snacks.picker.undo() end,     desc = "Undo", },
+            { "<leader>tt", mode = { "n" }, function() Snacks.terminal.toggle() end, desc = "Terminal", },
+            { "<leader>tz", mode = { "n" }, function() Snacks.zen() end,             desc = "Zen", },
+
             { "<leader>,",  mode = { "n" }, function() Snacks.picker.buffers() end,  desc = "Buffers", },
             {
                 "<leader>.",
                 function()
-                    require("telescope.builtin").find_files({
-                        cwd = require("oil").get_current_dir()
-                    })
+                    Snacks.picker.files()
                 end,
                 mode = "n",
-                nowait = true,
-                desc = "Find files in the current directory"
+                desc = "Files"
             },
-            -- { "<leader>.",        mode = { "n" }, function() Snacks.explorer.open({ cwd = vim.fn.expand('%:p:h') }) end,         desc = "Explorer", },
-            { "<leader>/",        mode = { "n" }, function() Snacks.picker.grep() end,                                  desc = "Grep", },
-            { "<leader>:",        mode = { "n" }, function() Snacks.picker.command_history() end,                       desc = "Command History" },
-            { "<leader><leader>", mode = { "n" }, function() Snacks.picker.files() end,                                 desc = "Files", },
+            {
+                "<leader>/",
+                mode = { "n" },
+                function() Snacks.picker.grep({ layout = { preset = 'vertico_no_preview' } }) end,
+                desc = "Grep",
+            },
+            {
+                "<leader>:",
+                mode = { "n" },
+                function() Snacks.picker.commands({ layout = { preset = 'vertico_no_preview' } }) end,
+                desc = "M-x",
+            },
+            -- { "<leader>;",  mode = { "n" }, function() Snacks.picker.command_history() end, desc = "Command History" },
+
             -- File + find
-            { "<leader>ff",       mode = { "n" }, function() Snacks.picker.files() end,                                 desc = "Files", },
-            -- { "<leader>fF",       mode = { "n" }, function() Snacks.picker.files({ cwd = vim.fn.expand('%:p:h') }) end, desc = "Files cwd", },
+
+            { "<leader>ff", mode = { "n" }, function() Snacks.picker.files() end,                                          desc = "Files", },
             {
                 "<leader>fF",
                 function()
-                    require("telescope.builtin").find_files({
+                    Snacks.picker.files({
                         cwd = require("oil").get_current_dir()
                     })
                 end,
@@ -39,8 +46,8 @@ return {
             },
             { "<leader>fr", mode = { "n" }, function() Snacks.picker.recent() end,                                         desc = "Recent", },
             { "<leader>fG", mode = { "n" }, function() Snacks.picker.grep_word() end,                                      desc = "Grep Word" },
-            { "<leader>fd", mode = { "n" }, function() Snacks.picker.diagnostics() end,                                    desc = "Diagnostics" },
-            { "<leader>fD", mode = { "n" }, function() Snacks.picker.diagnostics_buffer() end,                             desc = "Diagnostics Buffers" },
+            -- { "<leader>fd", mode = { "n" }, function() Snacks.picker.diagnostics() end,                                    desc = "Diagnostics" },
+            -- { "<leader>fD", mode = { "n" }, function() Snacks.picker.diagnostics_buffer() end,                             desc = "Diagnostics Buffers" },
             { "<leader>fe", mode = { "n" }, function() Snacks.explorer() end,                                              desc = "Explorer" },
             -- Buffer
             { "<leader>bb", mode = { "n" }, function() Snacks.picker.buffers() end,                                        desc = "Buffers", },
@@ -60,10 +67,46 @@ return {
             { "<leader>gr", mode = { "n" }, function() Snacks.picker.lsp_references() end,                                 desc = "[G]oto [R]eferences" },
             { "<leader>gI", mode = { "n" }, function() Snacks.picker.lsp_implementations() end,                            desc = "[G]oto [I]mplementation" },
             -- Words
-            { "gslw",       mode = { "n" }, function() Snacks.words.jump(-vim.v.count1) end,                               desc = "Last word" },
-            { "gsnw",       mode = { "n" }, function() Snacks.words.jump(vim.v.count1) end,                                desc = "Next word" },
+            -- { "gslw",       mode = { "n" }, function() Snacks.words.jump(-vim.v.count1) end,                               desc = "Last word" },
+            -- { "gsnw",       mode = { "n" }, function() Snacks.words.jump(vim.v.count1) end,                                desc = "Next word" },
         },
         after = function()
+            local Snacks = require("snacks")
+
+            local project_patterns = {
+                ".git",
+                "_darcs",
+                ".hg",
+                ".bzr",
+                ".svn",
+                "package.json",
+                "Makefile",
+            }
+
+            local function in_project()
+                local cwd = vim.loop.cwd()
+                local root = vim.fs.find(project_patterns, {
+                    upward = true,
+                    path = cwd,
+                })[1]
+
+                return root ~= nil
+            end
+
+            function Snacks.picker.smart_projects()
+                if in_project() then
+                    -- already inside a project → jump straight to files
+                    Snacks.picker.files()
+                else
+                    -- not in a project → show project picker
+                    Snacks.picker.projects()
+                end
+            end
+
+            vim.keymap.set("n", "<leader><leader>", function()
+                require("snacks").picker.smart_projects()
+            end, { desc = "Smart Projects / Files" })
+
             require("snacks").setup({
                 animate = {},
                 statuscolumn = {
@@ -181,7 +224,7 @@ return {
                 terminal = {},
                 notify = {},
                 notifier = {},
-                words = {},
+                -- words = {},
                 input = {
                     -- win = { border = "none" },
                 },
@@ -206,6 +249,24 @@ return {
                                     box = "horizontal",
                                     { win = "list",    border = "none" },
                                     { win = "preview", title = "{preview}", width = 0.6, border = "left" },
+                                },
+                            },
+                        },
+
+                        vertico_no_preview = {
+                            layout = {
+                                box = "vertical",
+                                backdrop = false,
+                                row = -1,
+                                width = 0,
+                                height = 0.3,
+                                title = " {title} {live} {flags}",
+                                title_pos = "left",
+                                border = "top",
+                                { win = "input", height = 1, },
+                                {
+                                    box = "horizontal",
+                                    { win = "list", border = "none" },
                                 },
                             },
                         },

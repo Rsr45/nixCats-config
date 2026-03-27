@@ -1,5 +1,5 @@
 return function(_, bufnr, client)
-    vim.lsp.inlay_hint.enable(true)
+    vim.lsp.inlay_hint.enable(false)
 
     -- we create a function that lets us more easily define mappings specific
     -- for LSP related items. It sets the mode, buffer and description for us each time.

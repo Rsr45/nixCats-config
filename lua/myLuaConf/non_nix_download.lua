@@ -33,9 +33,9 @@ require('nixCatsUtils.catPacker').setup({
     { 'nvim-treesitter/nvim-treesitter-textobjects', opt = true, },
     { 'nvim-treesitter/nvim-treesitter',             build = ':TSUpdate',            opt = true, },
 
-    { 'nvim-telescope/telescope-fzf-native.nvim',    build = ':!which make && make', opt = true, },
-    { 'nvim-telescope/telescope-ui-select.nvim',     opt = true, },
-    { 'nvim-telescope/telescope.nvim',               opt = true, },
+    -- { 'nvim-telescope/telescope-fzf-native.nvim',    build = ':!which make && make', opt = true, },
+    -- { 'nvim-telescope/telescope-ui-select.nvim',     opt = true, },
+    -- { 'nvim-telescope/telescope.nvim',               opt = true, },
 
     -- lsp
     { 'williamboman/mason.nvim',                     opt = true, },
@@ -70,6 +70,7 @@ require('nixCatsUtils.catPacker').setup({
     { 'tpope/vim-fugitive',                          opt = true, },
     { 'tpope/vim-rhubarb',                           opt = true, },
     { 'tpope/vim-sleuth',                            opt = true, },
+    { 'tpope/vim-eunuch',                            opt = true, },
     { 'folke/which-key.nvim',                        opt = true, },
     { 'lewis6991/gitsigns.nvim',                     opt = true, },
     { 'nvim-lualine/lualine.nvim',                   opt = true, },
@@ -77,11 +78,48 @@ require('nixCatsUtils.catPacker').setup({
     { 'nvim-mini/mini.comment',                      opt = true, },
     { 'nvim-mini/mini.surround',                     opt = true, },
     { 'nvim-mini/mini.bufremove',                    opt = true, },
+    { 'nvim-mini/mini.icons',                    opt = true, },
+    { 'nvim-mini/mini.statusline',                    opt = true, },
+    { 'nvim-mini/mini.ai',                     opt = true, },
+    { 'nvim-mini/mini.pairs',                     opt = true, },
+    { 'nvim-mini/mini.operators',                     opt = true, },
+    { 'nvim-mini/mini.bracketed',                     opt = true, },
+    { 'nvim-mini/mini.align',                     opt = true, },
+    { 'nvim-mini/mini.cursorword',                     opt = true, },
+    { 'nvim-mini/mini.extra',                     opt = true, },
+    { 'nvim-mini/mini.diff',                     opt = true, },
+    { 'nvim-mini/mini.trailspace',                     opt = true, },
+    { 'nvim-mini/mini.hipatterns',                     opt = true, },
+    { 'nvim-mini/mini.pick',                     opt = true, },
+    { 'folke/noice.nvim',                     opt = true, },
+    { 'folke/snacks.nvim',                     opt = true, },
+    { 'folke/which-key.nvim',                     opt = true, },
+    { 'folke/flash.nvim',                     opt = true, },
+    { 'folke/trouble.nvim',                     opt = true, },
+    { 'folke/edgy.nvim',                     opt = true, },
+    { 'NeogitOrg/neogit',                     opt = true, },
+    { 'obsidian-nvim/obsidian.nvim',                     opt = true, },
+    { 'nvim-orgmode/orgmode',                     opt = true, },
+     { 'danilshvalov/org-modern.nvim',  as = "org-modern",                   opt = true, },
+    { 'nvim-orgmode/org-bullets.nvim', as = "org-bullets",                    opt = true, },
+    { 'chipsenkbeil/org-roam.nvim',                     opt = true, },
+    -- { 'ThePrimeagen/harpoon/tree/harpoon2', as = "harpoon2",                    opt = true, },
+    { 'MunifTanjim/nui.nvim', },
+    { 'nvim-lualine/lualine.nvim', opt = true, },
+
+
     {
         "iamcco/markdown-preview.nvim",
         build = ":call mkdp#util#install()",
         opt = true,
     },
+
+    { 'MeanderingProgrammer/render-markdown.nvim', },
+
+    { 'kevinhwang91/promise-async', },
+    { 'kevinhwang91/nvim-ufo', },
+    { 'brenoprata10/nvim-highlight-colors', },
+
 
     -- all the rest of the setup will be done using the normal setup functions later,
     -- thus working regardless of what method loads the plugins.

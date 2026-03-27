@@ -1,6 +1,6 @@
 local colorschemeName = nixCats("colorscheme")
 if not require("nixCatsUtils").isNixCats then
-    colorschemeName = "onedark"
+    colorschemeName = "neopywal"
 end
 
 vim.cmd.colorscheme(colorschemeName)
@@ -25,7 +25,14 @@ if nixCats("general.extra") then
         end
     end
 
-    local detail = false
+    -- local detail = false
+
+    local permission_hlgroups = {
+        ['-'] = 'NonText',
+        ['r'] = 'DiagnosticSignWarn',
+        ['w'] = 'DiagnosticSignError',
+        ['x'] = 'DiagnosticSignOk',
+    }
 
     vim.g.loaded_netrwPlugin = 1
     vim.opt.splitright = true
@@ -34,15 +41,37 @@ if nixCats("general.extra") then
         view_options = {
             show_hidden = true,
         },
+
+        columns = {
+            {
+                'permissions',
+                highlight = function(permission_str)
+                    local hls = {}
+                    for i = 1, #permission_str do
+                        local char = permission_str:sub(i, i)
+                        table.insert(hls, { permission_hlgroups[char], i - 1, i })
+                    end
+                    return hls
+                end,
+            },
+            { 'size',  highlight = 'Special' },
+            { 'mtime', highlight = 'Question' },
+            {
+                'icon',
+                -- default_file = icon_file,
+                -- directory = icon_dir,
+                add_padding = true,
+            },
+        },
         win_options = {
+            number = false,
+            relativenumber = false,
+            signcolumn = 'no',
+            foldcolumn = '0',
+            statuscolumn = '',
             winbar = "%!v:lua.get_oil_winbar()",
         },
-        columns = {
-            "permissions",
-            "size",
-            "mtime",
-            "icon",
-        },
+
         keymaps = {
             -- ["gd"] = {
             --     desc = "Toggle file detail view",
@@ -74,22 +103,102 @@ if nixCats("general.extra") then
             ["g\\"] = "actions.toggle_trash",
         },
     })
-    vim.keymap.set("n", "-", "<cmd>Oil<CR>", {
-        noremap = true,
-        desc = "Open Directory in Oil",
-    })
-    vim.keymap.set("n", "<leader>-", "<cmd>Oil .<CR>", {
-        noremap = true,
-        desc = "Open nvim root directory",
-    })
-    vim.keymap.set("n", "<leader>to", "<cmd>Oil<CR>", {
-        noremap = true,
-        desc = "Open Directory in Oil",
-    })
-    vim.keymap.set("n", "<leader>tO", "<cmd>Oil .<CR>", {
-        noremap = true,
-        desc = "Open Directory in Oil",
-    })
+
+    -- vim.keymap.set("n", "-", "<cmd>Oil<CR>", {
+    --     noremap = true,
+    --     desc = "Open Directory in Oil",
+    -- })
+    -- vim.keymap.set("n", "<leader>-", "<cmd>Oil .<CR>", {
+    --     noremap = true,
+    --     desc = "Open nvim root directory",
+    -- })
+    -- vim.keymap.set("n", "<leader>to", "<cmd>Oil<CR>", {
+    --     noremap = true,
+    --     desc = "Open Directory in Oil",
+    -- })
+    -- vim.keymap.set("n", "<leader>tO", "<cmd>Oil .<CR>", {
+    --     noremap = true,
+    --     desc = "Open Directory in Oil",
+    -- })
+
+    local function open_oil_float()
+        local oil = require("oil")
+        local util = require("oil.util")
+
+        oil.setup({
+            view_options = {
+                show_hidden = true,
+            },
+            win_options = {
+                number = false,
+                relativenumber = false,
+                signcolumn = 'no',
+                foldcolumn = '0',
+                statuscolumn = '',
+            },
+            columns = {
+                {
+                    'icon',
+                    -- default_file = icon_file,
+                    -- directory = icon_dir,
+                    add_padding = true,
+                },
+            },
+        })
+
+        vim.cmd("Oil --float")
+        util.run_after_load(0, function()
+            oil.open_preview()
+        end)
+    end
+
+    local function open_oil()
+        local oil = require("oil")
+
+        oil.setup({
+            view_options = {
+                show_hidden = true,
+            },
+            win_options = {
+                number = false,
+                relativenumber = false,
+                signcolumn = 'no',
+                foldcolumn = '0',
+                statuscolumn = '',
+                winbar = "%!v:lua.get_oil_winbar()",
+            },
+
+            columns = {
+                {
+                    'permissions',
+                    highlight = function(permission_str)
+                        local hls = {}
+                        for i = 1, #permission_str do
+                            local char = permission_str:sub(i, i)
+                            table.insert(hls, { permission_hlgroups[char], i - 1, i })
+                        end
+                        return hls
+                    end,
+                },
+                { 'size',  highlight = 'Special' },
+                { 'mtime', highlight = 'Question' },
+                {
+                    'icon',
+                    -- default_file = icon_file,
+                    -- directory = icon_dir,
+                    add_padding = true,
+                },
+            },
+        })
+
+        oil.open()
+    end
+
+    vim.keymap.set("n", "<leader>o/", open_oil_float, { desc = "oil: float" })
+    vim.keymap.set("n", "<leader>te", open_oil_float, { desc = "oil: float" })
+
+    vim.keymap.set("n", "<leader>tE", open_oil, { desc = "oil" })
+    vim.keymap.set("n", "<leader>o-", open_oil, { desc = "oil" })
 
     vim.cmd([[hi! link WinBar StatusLine]])
     vim.cmd([[hi! link WinBarNC StatusLineNC]])
@@ -108,9 +217,10 @@ require("lze").load({
     { import = "myLuaConf.plugins.treesitter" },
     { import = "myLuaConf.plugins.completion" },
     { import = "myLuaConf.plugins.navigation" },
-    { import = "myLuaConf.plugins.mini-statusline" },
+    { import = "myLuaConf.plugins.fold" },
+    -- { import = "myLuaConf.plugins.mini-statusline" },
+    { import = "myLuaConf.plugins.lualine" },
     { import = "myLuaConf.plugins.snacks" },
-    -- { import = "myLuaConf.plugins.neorg" },
     { import = "myLuaConf.plugins.org" },
     { import = "myLuaConf.plugins.obsidian" },
     { import = "myLuaConf.plugins.neogit" },
@@ -118,6 +228,7 @@ require("lze").load({
     -- { import = "myLuaConf.plugins.smartcolumn" }, -- no need for now
     { import = "myLuaConf.plugins.trouble" },
     { import = "myLuaConf.plugins.edgy" },
+    -- { import = "myLuaConf.plugins.feed" },
     {
         "mini.icons",
         for_cat = "general.extra",
@@ -126,15 +237,27 @@ require("lze").load({
             MiniIcons.mock_nvim_web_devicons()
         end,
     },
-    {
-        "vimtex",
-        lazy = false,
-        for_cat = "general.always",
-        after = function()
-            vim.g.vimtex_view_method = "sioyek"
-            vim.g.vimtex_syntax_enabled = 0
-        end,
-    },
+    -- {
+    --
+    --     "indent-blankline.nvim",
+    --     for_cat = "general.extra",
+    --     event = "BufReadPost",
+    --     after = function()
+    --         require("ibl").setup({
+    --             indent = { char = "╎¦┆" },
+    --             scope = { enabled = true },
+    --         })
+    --     end,
+    -- },
+    -- {
+    --     "vimtex",
+    --     lazy = false,
+    --     for_cat = "general.always",
+    --     after = function()
+    --         vim.g.vimtex_view_method = "sioyek"
+    --         vim.g.vimtex_syntax_enabled = 0
+    --     end,
+    -- },
     {
         "markdown-preview.nvim",
         for_cat = "general.markdown",
@@ -173,7 +296,75 @@ require("lze").load({
         ft = "markdown",
         cmd = "RenderMarkdown",
         after = function()
-            require("render-markdown").setup({})
+            require("render-markdown").setup({
+                render_modes = true,
+                bullet = {
+                    enabled = true,
+                    render_modes = false,
+                    icons = { "󰫶 ", "󱂉 " },
+                    ordered_icons = function(ctx)
+                        local value = vim.trim(ctx.value)
+                        local index = tonumber(value:sub(1, #value - 1))
+                        return ('%d.'):format(index > 1 and index or ctx.index)
+                    end,
+                    highlight = "RenderMarkdownBullet",
+                    scope_highlight = {},
+                    scope_priority = nil,
+                    indent = 2,
+                    left_pad = 2,
+                },
+                checkbox = {
+                    enabled = true,
+                    left_pad = 2,
+                    indent = 2,
+                },
+                code = {
+                    -- above = " ",
+                    -- below = " ",
+                    -- border = "thick",
+                    -- language_pad = 2,
+                    -- left_pad = 4,
+                    position = "left",
+                    -- right_pad = 6,
+                    sign = false,
+                    width = "full",
+                },
+                heading = {
+                    border = false,
+                    icons = { "▼ ",
+                        "▽ ",
+                        "▼ ",
+                        "▽ ",
+                        "▼ ",
+                        "▽ " },
+                    position = "inline",
+                    sign = false,
+                    width = "full",
+                    left_pad = -2,
+                    backgrounds = { "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "" },
+                },
+                indent = {
+                    enabled = true,
+                    skip_heading = false,
+                    highlight = "",
+                    icon = "  ",
+                },
+                paragraph = {
+                    enabled = true,
+                    -- render_modes = false,
+                    -- left_margin = 0,
+                    indent = 2,
+                    -- min_width = 0,
+                },
+                signs = {
+                    enabled = false,
+                },
+            })
         end,
     },
     {
@@ -262,28 +453,6 @@ require("lze").load({
                 desc = "[S]ave File As",
             },
         },
-    },
-    {
-        "nvim-ufo",
-        for_cat = "general.always",
-        lazy = false,
-        -- event = "DeferredUIEnter",
-        after = function()
-            vim.o.foldcolumn = "1" -- '0' is not bad
-            vim.o.foldlevel = 99   -- Using ufo provider need a large value
-            vim.o.foldlevelstart = 99
-            vim.o.foldenable = true
-
-            -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
-            vim.keymap.set("n", "zR", require("ufo").openAllFolds)
-            vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
-
-            require("ufo").setup({
-                provide_selector = function(bufnr, filetype, buftype)
-                    return { "lsp", "treesitter", "indent" }
-                end,
-            })
-        end,
     },
     {
         "promise-async",

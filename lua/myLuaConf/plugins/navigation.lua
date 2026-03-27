@@ -1,24 +1,24 @@
 return {
-    {
-        "harpoon2",
-        for_cat = "general.navigation",
-        after = function()
-            local harpoon = require("harpoon")
+    -- {
+    --     "harpoon2",
+    --     for_cat = "general.navigation",
+    --     after = function()
+    --         local harpoon = require("harpoon")
 
-            harpoon:setup()
-            vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
-            vim.keymap.set("n", "<C-t>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+    --         harpoon:setup()
+    --         vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
+    --         vim.keymap.set("n", "<C-t>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
 
-            vim.keymap.set("n", "<C-n>", function() harpoon:list():select(1) end)
-            vim.keymap.set("n", "<C-e>", function() harpoon:list():select(2) end)
-            vim.keymap.set("n", "<C-i>", function() harpoon:list():select(3) end)
-            vim.keymap.set("n", "<C-o>", function() harpoon:list():select(4) end)
+    --         vim.keymap.set("n", "<C-n>", function() harpoon:list():select(1) end)
+    --         vim.keymap.set("n", "<C-e>", function() harpoon:list():select(2) end)
+    --         vim.keymap.set("n", "<C-i>", function() harpoon:list():select(3) end)
+    --         vim.keymap.set("n", "<C-o>", function() harpoon:list():select(4) end)
 
-            -- Toggle previous & next buffers stored within Harpoon list
-            vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
-            vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
-        end,
-    },
+    --         -- Toggle previous & next buffers stored within Harpoon list
+    --         vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
+    --         vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
+    --     end,
+    -- },
     -- {
     --     "mini.jump",
     --     for_cat = "general.navigation",
@@ -83,80 +83,8 @@ return {
         for_cat = "general.navigation",
         event = "DeferredUIEnter",
         keys = {
-            { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-            {
-                "S",
-                mode = { "n", "x", "o" },
-                function()
-                    require("flash").treesitter({
-                        actions = {
-                            ["S"] = "next", ["s"] = "prev", ["<RETURN>"] = "next", ["<BS>"] = "prev",
-                        }
-                    })
-                end,
-                desc = "Flash Treesitter"
-            },
-            -- {
-            --     "s",
-            --     function()
-            --         local Flash = require("flash")
-            --
-            --         -- for the first match
-            --         ---@param opts Flash.Format
-            --         local function format1(opts)
-            --             return {
-            --                 { opts.match.label1, "FlashLabel" },
-            --                 { opts.match.label2, "FlashMatch" },
-            --             }
-            --         end
-            --
-            --         -- for the second match
-            --         ---@param opts Flash.Format
-            --         local function format2(opts)
-            --             return {
-            --                 { opts.match.label1, "FlashBackdrop" }, -- will be hidden
-            --                 { opts.match.label2, "FlashLabel" },
-            --             }
-            --         end
-            --
-            --         Flash.jump({
-            --             search = { mode = "search" },
-            --             highlight = { matches = false },
-            --             label = { format = format1 },
-            --             ---@type fun(match:Flash.Match, state:Flash.State)|nil
-            --             action = function(match, state)
-            --                 state:hide()
-            --                 Flash.jump({
-            --                     search = { max_length = 0 },
-            --                     highlight = { matches = false },
-            --                     label = { format = format2 },
-            --                     matcher = function(win)
-            --                         -- limit matches to the current label
-            --                         return vim.tbl_filter(function(m)
-            --                             return m.label == match.label and m.win == win
-            --                         end, state.results)
-            --                     end,
-            --                     labeler = function(matches)
-            --                         for _, m in ipairs(matches) do
-            --                             m.label = m.label2 -- use the second label
-            --                         end
-            --                     end,
-            --                 })
-            --             end,
-            --             labeler = function(matches, state)
-            --                 local labels = state:labels()
-            --                 for index, match in ipairs(matches) do
-            --                     match.label1 = labels[math.floor((index - 1) / #labels) + 1]
-            --                     match.label2 = labels[(index - 1) % #labels + 1]
-            --                     match.label = match.label1 -- use the first label
-            --                 end
-            --             end,
-            --         })
-            --     end,
-            --     mode = { "n", "x", "o" },
-            --     desc = "Flash",
-            -- },
-            -- { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
+            { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end,   desc = "Flash" },
+            { "r", mode = "o",               function() require("flash").remote() end, desc = "Remote Flash" },
             -- { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
             -- { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
         },

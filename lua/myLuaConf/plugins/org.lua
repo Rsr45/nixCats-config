@@ -10,8 +10,8 @@ return {
             local Menu = require("org-modern.menu")
 
             require("orgmode").setup({
-                org_agenda_files = "~/Personal/Notes/orgfiles/**/*",
-                org_default_notes_file = "~/Personal/Notes/orgfiles/refile.org",
+                org_agenda_files = "~/Personal/Notes/**/*",
+                org_default_notes_file = "~/Personal/Notes/refile.org",
                 org_adapt_indentation = false,
                 org_startup_indented = true,
 
@@ -44,7 +44,7 @@ return {
         cmd = { "Org" },
         after = function()
             require("org-roam").setup({
-                directory = "~/Personal/Notes/orgroam",
+                directory = "~/Personal/Notes/roam",
             })
         end,
     },

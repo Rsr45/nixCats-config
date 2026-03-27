@@ -1,5 +1,13 @@
 return {
     {
+        "coop.nvim",
+        for_cat = "general.always",
+        lazy = false,
+        dep_of = "feed",
+        after = function()
+        end
+    },
+    {
         "feed",
         for_cat = "general.always",
         cmd = { "Feed" },
@@ -17,23 +25,23 @@ return {
                     -- the above is equivalent to:
                     news = {
                         tech = {
-                            { "https://neovim.io/news.xml", name = "Neovim News" },
+                            { "https://neovim.io/news.xml",           name = "Neovim News" },
                             { "http://www.theverge.com/rss/full.xml", name = "The Verge" },
                         },
                     },
 
-                    announcement = {
-                        uni = {
-                            {"https://ide.ikcu.edu.tr/Rss", name = "ide"},
-                            {"https://sbbf.ikcu.edu.tr/Rss", name = "sbbf"},
-                            {"https://ikcu.edu.tr/Rss", name = "ikcu"},
-                        },
-                    },
-
+                    -- announcement = {
+                    --     uni = {
+                    --         {"https://ide.ikcu.edu.tr/Rss", name = "ide"},
+                    --         {"https://sbbf.ikcu.edu.tr/Rss", name = "sbbf"},
+                    --         {"https://ikcu.edu.tr/Rss", name = "ikcu"},
+                    --     },
+                    -- },
+                    --
                     -- three link formats are supported:
                     -- "https://neovim.io/news.xml", -- Regular links
                     -- "rsshub://rsshub://apnews/topics/apf-topnews", -- RSSHub links
-                    "neovim/neovim/releases",     -- GitHub links
+                    "neovim/neovim/releases", -- GitHub links
                 },
             })
         end

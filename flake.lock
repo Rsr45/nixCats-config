@@ -2,11 +2,11 @@
   "nodes": {
     "nixCats": {
       "locked": {
-        "lastModified": 1764009888,
-        "narHash": "sha256-hJekfTiW1792txgRSM4LcHnz1lDSY87LYbsJEn2V378=",
+        "lastModified": 1769578476,
+        "narHash": "sha256-4+KbiBcC6hQ3sh0UbPXjy6TOfLh9yhskRlfPzyZ2FH4=",
         "owner": "BirdeeHub",
         "repo": "nixCats-nvim",
-        "rev": "16ac3281f322ea15d39843829e42a44d22da3715",
+        "rev": "48f8be4bdafccfa19ceaaf08071a15eca36fdb1d",
         "type": "github"
       },
       "original": {
@@ -17,11 +17,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1764167966,
-        "narHash": "sha256-nXv6xb7cq+XpjBYIjWEGTLCqQetxJu6zvVlrqHMsCOA=",
+        "lastModified": 1770015011,
+        "narHash": "sha256-7vUo0qWCl/rip+fzr6lcMlz9I0tN/8m7d5Bla/rS2kk=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "5c46f3bd98147c8d82366df95bbef2cab3a967ea",
+        "rev": "f08e6b11a5ed43637a8ac444dd44118bc7d273b9",
         "type": "github"
       },
       "original": {
@@ -47,14 +47,30 @@
         "type": "github"
       }
     },
+    "plugins-coop": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1753337805,
+        "narHash": "sha256-eUpJPhZ+tnyCXtpAqZ676rJOh/WwSMAYjWbEc1a1uVU=",
+        "owner": "gregorias",
+        "repo": "coop.nvim",
+        "rev": "85986a6f7390d1362864708dcba097ba0e6b8d39",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gregorias",
+        "repo": "coop.nvim",
+        "type": "github"
+      }
+    },
     "plugins-feed": {
       "flake": false,
       "locked": {
-        "lastModified": 1760486171,
-        "narHash": "sha256-BUnsvN/gxCtNk15T9VCaAVwPEFx2YwyUtastOX1bnlg=",
+        "lastModified": 1765821067,
+        "narHash": "sha256-6dry0pD4MXKSHi80LDxktjXQrPkWu3RnZ0SzXp9Gymg=",
         "owner": "neo451",
         "repo": "feed.nvim",
-        "rev": "249fe744f26d4c822a56f467a2a3c02fb8c45d11",
+        "rev": "d1f8cee9df8ea4c7e319db701fb0ece0eca9a005",
         "type": "github"
       },
       "original": {
@@ -124,16 +140,34 @@
         "type": "github"
       }
     },
+    "plugins-tfm": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1768719517,
+        "narHash": "sha256-IMF1H+gcSSEYSXaxkODnGpkXK1QhGbKnEBVpvXgkMpY=",
+        "owner": "Rolv-Apneseth",
+        "repo": "tfm.nvim",
+        "rev": "a74ac5333f030db3603d9f076d220e8d24621365",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Rolv-Apneseth",
+        "repo": "tfm.nvim",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "nixCats": "nixCats",
         "nixpkgs": "nixpkgs",
         "plugins-black-metal": "plugins-black-metal",
+        "plugins-coop": "plugins-coop",
         "plugins-feed": "plugins-feed",
         "plugins-hlargs": "plugins-hlargs",
         "plugins-neopywal": "plugins-neopywal",
         "plugins-org-bullets": "plugins-org-bullets",
-        "plugins-org-modern": "plugins-org-modern"
+        "plugins-org-modern": "plugins-org-modern",
+        "plugins-tfm": "plugins-tfm"
       }
     }
   },

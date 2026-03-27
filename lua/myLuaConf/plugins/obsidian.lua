@@ -5,14 +5,25 @@ return {
         for_cat = "notes",
         cmd = { "Obsidian", "Obsidian open", "Obsidian new", "Obsidian search", "Obsidian tags", "Obsidian follow_link", "Obsidian link_new" },
         keys = {
-            { "<leader>fn", mode = { "n" }, "<cmd>Obsidian quick_switch<CR>", desc = "[F]ind [N]ote" },
-            { "<leader>nn", mode = { "n" }, "<cmd>Obsidian new<CR>",          desc = "[N]ote [N]ode" },
-            { "<leader>sv", mode = { "n" }, "<cmd>Obsidian search<CR>",       desc = "[S]earch [V]ault" },
-            { "<leader>st", mode = { "n" }, "<cmd>Obsidian tags<CR>",         desc = "[S]earch [T]ags" },
-            { "<leader>fl", mode = { "n" }, "<cmd>Obsidian follow_link<CR>",  desc = "[F]ollow [L]ink" },
-            { "<leader>cl", mode = { "v" }, "<cmd>Obsidian link_new<CR>",     desc = "[C]reate [L]ink" },
+            { "<leader>vf", mode = { "n" }, "<cmd>Obsidian quick_switch<CR>", desc = "[F]ind [N]ote" },
+            { "<leader>vc", mode = { "n" }, "<cmd>Obsidian new<CR>",          desc = "[N]ote [N]ode" },
+            { "<leader>vs", mode = { "n" }, "<cmd>Obsidian search<CR>",       desc = "[S]earch [V]ault" },
+            { "<leader>vt", mode = { "n" }, "<cmd>Obsidian tags<CR>",         desc = "[S]earch [T]ags" },
         },
         after = function()
+            vim.api.nvim_create_autocmd("FileType", {
+                pattern = "markdown",
+                callback = function()
+                    vim.keymap.set("v", "<leader>cl", "<cmd>Obsidian link_new")
+                end,
+            })
+            vim.api.nvim_create_autocmd("FileType", {
+                pattern = "markdown",
+                callback = function()
+                    vim.keymap.set("v", "<leader>fl", "<cmd>Obsidian follow_link")
+                end,
+            })
+
             require("obsidian").setup({
                 ui = { enable = false },
                 legacy_commands = false,
@@ -33,8 +44,8 @@ return {
                             string.char(math.random(65, 90)) ..
                             string.char(math.random(65, 90)) ..
                             string.char(math.random(65, 90)) ..
-                            string.char(math.random(65, 90)) .. "-" .. folder_prefix
-                            .. "-" .. title:gsub(" ", "_"):gsub("[^A-Za-z0-9_-]", ""):lower()
+                            string.char(math.random(65, 90)) ..
+                            "-" .. title:gsub(" ", "_"):gsub("[^A-Za-z0-9_-]", ""):lower()
                     else
                         -- If title is nil, just add 4 random uppercase letters to the suffix.
                         for _ = 1, 4 do
@@ -62,9 +73,9 @@ return {
                         name = "Personal",
                         path = "~/Personal/Vaults/Personal",
                         overrides = {
-                            notes_subdir = "05_Fleeting/VIM",
+                            notes_subdir = "temp",
                             attachments = {
-                                img_folder = "99_Meta/01_Attachments/imgs",
+                                folder = "99_Meta/01_Attachments/imgs",
                             },
                         },
                     },
@@ -75,16 +86,6 @@ return {
                         --         notes_subdir = "",
                         -- },
                     },
-                    -- {
-                    --     name = "Vault",
-                    --     path = "~/Documents/Vault",
-                    --     overrides = {
-                    --         notes_subdir = "05_Fleeting",
-                    --         attachments = {
-                    --             img_folder = "99_Meta/01_Assets/imgs",
-                    --         },
-                    --     },
-                    -- },
                 },
                 templates = {
                     folder = "99_Meta/00_Templates",
@@ -101,7 +102,7 @@ return {
                 },
                 daily_notes = {
                     -- Optional, if you keep daily notes in a separate directory.
-                    folder = "06_Daily",
+                    folder = "daily",
                     -- Optional, if you want to change the date format for the ID of daily notes.
                     date_format = "%Y-%m-%d",
                     -- Optional, if you want to change the date format of the default alias of daily notes.
