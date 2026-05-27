@@ -331,12 +331,15 @@ require("lze").load({
                 },
                 heading = {
                     border = false,
-                    icons = { "▼ ",
-                        "▽ ",
-                        "▼ ",
-                        "▽ ",
-                        "▼ ",
-                        "▽ " },
+                    icons = {
+                        "* ",
+                        -- "▼ ",
+                        -- "▽ ",
+                        -- "▼ ",
+                        -- "▽ ",
+                        -- "▼ ",
+                        -- "▽ "
+                    },
                     position = "inline",
                     sign = false,
                     width = "full",
@@ -388,6 +391,9 @@ require("lze").load({
         "vim-fugitive",
         for_cat = "general.always",
         cmd = { "G", "Git" },
+        keys = {
+            { "<leader>ga", mode = { "n" }, "<cmd>Git add %:p<CR>", desc = "Add" },
+        },
     },
     {
         "vim-eunuch",

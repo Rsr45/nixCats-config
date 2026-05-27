@@ -4,7 +4,7 @@ return {
         for_cat = "general.always",
         event = "VimEnter",
         keys = {
-            { "<leader>tt", mode = { "n" }, function() Snacks.terminal.toggle() end, desc = "Terminal", },
+            { "<leader>ot", mode = { "n" }, function() Snacks.terminal.toggle() end, desc = "Terminal", },
             { "<leader>tz", mode = { "n" }, function() Snacks.zen() end,             desc = "Zen", },
 
             { "<leader>,",  mode = { "n" }, function() Snacks.picker.buffers() end,  desc = "Buffers", },
@@ -32,9 +32,10 @@ return {
 
             -- File + find
 
-            { "<leader>ff", mode = { "n" }, function() Snacks.picker.files() end,                                          desc = "Files", },
+            { "<leader><leader>", mode = { "n" }, function() Snacks.picker.files() end, desc = "Files", },
+            { "<leader>f",        mode = { "n" }, function() Snacks.picker.files() end, desc = "Files", },
             {
-                "<leader>fF",
+                "<leader>F",
                 function()
                     Snacks.picker.files({
                         cwd = require("oil").get_current_dir()
@@ -44,19 +45,19 @@ return {
                 nowait = true,
                 desc = "Find files in the current directory"
             },
-            { "<leader>fr", mode = { "n" }, function() Snacks.picker.recent() end,                                         desc = "Recent", },
-            { "<leader>fG", mode = { "n" }, function() Snacks.picker.grep_word() end,                                      desc = "Grep Word" },
+            -- { "<leader>fr", mode = { "n" }, function() Snacks.picker.recent() end,                                         desc = "Recent", },
+            -- { "<leader>fG", mode = { "n" }, function() Snacks.picker.grep_word() end,                                      desc = "Grep Word" },
             -- { "<leader>fd", mode = { "n" }, function() Snacks.picker.diagnostics() end,                                    desc = "Diagnostics" },
             -- { "<leader>fD", mode = { "n" }, function() Snacks.picker.diagnostics_buffer() end,                             desc = "Diagnostics Buffers" },
-            { "<leader>fe", mode = { "n" }, function() Snacks.explorer() end,                                              desc = "Explorer" },
+            -- { "<leader>fe", mode = { "n" }, function() Snacks.explorer() end,                                              desc = "Explorer" },
             -- Buffer
             { "<leader>bb", mode = { "n" }, function() Snacks.picker.buffers() end,                                        desc = "Buffers", },
             -- Search
-            { "<leader>sp", mode = { "n" }, function() Snacks.picker.grep() end,                                           desc = "Grep", },
-            { "<leader>sb", mode = { "n" }, function() Snacks.picker.lines({ layout = { preset = 'vertico_split' } }) end, desc = "Lines" },
-            { "<leader>sB", mode = { "n" }, function() Snacks.picker.grep_buffers() end,                                   desc = "Grep Buffers", },
-            { "<leader>sd", mode = { "n" }, function() Snacks.picker.grep_buffers({ cwd = vim.fn.expand('%:p:h') }) end,   desc = "Grep Buffers cwd", },
-            { "<leader>sn", mode = { "n" }, function() Snacks.picker.notifications() end,                                  desc = "Notifications", },
+            -- { "<leader>sp", mode = { "n" }, function() Snacks.picker.grep() end,                                           desc = "Grep", },
+            { "<leader>s",  mode = { "n" }, function() Snacks.picker.lines({ layout = { preset = 'vertico_split' } }) end, desc = "Lines" },
+            -- { "<leader>sB", mode = { "n" }, function() Snacks.picker.grep_buffers() end,                                   desc = "Grep Buffers", },
+            -- { "<leader>sd", mode = { "n" }, function() Snacks.picker.grep_buffers({ cwd = vim.fn.expand('%:p:h') }) end,   desc = "Grep Buffers cwd", },
+            -- { "<leader>sn", mode = { "n" }, function() Snacks.picker.notifications() end,                                  desc = "Notifications", },
             -- Project
             { "<leader>pp", mode = { "n" }, function() Snacks.picker.projects() end,                                       desc = "Projects", },
             -- LSP
@@ -64,8 +65,8 @@ return {
             { "<leader>ld", mode = { "n" }, function() Snacks.picker.lsp_symbols() end,                                    desc = "[D]ocument [S]ymbols" },
             { "<leader>lS", mode = { "n" }, function() Snacks.picker.lsp_workspace_symbols() end,                          desc = "Workspace Symbols" },
             { "<leader>lw", mode = { "n" }, function() Snacks.picker.lsp_workspace_symbols() end,                          desc = "[W]orkspace [S]ymbols" },
-            { "<leader>gr", mode = { "n" }, function() Snacks.picker.lsp_references() end,                                 desc = "[G]oto [R]eferences" },
-            { "<leader>gI", mode = { "n" }, function() Snacks.picker.lsp_implementations() end,                            desc = "[G]oto [I]mplementation" },
+            { "<leader>lr", mode = { "n" }, function() Snacks.picker.lsp_references() end,                                 desc = "[G]oto [R]eferences" },
+            { "<leader>li", mode = { "n" }, function() Snacks.picker.lsp_implementations() end,                            desc = "[G]oto [I]mplementation" },
             -- Words
             -- { "gslw",       mode = { "n" }, function() Snacks.words.jump(-vim.v.count1) end,                               desc = "Last word" },
             -- { "gsnw",       mode = { "n" }, function() Snacks.words.jump(vim.v.count1) end,                                desc = "Next word" },
@@ -73,42 +74,42 @@ return {
         after = function()
             local Snacks = require("snacks")
 
-            local project_patterns = {
-                ".git",
-                "_darcs",
-                ".hg",
-                ".bzr",
-                ".svn",
-                "package.json",
-                "Makefile",
-            }
-
-            local function in_project()
-                local cwd = vim.loop.cwd()
-                local root = vim.fs.find(project_patterns, {
-                    upward = true,
-                    path = cwd,
-                })[1]
-
-                return root ~= nil
-            end
-
-            function Snacks.picker.smart_projects()
-                if in_project() then
-                    -- already inside a project → jump straight to files
-                    Snacks.picker.files()
-                else
-                    -- not in a project → show project picker
-                    Snacks.picker.projects()
-                end
-            end
-
-            vim.keymap.set("n", "<leader><leader>", function()
-                require("snacks").picker.smart_projects()
-            end, { desc = "Smart Projects / Files" })
+            -- local project_patterns = {
+            --     ".git",
+            --     "_darcs",
+            --     ".hg",
+            --     ".bzr",
+            --     ".svn",
+            --     "package.json",
+            --     "Makefile",
+            -- }
+            --
+            -- local function in_project()
+            --     local cwd = vim.loop.cwd()
+            --     local root = vim.fs.find(project_patterns, {
+            --         upward = true,
+            --         path = cwd,
+            --     })[1]
+            --
+            --     return root ~= nil
+            -- end
+            --
+            -- function Snacks.picker.smart_projects()
+            --     if in_project() then
+            --         -- already inside a project → jump straight to files
+            --         Snacks.picker.files()
+            --     else
+            --         -- not in a project → show project picker
+            --         Snacks.picker.projects()
+            --     end
+            -- end
+            --
+            -- vim.keymap.set("n", "<leader><leader>", function()
+            --     require("snacks").picker.smart_projects()
+            -- end, { desc = "Smart Projects / Files" })
 
             require("snacks").setup({
-                animate = {},
+                -- animate = {},
                 statuscolumn = {
                     enabled = false,
                     right = { "mark", "sign" },
@@ -123,16 +124,16 @@ return {
                     refresh = 50,
                 },
                 indent = {
-                    enabled = false,
+                    enabled = true,
                     priority = 1,
                     animate = {
                         enabled = false,
                     },
-                    char = "╎",
+                    -- char = "╎",
                     scope = {
                         -- char = "┆",
-                        char = "╎",
-                        underline = false,
+                        -- char = "╎",
+                        underline = true,
                     },
                 },
                 image = {

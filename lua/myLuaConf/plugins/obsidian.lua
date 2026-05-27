@@ -45,12 +45,17 @@ return {
                             string.char(math.random(65, 90)) ..
                             string.char(math.random(65, 90)) ..
                             string.char(math.random(65, 90)) ..
-                            "-" .. title:gsub(" ", "_"):gsub("[^A-Za-z0-9_-]", ""):lower()
+                            "-" ..
+                            title:gsub(" ", "_"):gsub("[^A-Za-z0-9_-]", ""):lower()
                     else
                         -- If title is nil, just add 4 random uppercase letters to the suffix.
-                        for _ = 1, 4 do
-                            suffix = suffix .. string.char(math.random(65, 90)) .. "-" .. folder_prefix
-                        end
+                        -- for _ = 1, 4 do
+                        suffix = suffix ..
+                            string.char(math.random(65, 90)) ..
+                            string.char(math.random(65, 90)) ..
+                            string.char(math.random(65, 90)) ..
+                            string.char(math.random(65, 90))
+                        -- end
                     end
                     -- return tostring(os.time()) .. "-" .. suffix
                     return tostring(os.date("%Y%m%d%H%M")) .. "-" .. suffix
@@ -106,9 +111,9 @@ return {
                     -- Optional, if you want to change the date format for the ID of daily notes.
                     date_format = "%Y-%m-%d",
                     -- Optional, if you want to change the date format of the default alias of daily notes.
-                    alias_format = "%B %-d, %Y",
+                    alias_format = "%-d %B, %Y",
                     -- Optional, default tags to add to each new daily note created.
-                    default_tags = { "Daily" },
+                    default_tags = { "daily" },
                     -- Optional, if you want to automatically insert a template from your template directory like 'daily.md'
                     -- template = "daily.md",
                     -- Optional, if you want `Obsidian yesterday` to return the last work day or `Obsidian tomorrow` to return the next work day.
@@ -117,5 +122,4 @@ return {
             })
         end,
     },
-
 }
