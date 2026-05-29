@@ -2,11 +2,11 @@
   "nodes": {
     "nixCats": {
       "locked": {
-        "lastModified": 1769578476,
-        "narHash": "sha256-4+KbiBcC6hQ3sh0UbPXjy6TOfLh9yhskRlfPzyZ2FH4=",
+        "lastModified": 1777273601,
+        "narHash": "sha256-xBUa8Tl9V7IXI+VmLEuDc81La/EhoSn1C3EVSnJ3cfU=",
         "owner": "BirdeeHub",
         "repo": "nixCats-nvim",
-        "rev": "48f8be4bdafccfa19ceaaf08071a15eca36fdb1d",
+        "rev": "f69ea013e328841a7def7037ed59788a76be8816",
         "type": "github"
       },
       "original": {
@@ -17,11 +17,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1770015011,
-        "narHash": "sha256-7vUo0qWCl/rip+fzr6lcMlz9I0tN/8m7d5Bla/rS2kk=",
+        "lastModified": 1779877693,
+        "narHash": "sha256-NOF9NAREhxr50bbBfVcVOq+ArCMSoe8dP79Pk2uyARk=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "f08e6b11a5ed43637a8ac444dd44118bc7d273b9",
+        "rev": "4100e830e085863741bc69b156ec4ccd53ab5be0",
         "type": "github"
       },
       "original": {
@@ -34,11 +34,11 @@
     "plugins-black-metal": {
       "flake": false,
       "locked": {
-        "lastModified": 1755520422,
-        "narHash": "sha256-sRbXxekmQuL412AJKrSkI1EdcuYQkKm1qfcIyMNhLBA=",
+        "lastModified": 1776281669,
+        "narHash": "sha256-0RY/kek2QoL3ZIWehJFQIFOOpAgCrh/POpKklzQ2UKw=",
         "owner": "metalelf0",
         "repo": "black-metal-theme-neovim",
-        "rev": "6d0207871387077f40d5396ab1ae90520e688d36",
+        "rev": "d7ce1c4b9196b3b34e70ca4fa9af108bb4207818",
         "type": "github"
       },
       "original": {
@@ -50,11 +50,11 @@
     "plugins-coop": {
       "flake": false,
       "locked": {
-        "lastModified": 1753337805,
-        "narHash": "sha256-eUpJPhZ+tnyCXtpAqZ676rJOh/WwSMAYjWbEc1a1uVU=",
+        "lastModified": 1776681993,
+        "narHash": "sha256-S6iGmdakI714Im0tetgfASbe0K4/olYsjj26+WP+rSU=",
         "owner": "gregorias",
         "repo": "coop.nvim",
-        "rev": "85986a6f7390d1362864708dcba097ba0e6b8d39",
+        "rev": "b156e541316aee14be4ae64c93ed8bddb6d03bc1",
         "type": "github"
       },
       "original": {
@@ -66,11 +66,11 @@
     "plugins-feed": {
       "flake": false,
       "locked": {
-        "lastModified": 1765821067,
-        "narHash": "sha256-6dry0pD4MXKSHi80LDxktjXQrPkWu3RnZ0SzXp9Gymg=",
+        "lastModified": 1775008438,
+        "narHash": "sha256-pJYr1h7+0Exl0a5DYLeIAjBzOo5KbxxLtMqwDNc+GUg=",
         "owner": "neo451",
         "repo": "feed.nvim",
-        "rev": "d1f8cee9df8ea4c7e319db701fb0ece0eca9a005",
+        "rev": "4e0903343c47b13aa5355ed267dbd58300bff8be",
         "type": "github"
       },
       "original": {
@@ -111,11 +111,11 @@
     "plugins-org-bullets": {
       "flake": false,
       "locked": {
-        "lastModified": 1737617809,
-        "narHash": "sha256-/l8IfvVSPK7pt3Or39+uenryTM5aBvyJZX5trKNh0X0=",
+        "lastModified": 1774343634,
+        "narHash": "sha256-Tgeqr/Zd1hJXXaln4XWGS5aZqypnpfNxgO/+pQVk7jg=",
         "owner": "nvim-orgmode",
         "repo": "org-bullets.nvim",
-        "rev": "21437cfa99c70f2c18977bffd423f912a7b832ea",
+        "rev": "503fe053550879cc202086a40454e46a87c41ddb",
         "type": "github"
       },
       "original": {
@@ -156,23 +156,6 @@
         "type": "github"
       }
     },
-    "plugins-treesitter-textobjects": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1774087849,
-        "narHash": "sha256-H1tIn3XYJtLF1JvlUJvLtTScMdV/NHDFq+KZjBV4q1c=",
-        "owner": "nvim-treesitter",
-        "repo": "nvim-treesitter-textobjects",
-        "rev": "93d60a475f0b08a8eceb99255863977d3a25f310",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nvim-treesitter",
-        "ref": "main",
-        "repo": "nvim-treesitter-textobjects",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "nixCats": "nixCats",
@@ -184,8 +167,7 @@
         "plugins-neopywal": "plugins-neopywal",
         "plugins-org-bullets": "plugins-org-bullets",
         "plugins-org-modern": "plugins-org-modern",
-        "plugins-tfm": "plugins-tfm",
-        "plugins-treesitter-textobjects": "plugins-treesitter-textobjects"
+        "plugins-tfm": "plugins-tfm"
       }
     }
   },

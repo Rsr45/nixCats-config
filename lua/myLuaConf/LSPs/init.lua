@@ -1,6 +1,6 @@
 local catUtils = require('nixCatsUtils')
 if (catUtils.isNixCats and nixCats('lspDebugMode')) then
-    vim.lsp.set_log_level("debug")
+    vim.lsp.log.set_level("debug")
 end
 
 -- NOTE: This file uses lzextras.lsp handler https://github.com/BirdeeHub/lzextras?tab=readme-ov-file#lsp-handler
@@ -175,27 +175,34 @@ require('lze').load {
             },
         },
     },
-    {
-        "markdown_oxide",
-        for_cat = "markdown",
-        lsp = {
-            filetypes = { "markdown" },
-        },
-    },
-    {
-        "ruff",
-        for_cat = "python",
-        lsp = {
-            filetypes = { "python" },
-        },
-    },
     -- {
-    --     "pyright",
+    --     "markdown_oxide",
+    --     for_cat = "markdown",
+    --     lsp = {
+    --         filetypes = { "markdown" },
+    --     },
+    -- },
+    -- {
+    --     "ruff",
     --     for_cat = "python",
     --     lsp = {
     --         filetypes = { "python" },
     --     },
     -- },
+    {
+        "pyright",
+        for_cat = "python",
+        lsp = {
+            filetypes = { "python" },
+        },
+    },
+    {
+        "qmlls",
+        for_cat = "qml",
+        lsp = {
+            filetypes = { "qml", "qml" },
+        },
+    },
     -- {
     --     "texlab",
     --     for_cat = "tex",
