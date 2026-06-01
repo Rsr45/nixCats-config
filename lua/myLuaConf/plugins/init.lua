@@ -149,6 +149,7 @@ require("lze").load({
     -- { import = "myLuaConf.plugins.smartcolumn" }, -- no need for now
     { import = "myLuaConf.plugins.trouble" },
     { import = "myLuaConf.plugins.edgy" },
+    { import = "myLuaConf.plugins.img-clip" },
     -- { import = "myLuaConf.plugins.feed" },
     {
         "mini.icons",
@@ -252,15 +253,17 @@ require("lze").load({
                 },
                 heading = {
                     border = false,
-                    icons = {
-                        "* ",
-                        -- "▼ ",
-                        -- "▽ ",
-                        -- "▼ ",
-                        -- "▽ ",
-                        -- "▼ ",
-                        -- "▽ "
-                    },
+                    -- icons = {
+                    --     -- "▼ ",
+                    --     -- "▽ ",
+                    --     -- "▼ ",
+                    --     -- "▽ ",
+                    --     -- "▼ ",
+                    --     -- "▽ "
+                    -- },
+                    icons = function(ctx)
+                        return table.concat(ctx.sections, '.') .. ' '
+                    end,
                     position = "inline",
                     sign = false,
                     width = "full",
@@ -272,6 +275,29 @@ require("lze").load({
                         "",
                         "" },
                 },
+                -- heading = {
+                --     width = "block",
+                --     backgrounds = {
+                --         "MiniStatusLineModeNormal",
+                --         "MiniStatusLineModeInsert",
+                --         "MiniStatusLineModeReplace",
+                --         "MiniStatusLineModeVisual",
+                --         "MiniStatusLineModeCommand",
+                --         "MiniStatusLineModeOther",
+                --     },
+                --     sign = true,
+                --     left_pad = 1,
+                --     right_pad = 0,
+                --     position = "right",
+                --     icons = {
+                --         "",
+                --         "",
+                --         "",
+                --         "",
+                --         "",
+                --         "",
+                --     },
+                -- },
                 indent = {
                     enabled = true,
                     skip_heading = false,

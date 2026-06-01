@@ -5,22 +5,24 @@ return {
         for_cat = "notes",
         cmd = { "Obsidian", "Obsidian open", "Obsidian new", "Obsidian search", "Obsidian tags", "Obsidian follow_link", "Obsidian link_new" },
         keys = {
-            { "<leader>vf", mode = { "n" }, "<cmd>Obsidian quick_switch<CR>", desc = "[F]ind [N]ote" },
-            { "<leader>vc", mode = { "n" }, "<cmd>Obsidian new<CR>",          desc = "[N]ote [N]ode" },
-            { "<leader>vs", mode = { "n" }, "<cmd>Obsidian search<CR>",       desc = "[S]earch [V]ault" },
-            { "<leader>vt", mode = { "n" }, "<cmd>Obsidian tags<CR>",         desc = "[S]earch [T]ags" },
+            { "<leader>vf", mode = { "n" }, "<cmd>Obsidian quick_switch<CR>", desc = "(F)ind" },
+            { "<leader>vc", mode = { "n" }, "<cmd>Obsidian new<CR>",          desc = "(C)reate" },
+            { "<leader>vs", mode = { "n" }, "<cmd>Obsidian search<CR>",       desc = "(S)earch" },
+            { "<leader>vt", mode = { "n" }, "<cmd>Obsidian tags<CR>",         desc = "(T)ags" },
+            -- { "<leader>vlf", mode = { "n" },      "<cmd>Obsidian follow_link<CR>",  desc = "(L)ink (F)ollow" },
+            -- { "<leader>vlc", mode = { "v", "x" }, "<cmd>Obsidian link_new<CR>",     desc = "(L)ink (C)reate" },
         },
         after = function()
             vim.api.nvim_create_autocmd("FileType", {
                 pattern = "markdown",
                 callback = function()
-                    vim.keymap.set("v", "<leader>cl", "<cmd>Obsidian link_new")
+                    vim.keymap.set({ "v", "x" }, "<leader>vlc", "<cmd>Obsidian link_new<CR>")
                 end,
             })
             vim.api.nvim_create_autocmd("FileType", {
                 pattern = "markdown",
                 callback = function()
-                    vim.keymap.set("v", "<leader>fl", "<cmd>Obsidian follow_link")
+                    vim.keymap.set("n", "<leader>vlf", "<cmd>Obsidian follow_link<CR>")
                 end,
             })
 

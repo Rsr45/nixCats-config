@@ -408,6 +408,7 @@
                 indent-blankline-nvim
                 vim-startuptime
                 pkgs.neovimPlugins.hlargs
+                img-clip-nvim
               ];
             };
           };
