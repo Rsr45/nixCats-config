@@ -4,7 +4,13 @@
 -- end
 --
 -- vim.cmd.colorscheme(colorschemeName)
---
+-- no need for it using stylix with mini-base16
+
+-- if using it on non nix sysemts
+if not require("nixCatsUtils").isNixCats then
+    vim.cmd.colorscheme("onedark")
+end
+
 -- NOTE: you can check if you included the category with the thing wherever you want.
 if nixCats("general.extra") then
     -- I didnt want to bother with lazy loading this.
@@ -112,7 +118,7 @@ if nixCats("general.extra") then
     --     noremap = true,
     --     desc = "Open nvim root directory",
     -- })
-    vim.keymap.set("n", "<leader>oe", "<cmd>Oil --float<CR>", {
+    vim.keymap.set("n", "<leader>fe", "<cmd>Oil --float<CR>", {
         noremap = true,
         desc = "Open Directory in Oil",
     })

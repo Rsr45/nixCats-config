@@ -21,7 +21,7 @@ return {
                         {
                             "buffers",
                             buffers_color = {
-                                active = { gui = "bold" },
+                                active = 'CurSearch',
                                 inactive = { gui = "italic" },
                             },
                             symbols = {

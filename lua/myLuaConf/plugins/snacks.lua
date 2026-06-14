@@ -9,7 +9,7 @@ return {
 
             { "<leader>,",  mode = { "n" }, function() Snacks.picker.buffers() end,  desc = "Buffers", },
             {
-                "<leader>.",
+                "<leader>fr",
                 function()
                     Snacks.picker.recent()
                 end,
@@ -41,20 +41,15 @@ return {
                 nowait = true,
                 desc = "Find files in the current directory"
             },
-            { "gpw",        mode = { "n" }, function() Snacks.picker.grep_word() end,                                      desc = "Grep Word" },
-            -- Buffer
-            { "<leader>bb", mode = { "n" }, function() Snacks.picker.buffers() end,                                        desc = "Buffers", },
-
-            -- Search
             { "<leader>fs", mode = { "n" }, function() Snacks.picker.lines({ layout = { preset = 'vertico_split' } }) end, desc = "Buffer Grep" },
 
             -- LSP
-            { "<leader>ls", mode = { "n" }, function() Snacks.picker.lsp_symbols() end,                                    desc = "Document Symbols" },
-            { "<leader>ld", mode = { "n" }, function() Snacks.picker.lsp_symbols() end,                                    desc = "[D]ocument [S]ymbols" },
-            { "<leader>lS", mode = { "n" }, function() Snacks.picker.lsp_workspace_symbols() end,                          desc = "Workspace Symbols" },
-            { "<leader>lw", mode = { "n" }, function() Snacks.picker.lsp_workspace_symbols() end,                          desc = "[W]orkspace [S]ymbols" },
-            { "<leader>lr", mode = { "n" }, function() Snacks.picker.lsp_references() end,                                 desc = "[G]oto [R]eferences" },
-            { "<leader>li", mode = { "n" }, function() Snacks.picker.lsp_implementations() end,                            desc = "[G]oto [I]mplementation" },
+            -- { "<leader>ls", mode = { "n" }, function() Snacks.picker.lsp_symbols() end,                                    desc = "Document Symbols" },
+            -- { "<leader>ld", mode = { "n" }, function() Snacks.picker.lsp_symbols() end,                                    desc = "[D]ocument [S]ymbols" },
+            -- { "<leader>lS", mode = { "n" }, function() Snacks.picker.lsp_workspace_symbols() end,                          desc = "Workspace Symbols" },
+            -- { "<leader>lw", mode = { "n" }, function() Snacks.picker.lsp_workspace_symbols() end,                          desc = "[W]orkspace [S]ymbols" },
+            -- { "<leader>lr", mode = { "n" }, function() Snacks.picker.lsp_references() end,                                 desc = "[G]oto [R]eferences" },
+            -- { "<leader>li", mode = { "n" }, function() Snacks.picker.lsp_implementations() end,                            desc = "[G]oto [I]mplementation" },
             -- Words
             -- { "gslw",       mode = { "n" }, function() Snacks.words.jump(-vim.v.count1) end,                               desc = "Last word" },
             -- { "gsnw",       mode = { "n" }, function() Snacks.words.jump(vim.v.count1) end,                                desc = "Next word" },
