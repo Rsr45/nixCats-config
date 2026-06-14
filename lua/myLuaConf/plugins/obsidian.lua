@@ -78,7 +78,7 @@ return {
                 workspaces = {
                     {
                         name = "Personal",
-                        path = "~/Personal/Vaults/Personal",
+                        path = "~/Documents/Notes",
                         overrides = {
                             notes_subdir = "temp",
                             attachments = {

@@ -1,9 +1,9 @@
-local colorschemeName = nixCats("colorscheme")
-if not require("nixCatsUtils").isNixCats then
-    colorschemeName = "neopywal"
-end
+-- local colorschemeName = nixCats("colorscheme")
+-- if not require("nixCatsUtils").isNixCats then
+--     colorschemeName = "neopywal"
+-- end
 
-vim.cmd.colorscheme(colorschemeName)
+-- vim.cmd.colorscheme(colorschemeName)
 
 -- NOTE: you can check if you included the category with the thing wherever you want.
 if nixCats("general.extra") then
@@ -144,12 +144,14 @@ require("lze").load({
     { import = "myLuaConf.plugins.snacks" },
     { import = "myLuaConf.plugins.org" },
     { import = "myLuaConf.plugins.obsidian" },
+    { import = "myLuaConf.plugins.neorg" },
     { import = "myLuaConf.plugins.neogit" },
     { import = "myLuaConf.plugins.whichkey" }, -- try mini clue
     -- { import = "myLuaConf.plugins.smartcolumn" }, -- no need for now
     { import = "myLuaConf.plugins.trouble" },
     { import = "myLuaConf.plugins.edgy" },
     { import = "myLuaConf.plugins.img-clip" },
+    { import = "myLuaConf.plugins.mini-base16" },
     -- { import = "myLuaConf.plugins.feed" },
     {
         "mini.icons",

@@ -30,9 +30,9 @@ return {
             },
             -- File + find
 
-            { "<leader>f",  mode = { "n" }, function() Snacks.picker.files() end,                                          desc = "Files", },
+            { "<leader>ff", mode = { "n" }, function() Snacks.picker.files() end,                                          desc = "Files", },
             {
-                "<leader>F",
+                "<leader>fF",
                 function()
                     Snacks.picker.files({
                         cwd = vim.fn.expand('%:p:h') })
@@ -46,7 +46,7 @@ return {
             { "<leader>bb", mode = { "n" }, function() Snacks.picker.buffers() end,                                        desc = "Buffers", },
 
             -- Search
-            { "<leader>s",  mode = { "n" }, function() Snacks.picker.lines({ layout = { preset = 'vertico_split' } }) end, desc = "Buffer Grep" },
+            { "<leader>fs", mode = { "n" }, function() Snacks.picker.lines({ layout = { preset = 'vertico_split' } }) end, desc = "Buffer Grep" },
 
             -- LSP
             { "<leader>ls", mode = { "n" }, function() Snacks.picker.lsp_symbols() end,                                    desc = "Document Symbols" },
@@ -56,8 +56,8 @@ return {
             { "<leader>lr", mode = { "n" }, function() Snacks.picker.lsp_references() end,                                 desc = "[G]oto [R]eferences" },
             { "<leader>li", mode = { "n" }, function() Snacks.picker.lsp_implementations() end,                            desc = "[G]oto [I]mplementation" },
             -- Words
-            { "gslw",       mode = { "n" }, function() Snacks.words.jump(-vim.v.count1) end,                               desc = "Last word" },
-            { "gsnw",       mode = { "n" }, function() Snacks.words.jump(vim.v.count1) end,                                desc = "Next word" },
+            -- { "gslw",       mode = { "n" }, function() Snacks.words.jump(-vim.v.count1) end,                               desc = "Last word" },
+            -- { "gsnw",       mode = { "n" }, function() Snacks.words.jump(vim.v.count1) end,                                desc = "Next word" },
         },
         after = function()
             local Snacks = require("snacks")
@@ -121,7 +121,7 @@ return {
                     scope = {
                         -- char = "┆",
                         -- char = "╎",
-                        underline = true,
+                        underline = false,
                     },
                 },
                 image = {
@@ -213,7 +213,7 @@ return {
                 terminal = {},
                 notify = {},
                 notifier = {},
-                words = {},
+                -- words = {},
                 input = {
                     -- win = { border = "none" },
                 },

@@ -175,13 +175,13 @@ require('lze').load {
             },
         },
     },
-    -- {
-    --     "markdown_oxide",
-    --     for_cat = "markdown",
-    --     lsp = {
-    --         filetypes = { "markdown" },
-    --     },
-    -- },
+    {
+        "marksman",
+        for_cat = "markdown",
+        lsp = {
+            filetypes = { "markdown" },
+        },
+    },
     -- {
     --     "ruff",
     --     for_cat = "python",
@@ -203,11 +203,11 @@ require('lze').load {
             filetypes = { "qml", "qml" },
         },
     },
-    -- {
-    --     "texlab",
-    --     for_cat = "tex",
-    --     lsp = {
-    --         filetypes = { "tex", "latex", "bib" },
-    --     },
-    -- },
+    {
+        "texlab",
+        for_cat = "tex",
+        lsp = {
+            filetypes = { "tex" },
+        },
+    },
 }
