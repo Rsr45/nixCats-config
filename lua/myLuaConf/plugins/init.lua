@@ -1,10 +1,10 @@
-local colorschemeName = nixCats("colorscheme")
-if not require("nixCatsUtils").isNixCats then
-    colorschemeName = "onedark"
-end
-
-vim.cmd.colorscheme(colorschemeName)
-
+-- local colorschemeName = nixCats("colorscheme")
+-- if not require("nixCatsUtils").isNixCats then
+--     colorschemeName = "onedark"
+-- end
+--
+-- vim.cmd.colorscheme(colorschemeName)
+--
 -- NOTE: you can check if you included the category with the thing wherever you want.
 if nixCats("general.extra") then
     -- I didnt want to bother with lazy loading this.
@@ -140,7 +140,8 @@ require("lze").load({
     { import = "myLuaConf.plugins.navigation" },
     { import = "myLuaConf.plugins.fold" },
     -- { import = "myLuaConf.plugins.mini-statusline" },
-    { import = "myLuaConf.plugins.lualine" },
+    -- { import = "myLuaConf.plugins.lualine" },
+    { import = "myLuaConf.plugins.lualine-grimm" },
     { import = "myLuaConf.plugins.snacks" },
     { import = "myLuaConf.plugins.org" },
     { import = "myLuaConf.plugins.obsidian" },
