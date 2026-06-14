@@ -221,14 +221,15 @@
             oil-nvim
             # nvim-web-devicons
             mini-icons
+            mini-base16
           ];
         };
         # You can retreive information from the
         # packageDefinitions of the package this was packaged with.
         # :help nixCats.flake.outputs.categoryDefinitions.scheme
         themer = with pkgs.vimPlugins;
-        # (builtins.getAttr (categories.colorscheme or "onedark") {
-          (builtins.getAttr (extra.colorscheme.name or "gruvbox-material") {
+        (builtins.getAttr (categories.colorscheme or "onedark") {
+          # (builtins.getAttr (extra.colorscheme.name or "gruvbox-material") {
             # Theme switcher without creating a new category
             "moonfly" = vim-moonfly-colors;
             "everforest" = everforest;

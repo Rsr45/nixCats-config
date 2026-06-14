@@ -1,7 +1,7 @@
 return {
     {
         "mini.base16",
-        for_cat = "themer",
+        for_cat = "general.extra",
         lazy = false,
         after = function()
             require('mini.base16').setup({
