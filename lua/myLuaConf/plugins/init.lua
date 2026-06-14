@@ -1,9 +1,9 @@
--- local colorschemeName = nixCats("colorscheme")
--- if not require("nixCatsUtils").isNixCats then
---     colorschemeName = "neopywal"
--- end
+local colorschemeName = nixCats("colorscheme")
+if not require("nixCatsUtils").isNixCats then
+    colorschemeName = "onedark"
+end
 
--- vim.cmd.colorscheme(colorschemeName)
+vim.cmd.colorscheme(colorschemeName)
 
 -- NOTE: you can check if you included the category with the thing wherever you want.
 if nixCats("general.extra") then
