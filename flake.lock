@@ -63,6 +63,19 @@
         "type": "github"
       }
     },
+    "plugins-denote": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1777649236,
+        "narHash": "sha256-baZ+f4otYlbozkRALNbLvreEwPi7P8c6ck6WhZktCeo=",
+        "type": "tarball",
+        "url": "https://github.com/cvigilv/denote.nvim/archive/refs/tags/0.1.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://github.com/cvigilv/denote.nvim/archive/refs/tags/0.1.tar.gz"
+      }
+    },
     "plugins-feed": {
       "flake": false,
       "locked": {
@@ -178,6 +191,7 @@
         "nixpkgs": "nixpkgs",
         "plugins-black-metal": "plugins-black-metal",
         "plugins-coop": "plugins-coop",
+        "plugins-denote": "plugins-denote",
         "plugins-feed": "plugins-feed",
         "plugins-fff": "plugins-fff",
         "plugins-hlargs": "plugins-hlargs",

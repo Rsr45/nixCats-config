@@ -119,13 +119,6 @@ return {
         end
     },
     {
-        "mini.diff",
-        for_cat = "general.mini",
-        after = function()
-            require("mini.diff").setup()
-        end
-    },
-    {
         "mini.trailspace",
         for_cat = "general.mini",
         keys = {

@@ -141,6 +141,7 @@ require("lze").load({
         dep_of = { "noice.nvim" },
     },
     { import = "myLuaConf.plugins.noice" },
+
     { import = "myLuaConf.plugins.treesitter" },
     { import = "myLuaConf.plugins.completion" },
     { import = "myLuaConf.plugins.navigation" },
@@ -151,15 +152,14 @@ require("lze").load({
     { import = "myLuaConf.plugins.snacks" },
     { import = "myLuaConf.plugins.org" },
     { import = "myLuaConf.plugins.obsidian" },
-    { import = "myLuaConf.plugins.neorg" },
-    { import = "myLuaConf.plugins.neogit" },
     { import = "myLuaConf.plugins.whichkey" }, -- try mini clue
-    -- { import = "myLuaConf.plugins.smartcolumn" }, -- no need for now
-    { import = "myLuaConf.plugins.trouble" },
     { import = "myLuaConf.plugins.edgy" },
     { import = "myLuaConf.plugins.img-clip" },
     { import = "myLuaConf.plugins.mini-base16" },
-    -- { import = "myLuaConf.plugins.feed" },
+
+
+    { import = "myLuaConf.plugins.git.neogit" },
+    { import = "myLuaConf.plugins.git.mini-git" },
     {
         "mini.icons",
         for_cat = "general.extra",
@@ -178,15 +178,6 @@ require("lze").load({
     --             indent = { char = "╎¦┆" },
     --             scope = { enabled = true },
     --         })
-    --     end,
-    -- },
-    -- {
-    --     "vimtex",
-    --     lazy = false,
-    --     for_cat = "general.always",
-    --     after = function()
-    --         vim.g.vimtex_view_method = "sioyek"
-    --         vim.g.vimtex_syntax_enabled = 0
     --     end,
     -- },
     {
@@ -328,7 +319,7 @@ require("lze").load({
     },
     {
         "nvim-highlight-colors",
-        for_cat = "general.always",
+        for_cat = "general.extra",
         ft = { "css", "scss" },
         after = function()
             require("nvim-highlight-colors").setup({
@@ -344,81 +335,16 @@ require("lze").load({
         lazy = false,
     },
     {
-        "vim-fugitive",
-        for_cat = "general.always",
-        cmd = { "G", "Git" },
-        keys = {
-            { "<leader>ga", mode = { "n" }, "<cmd>Git add %:p<CR>", desc = "Add" },
-        },
-    },
-    {
         "vim-eunuch",
         for_cat = "general.always",
         cmd = {
-            "Rename",
-            "Copy",
-            "Unlink",
-            "Duplicate",
-            "Remove",
-            "Move",
-            "Delete",
-            "Chmod",
-            "Mkdir",
-            "Cfind",
-            "Clocate",
-            "Lfind",
-            "Llocate",
             "SudoEdit",
             "SudoWrite",
-            "Wall",
-            "W",
-        },
-        keys = {
-            -- { "<leader>fD", mode = { "n" }, "<cmd>Delete<Cr>", desc = "[D]elete File" },
-            {
-                "<leader>bR",
-                mode = { "n" },
-                function()
-                    local new_name = vim.fn.input("Enter new filename to save as: ")
-                    if new_name ~= "" then
-                        vim.cmd("Rename " .. new_name)
-                    else
-                        print("Aborted: No filename entered.")
-                    end
-                end,
-                desc = "[R]ename Buffer",
-            },
-            {
-                "<leader>fR",
-                mode = { "n" },
-                function()
-                    local new_name = vim.fn.input("Enter new filename to save as: ")
-                    if new_name ~= "" then
-                        vim.cmd("Rename " .. new_name)
-                    else
-                        print("Aborted: No filename entered.")
-                    end
-                end,
-                desc = "[R]ename File",
-            },
-            {
-                "<leader>fS",
-                mode = { "n" },
-                function()
-                    local new_name = vim.fn.input("Enter new filename to save as: ")
-                    if new_name ~= "" then
-                        vim.cmd("saveas " .. new_name)
-                    else
-                        print("Aborted: No filename entered.")
-                    end
-                end,
-                desc = "[S]ave File As",
-            },
         },
     },
     {
         "promise-async",
-        for_cat = "general.always",
+        for_cat = "general.extra",
         dep_of = "nvim-ufo",
     },
     {
@@ -457,31 +383,4 @@ require("lze").load({
             })
         end,
     },
-    -- {
-    --     "hlargs",
-    --     for_cat = 'general.extra',
-    --     event = "DeferredUIEnter",
-    --     -- keys = "",
-    --     dep_of = { "nvim-lspconfig" },
-    --     after = function()
-    --         require('hlargs').setup {
-    --             -- color = '#32a88f',
-    --         }
-    --         vim.cmd([[hi clear @lsp.type.parameter]])
-    --         vim.cmd([[hi link @lsp.type.parameter Hlargs]])
-    --     end,
-    -- },
-    -- {
-    --     "nvim-navic",
-    --     for_cat = "general.always",
-    --     event = "DeferredUIEnter",
-    --     after = function()
-    --         require("nvim-navic").setup({
-    --             lsp = {
-    --                 auto_attach = true,
-    --             }
-    --         })
-    --         vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
-    --     end
-    -- },
 })

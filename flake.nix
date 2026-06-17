@@ -76,6 +76,11 @@
       url = "github:dmtrKovalenko/fff.nvim";
       flake = false;
     };
+    "plugins-denote" = {
+      # url = "github:cvigilv/denote.nvim";
+      url = "https://github.com/cvigilv/denote.nvim/archive/refs/tags/0.1.tar.gz";
+      flake = false;
+    };
   };
 
   # see :help nixCats.flake.outputs
@@ -285,7 +290,8 @@
         ];
         notes = with pkgs.vimPlugins; [
           obsidian-nvim
-          neorg
+          # neorg
+          pkgs.neovimPlugins.denote
         ];
         org = with pkgs.vimPlugins; [
           orgmode
@@ -309,6 +315,12 @@
                 with plugins; [
                   nix
                   lua
+                  vim
+                  regex
+                  lua
+                  bash
+                  markdown
+                  markdown_inline
                 ]
             ))
           ];
@@ -331,31 +343,29 @@
             mini-files
           ];
           git = with pkgs.vimPlugins; [
-            diffview-nvim
-            gitsigns-nvim
-            vim-fugitive
             neogit
+            mini-git
+            mini-diff
           ];
           mini = with pkgs.vimPlugins; [
             mini-ai
             mini-align
-            mini-completion
             mini-keymap
             mini-move
             mini-operators
             mini-pairs
+            # mini-completion
             # mini-snippets
             mini-splitjoin
             mini-surround
             mini-basics
             mini-bracketed
             mini-bufremove
+            mini-comment
             mini-clue
             mini-deps
-            mini-diff
             mini-extra
             mini-files
-            mini-git
             mini-jump
             mini-jump2d
             mini-misc
@@ -377,37 +387,21 @@
             lualine-nvim
             bufferline-nvim
             vim-sleuth
-            vim-rhubarb
-            vim-visual-multi
             vim-eunuch
-            nvim-navic
-            nvim-biscuits
             snacks-nvim
-            # fff-nvim
-            nvim-ufo
-            promise-async
             nui-nvim
             noice-nvim
-            fzf-lua
-            nvim-highlight-colors
-            smartcolumn-nvim
-            vimtex
-            trouble-nvim
-            pkgs.neovimPlugins.feed
-            pkgs.neovimPlugins.tfm
-            pkgs.neovimPlugins.coop
-            edgy-nvim
           ];
           extra = with pkgs.vimPlugins; [
+            nvim-ufo
+            promise-async
+            nvim-highlight-colors
+            edgy-nvim
+            trouble-nvim
             fidget-nvim
-            # lualine-lsp-progress
             which-key-nvim
-            # comment-nvim
-            mini-comment
             undotree
-            indent-blankline-nvim
             vim-startuptime
-            pkgs.neovimPlugins.hlargs
             img-clip-nvim
           ];
         };

@@ -107,7 +107,7 @@ return {
                 prompt = {
                     enabled = false,
                 },
-                highlight = { matches = false, },
+                -- highlight = { matches = false, },
             })
         end,
     },

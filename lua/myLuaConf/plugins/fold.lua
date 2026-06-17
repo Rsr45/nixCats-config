@@ -1,7 +1,7 @@
 return {
     {
         "nvim-ufo",
-        for_cat = "general.always",
+        for_cat = "general.extra",
         lazy = false,
         event = "BufReadPost",
         after = function()

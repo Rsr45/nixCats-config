@@ -95,6 +95,8 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 vim.g.netrw_liststyle = 0
 vim.g.netrw_banner = 0
+
+vim.opt.laststatus = 3
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
@@ -107,22 +109,12 @@ vim.keymap.set("n", "n", "nzzzv", { desc = 'Next Search Result' })
 vim.keymap.set("n", "N", "Nzzzv", { desc = 'Previous Search Result' })
 vim.keymap.set("n", "<S-Down>", "mzJ`z", { desc = 'Keep cursor at line start' })
 
--- see help sticky keys on windows
--- vim.cmd([[command! W w]])
--- vim.cmd([[command! Wq wq]])
--- vim.cmd([[command! WQ wq]])
--- vim.cmd([[command! Q q]])
-
 -- Remap for dealing with word wrap
 vim.keymap.set('n', '<Up>', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', '<Down>', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Diagnostic keymaps
--- see mini bracketed
--- vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
--- vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
--- vim.keymap.set('n', '<leader>cx', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 vim.keymap.set('n', '<leader>cx', function()
 	if vim.fn.getloclist(0, { winid = 1 }).winid ~= 0 then
 		vim.cmd('lclose')
@@ -136,17 +128,11 @@ vim.keymap.set({ "v", "x", "n" }, '<leader>y', '"+y', { noremap = true, silent =
 vim.keymap.set({ "n", "v", "x" }, '<leader>Y', '"+yy', { noremap = true, silent = true, desc = 'Yank line to clipboard' })
 vim.keymap.set({ "n", "v", "x" }, '<C-a>', 'gg0vG$', { noremap = true, silent = true, desc = 'Select all' })
 vim.keymap.set({ 'n', 'v', 'x' }, '<leader>p', '"+p', { noremap = true, silent = true, desc = 'Paste from clipboard' })
--- vim.keymap.set('i', '<C-p>', '<C-r><C-p>+',
--- 	{ noremap = true, silent = true, desc = 'Paste from clipboard from within insert mode' })
 vim.keymap.set("x", "<leader>P", '"_dP',
 	{ noremap = true, silent = true, desc = 'Paste over selection without erasing unnamed register' })
 
--- File manipulation
--- vim.keymap.set("n", '<leader>fs', '<cmd>update<CR>', { desc = 'File save' })
 vim.keymap.set("n", '<leader>ts', '<cmd>set spell!<Cr>', { desc = 'Toggle Spellcheck' })
 vim.keymap.set("n", '<leader>tl', '<cmd>set rnu!<CR>')
---
--- vim.keymap.set("n", '<leader>bN', '<cmd>ene | startinsert<CR>', { desc = 'New Empty Buffer' })
 
 -- harpoon but builtin
 -- vim.keymap.set('n', "<leader><cr>", ":argu<cr>:args<cr>", { desc = "go to last used arglist file" })
@@ -158,4 +144,3 @@ vim.keymap.set("n", '<leader>tl', '<cmd>set rnu!<CR>')
 -- vim.keymap.set('n', "<leader>aa", "<cmd>$argadd %<bar>argded<bar>args<cr>", { desc = "add to arglist" })
 -- vim.keymap.set('n', "<leader>ad", "<cmd>argdelete %<bar>args<cr>", { desc = "delete from arglist" })
 -- vim.keymap.set('n', "<leader>ac", "<cmd>argdelete *<CR><C-L>", { desc = "clear arglist" })
---

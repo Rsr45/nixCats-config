@@ -2,7 +2,7 @@ return {
     {
         "edgy.nvim",
         lazy = false,
-        for_cat = "general.always",
+        for_cat = "general.extra",
         after = function()
             require("edgy").setup({
                 bottom = {
