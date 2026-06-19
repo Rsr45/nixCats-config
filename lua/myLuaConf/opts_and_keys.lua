@@ -96,7 +96,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 vim.g.netrw_liststyle = 0
 vim.g.netrw_banner = 0
 
-vim.opt.laststatus = 3
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience

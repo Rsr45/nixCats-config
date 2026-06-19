@@ -4,6 +4,7 @@ return {
         for_cat = "general.always",
         event = "DeferredUIEnter",
         after = function()
+            vim.o.laststatus = 3
             require("lualine").setup({
                 options = {
                     component_separators = { left = "|", right = "|" },
