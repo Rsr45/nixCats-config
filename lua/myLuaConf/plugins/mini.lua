@@ -14,13 +14,13 @@ return {
         after = function()
             require("mini.surround").setup({
                 mappings = {
-                    add = "gsa",            -- Add surrounding in Normal and Visual modes
-                    delete = "gsd",         -- Delete surrounding
-                    find = "gsf",           -- Find surrounding (to the right)
-                    find_left = "gsF",      -- Find surrounding (to the left)
-                    highlight = "gsh",      -- Highlight surrounding
-                    replace = "gsr",        -- Replace surrounding
-                    update_n_lines = "gsn", -- Update `n_lines`
+                    add = "Sa",            -- Add surrounding in Normal and Visual modes
+                    delete = "Sd",         -- Delete surrounding
+                    find = "Sf",           -- Find surrounding (to the right)
+                    find_left = "SF",      -- Find surrounding (to the left)
+                    highlight = "Sh",      -- Highlight surrounding
+                    replace = "Sr",        -- Replace surrounding
+                    update_n_lines = "Sn", -- Update `n_lines`
                 },
                 -- keys = {
                 --     { "gs", "", desc = "+surround" },
@@ -39,6 +39,7 @@ return {
     {
         "mini.pairs",
         for_cat = "general.mini",
+        event = "DeferredUIEnter",
         after = function()
             require("mini.pairs").setup()
         end,
@@ -46,6 +47,7 @@ return {
     {
         "mini.operators",
         for_cat = "general.mini",
+        event = "DeferredUIEnter",
         after = function()
             require("mini.operators").setup()
         end,
@@ -53,6 +55,7 @@ return {
     {
         "mini.bracketed",
         for_cat = "general.mini",
+        event = "DeferredUIEnter",
         after = function()
             require("mini.bracketed").setup()
         end,
@@ -64,6 +67,7 @@ return {
             { "<leader>bd", mode = { "n" }, "<cmd>lua MiniBufremove.delete()<CR>", desc = "Kill buffer" },
             { "<leader>bk", mode = { "n" }, "<cmd>lua MiniBufremove.delete()<CR>", desc = "Kill buffer" },
         },
+        event = "DeferredUIEnter",
         after = function()
             require("mini.bufremove").setup()
         end,
@@ -71,6 +75,7 @@ return {
     {
         "mini.align",
         for_cat = "general.mini",
+        event = "DeferredUIEnter",
         after = function()
             require("mini.align").setup({
                 mappings = {
@@ -107,6 +112,7 @@ return {
     {
         "mini.cursorword",
         for_cat = "general.mini",
+        event = "DeferredUIEnter",
         after = function()
             require("mini.cursorword").setup()
         end
@@ -114,6 +120,7 @@ return {
     {
         "mini.extra",
         for_cat = "general.mini",
+        event = "DeferredUIEnter",
         after = function()
             require("mini.extra").setup()
         end
@@ -121,6 +128,7 @@ return {
     {
         "mini.trailspace",
         for_cat = "general.mini",
+        event = "DeferredUIEnter",
         keys = {
             { "<leader>bt", function() MiniTrailspace.trim() end,            desc = "Trim" },
             { "<leader>bT", function() MiniTrailspace.trim_last_lines() end, desc = "Trim last lines" },
@@ -134,6 +142,7 @@ return {
     {
         "mini.hipatterns",
         for_cat = "general.mini",
+        event = "DeferredUIEnter",
         after = function()
             local hipatterns = require("mini.hipatterns")
             require("mini.hipatterns").setup({

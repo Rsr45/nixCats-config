@@ -132,23 +132,23 @@ if nixCats("general.extra") then
 end
 
 require("lze").load({
-    { import = "myLuaConf.plugins.mini" },
     -- { import = "myLuaConf.plugins.mini-clue" },
-    {
-        "nui.nvim",
-        for_cat = "general.always",
-        lazy = true,
-        dep_of = { "noice.nvim" },
-    },
-    { import = "myLuaConf.plugins.noice" },
+    -- {
+    --     "nui.nvim",
+    --     for_cat = "general.always",
+    --     lazy = true,
+    --     dep_of = { "noice.nvim" },
+    -- },
+    -- { import = "myLuaConf.plugins.noice" },
 
+    { import = "myLuaConf.plugins.mini" },
     { import = "myLuaConf.plugins.treesitter" },
     { import = "myLuaConf.plugins.completion" },
     { import = "myLuaConf.plugins.navigation" },
     { import = "myLuaConf.plugins.fold" },
-    -- { import = "myLuaConf.plugins.mini-statusline" },
+    { import = "myLuaConf.plugins.mini-statusline" },
     -- { import = "myLuaConf.plugins.lualine" },
-    { import = "myLuaConf.plugins.lualine-grimm" },
+    -- { import = "myLuaConf.plugins.lualine-grimm" },
     { import = "myLuaConf.plugins.snacks" },
     { import = "myLuaConf.plugins.org" },
     { import = "myLuaConf.plugins.obsidian" },
@@ -168,18 +168,6 @@ require("lze").load({
             MiniIcons.mock_nvim_web_devicons()
         end,
     },
-    -- {
-    --
-    --     "indent-blankline.nvim",
-    --     for_cat = "general.extra",
-    --     event = "BufReadPost",
-    --     after = function()
-    --         require("ibl").setup({
-    --             indent = { char = "╎¦┆" },
-    --             scope = { enabled = true },
-    --         })
-    --     end,
-    -- },
     {
         "markdown-preview.nvim",
         for_cat = "general.markdown",

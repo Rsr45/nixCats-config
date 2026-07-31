@@ -91,7 +91,8 @@ return {
         after = function()
             require("flash").setup({
                 -- labels = "asdfghjklqwertyuiopzxcvbnm",
-                labels = 'arstgmneio',
+                -- labels = 'arstgmneio', -- colemak
+                labels = 'strdnaei', -- sturdy
                 label = {
                     uppercase = false,
                     distance = false,
