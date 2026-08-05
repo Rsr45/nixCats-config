@@ -11,300 +11,308 @@ if not require("nixCatsUtils").isNixCats then
     vim.cmd.colorscheme("onedark")
 end
 
--- NOTE: you can check if you included the category with the thing wherever you want.
-if nixCats("general.extra") then
-    -- I didnt want to bother with lazy loading this.
-    -- I could put it in opt and put it in a spec anyway
-    -- and then not set any handlers and it would load at startup,
-    -- but why... I guess I could make it load
-    -- after the other lze definitions in the next call using priority value?
-    -- didnt seem necessary.
-    -- Declare a global function to retrieve the current directory
-    function _G.get_oil_winbar()
-        local bufnr = vim.api.nvim_win_get_buf(vim.g.statusline_winid)
-        local dir = require("oil").get_current_dir(bufnr)
-        if dir then
-            return vim.fn.fnamemodify(dir, ":~")
-        else
-            -- If there is no current directory (e.g. over ssh), just show the buffer name
-            return vim.api.nvim_buf_get_name(0)
-        end
-    end
-
-    -- local detail = false
-
-    local permission_hlgroups = {
-        ['-'] = 'NonText',
-        ['r'] = 'DiagnosticSignWarn',
-        ['w'] = 'DiagnosticSignError',
-        ['x'] = 'DiagnosticSignOk',
-    }
-
-    vim.g.loaded_netrwPlugin = 1
-    vim.opt.splitright = true
-    require("oil").setup({
-        default_file_explorer = true,
-        view_options = {
-            show_hidden = true,
-        },
-
-        columns = {
-            {
-                'permissions',
-                highlight = function(permission_str)
-                    local hls = {}
-                    for i = 1, #permission_str do
-                        local char = permission_str:sub(i, i)
-                        table.insert(hls, { permission_hlgroups[char], i - 1, i })
-                    end
-                    return hls
-                end,
-            },
-            { 'size',  highlight = 'Special' },
-            { 'mtime', highlight = 'Question' },
-            {
-                'icon',
-                -- default_file = icon_file,
-                -- directory = icon_dir,
-                add_padding = true,
-            },
-        },
-        win_options = {
-            number = false,
-            relativenumber = false,
-            signcolumn = 'no',
-            foldcolumn = '0',
-            statuscolumn = '',
-            winbar = "%!v:lua.get_oil_winbar()",
-        },
-
-        keymaps = {
-            -- ["gd"] = {
-            --     desc = "Toggle file detail view",
-            --     callback = function()
-            --         detail = not detail
-            --         if detail then
-            --             require("oil").set_columns({ "permissions", "size", "mtime" })
-            --         else
-            --             require("oil").set_columns({ "icon" })
-            --         end
-            --     end,
-            -- },
-            ["g?"] = "actions.show_help",
-            ["<CR>"] = "actions.select",
-            ["<C-s>"] = "actions.select_vsplit",
-            ["<C-h>"] = "actions.select_split",
-            ["<C-t>"] = "actions.select_tab",
-            ["<C-p>"] = "actions.preview",
-            ["<C-c>"] = "actions.close",
-            ["<C-l>"] = "actions.refresh",
-            ["-"] = "actions.parent",
-            ["<BS>"] = "actions.parent",
-            ["_"] = "actions.open_cwd",
-            ["`"] = "actions.cd",
-            ["~"] = "actions.tcd",
-            ["gs"] = "actions.change_sort",
-            ["gx"] = "actions.open_external",
-            ["g."] = "actions.toggle_hidden",
-            ["g\\"] = "actions.toggle_trash",
-        },
-    })
-
-    -- vim.keymap.set("n", "-", "<cmd>Oil<CR>", {
-    --     noremap = true,
-    --     desc = "Open Directory in Oil",
-    -- })
-    -- vim.keymap.set("n", "<leader>-", "<cmd>Oil .<CR>", {
-    --     noremap = true,
-    --     desc = "Open nvim root directory",
-    -- })
-    vim.keymap.set("n", "<leader>fe", "<cmd>Oil --float<CR>", {
-        noremap = true,
-        desc = "Open Directory in Oil",
-    })
-    -- vim.keymap.set("n", "<leader>tO", "<cmd>Oil .<CR>", {
-    --     noremap = true,
-    --     desc = "Open Directory in Oil",
-    -- })
-
-    vim.cmd([[hi! link WinBar StatusLine]])
-    vim.cmd([[hi! link WinBarNC StatusLineNC]])
-end
+-- -- NOTE: you can check if you included the category with the thing wherever you want.
+-- if nixCats("general.extra") then
+--     -- I didnt want to bother with lazy loading this.
+--     -- I could put it in opt and put it in a spec anyway
+--     -- and then not set any handlers and it would load at startup,
+--     -- but why... I guess I could make it load
+--     -- after the other lze definitions in the next call using priority value?
+--     -- didnt seem necessary.
+--     -- Declare a global function to retrieve the current directory
+--     function _G.get_oil_winbar()
+--         local bufnr = vim.api.nvim_win_get_buf(vim.g.statusline_winid)
+--         local dir = require("oil").get_current_dir(bufnr)
+--         if dir then
+--             return vim.fn.fnamemodify(dir, ":~")
+--         else
+--             -- If there is no current directory (e.g. over ssh), just show the buffer name
+--             return vim.api.nvim_buf_get_name(0)
+--         end
+--     end
+--
+--     -- local detail = false
+--
+--     local permission_hlgroups = {
+--         ['-'] = 'NonText',
+--         ['r'] = 'DiagnosticSignWarn',
+--         ['w'] = 'DiagnosticSignError',
+--         ['x'] = 'DiagnosticSignOk',
+--     }
+--
+--     vim.g.loaded_netrwPlugin = 1
+--     vim.opt.splitright = true
+--     require("oil").setup({
+--         default_file_explorer = true,
+--         view_options = {
+--             show_hidden = true,
+--         },
+--
+--         columns = {
+--             {
+--                 'permissions',
+--                 highlight = function(permission_str)
+--                     local hls = {}
+--                     for i = 1, #permission_str do
+--                         local char = permission_str:sub(i, i)
+--                         table.insert(hls, { permission_hlgroups[char], i - 1, i })
+--                     end
+--                     return hls
+--                 end,
+--             },
+--             { 'size',  highlight = 'Special' },
+--             { 'mtime', highlight = 'Question' },
+--             {
+--                 'icon',
+--                 -- default_file = icon_file,
+--                 -- directory = icon_dir,
+--                 add_padding = true,
+--             },
+--         },
+--         win_options = {
+--             number = false,
+--             relativenumber = false,
+--             signcolumn = 'no',
+--             foldcolumn = '0',
+--             statuscolumn = '',
+--             winbar = "%!v:lua.get_oil_winbar()",
+--         },
+--
+--         keymaps = {
+--             -- ["gd"] = {
+--             --     desc = "Toggle file detail view",
+--             --     callback = function()
+--             --         detail = not detail
+--             --         if detail then
+--             --             require("oil").set_columns({ "permissions", "size", "mtime" })
+--             --         else
+--             --             require("oil").set_columns({ "icon" })
+--             --         end
+--             --     end,
+--             -- },
+--             ["g?"] = "actions.show_help",
+--             ["<CR>"] = "actions.select",
+--             ["<C-s>"] = "actions.select_vsplit",
+--             ["<C-h>"] = "actions.select_split",
+--             ["<C-t>"] = "actions.select_tab",
+--             ["<C-p>"] = "actions.preview",
+--             ["<C-c>"] = "actions.close",
+--             ["<C-l>"] = "actions.refresh",
+--             ["-"] = "actions.parent",
+--             ["<BS>"] = "actions.parent",
+--             ["_"] = "actions.open_cwd",
+--             ["`"] = "actions.cd",
+--             ["~"] = "actions.tcd",
+--             ["gs"] = "actions.change_sort",
+--             ["gx"] = "actions.open_external",
+--             ["g."] = "actions.toggle_hidden",
+--             ["g\\"] = "actions.toggle_trash",
+--         },
+--     })
+--
+--     vim.cmd([[hi! link WinBar StatusLine]])
+--     vim.cmd([[hi! link WinBarNC StatusLineNC]])
+-- end
 
 require("lze").load({
-    -- { import = "myLuaConf.plugins.mini-clue" },
-    -- {
-    --     "nui.nvim",
-    --     for_cat = "general.always",
-    --     lazy = true,
-    --     dep_of = { "noice.nvim" },
-    -- },
-    -- { import = "myLuaConf.plugins.noice" },
-
+    {
+        "canola.nvim",
+        for_cat = "general.extra",
+        lazy = false,
+        keys = {
+            { "<leader>fd", "<cmd>Canola<CR>", noremap = true, mode = "n", },
+        },
+        after = function()
+            vim.g.canola = {
+                hidden = {
+                    enabled = true,
+                    patterns = { "^%." },
+                    always = {},
+                },
+                columns = { "permissions", "owner", "group", "mtime", "ctime", "size", "icon" },
+                keymaps = {
+                    ["<Right>"] = { callback = "actions.select", },
+                    ["<Left>"] = { callback = "actions.parent", },
+                },
+            }
+        end,
+    },
+    { import = "myLuaConf.plugins.mini-base16" },
     { import = "myLuaConf.plugins.mini" },
+    {
+        "fff.nvim",
+        for_cat = "general.extra",
+        lazy = false,
+        keys = {
+            { "ff", function() require('fff').find_files() end, desc = 'Find Files' },
+            {
+                "fg",
+                function() require('fff').live_grep({ grep = { modes = { 'fuzzy', 'plain', 'regex' } } }) end,
+                desc = 'File Grep',
+            },
+            {
+                "fw",
+                function() require('fff').live_grep_under_cursor() end,
+                mode = { 'n', 'x' },
+                desc = 'Search current word / selection',
+            },
+        },
+        after = function()
+        end,
+    },
     { import = "myLuaConf.plugins.treesitter" },
-    { import = "myLuaConf.plugins.completion" },
-    { import = "myLuaConf.plugins.navigation" },
     { import = "myLuaConf.plugins.fold" },
-    { import = "myLuaConf.plugins.mini-statusline" },
-    -- { import = "myLuaConf.plugins.lualine" },
-    -- { import = "myLuaConf.plugins.lualine-grimm" },
-    { import = "myLuaConf.plugins.snacks" },
     { import = "myLuaConf.plugins.org" },
-    { import = "myLuaConf.plugins.obsidian" },
-    { import = "myLuaConf.plugins.whichkey" }, -- try mini clue
     { import = "myLuaConf.plugins.edgy" },
     { import = "myLuaConf.plugins.img-clip" },
-    { import = "myLuaConf.plugins.mini-base16" },
-
-
     { import = "myLuaConf.plugins.git.neogit" },
-    { import = "myLuaConf.plugins.git.mini-git" },
+    -- { import = "myLuaConf.plugins.completion" },
+    -- { import = "myLuaConf.plugins.git.mini-git" },
     {
         "mini.icons",
-        for_cat = "general.extra",
+        for_cat = "general.mini",
         after = function()
             require("mini.icons").setup()
             MiniIcons.mock_nvim_web_devicons()
         end,
     },
-    {
-        "markdown-preview.nvim",
-        for_cat = "general.markdown",
-        cmd = { "MarkdownPreview", "MarkdownPreviewStop", "MarkdownPreviewToggle" },
-        ft = "markdown",
-        keys = {
-            {
-                "<leader>mp",
-                "<cmd>MarkdownPreview <CR>",
-                mode = { "n" },
-                noremap = true,
-                desc = "markdown preview",
-            },
-            {
-                "<leader>ms",
-                "<cmd>MarkdownPreviewStop <CR>",
-                mode = { "n" },
-                noremap = true,
-                desc = "markdown preview stop",
-            },
-            {
-                "<leader>mt",
-                "<cmd>MarkdownPreviewToggle <CR>",
-                mode = { "n" },
-                noremap = true,
-                desc = "markdown preview toggle",
-            },
-        },
-        before = function()
-            vim.g.mkdp_auto_close = 0
-        end,
-    },
-    {
-        "render-markdown.nvim",
-        for_cat = "general.markdown",
-        ft = "markdown",
-        cmd = "RenderMarkdown",
-        after = function()
-            require("render-markdown").setup({
-                render_modes = true,
-                bullet = {
-                    enabled = true,
-                    render_modes = false,
-                    icons = { "󰫶 ", "󱂉 " },
-                    ordered_icons = function(ctx)
-                        local value = vim.trim(ctx.value)
-                        local index = tonumber(value:sub(1, #value - 1))
-                        return ('%d.'):format(index > 1 and index or ctx.index)
-                    end,
-                    highlight = "RenderMarkdownBullet",
-                    scope_highlight = {},
-                    scope_priority = nil,
-                    indent = 2,
-                    left_pad = 2,
-                },
-                checkbox = {
-                    enabled = true,
-                    left_pad = 2,
-                    indent = 2,
-                },
-                code = {
-                    -- above = " ",
-                    -- below = " ",
-                    -- border = "thick",
-                    -- language_pad = 2,
-                    -- left_pad = 4,
-                    position = "left",
-                    -- right_pad = 6,
-                    sign = false,
-                    width = "full",
-                },
-                heading = {
-                    border = false,
-                    -- icons = {
-                    --     -- "▼ ",
-                    --     -- "▽ ",
-                    --     -- "▼ ",
-                    --     -- "▽ ",
-                    --     -- "▼ ",
-                    --     -- "▽ "
-                    -- },
-                    icons = function(ctx)
-                        return table.concat(ctx.sections, '.') .. ' '
-                    end,
-                    position = "inline",
-                    sign = false,
-                    width = "full",
-                    left_pad = -2,
-                    backgrounds = { "",
-                        "",
-                        "",
-                        "",
-                        "",
-                        "" },
-                },
-                -- heading = {
-                --     width = "block",
-                --     backgrounds = {
-                --         "MiniStatusLineModeNormal",
-                --         "MiniStatusLineModeInsert",
-                --         "MiniStatusLineModeReplace",
-                --         "MiniStatusLineModeVisual",
-                --         "MiniStatusLineModeCommand",
-                --         "MiniStatusLineModeOther",
-                --     },
-                --     sign = true,
-                --     left_pad = 1,
-                --     right_pad = 0,
-                --     position = "right",
-                --     icons = {
-                --         "",
-                --         "",
-                --         "",
-                --         "",
-                --         "",
-                --         "",
-                --     },
-                -- },
-                indent = {
-                    enabled = true,
-                    skip_heading = false,
-                    highlight = "",
-                    icon = "  ",
-                },
-                paragraph = {
-                    enabled = true,
-                    -- render_modes = false,
-                    -- left_margin = 0,
-                    indent = 2,
-                    -- min_width = 0,
-                },
-                signs = {
-                    enabled = false,
-                },
-            })
-        end,
-    },
+    -- {
+    --     "markdown-preview.nvim",
+    --     for_cat = "general.markdown",
+    --     cmd = { "MarkdownPreview", "MarkdownPreviewStop", "MarkdownPreviewToggle" },
+    --     ft = "markdown",
+    --     keys = {
+    --         {
+    --             "<leader>mp",
+    --             "<cmd>MarkdownPreview <CR>",
+    --             mode = { "n" },
+    --             noremap = true,
+    --             desc = "markdown preview",
+    --         },
+    --         {
+    --             "<leader>ms",
+    --             "<cmd>MarkdownPreviewStop <CR>",
+    --             mode = { "n" },
+    --             noremap = true,
+    --             desc = "markdown preview stop",
+    --         },
+    --         {
+    --             "<leader>mt",
+    --             "<cmd>MarkdownPreviewToggle <CR>",
+    --             mode = { "n" },
+    --             noremap = true,
+    --             desc = "markdown preview toggle",
+    --         },
+    --     },
+    --     before = function()
+    --         vim.g.mkdp_auto_close = 0
+    --     end,
+    -- },
+    -- {
+    --     "render-markdown.nvim",
+    --     for_cat = "general.markdown",
+    --     ft = "markdown",
+    --     cmd = "RenderMarkdown",
+    --     after = function()
+    --         require("render-markdown").setup({
+    --             render_modes = true,
+    --             bullet = {
+    --                 enabled = true,
+    --                 render_modes = false,
+    --                 icons = { "󰫶 ", "󱂉 " },
+    --                 ordered_icons = function(ctx)
+    --                     local value = vim.trim(ctx.value)
+    --                     local index = tonumber(value:sub(1, #value - 1))
+    --                     return ('%d.'):format(index > 1 and index or ctx.index)
+    --                 end,
+    --                 highlight = "RenderMarkdownBullet",
+    --                 scope_highlight = {},
+    --                 scope_priority = nil,
+    --                 indent = 2,
+    --                 left_pad = 2,
+    --             },
+    --             checkbox = {
+    --                 enabled = true,
+    --                 left_pad = 2,
+    --                 indent = 2,
+    --             },
+    --             code = {
+    --                 -- above = " ",
+    --                 -- below = " ",
+    --                 -- border = "thick",
+    --                 -- language_pad = 2,
+    --                 -- left_pad = 4,
+    --                 position = "left",
+    --                 -- right_pad = 6,
+    --                 sign = false,
+    --                 width = "full",
+    --             },
+    --             heading = {
+    --                 border = false,
+    --                 -- icons = {
+    --                 --     -- "▼ ",
+    --                 --     -- "▽ ",
+    --                 --     -- "▼ ",
+    --                 --     -- "▽ ",
+    --                 --     -- "▼ ",
+    --                 --     -- "▽ "
+    --                 -- },
+    --                 icons = function(ctx)
+    --                     return table.concat(ctx.sections, '.') .. ' '
+    --                 end,
+    --                 position = "inline",
+    --                 sign = false,
+    --                 width = "full",
+    --                 left_pad = -2,
+    --                 backgrounds = { "",
+    --                     "",
+    --                     "",
+    --                     "",
+    --                     "",
+    --                     "" },
+    --             },
+    --             -- heading = {
+    --             --     width = "block",
+    --             --     backgrounds = {
+    --             --         "MiniStatusLineModeNormal",
+    --             --         "MiniStatusLineModeInsert",
+    --             --         "MiniStatusLineModeReplace",
+    --             --         "MiniStatusLineModeVisual",
+    --             --         "MiniStatusLineModeCommand",
+    --             --         "MiniStatusLineModeOther",
+    --             --     },
+    --             --     sign = true,
+    --             --     left_pad = 1,
+    --             --     right_pad = 0,
+    --             --     position = "right",
+    --             --     icons = {
+    --             --         "",
+    --             --         "",
+    --             --         "",
+    --             --         "",
+    --             --         "",
+    --             --         "",
+    --             --     },
+    --             -- },
+    --             indent = {
+    --                 enabled = true,
+    --                 skip_heading = false,
+    --                 highlight = "",
+    --                 icon = "  ",
+    --             },
+    --             paragraph = {
+    --                 enabled = true,
+    --                 -- render_modes = false,
+    --                 -- left_margin = 0,
+    --                 indent = 2,
+    --                 -- min_width = 0,
+    --             },
+    --             signs = {
+    --                 enabled = false,
+    --             },
+    --         })
+    --     end,
+    -- },
     {
         "nvim-highlight-colors",
         for_cat = "general.extra",
@@ -335,16 +343,16 @@ require("lze").load({
         for_cat = "general.extra",
         dep_of = "nvim-ufo",
     },
-    {
-        "undotree",
-        for_cat = "general.extra",
-        cmd = { "UndotreeToggle", "UndotreeHide", "UndotreeShow", "UndotreeFocus", "UndotreePersistUndo" },
-        keys = { { "<leader>u", "<cmd>UndotreeToggle<CR>", mode = { "n" }, desc = "Undo Tree" } },
-        before = function(_)
-            vim.g.undotree_WindowLayout = 1
-            vim.g.undotree_SplitWidth = 40
-        end,
-    },
+    -- {
+    --     "undotree",
+    --     for_cat = "general.extra",
+    --     cmd = { "UndotreeToggle", "UndotreeHide", "UndotreeShow", "UndotreeFocus", "UndotreePersistUndo" },
+    --     keys = { { "<leader>u", "<cmd>UndotreeToggle<CR>", mode = { "n" }, desc = "Undo Tree" } },
+    --     before = function(_)
+    --         vim.g.undotree_WindowLayout = 1
+    --         vim.g.undotree_SplitWidth = 40
+    --     end,
+    -- },
     {
         "vim-startuptime",
         for_cat = "general.extra",

@@ -1,7 +1,7 @@
 return {
     {
         "mini.base16",
-        for_cat = "general.extra",
+        for_cat = "general.mini",
         lazy = false,
         after = function()
             require('mini.base16').setup({

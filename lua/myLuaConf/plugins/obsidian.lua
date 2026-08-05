@@ -37,34 +37,27 @@ return {
                     -- In this case a note with the title 'My new note' inside folder named 'VIM' will be given an ID that looks
                     -- like '202502132345-FRXT-VIM-my_new_note', and therefore the file name '202502132345-FRXT-VIM-my_new_note.md'.
                     local suffix = ""
-                    local folder_path = vim.fn.expand('%:p:h')
-                    local folder_name = vim.fn.fnamemodify(folder_path, ':t')
-                    local folder_prefix = folder_name:sub(1, 3):upper()
                     if title ~= nil then
-                        -- If title is given, transform it into valid file name.
                         suffix = suffix ..
-                            string.char(math.random(65, 90)) ..
-                            string.char(math.random(65, 90)) ..
-                            string.char(math.random(65, 90)) ..
-                            string.char(math.random(65, 90)) ..
                             "-" ..
-                            title:gsub(" ", "_"):gsub("[^A-Za-z0-9_-]", ""):lower()
+                            title:gsub(" ", "-"):gsub("[^A-Za-z0-9_-]", ""):lower()
                     else
-                        -- If title is nil, just add 4 random uppercase letters to the suffix.
-                        -- for _ = 1, 4 do
                         suffix = suffix ..
-                            string.char(math.random(65, 90)) ..
-                            string.char(math.random(65, 90)) ..
-                            string.char(math.random(65, 90)) ..
-                            string.char(math.random(65, 90))
-                        -- end
+                            "-" ..
+                            title:gsub(" ", "-"):gsub("[^A-Za-z0-9_-]", ""):lower()
                     end
-                    -- return tostring(os.time()) .. "-" .. suffix
-                    return tostring(os.date("%Y%m%d%H%M")) .. "-" .. suffix
+                    return tostring(os.date("%Y%m%dT%H%M%S")) .. "-" .. suffix
                 end,
+
                 frontmatter = {
                     func = function(note)
-                        local out = { id = note.id, aliases = note.aliases, tags = note.tags, title = note.aliases }
+                        local out = {
+                            date = tostring(os.date("%Y-%m-%dT%H:%M:%S%z"):gsub("([+-]%d%d)(%d%d)$", "%1:%2")),
+                            identifier =
+                                os.date("%Y%m%dT%H%M%S"),
+                            tags = note.tags,
+                            title = note.title
+                        }
                         if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
                             for k, v in pairs(note.metadata) do
                                 out[k] = v
@@ -73,7 +66,8 @@ return {
 
                         return out
                     end,
-                    sort = { "id", "aliases", "tags", "title" },
+
+                    sort = { "title", "date", "tags", "identifier" },
                 },
                 workspaces = {
                     {
@@ -85,13 +79,6 @@ return {
                                 folder = "99_Meta/01_Attachments/imgs",
                             },
                         },
-                    },
-                    {
-                        name = "Work",
-                        path = "~/Personal/Vaults/Dev",
-                        -- overrides = {
-                        --         notes_subdir = "",
-                        -- },
                     },
                 },
                 templates = {
@@ -111,9 +98,9 @@ return {
                     -- Optional, if you keep daily notes in a separate directory.
                     folder = "daily",
                     -- Optional, if you want to change the date format for the ID of daily notes.
-                    date_format = "%Y-%m-%d",
+                    date_format = "DD.MM.YYYY",
                     -- Optional, if you want to change the date format of the default alias of daily notes.
-                    alias_format = "%-d %B, %Y",
+                    -- alias_format = "%-d %B, %Y",
                     -- Optional, default tags to add to each new daily note created.
                     default_tags = { "daily" },
                     -- Optional, if you want to automatically insert a template from your template directory like 'daily.md'

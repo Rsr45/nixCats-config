@@ -35,23 +35,18 @@
     # How to import it into your config is shown farther down in the startupPlugins set.
     # You put it here like this, and then below you would use it with `pkgs.neovimPlugins.hlargs`
 
-    "plugins-hlargs" = {
-      url = "github:m-demare/hlargs.nvim";
-      flake = false;
-    };
-
     # neovim-nightly-overlay = {
     #   url = "github:nix-community/neovim-nightly-overlay";
     # };
 
-    "plugins-black-metal" = {
-      url = "github:metalelf0/black-metal-theme-neovim";
-      flake = false;
-    };
-    "plugins-neopywal" = {
-      url = "https://github.com/RedsXDD/neopywal.nvim/archive/refs/tags/v2.6.0.tar.gz";
-      flake = false;
-    };
+    # "plugins-black-metal" = {
+    #   url = "github:metalelf0/black-metal-theme-neovim";
+    #   flake = false;
+    # };
+    # "plugins-neopywal" = {
+    #   url = "https://github.com/RedsXDD/neopywal.nvim/archive/refs/tags/v2.6.0.tar.gz";
+    #   flake = false;
+    # };
     "plugins-org-bullets" = {
       url = "github:nvim-orgmode/org-bullets.nvim";
       flake = false;
@@ -60,27 +55,14 @@
       url = "github:danilshvalov/org-modern.nvim";
       flake = false;
     };
-    "plugins-feed" = {
-      url = "github:neo451/feed.nvim";
-      flake = false;
-    };
-    "plugins-coop" = {
-      url = "github:gregorias/coop.nvim";
-      flake = false;
-    };
-    "plugins-tfm" = {
-      url = "github:Rolv-Apneseth/tfm.nvim";
-      flake = false;
-    };
-    "plugins-fff" = {
-      url = "github:dmtrKovalenko/fff.nvim";
-      flake = false;
-    };
-    "plugins-denote" = {
-      # url = "github:cvigilv/denote.nvim";
-      url = "https://github.com/cvigilv/denote.nvim/archive/refs/tags/0.1.tar.gz";
-      flake = false;
-    };
+    # "plugins-tfm" = {
+    #   url = "github:Rolv-Apneseth/tfm.nvim";
+    #   flake = false;
+    # };
+    # "plugins-denote" = {
+    #   url = "https://github.com/cvigilv/denote.nvim/archive/refs/tags/0.1.tar.gz";
+    #   flake = false;
+    # };
   };
 
   # see :help nixCats.flake.outputs
@@ -157,6 +139,7 @@
           ripgrep
           fd
           tree-sitter
+          pkgs.vimPlugins.fff-nvim
         ];
         # these names are arbitrary.
         lint = with pkgs; [
@@ -220,14 +203,13 @@
             plenary-nvim
             nvim-notify
             nui-nvim
-            # pkgs.neovimPlugins.navbuddy
-            # nvim-navic
           ];
           extra = [
-            oil-nvim
+            # oil-nvim
+            canola-nvim
             # nvim-web-devicons
-            mini-icons
-            mini-base16
+            # mini-icons
+            # mini-base16
           ];
         };
         # You can retreive information from the
@@ -241,8 +223,8 @@
           "dracula-vim" = dracula-vim;
           "dracula-nvim" = dracula-nvim;
           "gruvbox-material" = gruvbox-material;
-          "emperor" = pkgs.neovimPlugins.black-metal;
-          "immortal" = pkgs.neovimPlugins.black-metal;
+          # "emperor" = pkgs.neovimPlugins.black-metal;
+          # "immortal" = pkgs.neovimPlugins.black-metal;
           "onedark" = onedark-nvim;
           "catppuccin" = catppuccin-nvim;
           "catppuccin-mocha" = catppuccin-nvim;
@@ -250,7 +232,7 @@
           "tokyonight-day" = tokyonight-nvim;
           "miasma" = miasma-nvim;
           "kanagawa" = kanagawa-nvim;
-          "neopywal" = pkgs.neovimPlugins.neopywal;
+          # "neopywal" = pkgs.neovimPlugins.neopywal;
           "pywal" = pywal-nvim;
           "stylix" = mini-base16;
         });
@@ -324,23 +306,17 @@
                 ]
             ))
           ];
-          telescope = with pkgs.vimPlugins; [
-            telescope-fzf-native-nvim
-            telescope-ui-select-nvim
-            telescope-nvim
-          ];
+          # telescope = with pkgs.vimPlugins; [
+          #   telescope-fzf-native-nvim
+          #   telescope-ui-select-nvim
+          #   telescope-nvim
+          # ];
           navigation = with pkgs.vimPlugins; [
-            harpoon2
-            grapple-nvim
-            mini-jump
-            mini-jump2d
-            leap-nvim
-            flit-nvim
-            flash-nvim
-          ];
-          filesystem = with pkgs.vimPlugins; [
-            mini-pick
-            mini-files
+            # harpoon2
+            # grapple-nvim
+            # leap-nvim
+            # flit-nvim
+            # flash-nvim
           ];
           git = with pkgs.vimPlugins; [
             neogit
@@ -348,49 +324,19 @@
             mini-diff
           ];
           mini = with pkgs.vimPlugins; [
-            mini-ai
-            mini-align
-            mini-keymap
-            mini-move
-            mini-operators
-            mini-pairs
-            # mini-completion
-            # mini-snippets
-            mini-splitjoin
-            mini-surround
-            mini-basics
-            mini-bracketed
-            mini-bufremove
-            mini-comment
-            mini-clue
-            mini-deps
-            mini-extra
-            mini-files
-            mini-jump
-            mini-jump2d
-            mini-misc
-            mini-pick
-            mini-sessions
-            mini-visits
-            mini-cursorword
-            mini-hipatterns
+            mini-nvim
+            mini-base16
             mini-icons
-            mini-indentscope
-            mini-notify
-            mini-starter
-            mini-statusline
-            # mini-tabline
-            mini-trailspace
           ];
           always = with pkgs.vimPlugins; [
             nvim-lspconfig
-            lualine-nvim
-            bufferline-nvim
+            # lualine-nvim
+            # bufferline-nvim
             vim-sleuth
             vim-eunuch
-            snacks-nvim
-            nui-nvim
-            noice-nvim
+            # snacks-nvim
+            # nui-nvim
+            # noice-nvim
           ];
           extra = with pkgs.vimPlugins; [
             nvim-ufo
@@ -399,10 +345,11 @@
             edgy-nvim
             trouble-nvim
             fidget-nvim
-            which-key-nvim
-            undotree
+            # which-key-nvim
+            # undotree
             vim-startuptime
             img-clip-nvim
+            pkgs.vimPlugins.fff-nvim
           ];
         };
       };
@@ -531,7 +478,7 @@
         # enable the categories you want from categoryDefinitions
         categories = {
           markdown = true;
-          notes = true;
+          notes = false;
           org = true;
           general = true;
           lint = true;

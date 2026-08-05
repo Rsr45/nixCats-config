@@ -31,112 +31,6 @@
         "type": "github"
       }
     },
-    "plugins-black-metal": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1776281669,
-        "narHash": "sha256-0RY/kek2QoL3ZIWehJFQIFOOpAgCrh/POpKklzQ2UKw=",
-        "owner": "metalelf0",
-        "repo": "black-metal-theme-neovim",
-        "rev": "d7ce1c4b9196b3b34e70ca4fa9af108bb4207818",
-        "type": "github"
-      },
-      "original": {
-        "owner": "metalelf0",
-        "repo": "black-metal-theme-neovim",
-        "type": "github"
-      }
-    },
-    "plugins-coop": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1776681993,
-        "narHash": "sha256-S6iGmdakI714Im0tetgfASbe0K4/olYsjj26+WP+rSU=",
-        "owner": "gregorias",
-        "repo": "coop.nvim",
-        "rev": "b156e541316aee14be4ae64c93ed8bddb6d03bc1",
-        "type": "github"
-      },
-      "original": {
-        "owner": "gregorias",
-        "repo": "coop.nvim",
-        "type": "github"
-      }
-    },
-    "plugins-denote": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1777649236,
-        "narHash": "sha256-baZ+f4otYlbozkRALNbLvreEwPi7P8c6ck6WhZktCeo=",
-        "type": "tarball",
-        "url": "https://github.com/cvigilv/denote.nvim/archive/refs/tags/0.1.tar.gz"
-      },
-      "original": {
-        "type": "tarball",
-        "url": "https://github.com/cvigilv/denote.nvim/archive/refs/tags/0.1.tar.gz"
-      }
-    },
-    "plugins-feed": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1775008438,
-        "narHash": "sha256-pJYr1h7+0Exl0a5DYLeIAjBzOo5KbxxLtMqwDNc+GUg=",
-        "owner": "neo451",
-        "repo": "feed.nvim",
-        "rev": "4e0903343c47b13aa5355ed267dbd58300bff8be",
-        "type": "github"
-      },
-      "original": {
-        "owner": "neo451",
-        "repo": "feed.nvim",
-        "type": "github"
-      }
-    },
-    "plugins-fff": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1785464249,
-        "narHash": "sha256-/yxNCSj78sHoY99aBBwhgFsFtZa5KpFeK2Xx7Aq5fy4=",
-        "owner": "dmtrKovalenko",
-        "repo": "fff.nvim",
-        "rev": "1eb913e509b846e77111cde2aeeb77a05243c003",
-        "type": "github"
-      },
-      "original": {
-        "owner": "dmtrKovalenko",
-        "repo": "fff.nvim",
-        "type": "github"
-      }
-    },
-    "plugins-hlargs": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1780694987,
-        "narHash": "sha256-daCx0OHqsGNasfnxHxVO2309aS8LYZIxbeaZ/pEtNFU=",
-        "owner": "m-demare",
-        "repo": "hlargs.nvim",
-        "rev": "05f3d1789642d5e1807121c05c42a5e883ba46d3",
-        "type": "github"
-      },
-      "original": {
-        "owner": "m-demare",
-        "repo": "hlargs.nvim",
-        "type": "github"
-      }
-    },
-    "plugins-neopywal": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1723226430,
-        "narHash": "sha256-P28gg5fPPPyhepPHOZFgMnGTToCXK+v4ev6oTRSZXtg=",
-        "type": "tarball",
-        "url": "https://github.com/RedsXDD/neopywal.nvim/archive/refs/tags/v2.6.0.tar.gz"
-      },
-      "original": {
-        "type": "tarball",
-        "url": "https://github.com/RedsXDD/neopywal.nvim/archive/refs/tags/v2.6.0.tar.gz"
-      }
-    },
     "plugins-org-bullets": {
       "flake": false,
       "locked": {
@@ -169,36 +63,12 @@
         "type": "github"
       }
     },
-    "plugins-tfm": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1768719517,
-        "narHash": "sha256-IMF1H+gcSSEYSXaxkODnGpkXK1QhGbKnEBVpvXgkMpY=",
-        "owner": "Rolv-Apneseth",
-        "repo": "tfm.nvim",
-        "rev": "a74ac5333f030db3603d9f076d220e8d24621365",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Rolv-Apneseth",
-        "repo": "tfm.nvim",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "nixCats": "nixCats",
         "nixpkgs": "nixpkgs",
-        "plugins-black-metal": "plugins-black-metal",
-        "plugins-coop": "plugins-coop",
-        "plugins-denote": "plugins-denote",
-        "plugins-feed": "plugins-feed",
-        "plugins-fff": "plugins-fff",
-        "plugins-hlargs": "plugins-hlargs",
-        "plugins-neopywal": "plugins-neopywal",
         "plugins-org-bullets": "plugins-org-bullets",
-        "plugins-org-modern": "plugins-org-modern",
-        "plugins-tfm": "plugins-tfm"
+        "plugins-org-modern": "plugins-org-modern"
       }
     }
   },
