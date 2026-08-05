@@ -273,7 +273,6 @@
         notes = with pkgs.vimPlugins; [
           obsidian-nvim
           # neorg
-          pkgs.neovimPlugins.denote
         ];
         org = with pkgs.vimPlugins; [
           orgmode
