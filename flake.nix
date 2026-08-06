@@ -139,7 +139,6 @@
           ripgrep
           fd
           tree-sitter
-          pkgs.vimPlugins.fff-nvim
         ];
         # these names are arbitrary.
         lint = with pkgs; [
@@ -319,8 +318,6 @@
           ];
           git = with pkgs.vimPlugins; [
             neogit
-            mini-git
-            mini-diff
           ];
           mini = with pkgs.vimPlugins; [
             mini-nvim
@@ -343,12 +340,12 @@
             nvim-highlight-colors
             edgy-nvim
             trouble-nvim
-            fidget-nvim
+            # fidget-nvim
             # which-key-nvim
             # undotree
             vim-startuptime
             img-clip-nvim
-            pkgs.vimPlugins.fff-nvim
+            # pkgs.vimPlugins.fff-nvim
           ];
         };
       };

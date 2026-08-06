@@ -131,43 +131,20 @@ require("lze").load({
                 },
                 columns = { "permissions", "owner", "group", "mtime", "ctime", "size", "icon" },
                 keymaps = {
-                    ["<Right>"] = { callback = "actions.select", },
-                    ["<Left>"] = { callback = "actions.parent", },
+                    ["<l>"] = { callback = "actions.select", },
+                    ["<h>"] = { callback = "actions.parent", },
                 },
             }
         end,
     },
     { import = "myLuaConf.plugins.mini-base16" },
     { import = "myLuaConf.plugins.mini" },
-    {
-        "fff.nvim",
-        for_cat = "general.extra",
-        lazy = false,
-        keys = {
-            { "ff", function() require('fff').find_files() end, desc = 'Find Files' },
-            {
-                "fg",
-                function() require('fff').live_grep({ grep = { modes = { 'fuzzy', 'plain', 'regex' } } }) end,
-                desc = 'File Grep',
-            },
-            {
-                "fw",
-                function() require('fff').live_grep_under_cursor() end,
-                mode = { 'n', 'x' },
-                desc = 'Search current word / selection',
-            },
-        },
-        after = function()
-        end,
-    },
     { import = "myLuaConf.plugins.treesitter" },
     { import = "myLuaConf.plugins.fold" },
     { import = "myLuaConf.plugins.org" },
     { import = "myLuaConf.plugins.edgy" },
     { import = "myLuaConf.plugins.img-clip" },
     { import = "myLuaConf.plugins.git.neogit" },
-    -- { import = "myLuaConf.plugins.completion" },
-    -- { import = "myLuaConf.plugins.git.mini-git" },
     {
         "mini.icons",
         for_cat = "general.mini",
@@ -176,6 +153,27 @@ require("lze").load({
             MiniIcons.mock_nvim_web_devicons()
         end,
     },
+    -- typo tesitans is cool and needed but the frec and the sorting is not
+    -- {
+    --     "fff.nvim",
+    --     for_cat = "general.extra",
+    --     -- lazy = false,
+    --     keys = {
+    --         { "ff", function() require('fff').find_files() end, desc = 'Find Files' },
+    --         {
+    --             "fg",
+    --             function() require('fff').live_grep({ grep = { modes = { 'fuzzy', 'plain', 'regex' } } }) end,
+    --             desc = 'File Grep',
+    --         },
+    --         {
+    --             "fw",
+    --             function() require('fff').live_grep_under_cursor() end,
+    --             mode = { 'n', 'x' },
+    --             desc = 'Search current word / selection',
+    --         },
+    --     },
+    -- },
+
     -- {
     --     "markdown-preview.nvim",
     --     for_cat = "general.markdown",
@@ -363,20 +361,20 @@ require("lze").load({
             vim.g.startuptime_exe_path = nixCats.packageBinPath
         end,
     },
-    {
-        "fidget.nvim",
-        for_cat = "general.extra",
-        event = "DeferredUIEnter",
-        after = function()
-            require("fidget").setup({
-                notification = {
-                    window = {
-                        border = "none",
-                        x_padding = 1,
-                        y_padding = 1,
-                    },
-                },
-            })
-        end,
-    },
+    -- {
+    --     "fidget.nvim",
+    --     for_cat = "general.extra",
+    --     event = "DeferredUIEnter",
+    --     after = function()
+    --         require("fidget").setup({
+    --             notification = {
+    --                 window = {
+    --                     border = "none",
+    --                     x_padding = 1,
+    --                     y_padding = 1,
+    --                 },
+    --             },
+    --         })
+    --     end,
+    -- },
 })

@@ -9,14 +9,16 @@ return {
             { "<leader>bT", function() MiniTrailspace.trim_last_lines() end, desc = "Trim last lines" },
             { "<leader>ct", function() MiniTrailspace.trim() end,            desc = "Trim" },
             { "<leader>cT", function() MiniTrailspace.trim_last_lines() end, desc = "Trim last lines" },
-            { "<leader>bd", mode = { "n" },                                  "<cmd>lua MiniBufremove.delete()<CR>",       desc = "Kill buffer" },
-            { "<leader>bk", mode = { "n" },                                  "<cmd>lua MiniBufremove.delete()<CR>",       desc = "Kill buffer" },
+            { "<leader>bd", mode = { "n" },                                  "<cmd>lua MiniBufremove.delete()<CR>",                               desc = "Kill buffer" },
+            { "<leader>bk", mode = { "n" },                                  "<cmd>lua MiniBufremove.delete()<CR>",                               desc = "Kill buffer" },
 
             -- pick
-            { "<leader>fb", mode = { "n" },                                  "<cmd>lua MiniPick.builtin.buffers()<CR>",   desc = "Find Buffer", },
-            -- { "<leader>fg", mode = { "n" },                                  "<cmd>lua MiniPick.builtin.grep_live()<CR>", desc = "File Grep", },
-            -- { "<leader>ff", mode = { "n" },                                  "<cmd>lua MiniPick.builtin.files()<CR>",     desc = "Find File", },
-            { "<leader>fe", mode = { "n" },                                  "<cmd>lua MiniFiles.open()<CR>",             desc = "File Ex", },
+            { "<leader>fb", mode = { "n" },                                  "<cmd>lua MiniPick.builtin.buffers()<CR>",                           desc = "Find Buffer", },
+            { "<leader>fs", mode = { "n" },                                  "<cmd>Pick buf_lines<CR>",                                           desc = "File Grep", },
+            { "<leader>fg", mode = { "n" },                                  "<cmd>lua MiniPick.builtin.grep_live()<CR>",                         desc = "Grep", },
+            { "<leader>ff", mode = { "n" },                                  "<cmd>lua MiniPick.builtin.files()<CR>",                             desc = "Find File", },
+            { "<leader>fF", mode = { "n" },                                  "<cmd>lua MiniPick.builtin.files({ dir = fn.expand('%:p:h') })<CR>", desc = "Find File", },
+            { "<leader>fe", mode = { "n" },                                  "<cmd>lua MiniFiles.open()<CR>",                                     desc = "File Ex", },
         },
         after = function()
             require("mini.ai").setup()
@@ -120,31 +122,34 @@ return {
             require("mini.operators").setup()
             require("mini.pick").setup()
             -- require("mini.sessions").setup()
-            -- require("mini.snippets").setup()
+            require("mini.snippets").setup()
             -- require("mini.splitjoin").setup()
             -- require("mini.starter").setup()
             require("mini.statusline").setup()
 
             vim.keymap.set({ "n", "v", "x" }, "S", "<Nop>")
+            vim.keymap.set({ "n", "v", "x" }, "s", "<Nop>")
             require("mini.surround").setup({
                 mappings = {
-                    add = "Sa",            -- Add surrounding in Normal and Visual modes
-                    delete = "Sd",         -- Delete surrounding
-                    find = "Sf",           -- Find surrounding (to the right)
-                    find_left = "SF",      -- Find surrounding (to the left)
-                    highlight = "Sh",      -- Highlight surrounding
-                    replace = "Sr",        -- Replace surrounding
-                    update_n_lines = "Sn", -- Update `n_lines`
+                    add = "sa",            -- Add surrounding in Normal and Visual modes
+                    delete = "sd",         -- Delete surrounding
+                    find = "sf",           -- Find surrounding (to the right)
+                    find_left = "sF",      -- Find surrounding (to the left)
+                    highlight = "sh",      -- Highlight surrounding
+                    replace = "sr",        -- Replace surrounding
+                    update_n_lines = "sn", -- Update `n_lines`
                 },
             })
 
             -- require("mini.tabline").setup()
             -- require("mini.test").setup()
-            -- require("mini.trailspace").setup()
+            require("mini.trailspace").setup()
             -- require("mini.visits").setup()
 
 
 
+            -- cool as fuck
+            -- https://github.com/nvim-mini/mini.nvim/discussions/2523
             local fn, fs, uv, api = vim.fn, vim.fs, vim.uv, vim.api
             local pick = require("mini.pick")
 
@@ -412,7 +417,7 @@ return {
 
             pick.registry["find_file"] = find_file
             -- vim.keymap.set("n", "<Leader>ff", function() pick.registry.find_file() end)
-            vim.keymap.set("n", "<Leader>fF", function() pick.registry.find_file({ dir = fn.expand("%:p:h") }) end)
+            -- vim.keymap.set("n", "<Leader>fF", function() pick.registry.find_file({ dir = fn.expand("%:p:h") }) end)
         end,
     },
     -- {

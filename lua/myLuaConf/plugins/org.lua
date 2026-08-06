@@ -44,15 +44,7 @@ return {
         cmd = { "Org" },
         after = function()
             require("org-roam").setup({
-                directory = "~/Documents/Notes/roam",
-
-                -- hyperlinks = {
-                --     sources = {
-                --       require("denote.extensions.orgmode"):new({
-                --         files = vim.g.denote.directory
-                --       }),
-                --     },
-                --   },
+                directory = "~/Documents/Notes/",
             })
         end,
     },
