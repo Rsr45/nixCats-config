@@ -208,14 +208,16 @@ require("lze").load({
                     state.current_file_cache, -- Arg 2: String (or nil)
                     100,                      -- Arg 3: Number
                     4,                        -- Arg 4: Number (usize)
-                    nil                     -- Arg 5: Boolean/Nil
+                    nil                       -- Arg 5: Boolean/Nil
                 )
 
                 local items = {}
                 for _, fff_item in ipairs(fff_result) do
+                    -- vim.notify(vim.inspect(fff_item))
                     local item = {
                         text = fff_item.relative_path,
-                        path = fff_item.path,
+                        -- path = fff_item.path,
+                        path = fff_item.relative_path,
                         score = fff_item.total_frecency_score,
                     }
                     table.insert(items, item)
@@ -280,6 +282,25 @@ require("lze").load({
                     end
                 end
 
+                local function choose(item)
+                    if not item or not item.text then
+                        return
+                    end
+
+                    local path = vim.fs.joinpath(vim.uv.cwd(), item.text)
+
+                    -- Add the buffer or get the existing one.
+                    local buf = vim.fn.bufadd(path)
+
+                    -- Make it a normal listed, loaded file buffer.
+                    vim.bo[buf].buflisted = true
+                    vim.fn.bufload(buf)
+
+                    -- Switch the target window to it.
+                    local target = MiniPick.get_picker_state().windows.target
+                    vim.api.nvim_win_set_buf(target, buf)
+                end
+
                 -- Start picker
                 MiniPick.start {
                     source = {
@@ -290,6 +311,7 @@ require("lze").load({
                             MiniPick.set_picker_items(items, { do_match = false })
                         end,
                         show = show,
+                        -- choose = choose,
                     },
                 }
 
