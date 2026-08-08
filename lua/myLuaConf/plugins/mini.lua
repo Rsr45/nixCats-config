@@ -4,6 +4,7 @@ return {
         for_cat = "general.mini",
         event = "DeferredUIEnter",
         lazy = false,
+        dep_of = { "fff.nvim" },
         keys = {
             { "<leader>bt", function() MiniTrailspace.trim() end,            desc = "Trim" },
             { "<leader>bT", function() MiniTrailspace.trim_last_lines() end, desc = "Trim last lines" },
@@ -17,7 +18,7 @@ return {
             { "<leader>fs", mode = { "n" },                                  "<cmd>Pick buf_lines<CR>",                                           desc = "File Grep", },
             { "<leader>fg", mode = { "n" },                                  "<cmd>lua MiniPick.builtin.grep_live()<CR>",                         desc = "Grep", },
             { "<leader>ff", mode = { "n" },                                  "<cmd>lua MiniPick.builtin.files()<CR>",                             desc = "Find File", },
-            { "<leader>fF", mode = { "n" },                                  "<cmd>lua MiniPick.builtin.files({ dir = fn.expand('%:p:h') })<CR>", desc = "Find File", },
+            -- { "<leader>fF", mode = { "n" },                                  "<cmd>lua MiniPick.builtin.files({ dir = fn.expand('%:p:h') })<CR>", desc = "Find File", },
             { "<leader>fe", mode = { "n" },                                  "<cmd>lua MiniFiles.open()<CR>",                                     desc = "File Ex", },
         },
         after = function()

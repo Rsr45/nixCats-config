@@ -345,7 +345,7 @@
             # undotree
             vim-startuptime
             img-clip-nvim
-            # pkgs.vimPlugins.fff-nvim
+            pkgs.vimPlugins.fff-nvim
           ];
         };
       };
