@@ -165,6 +165,11 @@
         tex = with pkgs; [
           texlab
         ];
+        bash = with pkgs; [
+          bash-language-server
+          shfmt
+          shellcheck
+        ];
         markdown = with pkgs; [
           markdown-oxide
           marksman
@@ -346,6 +351,7 @@
             vim-startuptime
             img-clip-nvim
             pkgs.vimPlugins.fff-nvim
+            flash-nvim
           ];
         };
       };
@@ -482,6 +488,7 @@
           neonixdev = true;
           typst = true;
           tex = true;
+          bash = true;
           qml = true;
           python = true;
           nix = true;

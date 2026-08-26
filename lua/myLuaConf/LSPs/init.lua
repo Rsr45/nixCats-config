@@ -193,4 +193,11 @@ require('lze').load {
             filetypes = { "tex" },
         },
     },
+    {
+        "bashls",
+        for_cat = "bash",
+        lsp = {
+            filetypes = { "sh", "bash" },
+        },
+    },
 }

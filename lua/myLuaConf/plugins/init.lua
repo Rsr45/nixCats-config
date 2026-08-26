@@ -139,6 +139,7 @@ require("lze").load({
     },
     { import = "myLuaConf.plugins.mini-base16" },
     { import = "myLuaConf.plugins.mini" },
+    { import = "myLuaConf.plugins.flash" },
     { import = "myLuaConf.plugins.treesitter" },
     { import = "myLuaConf.plugins.fold" },
     { import = "myLuaConf.plugins.org" },
@@ -282,25 +283,6 @@ require("lze").load({
                     end
                 end
 
-                local function choose(item)
-                    if not item or not item.text then
-                        return
-                    end
-
-                    local path = vim.fs.joinpath(vim.uv.cwd(), item.text)
-
-                    -- Add the buffer or get the existing one.
-                    local buf = vim.fn.bufadd(path)
-
-                    -- Make it a normal listed, loaded file buffer.
-                    vim.bo[buf].buflisted = true
-                    vim.fn.bufload(buf)
-
-                    -- Switch the target window to it.
-                    local target = MiniPick.get_picker_state().windows.target
-                    vim.api.nvim_win_set_buf(target, buf)
-                end
-
                 -- Start picker
                 MiniPick.start {
                     source = {
@@ -311,7 +293,6 @@ require("lze").load({
                             MiniPick.set_picker_items(items, { do_match = false })
                         end,
                         show = show,
-                        -- choose = choose,
                     },
                 }
 

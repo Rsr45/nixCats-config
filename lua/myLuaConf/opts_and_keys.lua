@@ -130,8 +130,7 @@ vim.keymap.set({ 'n', 'v', 'x' }, '<leader>p', '"+p', { noremap = true, silent =
 vim.keymap.set("x", "<leader>P", '"_dP',
     { noremap = true, silent = true, desc = 'Paste over selection without erasing unnamed register' })
 
-vim.keymap.set("n", '<leader>ts', '<cmd>set spell!<Cr>', { desc = 'Toggle Spellcheck' })
-vim.keymap.set("n", '<leader>tl', '<cmd>set rnu!<CR>')
+vim.keymap.set( 'n', '<leader>cs', '<cmd>update<CR>', { desc = 'Save buffer' })
 
 -- harpoon but builtin
 -- vim.keymap.set('n', "<leader><cr>", ":argu<cr>:args<cr>", { desc = "go to last used arglist file" })
