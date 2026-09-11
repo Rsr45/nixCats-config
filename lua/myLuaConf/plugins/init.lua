@@ -156,7 +156,7 @@ require("lze").load({
     },
     {
         "vim-tmux-navigator",
-        for_cat = "general.extra";
+        for_cat = "general.extra",
         cmd = {
             "TmuxNavigateLeft",
             "TmuxNavigateDown",
@@ -166,11 +166,11 @@ require("lze").load({
             "TmuxNavigatorProcessList",
         },
         keys = {
-            { "<c-t>",  "<cmd><C-U>TmuxNavigateLeft<cr>" },
-            { "<c-r>",  "<cmd><C-U>TmuxNavigateDown<cr>" },
-            { "<c-l>",  "<cmd><C-U>TmuxNavigateUp<cr>" },
-            { "<c-d>",  "<cmd><C-U>TmuxNavigateRight<cr>" },
-            { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
+            { "n",      "<c-t>",                            "<Cmd>TmuxNavigateLeft<CR>",     { silent = true } },
+            { "n",      "<c-r>",                            "<Cmd>TmuxNavigateDown<CR>",     { silent = true } },
+            { "n",      "<c-l>",                              "<Cmd>TmuxNavigateUp<CR>",       { silent = true } },
+            { "n",      "<c-d>",                           "<Cmd>TmuxNavigateRight<CR>",    { silent = true } },
+            { "n",      "<C-w>p",                            "<Cmd>TmuxNavigatePrevious<CR>", { silent = true } },
         },
     },
     {
