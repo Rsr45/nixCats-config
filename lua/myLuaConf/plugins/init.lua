@@ -167,11 +167,11 @@ require("lze").load({
             "TmuxNavigatorProcessList",
         },
         keys = {
-            { "n", "<c-t>",  "<cmd><C-U>TmuxNavigateLeft<CR>",     { silent = true, noremap = true } },
-            { "n", "<c-r>",  "<cmd><C-U>TmuxNavigateDown<CR>",     { silent = true, noremap = true } },
-            { "n", "<c-l>",  "<cmd><C-U>TmuxNavigateUp<CR>",       { silent = true, noremap = true } },
-            { "n", "<c-d>",  "<cmd><C-U>TmuxNavigateRight<CR>",    { silent = true, noremap = true } },
-            { "n", "<C-w>p", "<cmd><C-U>TmuxNavigatePrevious<CR>", { silent = true, noremap = true } },
+            { "<C-t>",  "<Cmd><C-U>TmuxNavigateLeft<CR>",     mode = "n", silent = true, noremap = true },
+            { "<C-r>",  "<Cmd><C-U>TmuxNavigateDown<CR>",     mode = "n", silent = true, noremap = true },
+            { "<C-l>",  "<Cmd><C-U>TmuxNavigateUp<CR>",       mode = "n", silent = true, noremap = true },
+            { "<C-d>",  "<Cmd><C-U>TmuxNavigateRight<CR>",    mode = "n", silent = true, noremap = true },
+            { "<C-w>p", "<Cmd><C-U>TmuxNavigatePrevious<CR>", mode = "n", silent = true, noremap = true },
         },
         after = function()
             vim.g.tmux_navigator_no_mappings = 1
