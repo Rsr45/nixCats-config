@@ -352,6 +352,7 @@
             img-clip-nvim
             pkgs.vimPlugins.fff-nvim
             flash-nvim
+            vim-tmux-navigator
           ];
         };
       };
