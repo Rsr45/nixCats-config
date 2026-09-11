@@ -166,11 +166,11 @@ require("lze").load({
             "TmuxNavigatorProcessList",
         },
         keys = {
-            { "n",      "<c-t>",                            "<Cmd>TmuxNavigateLeft<CR>",     { silent = true } },
-            { "n",      "<c-r>",                            "<Cmd>TmuxNavigateDown<CR>",     { silent = true } },
-            { "n",      "<c-l>",                              "<Cmd>TmuxNavigateUp<CR>",       { silent = true } },
-            { "n",      "<c-d>",                           "<Cmd>TmuxNavigateRight<CR>",    { silent = true } },
-            { "n",      "<C-w>p",                            "<Cmd>TmuxNavigatePrevious<CR>", { silent = true } },
+            { "n", "<c-t>",  "<Cmd>TmuxNavigateLeft<CR>",     { silent = true, noremap = true } },
+            { "n", "<c-r>",  "<Cmd>TmuxNavigateDown<CR>",     { silent = true, noremap = true } },
+            { "n", "<c-l>",  "<Cmd>TmuxNavigateUp<CR>",       { silent = true, noremap = true } },
+            { "n", "<c-d>",  "<Cmd>TmuxNavigateRight<CR>",    { silent = true, noremap = true } },
+            { "n", "<C-w>p", "<Cmd>TmuxNavigatePrevious<CR>", { silent = true, noremap = true } },
         },
     },
     {
