@@ -156,6 +156,7 @@ require("lze").load({
     },
     {
         "vim-tmux-navigator",
+        lazy = false,
         for_cat = "general.extra",
         cmd = {
             "TmuxNavigateLeft",
