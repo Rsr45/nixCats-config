@@ -175,6 +175,9 @@ require("lze").load({
         },
         before = function()
             vim.g.tmux_navigator_no_mappings = 1
+
+            vim.keymap.set("n", "<C-r>", "<Nop>")
+            vim.keymap.set("n", "U", "<cmd>redo<CR>")
         end,
     },
     {
