@@ -173,7 +173,7 @@ require("lze").load({
             { "<C-d>",  "<cmd><C-U>TmuxNavigateRight<CR>",    mode = "n", silent = true, noremap = true },
             { "<C-w>p", "<cmd><C-U>TmuxNavigatePrevious<CR>", mode = "n", silent = true, noremap = true },
         },
-        after = function()
+        before = function()
             vim.g.tmux_navigator_no_mappings = 1
         end,
     },
