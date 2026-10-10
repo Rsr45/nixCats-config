@@ -154,32 +154,42 @@ require("lze").load({
             MiniIcons.mock_nvim_web_devicons()
         end,
     },
-    {
-        "vim-tmux-navigator",
-        lazy = false,
-        for_cat = "general.extra",
-        cmd = {
-            "TmuxNavigateLeft",
-            "TmuxNavigateDown",
-            "TmuxNavigateUp",
-            "TmuxNavigateRight",
-            "TmuxNavigatePrevious",
-            "TmuxNavigatorProcessList",
-        },
-        keys = {
-            { "<C-S-T>",  "<cmd>TmuxNavigateLeft<CR>",     mode = "n", silent = true, noremap = true },
-            { "<C-S-R>",  "<cmd>TmuxNavigateDown<CR>",     mode = "n", silent = true, noremap = true },
-            { "<C-S-L>",  "<cmd>TmuxNavigateUp<CR>",       mode = "n", silent = true, noremap = true },
-            { "<C-S-D>",  "<cmd>TmuxNavigateRight<CR>",    mode = "n", silent = true, noremap = true },
-            { "<C-w>p", "<cmd>TmuxNavigatePrevious<CR>", mode = "n", silent = true, noremap = true },
-        },
-        before = function()
-            vim.g.tmux_navigator_no_mappings = 1
-
-            vim.keymap.set("n", "<C-r>", "<Nop>")
-            vim.keymap.set("n", "U", "<cmd>redo<CR>")
-        end,
-    },
+    -- {
+    --     "vim-tmux-navigator",
+    --     lazy = false,
+    --     for_cat = "general.extra",
+    --     cmd = {
+    --         "TmuxNavigateLeft",
+    --         "TmuxNavigateDown",
+    --         "TmuxNavigateUp",
+    --         "TmuxNavigateRight",
+    --         "TmuxNavigatePrevious",
+    --         "TmuxNavigatorProcessList",
+    --     },
+    --     keys = {
+    --         -- { "<C-S-T>", "<cmd><C-U>TmuxNavigateLeft<CR>",  silent = true, noremap = true },
+    --         -- { "<C-S-R>", "<cmd><C-U>TmuxNavigateDown<CR>",  silent = true, noremap = true },
+    --         -- { "<C-S-L>", "<cmd><C-U>TmuxNavigateUp<CR>",    silent = true, noremap = true },
+    --         -- { "<C-S-D>", "<cmd><C-U>TmuxNavigateRight<CR>", silent = true, noremap = true },
+    --         -- { "<C-w>p",  "<cmd>TmuxNavigatePrevious<CR>",   mode = "n",    silent = true, noremap = true },
+    --     },
+    --     before = function()
+    --         vim.keymap.set("n", "<C-S-t>", "<Nop>")
+    --         vim.keymap.set("n", "<C-S-r>", "<Nop>")
+    --         vim.keymap.set("n", "<C-S-d>", "<Nop>")
+    --         vim.keymap.set("n", "<C-S-l>", "<Nop>")
+    --         vim.keymap.set("n", "U", "<cmd>redo<CR>")
+    --
+    --         vim.cmd([[
+    --         let g:tmux_navigator_no_mappings = 1
+    --         let g:tmux_navigator_disable_when_zoomed = 0
+    --         noremap <silent> <c-s-t> :<C-U>:TmuxNavigateLeft<cr>
+    --         noremap <silent> <c-s-r> :<C-U>TmuxNavigateDown<cr>
+    --         noremap <silent> <c-s-l> :<C-U>TmuxNavigateUp<cr>
+    --         noremap <silent> <c-s-d> :<C-U>:TmuxNavigateRight<cr>
+    --         ]])
+    --     end,
+    -- },
     {
         "fff.nvim",
         for_cat = "general.extra",
@@ -331,38 +341,38 @@ require("lze").load({
         end,
     },
 
-    -- {
-    --     "markdown-preview.nvim",
-    --     for_cat = "general.markdown",
-    --     cmd = { "MarkdownPreview", "MarkdownPreviewStop", "MarkdownPreviewToggle" },
-    --     ft = "markdown",
-    --     keys = {
-    --         {
-    --             "<leader>mp",
-    --             "<cmd>MarkdownPreview <CR>",
-    --             mode = { "n" },
-    --             noremap = true,
-    --             desc = "markdown preview",
-    --         },
-    --         {
-    --             "<leader>ms",
-    --             "<cmd>MarkdownPreviewStop <CR>",
-    --             mode = { "n" },
-    --             noremap = true,
-    --             desc = "markdown preview stop",
-    --         },
-    --         {
-    --             "<leader>mt",
-    --             "<cmd>MarkdownPreviewToggle <CR>",
-    --             mode = { "n" },
-    --             noremap = true,
-    --             desc = "markdown preview toggle",
-    --         },
-    --     },
-    --     before = function()
-    --         vim.g.mkdp_auto_close = 0
-    --     end,
-    -- },
+    {
+        "markdown-preview.nvim",
+        for_cat = "general.markdown",
+        cmd = { "MarkdownPreview", "MarkdownPreviewStop", "MarkdownPreviewToggle" },
+        ft = "markdown",
+        keys = {
+            {
+                "<leader>mp",
+                "<cmd>MarkdownPreview <CR>",
+                mode = { "n" },
+                noremap = true,
+                desc = "markdown preview",
+            },
+            {
+                "<leader>ms",
+                "<cmd>MarkdownPreviewStop <CR>",
+                mode = { "n" },
+                noremap = true,
+                desc = "markdown preview stop",
+            },
+            {
+                "<leader>mt",
+                "<cmd>MarkdownPreviewToggle <CR>",
+                mode = { "n" },
+                noremap = true,
+                desc = "markdown preview toggle",
+            },
+        },
+        before = function()
+            vim.g.mkdp_auto_close = 0
+        end,
+    },
     -- {
     --     "render-markdown.nvim",
     --     for_cat = "general.markdown",
@@ -394,13 +404,13 @@ require("lze").load({
     --             code = {
     --                 -- above = " ",
     --                 -- below = " ",
-    --                 -- border = "thick",
     --                 -- language_pad = 2,
     --                 -- left_pad = 4,
     --                 position = "left",
     --                 -- right_pad = 6,
     --                 sign = false,
     --                 width = "full",
+    --                 conceal_delimiters = false,
     --             },
     --             heading = {
     --                 border = false,

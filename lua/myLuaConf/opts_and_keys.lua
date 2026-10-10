@@ -70,7 +70,7 @@ vim.o.termguicolors = true
 vim.o.cursorline = true
 vim.o.cursorlineopt = 'both'
 
-vim.o.conceallevel = 1
+vim.o.conceallevel = 0
 
 -- vim.o.winborder = 'single'
 -- [[ Disable auto comment on enter ]]
