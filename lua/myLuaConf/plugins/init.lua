@@ -11,132 +11,135 @@ if not require("nixCatsUtils").isNixCats then
     vim.cmd.colorscheme("onedark")
 end
 
--- -- NOTE: you can check if you included the category with the thing wherever you want.
--- if nixCats("general.extra") then
---     -- I didnt want to bother with lazy loading this.
---     -- I could put it in opt and put it in a spec anyway
---     -- and then not set any handlers and it would load at startup,
---     -- but why... I guess I could make it load
---     -- after the other lze definitions in the next call using priority value?
---     -- didnt seem necessary.
---     -- Declare a global function to retrieve the current directory
---     function _G.get_oil_winbar()
---         local bufnr = vim.api.nvim_win_get_buf(vim.g.statusline_winid)
---         local dir = require("oil").get_current_dir(bufnr)
---         if dir then
---             return vim.fn.fnamemodify(dir, ":~")
---         else
---             -- If there is no current directory (e.g. over ssh), just show the buffer name
---             return vim.api.nvim_buf_get_name(0)
---         end
---     end
---
---     -- local detail = false
---
---     local permission_hlgroups = {
---         ['-'] = 'NonText',
---         ['r'] = 'DiagnosticSignWarn',
---         ['w'] = 'DiagnosticSignError',
---         ['x'] = 'DiagnosticSignOk',
---     }
---
---     vim.g.loaded_netrwPlugin = 1
---     vim.opt.splitright = true
---     require("oil").setup({
---         default_file_explorer = true,
---         view_options = {
---             show_hidden = true,
---         },
---
---         columns = {
---             {
---                 'permissions',
---                 highlight = function(permission_str)
---                     local hls = {}
---                     for i = 1, #permission_str do
---                         local char = permission_str:sub(i, i)
---                         table.insert(hls, { permission_hlgroups[char], i - 1, i })
---                     end
---                     return hls
---                 end,
---             },
---             { 'size',  highlight = 'Special' },
---             { 'mtime', highlight = 'Question' },
---             {
---                 'icon',
---                 -- default_file = icon_file,
---                 -- directory = icon_dir,
---                 add_padding = true,
---             },
---         },
---         win_options = {
---             number = false,
---             relativenumber = false,
---             signcolumn = 'no',
---             foldcolumn = '0',
---             statuscolumn = '',
---             winbar = "%!v:lua.get_oil_winbar()",
---         },
---
---         keymaps = {
---             -- ["gd"] = {
---             --     desc = "Toggle file detail view",
---             --     callback = function()
---             --         detail = not detail
---             --         if detail then
---             --             require("oil").set_columns({ "permissions", "size", "mtime" })
---             --         else
---             --             require("oil").set_columns({ "icon" })
---             --         end
---             --     end,
---             -- },
---             ["g?"] = "actions.show_help",
---             ["<CR>"] = "actions.select",
---             ["<C-s>"] = "actions.select_vsplit",
---             ["<C-h>"] = "actions.select_split",
---             ["<C-t>"] = "actions.select_tab",
---             ["<C-p>"] = "actions.preview",
---             ["<C-c>"] = "actions.close",
---             ["<C-l>"] = "actions.refresh",
---             ["-"] = "actions.parent",
---             ["<BS>"] = "actions.parent",
---             ["_"] = "actions.open_cwd",
---             ["`"] = "actions.cd",
---             ["~"] = "actions.tcd",
---             ["gs"] = "actions.change_sort",
---             ["gx"] = "actions.open_external",
---             ["g."] = "actions.toggle_hidden",
---             ["g\\"] = "actions.toggle_trash",
---         },
---     })
---
---     vim.cmd([[hi! link WinBar StatusLine]])
---     vim.cmd([[hi! link WinBarNC StatusLineNC]])
--- end
+-- NOTE: you can check if you included the category with the thing wherever you want.
+if nixCats("general.extra") then
+    -- I didnt want to bother with lazy loading this.
+    -- I could put it in opt and put it in a spec anyway
+    -- and then not set any handlers and it would load at startup,
+    -- but why... I guess I could make it load
+    -- after the other lze definitions in the next call using priority value?
+    -- didnt seem necessary.
+    -- Declare a global function to retrieve the current directory
+    function _G.get_oil_winbar()
+        local bufnr = vim.api.nvim_win_get_buf(vim.g.statusline_winid)
+        local dir = require("oil").get_current_dir(bufnr)
+        if dir then
+            return vim.fn.fnamemodify(dir, ":~")
+        else
+            -- If there is no current directory (e.g. over ssh), just show the buffer name
+            return vim.api.nvim_buf_get_name(0)
+        end
+    end
+
+    -- local detail = false
+
+    local permission_hlgroups = {
+        ['-'] = 'NonText',
+        ['r'] = 'DiagnosticSignWarn',
+        ['w'] = 'DiagnosticSignError',
+        ['x'] = 'DiagnosticSignOk',
+    }
+
+    vim.g.loaded_netrwPlugin = 1
+    vim.opt.splitright = true
+    require("oil").setup({
+        default_file_explorer = true,
+        view_options = {
+            show_hidden = true,
+        },
+
+        columns = {
+            {
+                'permissions',
+                highlight = function(permission_str)
+                    local hls = {}
+                    for i = 1, #permission_str do
+                        local char = permission_str:sub(i, i)
+                        table.insert(hls, { permission_hlgroups[char], i - 1, i })
+                    end
+                    return hls
+                end,
+            },
+            { 'size',  highlight = 'Special' },
+            { 'mtime', highlight = 'Question' },
+            {
+                'icon',
+                -- default_file = icon_file,
+                -- directory = icon_dir,
+                add_padding = true,
+            },
+        },
+        win_options = {
+            number = false,
+            relativenumber = false,
+            signcolumn = 'no',
+            foldcolumn = '0',
+            statuscolumn = '',
+            winbar = "%!v:lua.get_oil_winbar()",
+        },
+
+        keymaps = {
+            -- ["gd"] = {
+            --     desc = "Toggle file detail view",
+            --     callback = function()
+            --         detail = not detail
+            --         if detail then
+            --             require("oil").set_columns({ "permissions", "size", "mtime" })
+            --         else
+            --             require("oil").set_columns({ "icon" })
+            --         end
+            --     end,
+            -- },
+            ["g?"] = "actions.show_help",
+            ["<CR>"] = "actions.select",
+            ["<C-s>"] = "actions.select_vsplit",
+            ["<C-h>"] = "actions.select_split",
+            ["<C-t>"] = "actions.select_tab",
+            ["<C-p>"] = "actions.preview",
+            ["<C-c>"] = "actions.close",
+            ["<C-l>"] = "actions.refresh",
+            ["-"] = "actions.parent",
+            ["<BS>"] = "actions.parent",
+            ["_"] = "actions.open_cwd",
+            ["`"] = "actions.cd",
+            ["~"] = "actions.tcd",
+            ["gs"] = "actions.change_sort",
+            ["gx"] = "actions.open_external",
+            ["g."] = "actions.toggle_hidden",
+            ["g\\"] = "actions.toggle_trash",
+        },
+    })
+
+    vim.cmd([[hi! link WinBar StatusLine]])
+    vim.cmd([[hi! link WinBarNC StatusLineNC]])
+
+    vim.keymap.set("n", "<leader>fd", "<cmd>Oil .<CR>")
+end
 
 require("lze").load({
-    {
-        "canola.nvim",
-        for_cat = "general.extra",
-        lazy = false,
-        keys = {
-            { "<leader>fd", "<cmd>Canola<CR>", noremap = true, mode = "n", },
-        },
-        after = function()
-            vim.g.canola = {
-                hidden = {
-                    enabled = true,
-                    patterns = { "^%." },
-                    always = {},
-                },
-                columns = { "permissions", "owner", "group", "mtime", "ctime", "size", "icon" },
-                keymaps = {
-                    ["<l>"] = { callback = "actions.select", },
-                    ["<h>"] = { callback = "actions.parent", },
-                },
-            }
-        end,
-    },
+    -- cool not stable and not needed over oil plus the mini patterns not worky as it uses some virtual text stuff
+    -- {
+    --     "canola.nvim",
+    --     for_cat = "general.extra",
+    --     lazy = false,
+    --     keys = {
+    --         { "<leader>fd", "<cmd>Canola<CR>", noremap = true, mode = "n", },
+    --     },
+    --     after = function()
+    --         vim.g.canola = {
+    --             hidden = {
+    --                 enabled = true,
+    --                 patterns = { "^%." },
+    --                 always = {},
+    --             },
+    --             columns = { "permissions", "owner", "group", "mtime", "ctime", "size", "icon" },
+    --             keymaps = {
+    --                 ["<l>"] = { callback = "actions.select", },
+    --                 ["<h>"] = { callback = "actions.parent", },
+    --             },
+    --         }
+    --     end,
+    -- },
     { import = "myLuaConf.plugins.mini-base16" },
     { import = "myLuaConf.plugins.mini" },
     { import = "myLuaConf.plugins.flash" },

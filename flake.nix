@@ -209,7 +209,7 @@
             nui-nvim
           ];
           extra = [
-            # oil-nvim
+            oil-nvim
             canola-nvim
             # nvim-web-devicons
             # mini-icons

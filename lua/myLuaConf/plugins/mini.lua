@@ -10,16 +10,16 @@ return {
             { "<leader>bT", function() MiniTrailspace.trim_last_lines() end, desc = "Trim last lines" },
             { "<leader>ct", function() MiniTrailspace.trim() end,            desc = "Trim" },
             { "<leader>cT", function() MiniTrailspace.trim_last_lines() end, desc = "Trim last lines" },
-            { "<leader>bd", mode = { "n" },                                  "<cmd>lua MiniBufremove.delete()<CR>",                               desc = "Kill buffer" },
-            { "<leader>bk", mode = { "n" },                                  "<cmd>lua MiniBufremove.delete()<CR>",                               desc = "Kill buffer" },
+            { "<leader>bd", mode = { "n" },                                  "<cmd>lua MiniBufremove.delete()<CR>",       desc = "Kill buffer" },
+            { "<leader>bk", mode = { "n" },                                  "<cmd>lua MiniBufremove.delete()<CR>",       desc = "Kill buffer" },
 
             -- pick
-            { "<leader>fb", mode = { "n" },                                  "<cmd>lua MiniPick.builtin.buffers()<CR>",                           desc = "Find Buffer", },
-            { "<leader>fs", mode = { "n" },                                  "<cmd>Pick buf_lines<CR>",                                           desc = "File Grep", },
-            { "<leader>fg", mode = { "n" },                                  "<cmd>lua MiniPick.builtin.grep_live()<CR>",                         desc = "Grep", },
-            { "<leader>ff", mode = { "n" },                                  "<cmd>lua MiniPick.builtin.files()<CR>",                             desc = "Find File", },
+            { "<leader>fb", mode = { "n" },                                  "<cmd>lua MiniPick.builtin.buffers()<CR>",   desc = "Find Buffer", },
+            { "<leader>fs", mode = { "n" },                                  "<cmd>Pick buf_lines<CR>",                   desc = "File Grep", },
+            { "<leader>fg", mode = { "n" },                                  "<cmd>lua MiniPick.builtin.grep_live()<CR>", desc = "Grep", },
+            { "<leader>ff", mode = { "n" },                                  "<cmd>lua MiniPick.builtin.files()<CR>",     desc = "Find File", },
             -- { "<leader>fF", mode = { "n" },                                  "<cmd>lua MiniPick.builtin.files({ dir = fn.expand('%:p:h') })<CR>", desc = "Find File", },
-            { "<leader>fe", mode = { "n" },                                  "<cmd>lua MiniFiles.open()<CR>",                                     desc = "File Ex", },
+            { "<leader>fe", mode = { "n" },                                  "<cmd>lua MiniFiles.open()<CR>",             desc = "File Ex", },
         },
         after = function()
             require("mini.ai").setup()
@@ -79,9 +79,9 @@ return {
                     note       = { pattern = '%f[%w]()NOTE()%f[%W]', group = 'MiniHipatternsNote' },
 
                     -- denote.el TODO find a better way to integrate the custom dired mod.
-                    -- id         = { pattern = '@@[^==%--__]+', group = 'MiniHipatternsNote' },
-                    -- signature  = { pattern = '==[^@@%--__]+', group = 'MiniHipatternsFixme' },
-                    -- keywords   = { pattern = '__[^@@%--==]+', group = 'MiniHipatternsHack' },
+                    identifier = { pattern = '@@[^==%--__]+', group = 'MiniHipatternsNote' },
+                    signature  = { pattern = '==[^@@%--__]+', group = 'MiniHipatternsFixme' },
+                    keywords   = { pattern = '__[^@@%--==]+', group = 'MiniHipatternsHack' },
 
                     -- Highlight hex color strings (`#292929`) using that color
                     hex_color  = hipatterns.gen_highlighter.hex_color(),
@@ -102,7 +102,23 @@ return {
             require("mini.extra").setup()
 
             require("mini.files").setup({
-                windows = { preview = true }
+                windows = { preview = true },
+
+                mappings = {
+                    close       = 'q',
+                    go_in       = '<Right>',
+                    go_in_plus  = 'L',
+                    go_out      = '<Left>',
+                    go_out_plus = 'H',
+                    mark_goto   = "'",
+                    mark_set    = 'm',
+                    reset       = '<BS>',
+                    reveal_cwd  = '@',
+                    show_help   = 'g?',
+                    synchronize = '=',
+                    trim_left   = '<',
+                    trim_right  = '>',
+                },
             })
             require("mini.fuzzy").setup()
             require("mini.git").setup()
