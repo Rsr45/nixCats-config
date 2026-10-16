@@ -142,7 +142,7 @@ require("lze").load({
     -- },
     { import = "myLuaConf.plugins.mini-base16" },
     { import = "myLuaConf.plugins.mini" },
-    { import = "myLuaConf.plugins.flash" },
+    -- { import = "myLuaConf.plugins.flash" },
     { import = "myLuaConf.plugins.treesitter" },
     { import = "myLuaConf.plugins.fold" },
     { import = "myLuaConf.plugins.org" },

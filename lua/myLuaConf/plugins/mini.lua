@@ -130,7 +130,20 @@ return {
             -- require("mini.init").setup()
             -- require("mini.input").setup()
             -- require("mini.jump").setup()
-            -- require("mini.jump2d").setup()
+
+            local jump2d = require('mini.jump2d')
+            jump2d.setup({
+                spotter = jump2d.gen_spotter.pattern('[^%s%p]+'),
+                labels = 'strdnaei',
+                mappings = { start_jumping = '' },
+                view = { dim = true, n_steps_ahead = 2 },
+            })
+
+            vim.keymap.set({ 'n', 'x', 'o' }, 'sn',
+                function() MiniJump2d.start(MiniJump2d.builtin_opts.single_character) end)
+            vim.keymap.set({ 'n', 'x', 'o' }, 'sw', function() MiniJump2d.start(MiniJump2d.builtin_opts.word_start) end)
+            -- vim.keymap.set({ 'n', 'x', 'o' }, 'se', function() MiniJump2d.start(MiniJump2d.builtin_opts.line_start) end)
+
             require("mini.keymap").setup()
             -- require("mini.map").setup()
             require("mini.misc").setup()
