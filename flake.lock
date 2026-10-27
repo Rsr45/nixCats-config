@@ -63,12 +63,29 @@
         "type": "github"
       }
     },
+    "plugins-tmux-navigate": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1665505688,
+        "narHash": "sha256-Rn/rIbFx2zCyzvLZmbf7q1nF97Yi9dONUDv1QDcscxo=",
+        "owner": "sunaku",
+        "repo": "tmux-navigate",
+        "rev": "27c83cd229bceff55e6318cce7945995623a6106",
+        "type": "github"
+      },
+      "original": {
+        "owner": "sunaku",
+        "repo": "tmux-navigate",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "nixCats": "nixCats",
         "nixpkgs": "nixpkgs",
         "plugins-org-bullets": "plugins-org-bullets",
-        "plugins-org-modern": "plugins-org-modern"
+        "plugins-org-modern": "plugins-org-modern",
+        "plugins-tmux-navigate": "plugins-tmux-navigate"
       }
     }
   },

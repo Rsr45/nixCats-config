@@ -113,7 +113,8 @@ if nixCats("general.extra") then
     vim.cmd([[hi! link WinBar StatusLine]])
     vim.cmd([[hi! link WinBarNC StatusLineNC]])
 
-    vim.keymap.set("n", "<leader>fd", "<cmd>Oil .<CR>")
+    vim.keymap.set("n", "<leader>fd", "<cmd>Oil<CR>")
+    vim.keymap.set("n", "<leader>fD", "<cmd>Oil .<CR>")
 end
 
 require("lze").load({
@@ -156,6 +157,11 @@ require("lze").load({
             require("mini.icons").setup()
             MiniIcons.mock_nvim_web_devicons()
         end,
+    },
+    {
+        "tmux-navigate",
+        lazy = false,
+        for_cat = "general.extra",
     },
     -- {
     --     "vim-tmux-navigator",

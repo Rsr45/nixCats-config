@@ -6,12 +6,9 @@ return {
         lazy = false,
         dep_of = { "fff.nvim" },
         keys = {
-            { "<leader>bt", function() MiniTrailspace.trim() end,            desc = "Trim" },
-            { "<leader>bT", function() MiniTrailspace.trim_last_lines() end, desc = "Trim last lines" },
             { "<leader>ct", function() MiniTrailspace.trim() end,            desc = "Trim" },
             { "<leader>cT", function() MiniTrailspace.trim_last_lines() end, desc = "Trim last lines" },
             { "<leader>bd", mode = { "n" },                                  "<cmd>lua MiniBufremove.delete()<CR>",       desc = "Kill buffer" },
-            { "<leader>bk", mode = { "n" },                                  "<cmd>lua MiniBufremove.delete()<CR>",       desc = "Kill buffer" },
 
             -- pick
             { "<leader>fb", mode = { "n" },                                  "<cmd>lua MiniPick.builtin.buffers()<CR>",   desc = "Find Buffer", },
@@ -56,6 +53,7 @@ return {
                     { mode = { 'i', 'c' }, keys = '<C-r>' },
                     { mode = 'n',          keys = '<C-w>' },    -- Window commands
                     { mode = { 'n', 'x' }, keys = 's' },        -- `s` key
+                    { mode = { 'n', 'x' }, keys = 'S' },        -- `S` key
                     { mode = { 'n', 'x' }, keys = 'z' },        -- `z` key
                 },
             })
@@ -129,7 +127,7 @@ return {
             -- require("mini.indentscope").setup()
             -- require("mini.init").setup()
             -- require("mini.input").setup()
-            -- require("mini.jump").setup()
+            require("mini.jump").setup()
 
             local jump2d = require('mini.jump2d')
             jump2d.setup({
@@ -139,10 +137,10 @@ return {
                 view = { dim = true, n_steps_ahead = 2 },
             })
 
-            vim.keymap.set({ 'n', 'x', 'o' }, 'sn',
+            vim.keymap.set({ 'n', 'x', 'o' }, 'Ss',
                 function() MiniJump2d.start(MiniJump2d.builtin_opts.single_character) end)
-            vim.keymap.set({ 'n', 'x', 'o' }, 'sw', function() MiniJump2d.start(MiniJump2d.builtin_opts.word_start) end)
-            -- vim.keymap.set({ 'n', 'x', 'o' }, 'se', function() MiniJump2d.start(MiniJump2d.builtin_opts.line_start) end)
+            vim.keymap.set({ 'n', 'x', 'o' }, 'Sw', function() MiniJump2d.start(MiniJump2d.builtin_opts.word_start) end)
+            vim.keymap.set({ 'n', 'x', 'o' }, 'Se', function() MiniJump2d.start(MiniJump2d.builtin_opts.line_start) end)
 
             require("mini.keymap").setup()
             -- require("mini.map").setup()
@@ -157,8 +155,8 @@ return {
             require("mini.starter").setup()
             require("mini.statusline").setup()
 
-            vim.keymap.set({ "n", "v", "x" }, "S", "<Nop>")
-            vim.keymap.set({ "n", "v", "x" }, "s", "<Nop>")
+            -- vim.keymap.set({ "n", "v", "x" }, "S", "<Nop>")
+            -- vim.keymap.set({ "n", "v", "x" }, "s", "<Nop>")
             require("mini.surround").setup({
                 mappings = {
                     add = "sa",            -- Add surrounding in Normal and Visual modes

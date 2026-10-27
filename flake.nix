@@ -55,6 +55,10 @@
       url = "github:danilshvalov/org-modern.nvim";
       flake = false;
     };
+    "plugins-tmux-navigate" = {
+      url = "github:sunaku/tmux-navigate";
+      flake = false;
+    };
     # "plugins-tfm" = {
     #   url = "github:Rolv-Apneseth/tfm.nvim";
     #   flake = false;
@@ -353,6 +357,7 @@
             pkgs.vimPlugins.fff-nvim
             flash-nvim
             vim-tmux-navigator
+            pkgs.neovimPlugins.tmux-navigate
           ];
         };
       };
